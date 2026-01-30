@@ -64,12 +64,16 @@ export function Header() {
 
             {/* Auth Buttons */}
             <div className="hidden items-center gap-4 md:flex">
-              <Button variant="ghost" className="text-sm text-muted-foreground hover:text-foreground">
-                Sign In
-              </Button>
-              <Button className="glow-accent bg-primary text-primary-foreground hover:bg-primary/90">
-                Get Started
-              </Button>
+              <Link href="/auth/sign-in">
+                <Button variant="ghost" className="text-sm text-muted-foreground hover:text-foreground">
+                  Sign In
+                </Button>
+              </Link>
+              <Link href="/auth/sign-up">
+                <Button className="glow-accent bg-primary text-primary-foreground hover:bg-primary/90">
+                  Get Started
+                </Button>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -115,12 +119,16 @@ export function Header() {
                 Dashboard
               </Link>
               <div className="flex flex-col gap-2 pt-2">
-                <Button variant="ghost" className="justify-start text-muted-foreground">
-                  Sign In
-                </Button>
-                <Button className="glow-accent bg-primary text-primary-foreground">
-                  Get Started
-                </Button>
+                <Link href="/auth/sign-in">
+                  <Button variant="ghost" className="w-full justify-start text-muted-foreground">
+                    Sign In
+                  </Button>
+                </Link>
+                <Link href="/auth/sign-up">
+                  <Button className="w-full glow-accent bg-primary text-primary-foreground">
+                    Get Started
+                  </Button>
+                </Link>
               </div>
             </div>
           )}

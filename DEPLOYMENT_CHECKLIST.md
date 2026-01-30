@@ -65,13 +65,13 @@
 
 ### 1. Final Environment Variable Setup
 Ensure all environment variables are set in the Vercel project:
-```env
+\`\`\`env
 STRIPE_SECRET_KEY=sk_live_...
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_...
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
 NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL=https://doggybagg.cc/protected
-```
+\`\`\`
 
 ### 2. Stripe Configuration
 - [ ] Replace test Stripe keys with live keys
@@ -142,9 +142,9 @@ If issues occur:
 **Status:** All systems configured and ready for production launch.
 
 **Deployment Command:** Click "Publish" button in v0 UI or deploy via:
-```bash
+\`\`\`bash
 vercel --prod
-```
+\`\`\`
 
 **Last Updated:** Production audit completed
 **Next Step:** Click Publish to deploy to Vercel

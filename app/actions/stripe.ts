@@ -4,6 +4,13 @@ import { stripe } from '@/lib/stripe'
 import { PRODUCTS, getProductById } from '@/lib/products'
 import { createClient } from '@/lib/supabase/server'
 
+// TODO: After creating products in Stripe Dashboard, replace these with actual Price IDs
+// Instructions: See STRIPE_SETUP_INSTRUCTIONS.md
+const STRIPE_PRICE_IDS: Record<string, string> = {
+  'starter-plan': process.env.STRIPE_STARTER_PRICE_ID || 'REPLACE_WITH_STARTER_PRICE_ID',
+  'professional-plan': process.env.STRIPE_PROFESSIONAL_PRICE_ID || 'REPLACE_WITH_PROFESSIONAL_PRICE_ID',
+}
+
 export async function startCheckoutSession(productId: string) {
   const product = getProductById(productId)
   
@@ -21,12 +28,35 @@ export async function startCheckoutSession(productId: string) {
     throw new Error('User must be authenticated to purchase')
   }
 
-  // Create Checkout Session
-  const session = await stripe.checkout.sessions.create({
+  // Get Stripe Price ID for this product
+  const stripePriceId = STRIPE_PRICE_IDS[productId]
+
+  // If no Stripe Price ID is configured, use dynamic pricing (for development)
+  const sessionConfig: any = {
     ui_mode: 'embedded',
     redirect_on_completion: 'never',
     customer_email: user.email,
-    line_items: [
+    mode: product.priceInCents > 0 ? 'subscription' : 'payment',
+    metadata: {
+      userId: user.id,
+      productId: product.id,
+      subscriptionTier: product.subscriptionTier,
+      searchCredits: product.searchCredits.toString(),
+    },
+  }
+
+  // Use actual Stripe Price ID if configured, otherwise use dynamic pricing
+  if (stripePriceId && !stripePriceId.includes('REPLACE_WITH')) {
+    sessionConfig.line_items = [
+      {
+        price: stripePriceId,
+        quantity: 1,
+      },
+    ]
+  } else {
+    // Fallback to dynamic pricing for development
+    console.log('[v0] Using dynamic pricing - configure Stripe Price IDs for production')
+    sessionConfig.line_items = [
       {
         price_data: {
           currency: 'usd',
@@ -39,15 +69,11 @@ export async function startCheckoutSession(productId: string) {
         },
         quantity: 1,
       },
-    ],
-    mode: product.priceInCents > 0 ? 'subscription' : 'payment',
-    metadata: {
-      userId: user.id,
-      productId: product.id,
-      subscriptionTier: product.subscriptionTier,
-      searchCredits: product.searchCredits.toString(),
-    },
-  })
+    ]
+  }
+
+  // Create Checkout Session
+  const session = await stripe.checkout.sessions.create(sessionConfig)
 
   // Log the transaction in the database
   const { error: insertError } = await supabase.from('payments').insert({

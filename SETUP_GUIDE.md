@@ -170,16 +170,16 @@ All tables have RLS enabled with policies ensuring users can only:
 ## 🎯 Using the Integrations
 
 ### Adding Checkout to a Page
-```tsx
+\`\`\`tsx
 import { Checkout } from '@/components/checkout'
 
 export default function PricingPage() {
   return <Checkout productId="professional-plan" />
 }
-```
+\`\`\`
 
 ### Querying Property Data
-```tsx
+\`\`\`tsx
 import { createClient } from '@/lib/supabase/client'
 
 const supabase = createClient()
@@ -187,10 +187,10 @@ const { data: properties } = await supabase
   .from('properties')
   .select('*')
   .eq('user_id', userId)
-```
+\`\`\`
 
 ### Creating a Fine
-```tsx
+\`\`\`tsx
 const { data: fine } = await supabase
   .from('fines')
   .insert({
@@ -199,7 +199,7 @@ const { data: fine } = await supabase
     due_date: '2026-02-15',
     status: 'pending'
   })
-```
+\`\`\`
 
 ---
 
