@@ -1,0 +1,131 @@
+"use client"
+
+import { useState } from "react"
+import Link from "next/link"
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import { Menu, X } from "lucide-react"
+
+export function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50">
+      <div className="liquid-glass mx-4 mt-4 rounded-2xl">
+        <nav className="container mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-3">
+              <div className="relative h-10 w-10 overflow-hidden rounded-xl glow-accent">
+                <Image
+                  src="/images/darkdoggylogo.jpg"
+                  alt="Ordinance.ai Logo"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-lg font-bold text-foreground tracking-tight">
+                  Ordinance.ai
+                </span>
+                <span className="text-xs text-muted-foreground">
+                  by DoggyBagg LLC
+                </span>
+              </div>
+            </Link>
+
+            {/* Desktop Navigation */}
+            <div className="hidden items-center gap-8 md:flex">
+              <Link
+                href="#features"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Features
+              </Link>
+              <Link
+                href="#calculator"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Calculator
+              </Link>
+              <Link
+                href="#pricing"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Pricing
+              </Link>
+              <Link
+                href="/dashboard"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Dashboard
+              </Link>
+            </div>
+
+            {/* Auth Buttons */}
+            <div className="hidden items-center gap-4 md:flex">
+              <Button variant="ghost" className="text-sm text-muted-foreground hover:text-foreground">
+                Sign In
+              </Button>
+              <Button className="glow-accent bg-primary text-primary-foreground hover:bg-primary/90">
+                Get Started
+              </Button>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              type="button"
+              className="p-2 md:hidden"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? (
+                <X className="h-6 w-6 text-foreground" />
+              ) : (
+                <Menu className="h-6 w-6 text-foreground" />
+              )}
+            </button>
+          </div>
+
+          {/* Mobile Menu */}
+          {isMenuOpen && (
+            <div className="mt-4 flex flex-col gap-4 border-t border-border pt-4 md:hidden">
+              <Link
+                href="#features"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Features
+              </Link>
+              <Link
+                href="#calculator"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Calculator
+              </Link>
+              <Link
+                href="#pricing"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Pricing
+              </Link>
+              <Link
+                href="/dashboard"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Dashboard
+              </Link>
+              <div className="flex flex-col gap-2 pt-2">
+                <Button variant="ghost" className="justify-start text-muted-foreground">
+                  Sign In
+                </Button>
+                <Button className="glow-accent bg-primary text-primary-foreground">
+                  Get Started
+                </Button>
+              </div>
+            </div>
+          )}
+        </nav>
+      </div>
+    </header>
+  )
+}
