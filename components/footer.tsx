@@ -9,23 +9,23 @@ const footerLinks = {
     { label: "Features", href: "#features" },
     { label: "Calculator", href: "#calculator" },
     { label: "Pricing", href: "#pricing" },
-    { label: "API", href: "#" },
+    { label: "API", href: "mailto:support@doggybagg.cc" },
   ],
   Company: [
-    { label: "About", href: "#" },
-    { label: "Blog", href: "#" },
-    { label: "Careers", href: "#" },
-    { label: "Contact", href: "#" },
+    { label: "About", href: "mailto:support@doggybagg.cc" },
+    { label: "Blog", href: "mailto:support@doggybagg.cc" },
+    { label: "Careers", href: "mailto:support@doggybagg.cc" },
+    { label: "Contact", href: "mailto:support@doggybagg.cc" },
   ],
   Legal: [
-    { label: "Privacy Policy", href: "#" },
-    { label: "Terms of Service", href: "#" },
-    { label: "Cookie Policy", href: "#" },
+    { label: "Privacy Policy", href: "mailto:support@doggybagg.cc" },
+    { label: "Terms of Service", href: "mailto:support@doggybagg.cc" },
+    { label: "Cookie Policy", href: "mailto:support@doggybagg.cc" },
   ],
   Support: [
-    { label: "Help Center", href: "#" },
-    { label: "Documentation", href: "#" },
-    { label: "Status", href: "#" },
+    { label: "Help Center", href: "mailto:support@doggybagg.cc" },
+    { label: "Documentation", href: "mailto:support@doggybagg.cc" },
+    { label: "Status", href: "mailto:support@doggybagg.cc" },
   ],
 }
 
@@ -61,7 +61,7 @@ export function Footer() {
             </p>
             <div className="flex gap-4">
               <Link
-                href="#"
+                href="mailto:support@doggybagg.cc"
                 className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-secondary/50 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
                 aria-label="Twitter"
               >
@@ -70,7 +70,7 @@ export function Footer() {
                 </svg>
               </Link>
               <Link
-                href="#"
+                href="mailto:support@doggybagg.cc"
                 className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-secondary/50 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
                 aria-label="LinkedIn"
               >
@@ -123,13 +123,13 @@ export function Footer() {
             &copy; 2026 DoggyBagg LLC. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <Link href="#" className="text-xs text-muted-foreground hover:text-foreground">
+            <Link href="mailto:support@doggybagg.cc" className="text-xs text-muted-foreground hover:text-foreground">
               Privacy
             </Link>
-            <Link href="#" className="text-xs text-muted-foreground hover:text-foreground">
+            <Link href="mailto:support@doggybagg.cc" className="text-xs text-muted-foreground hover:text-foreground">
               Terms
             </Link>
-            <Link href="#" className="text-xs text-muted-foreground hover:text-foreground">
+            <Link href="mailto:support@doggybagg.cc" className="text-xs text-muted-foreground hover:text-foreground">
               Cookies
             </Link>
           </div>
