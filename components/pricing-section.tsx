@@ -145,17 +145,43 @@ export function PricingSection() {
                 ))}
               </ul>
 
-              <Link href="mailto:support@doggybagg.cc">
-                <Button
-                  className={`w-full ${
-                    plan.highlighted
-                      ? "glow-accent bg-primary text-primary-foreground hover:bg-primary/90"
-                      : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-                  }`}
-                >
-                  {plan.cta}
-                </Button>
-              </Link>
+              {plan.name === "Starter" ? (
+                <Link href="/checkout/starter-plan">
+                  <Button
+                    className={`w-full ${
+                      plan.highlighted
+                        ? "glow-accent bg-primary text-primary-foreground hover:bg-primary/90"
+                        : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                    }`}
+                  >
+                    {plan.cta}
+                  </Button>
+                </Link>
+              ) : plan.name === "Professional" ? (
+                <Link href="/checkout/professional-plan">
+                  <Button
+                    className={`w-full ${
+                      plan.highlighted
+                        ? "glow-accent bg-primary text-primary-foreground hover:bg-primary/90"
+                        : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                    }`}
+                  >
+                    {plan.cta}
+                  </Button>
+                </Link>
+              ) : (
+                <Link href="mailto:support@doggybagg.cc">
+                  <Button
+                    className={`w-full ${
+                      plan.highlighted
+                        ? "glow-accent bg-primary text-primary-foreground hover:bg-primary/90"
+                        : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                    }`}
+                  >
+                    {plan.cta}
+                  </Button>
+                </Link>
+              )}
             </div>
           ))}
         </div>

@@ -50,19 +50,22 @@ export async function startCheckoutSession(productId: string) {
   })
 
   // Log the transaction in the database
-  await supabase.from('payment_transactions').insert({
+  const { error: insertError } = await supabase.from('payments').insert({
     user_id: user.id,
     stripe_session_id: session.id,
-    amount: product.priceInCents / 100,
-    currency: 'usd',
+    amount_cents: product.priceInCents,
     status: 'pending',
-    product_id: product.id,
     metadata: {
+      product_id: product.id,
       product_name: product.name,
       subscription_tier: product.subscriptionTier,
       search_credits: product.searchCredits,
     },
   })
+
+  if (insertError) {
+    console.error('[v0] Failed to log payment transaction:', insertError)
+  }
 
   return session.client_secret
 }
