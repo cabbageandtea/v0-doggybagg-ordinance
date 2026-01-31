@@ -78,12 +78,12 @@ All server actions properly implement authentication checks:
 
 **Current Legal Disclaimer** (`/components/footer.tsx` lines 112-125):
 
-```
+\`\`\`
 Ordinance.ai is a data-monitoring utility by DoggyBagg LLC. Registry matching 
 is based on public San Diego municipal records. Not legal or tax advice. We do 
 not warrant 100% accuracy; verify all findings with the San Diego City Treasurer. 
 Liability is limited to the greater of $100 or the amount paid in the last 12 months.
-```
+\`\`\`
 
 **✅ Verification Checklist:**
 - ✅ Company attribution: "DoggyBagg LLC" ✅
