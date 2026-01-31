@@ -31,17 +31,32 @@ async function main() {
 
     if (res.error) {
       console.warn('Create user returned error:', res.error.message)
-      // Try to find existing user
+      // Try to find existing user via admin.listUsers if available
       if (typeof supabase.auth.admin.listUsers === 'function') {
         const list = await supabase.auth.admin.listUsers()
         const existing = list.data?.users?.find(u => u.email === TEST_EMAIL) || list.data?.find?.(u => u.email === TEST_EMAIL)
         if (existing) {
           const id = existing.id
           fs.writeFileSync(path.resolve(__dirname, '.test_user.json'), JSON.stringify({ id, email: TEST_EMAIL }))
-          console.log('Found existing user, wrote .test_user.json')
+          console.log('Found existing user via admin.listUsers, wrote .test_user.json')
           return
         }
       }
+
+      // Fallback: query the `users` table directly using the service role key
+      try {
+        const { data, error } = await supabase.from('users').select('id,email').eq('email', TEST_EMAIL).limit(1)
+        if (error) console.warn('Fallback query to users table returned error:', error.message)
+        const row = (data && data[0])
+        if (row && row.id) {
+          fs.writeFileSync(path.resolve(__dirname, '.test_user.json'), JSON.stringify({ id: row.id, email: TEST_EMAIL }))
+          console.log('Found existing user via users table, wrote .test_user.json')
+          return
+        }
+      } catch (e) {
+        console.warn('Error querying users table as fallback:', e.message || e)
+      }
+
       throw new Error('Failed to create or find test user')
     }
 
