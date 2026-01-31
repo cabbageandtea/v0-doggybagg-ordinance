@@ -1,5 +1,6 @@
 'use server'
 
+import Stripe from 'stripe'
 import { stripe } from '@/lib/stripe'
 import { PRODUCTS, getProductById } from '@/lib/products'
 import { createClient } from '@/lib/supabase/server'
@@ -31,7 +32,7 @@ export async function startCheckoutSession(productId: string): Promise<string> {
   const stripePriceId = STRIPE_PRICE_IDS[productId]
 
   // If no Stripe Price ID is configured, use dynamic pricing (for development)
-  const sessionConfig: any = {
+  const sessionConfig: Stripe.Checkout.SessionCreateParams = {
     ui_mode: 'embedded',
     redirect_on_completion: 'never',
     customer_email: user.email,

@@ -4,7 +4,8 @@ import { useState } from "react"
 import { 
   generateAppealLetter, 
   suggestNextAction,
-  type ViolationDetail 
+  type ViolationDetail,
+  type NextActionResult,
 } from "@/app/actions/agentic"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -38,7 +39,7 @@ export function ResolutionCenter({ violation, propertyId }: ResolutionCenterProp
   const [isGenerating, setIsGenerating] = useState(false)
   const [appealLetter, setAppealLetter] = useState<string | null>(null)
   const [citations, setCitations] = useState<string[] | null>(null)
-  const [nextAction, setNextAction] = useState<any>(null)
+  const [nextAction, setNextAction] = useState<NextActionResult['action'] | null>(null)
   const [isCopied, setIsCopied] = useState(false)
 
   const handleGenerateAppeal = async () => {
