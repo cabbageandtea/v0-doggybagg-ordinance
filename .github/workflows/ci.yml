@@ -45,7 +45,7 @@ jobs:
       - name: Type check
         run: pnpm -s tsc --noEmit
       - name: Lint
-        run: pnpm -s lint
+        run: pnpm -s lint:ci
       - name: Run tests
         run: pnpm -s test:coverage
       - name: Audit dependencies

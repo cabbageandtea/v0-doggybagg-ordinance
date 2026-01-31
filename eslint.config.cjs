@@ -20,7 +20,7 @@ module.exports = [
       '@typescript-eslint/no-misused-promises': ['error', { checksVoidReturn: false }],
       'no-unused-vars': ['error', { 'argsIgnorePattern': '^_' }],
       '@typescript-eslint/no-unused-vars': ['error', { 'argsIgnorePattern': '^_' }],
-      'no-console': 'warn',
+      'no-console': ['error', { allow: ['error', 'warn'] }],
       'react/react-in-jsx-scope': 'off',
     },
 
