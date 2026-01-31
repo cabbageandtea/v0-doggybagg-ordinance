@@ -27,8 +27,18 @@ type ComplianceCertificateProps = {
   propertyAddress: string
 }
 
+type CertificateData = {
+  certificateId: string
+  issuedDate: string
+  expiryDate: string
+  propertyAddress: string
+  blockchainHash: string
+  complianceScore: number
+  verificationUrl: string
+}
+
 export function ComplianceCertificate({ propertyId, propertyAddress }: ComplianceCertificateProps) {
-  const [certificate, setCertificate] = useState<any>(null)
+  const [certificate, setCertificate] = useState<CertificateData | null>(null)
   const [isGenerating, setIsGenerating] = useState(false)
   const [isCopied, setIsCopied] = useState(false)
 
@@ -47,7 +57,7 @@ export function ComplianceCertificate({ propertyId, propertyAddress }: Complianc
 
   const handleCopyHash = () => {
     if (certificate?.blockchainHash) {
-      navigator.clipboard.writeText(certificate.blockchainHash)
+      void navigator.clipboard.writeText(certificate.blockchainHash)
       setIsCopied(true)
       setTimeout(() => setIsCopied(false), 2000)
     }

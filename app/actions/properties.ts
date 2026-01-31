@@ -10,7 +10,8 @@ export interface Property {
   reporting_status: string
   risk_score: number
   last_checked: string
-}
+  created_at?: string
+} 
 
 export async function getUserProperties(): Promise<{ properties: Property[] | null; error: string | null }> {
   try {

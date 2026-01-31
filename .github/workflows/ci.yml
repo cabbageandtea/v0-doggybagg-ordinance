@@ -1,0 +1,112 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, chore/** ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@stable --activate || true
+          if ! command -v pnpm >/dev/null 2>&1; then
+            npm i -g pnpm
+          fi
+          pnpm -v
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: ESLint autofix (apply fixes and push)
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Run eslint --fix but don't fail the step if there are still errors (we want to attempt fixes)
+          pnpm exec eslint . --ext .ts,.tsx --fix || true
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -m "chore(lint): apply automatic ESLint fixes [ci skip]" || true
+            git push || true
+          fi
+      - name: Type check
+        run: pnpm -s tsc --noEmit
+      - name: Lint
+        run: pnpm -s lint:ci
+      - name: Run tests
+        run: pnpm -s test:coverage
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage
+      - name: Check Codecov token
+        if: always()
+        run: |
+          if [ -z "${{ secrets.CODECOV_TOKEN }}" ]; then
+            echo "WARNING: CODECOV_TOKEN secret not set; Codecov uploads will be unauthenticated or skipped."
+          else
+            echo "Codecov token found."
+          fi
+      - name: Upload coverage to Codecov
+        if: always()
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage/lcov.info
+          fail_ci_if_error: false
+      - name: Check coverage thresholds
+        if: always()
+        run: node scripts/check-coverage-threshold.js
+      - name: Post coverage comment (fallback)
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_EVENT_PATH: ${{ github.event_path }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/post-coverage-comment.js
+      - name: Audit dependencies
+        run: pnpm audit --json
+
+  e2e:
+    needs: checks
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@stable --activate || true
+          if ! command -v pnpm >/dev/null 2>&1; then
+            npm i -g pnpm
+          fi
+          pnpm -v
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Build
+        run: pnpm -s build
+      - name: Start server
+        run: pnpm -s start &
+      - name: Wait for server
+        run: pnpm exec wait-on http://localhost:3000 --timeout 45000
+      - name: Run Playwright E2E tests
+        run: pnpm -s e2e:ci

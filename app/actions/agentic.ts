@@ -63,6 +63,25 @@ export type ComplianceCertificate = {
   error?: string
 }
 
+// Helper types to avoid `any` and keep logic explicit
+export type UserTier = 'free' | 'starter' | 'professional' | 'enterprise'
+export type Ordinance = {
+  status?: string
+  fine_amount?: number
+  violation_type?: string
+  zip_code?: string
+}
+export type FetchedProperty = {
+  ordinances?: Ordinance[]
+  zip_code?: string
+  address?: string
+  city?: string
+  state?: string
+}
+export type FetchedViolation = ViolationDetail & { properties?: FetchedProperty }
+export type MinimalProperty = { id: string; address: string }
+export type RiskLevel = 'Low' | 'Medium' | 'High'
+
 /**
  * AGENTIC FUNCTION 1: Generate Appeal Letter
  * Server-side only - uses proprietary legal templates
@@ -260,13 +279,18 @@ export async function generateComplianceCertificate(
 // ========== PROPRIETARY SERVER-SIDE ALGORITHMS ==========
 // These functions contain the core IP and never get exposed to client
 
-function generateLetterTemplate(violation: any): string {
+export function generateLetterTemplate(violation: FetchedViolation): string {
   const property = violation.properties
   const date = new Date().toLocaleDateString('en-US', { 
     year: 'numeric', 
     month: 'long', 
     day: 'numeric' 
   })
+
+  // If property metadata is missing from the violation record, provide a safe fallback
+  const propertyAddressLine = property
+    ? `${property.address ?? 'Unknown Address'}, ${property.city ?? ''}, ${property.state ?? ''} ${property.zip_code ?? ''}`.replace(/,\s*,/g, ',').replace(/\s+,/g, ',').trim()
+    : 'Unknown Address'
 
   return `
 San Diego City Treasurer
@@ -276,7 +300,7 @@ Office of Compliance and Enforcement
 ${date}
 
 RE: Formal Appeal - Violation Notice #${violation.id.slice(0, 8)}
-Property Address: ${property.address}, ${property.city}, ${property.state} ${property.zip_code}
+Property Address: ${propertyAddressLine}
 
 Dear City Treasurer,
 
@@ -307,7 +331,7 @@ Generated via Ordinance.ai
   `.trim()
 }
 
-function getMunicipalCitations(violationType: string): string[] {
+export function getMunicipalCitations(violationType: string): string[] {
   const citationMap: Record<string, string[]> = {
     'Short-Term Rental': [
       'SDMC 143.0101 - Short-Term Residential Occupancy Regulations',
@@ -327,7 +351,7 @@ function getMunicipalCitations(violationType: string): string[] {
   return citationMap[violationType] || ['SDMC 143.0101 - General Compliance Standards']
 }
 
-function calculateNextBestAction(violations: any[]) {
+export function calculateNextBestAction(violations: ViolationDetail[]): NextActionResult['action'] {
   if (violations.length === 0) {
     return {
       priority: 'low' as const,
@@ -355,20 +379,20 @@ function calculateNextBestAction(violations: any[]) {
     description: 'Submit formal appeal to San Diego City Treasurer within 30 days',
     deadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
   }
-}
+} 
 
-function calculateBayesianRisk(areaViolations: any[], zipCode: string) {
+export function calculateBayesianRisk(areaViolations: Array<{ violation_type: string }>, zipCode: string) {
   const violationCount = areaViolations.length
   const violationTypes = [...new Set(areaViolations.map(v => v.violation_type))]
 
   // PROPRIETARY BAYESIAN MODEL
   let riskScore = Math.min(100, (violationCount / 10) * 100)
-  let neighborhoodScore: 'Low' | 'Medium' | 'High' = 'Low'
+  let neighborhoodScore: RiskLevel = 'Low'
   
   if (violationCount > 5) neighborhoodScore = 'Medium'
   if (violationCount > 10) neighborhoodScore = 'High'
 
-  const reasons = []
+  const reasons: string[] = []
   if (violationCount > 3) {
     reasons.push(`${violationCount} recent violations detected in ${zipCode} area`)
   }
@@ -379,9 +403,11 @@ function calculateBayesianRisk(areaViolations: any[], zipCode: string) {
     reasons.push('No recent violations in neighborhood')
   }
 
+  const level: RiskLevel = riskScore > 66 ? 'High' : riskScore > 33 ? 'Medium' : 'Low'
+
   return {
     score: Math.round(riskScore),
-    level: riskScore > 66 ? 'High' : riskScore > 33 ? 'Medium' : 'Low' as any,
+    level,
     neighborhoodScore,
     reasons,
     areaViolations: {
@@ -390,18 +416,18 @@ function calculateBayesianRisk(areaViolations: any[], zipCode: string) {
       types: violationTypes,
     },
   }
-}
+} 
 
-function generateBlockchainHash(property: any): string {
+export function generateBlockchainHash(property: MinimalProperty): string {
   // PROPRIETARY: Simulate blockchain verification hash
   const data = `${property.id}${property.address}${Date.now()}`
   return `0x${Buffer.from(data).toString('hex').slice(0, 64)}`
 }
 
-function calculateComplianceScore(property: any): number {
-  const activeViolations = property.ordinances?.filter((o: any) => o.status === 'active').length || 0
+export function calculateComplianceScore(property: FetchedProperty): number {
+  const activeViolations = property.ordinances?.filter((o: Ordinance) => o.status === 'active').length || 0
   return Math.max(0, 100 - (activeViolations * 15))
-}
+} 
 
 // ========== AUTONOMOUS ONBOARDING AGENT ==========
 
@@ -469,11 +495,11 @@ export async function getOnboardingStatus(): Promise<OnboardingStatus> {
       .select('id')
       .eq('user_id', user.id)
 
-    const userTier = profile?.subscription_tier || 'free'
+    const userTier = (profile?.subscription_tier as UserTier) || 'free'
     const propertiesCount = properties?.length || 0
     
     // PROPRIETARY: Determine completed steps
-    const completedSteps = []
+    const completedSteps: string[] = []
     let currentStep = 1
 
     if (propertiesCount > 0) {
@@ -508,7 +534,7 @@ export async function getOnboardingStatus(): Promise<OnboardingStatus> {
         currentStep,
         totalSteps: 3,
         completedSteps,
-        userTier: userTier as any,
+        userTier: userTier as UserTier,
         nextAction,
       },
     }
@@ -533,7 +559,7 @@ export async function updateOnboardingProgress(
     }
 
     // Upsert onboarding progress
-    const updateData: any = {}
+    const updateData: Partial<{ phone_verified: boolean; viewed_risk_score: boolean }> = {}
     if (step === 'verify_phone') updateData.phone_verified = true
     if (step === 'view_risk') updateData.viewed_risk_score = true
 
@@ -611,12 +637,12 @@ export async function generateFirstHealthCheck(): Promise<ComplianceHealthCheck>
     }
 
     // PROPRIETARY ALGORITHM: Calculate health metrics
-    const activeViolations = properties.reduce((sum, p) => 
-      sum + (p.ordinances?.filter((o: any) => o.status === 'active').length || 0), 0
+    const activeViolations = properties.reduce((sum: number, p: FetchedProperty) => 
+      sum + (p.ordinances?.filter((o: Ordinance) => o.status === 'active').length || 0), 0
     )
 
-    const totalFines = properties.reduce((sum, p) =>
-      sum + (p.ordinances?.reduce((s: number, o: any) => s + (o.fine_amount || 0), 0) || 0), 0
+    const totalFines = properties.reduce((sum: number, p: FetchedProperty) =>
+      sum + (p.ordinances?.reduce((s: number, o: Ordinance) => s + (o.fine_amount || 0), 0) || 0), 0
     )
 
     // Get neighborhood risk
@@ -637,7 +663,7 @@ export async function generateFirstHealthCheck(): Promise<ComplianceHealthCheck>
     if (neighborhoodRiskLevel === 'Medium') overallScore -= 5
     overallScore = Math.max(0, Math.round(overallScore))
 
-    const portfolioHealth = 
+    const portfolioHealth: 'Excellent' | 'Good' | 'Fair' | 'At Risk' = 
       overallScore >= 85 ? 'Excellent' :
       overallScore >= 70 ? 'Good' :
       overallScore >= 50 ? 'Fair' : 'At Risk'
@@ -680,13 +706,13 @@ export async function generateFirstHealthCheck(): Promise<ComplianceHealthCheck>
 }
 
 // PROPRIETARY: Helper functions for health check
-function calculateNeighborhoodRisk(violationCount: number): 'Low' | 'Medium' | 'High' {
+export function calculateNeighborhoodRisk(violationCount: number): 'Low' | 'Medium' | 'High' {
   if (violationCount > 10) return 'High'
   if (violationCount > 5) return 'Medium'
   return 'Low'
 }
 
-function generateHealthRecommendations(
+export function generateHealthRecommendations(
   activeViolations: number,
   totalFines: number,
   neighborhoodRisk: string,
