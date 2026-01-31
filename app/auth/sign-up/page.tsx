@@ -10,6 +10,7 @@ import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { createClient } from "@/lib/supabase/client"
 import { useRouter } from "next/navigation"
+import { ensureUserProfile } from "@/app/actions/profile"
 
 export default function SignUpPage() {
   const [email, setEmail] = useState("")
@@ -26,7 +27,7 @@ export default function SignUpPage() {
 
     try {
       const supabase = createClient()
-      const { error } = await supabase.auth.signUp({
+      const { data, error: signUpError } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -37,8 +38,16 @@ export default function SignUpPage() {
         },
       })
 
-      if (error) throw error
-      
+      if (signUpError) throw signUpError
+
+      // If email confirmation is disabled, we get a session immediately; ensure profile exists
+      if (data.session) {
+        const { error: profileError } = await ensureUserProfile()
+        if (profileError) {
+          console.warn("[sign-up] ensureUserProfile:", profileError)
+        }
+      }
+
       router.push("/auth/verify-email")
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Failed to sign up")

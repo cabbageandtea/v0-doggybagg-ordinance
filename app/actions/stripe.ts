@@ -4,8 +4,7 @@ import { stripe } from '@/lib/stripe'
 import { PRODUCTS, getProductById } from '@/lib/products'
 import { createClient } from '@/lib/supabase/server'
 
-// TODO: After creating products in Stripe Dashboard, replace these with actual Price IDs
-// Instructions: See STRIPE_SETUP_INSTRUCTIONS.md
+// Live Stripe Price IDs – set in .env.local and Vercel. See DEPLOY.md.
 const STRIPE_PRICE_IDS: Record<string, string> = {
   'starter-plan': process.env.STRIPE_STARTER_PRICE_ID || 'REPLACE_WITH_STARTER_PRICE_ID',
   'professional-plan': process.env.STRIPE_PROFESSIONAL_PRICE_ID || 'REPLACE_WITH_PROFESSIONAL_PRICE_ID',

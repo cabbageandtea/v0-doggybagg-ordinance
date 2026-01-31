@@ -1,30 +1,31 @@
-# v0-doggybagg-ordinance
+# Ordinance.ai / doggybagg.cc
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+Property ordinance monitoring platform. Next.js + Supabase + Stripe.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/techtitan0187-8440/v0-doggybagg-ordinance)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/Z0ibEWpYHNo)
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://doggybagg.cc)
+[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app)
+
+## Production deploy
+
+**→ [DEPLOY.md](./DEPLOY.md)** — 3 steps: Supabase script, Vercel env vars, push.
 
 ## Overview
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+- **Production:** https://doggybagg.cc
+- **Stack:** Next.js, Supabase (auth + DB), Stripe (checkout)
+- **Plans:** Starter $29/mo · Professional $99/mo
 
-## Deployment
+## Developer setup (local)
 
-Your project is live at:
+| Task | Doc |
+|------|-----|
+| **Deploy to production** | [DEPLOY.md](./DEPLOY.md) · 3-step guide |
+| **Environment variables** | [.env.example](./.env.example) → copy to `.env.local` · [ENV_AUDIT.md](./ENV_AUDIT.md) |
+| **MCP** (Cursor) | [MCP_SETUP.md](./MCP_SETUP.md) |
+| **Vercel env setup** | [VERCEL_ENV_SETUP.md](./VERCEL_ENV_SETUP.md) |
 
-**[https://vercel.com/techtitan0187-8440/v0-doggybagg-ordinance](https://vercel.com/techtitan0187-8440/v0-doggybagg-ordinance)**
-
-## Build your app
-
-Continue building your app on:
-
-**[https://v0.app/chat/Z0ibEWpYHNo](https://v0.app/chat/Z0ibEWpYHNo)**
-
-## How It Works
-
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+```bash
+pnpm install
+pnpm dev
+pnpm build
+```

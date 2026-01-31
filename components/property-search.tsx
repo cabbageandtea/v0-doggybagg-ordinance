@@ -28,15 +28,21 @@ export function PropertySearch() {
   const [searchQuery, setSearchQuery] = useState("")
   const [isSearching, setIsSearching] = useState(false)
   const [showResults, setShowResults] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (!searchQuery.trim()) return
     setIsSearching(true)
-    // Simulate search
-    setTimeout(() => {
-      setIsSearching(false)
+    setError(null)
+    try {
+      // Mock: replace with real API when backend is wired
+      await new Promise((r) => setTimeout(r, 1500))
       setShowResults(true)
-    }, 1500)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Search failed. Please try again.")
+    } finally {
+      setIsSearching(false)
+    }
   }
 
   const getStatusIcon = (status: string) => {
@@ -109,6 +115,13 @@ export function PropertySearch() {
             </Button>
           </div>
         </div>
+
+        {error && (
+          <div className="flex items-center gap-3 rounded-xl border border-destructive/50 bg-destructive/10 p-4">
+            <AlertCircle className="h-5 w-5 shrink-0 text-destructive" />
+            <p className="text-sm text-destructive">{error}</p>
+          </div>
+        )}
 
         {/* Sample Results */}
         {showResults && (

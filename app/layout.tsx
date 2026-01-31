@@ -7,7 +7,10 @@ import './globals.css'
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space" });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://doggybagg.cc'
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: 'Ordinance.ai | San Diego Property Fine Monitoring | DoggyBagg LLC',
   description: 'AI-powered municipal code violation monitoring for San Diego property investors. Detect fines early, protect your portfolio, and stay compliant with Ordinance.ai.',
   generator: 'v0.app',

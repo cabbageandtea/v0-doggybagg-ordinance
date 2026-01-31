@@ -1,16 +1,20 @@
 import { createBrowserClient } from '@supabase/ssr'
 
-let client: ReturnType<typeof createBrowserClient> | undefined
+// Singleton: use globalThis so one GoTrueClient is reused across the app and
+// across Next.js dev HMR, preventing "Multiple GoTrueClient instances" errors.
+const globalForSupabase = globalThis as unknown as {
+  supabaseClient: ReturnType<typeof createBrowserClient> | undefined
+}
 
 export function createClient() {
-  if (client) {
-    return client
+  if (globalForSupabase.supabaseClient) {
+    return globalForSupabase.supabaseClient
   }
 
-  client = createBrowserClient(
+  globalForSupabase.supabaseClient = createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
   )
 
-  return client
+  return globalForSupabase.supabaseClient
 }

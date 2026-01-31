@@ -1,5 +1,12 @@
 -- Auto-create user profile when a new user signs up
--- This trigger ensures every new user gets a profile with default settings
+-- This trigger ensures every new user gets a profile with default settings.
+--
+-- IMPORTANT: Run this script in Supabase Dashboard → SQL Editor (as the project
+-- owner / postgres) so the function runs with privileges that can insert into
+-- public.profiles. If the trigger was created by a role that is subject to RLS,
+-- you get "Database error saving new user" on sign-up. If that happens, either
+-- re-run this script as postgres, or run 003_drop_profile_trigger_use_app_fallback.sql
+-- and rely on the app to create profiles (callback + sign-up page).
 
 create or replace function public.handle_new_user()
 returns trigger

@@ -2,14 +2,14 @@
 
 import React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { createClient } from "@/lib/supabase/client"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 
 export default function SignInPage() {
   const [email, setEmail] = useState("")
@@ -17,6 +17,14 @@ export default function SignInPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    const err = searchParams.get("error")
+    if (err === "auth_callback_failed") {
+      setError("Sign-in link expired or invalid. Please sign in again.")
+    }
+  }, [searchParams])
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -31,7 +39,8 @@ export default function SignInPage() {
       })
 
       if (error) throw error
-      
+
+      router.refresh()
       router.push("/dashboard")
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Failed to sign in")
