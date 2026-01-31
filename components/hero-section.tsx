@@ -42,7 +42,7 @@ export function HeroSection() {
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
-            <Link href="mailto:support@doggybagg.cc">
+            <Link href="mailto:maliklomax@doggybagg.cc?subject=Portfolio%20Strategy%20Call%20Request">
               <Button
                 variant="outline"
                 size="lg"

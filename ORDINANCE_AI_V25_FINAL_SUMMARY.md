@@ -26,11 +26,11 @@ Ordinance.ai has evolved from concept to a production-ready Agentic compliance p
 **Guided Tour System:**
 The Autonomous Onboarding Agent uses a "Ghost Cursor" animation system with sparkle effects to guide new users through three critical setup steps:
 
-```typescript
+\`\`\`typescript
 Step 1: Add Property → Targets #add-property-button
 Step 2: Verify Phone → Opens SMS verification modal
 Step 3: View Risk Assessment → Highlights neighborhood risk card
-```
+\`\`\`
 
 **Tier-Based Adaptation:**
 The system intelligently detects user subscription tiers and customizes the experience:
@@ -40,9 +40,9 @@ The system intelligently detects user subscription tiers and customizes the expe
 - **Enterprise Tier Users:** Shown compliance certificate generation
 
 **Server-Side Logic:**
-```typescript
+\`\`\`typescript
 export async function getOnboardingStatus(): Promise<OnboardingStatus>
-```
+\`\`\`
 - Queries Supabase `user_onboarding` table for progress tracking
 - Calculates completion percentage based on user actions
 - Returns next recommended action based on tier + completion state
@@ -53,9 +53,9 @@ export async function getOnboardingStatus(): Promise<OnboardingStatus>
 **Proprietary Algorithm:**
 Upon completing onboarding, the agent autonomously generates a "Compliance Health Check" report:
 
-```typescript
+\`\`\`typescript
 export async function generateFirstHealthCheck(): Promise<ComplianceHealthCheck>
-```
+\`\`\`
 
 **Multi-Factor Analysis:**
 1. **Portfolio Score (0-100):** Weighted algorithm considering:
@@ -79,9 +79,9 @@ This is the "aha moment" that converts free users to paid tiers—they see immed
 ### 1.3 AI Resolution Center
 
 **Autonomous Appeal Drafting:**
-```typescript
+\`\`\`typescript
 export async function generateAppealLetter(violation: ViolationDetail)
-```
+\`\`\`
 
 The system automatically:
 - Drafts formal appeal letters addressed to San Diego City Treasurer
@@ -102,12 +102,12 @@ All Resolution Center components are fully responsive with `sm:`, `md:`, `lg:` T
 The v18 audit identified critical gaps in the dashboard showing static mock data. We successfully transitioned to live Supabase queries:
 
 **Database Schema (`/scripts/001_create_properties_schema.sql`):**
-```sql
+\`\`\`sql
 - properties: Core property records with user_id FK
 - ordinances: Violation tracking with RLS policies
 - fines: Payment and penalty tracking
 - profiles: Extended user metadata with subscription_tier
-```
+\`\`\`
 
 **Row-Level Security (RLS):**
 Every table enforces `user_id = auth.uid()` policies, ensuring users only access their own data.
@@ -115,21 +115,21 @@ Every table enforces `user_id = auth.uid()` policies, ensuring users only access
 ### 2.2 Critical SQL Trigger Fix
 
 **Profile Auto-Creation:**
-```sql
+\`\`\`sql
 -- scripts/002_create_profile_trigger.sql
 CREATE TRIGGER on_auth_user_created
 AFTER INSERT ON auth.users
 FOR EACH ROW EXECUTE FUNCTION handle_new_user();
-```
+\`\`\`
 
 **Why This Was Critical:**
 Initially, new users signing up would hit errors because `profiles` records weren't created automatically. The trigger ensures seamless onboarding without manual intervention.
 
 **Application-Level Fallback:**
-```typescript
+\`\`\`typescript
 // /app/actions/profile.ts
 export async function ensureUserProfile()
-```
+\`\`\`
 Defensive programming: If the trigger fails, the app creates the profile on first dashboard load.
 
 ### 2.3 Singleton Supabase Client Pattern
@@ -138,12 +138,12 @@ Defensive programming: If the trigger fails, the app creates the profile on firs
 Early builds had multiple Supabase client instantiations causing connection pool exhaustion.
 
 **Solution:**
-```typescript
+\`\`\`typescript
 // /lib/supabase/server.ts
 export const createClient = cache(async () => {
   // Singleton pattern with Next.js cache
 })
-```
+\`\`\`
 
 This ensures one client per request lifecycle, reducing latency and preventing connection leaks.
 
@@ -191,29 +191,29 @@ These tables enable the agent to improve over time through reinforcement learnin
    - Target: Investors, property funds
 
 **Stripe Price ID Mapping:**
-```typescript
+\`\`\`typescript
 STRIPE_STARTER_PRICE_ID: price_xxx (mapped to $29 product)
 STRIPE_PROFESSIONAL_PRICE_ID: price_yyy (mapped to $149 product)
-```
+\`\`\`
 
 **Checkout Flow:**
-```
+\`\`\`
 Pricing Page → /checkout/[productId] → Stripe Checkout → /checkout/success
-```
+\`\`\`
 
 Seamless redirect flow with session validation and subscription activation.
 
 ### 3.2 Legal Disclaimer & Liability
 
 **Footer Compliance (`/components/footer.tsx`):**
-```
+\`\`\`
 Company: DoggyBagg LLC
 Service: Data-monitoring utility (not legal advice)
 Data Source: Public San Diego municipal records
 Accuracy: No 100% warranty; verify with City Treasurer
 Liability: Limited to greater of $100 or amount paid in last 12 months
 Copyright: © 2026 DoggyBagg LLC
-```
+\`\`\`
 
 **Why This Language Matters:**
 - Protects against legal liability if users rely solely on AI-drafted appeals
@@ -223,9 +223,9 @@ Copyright: © 2026 DoggyBagg LLC
 ### 3.3 Blockchain Verification Placeholder
 
 **Compliance Certificate (`/components/compliance-certificate.tsx`):**
-```typescript
+\`\`\`typescript
 Blockchain Verification Hash: SHA256-based timestamp
-```
+\`\`\`
 
 Currently a placeholder (no actual blockchain integration), but signals data integrity for institutional investors evaluating portfolio compliance during due diligence.
 
@@ -237,7 +237,7 @@ Currently a placeholder (no actual blockchain integration), but signals data int
 
 **All Proprietary Logic Lives in `/app/actions/agentic.ts`:**
 
-```typescript
+\`\`\`typescript
 'use server' // Directive ensures no client-side exposure
 
 export async function generateAppealLetter() {
@@ -257,10 +257,10 @@ export async function generateFirstHealthCheck() {
   // PROPRIETARY: Recommendation prioritization algorithm
   // PROPRIETARY: Portfolio optimization suggestions
 }
-```
+\`\`\`
 
 **Client Components Only Display Results:**
-```typescript
+\`\`\`typescript
 // /components/resolution-center.tsx
 'use client' // Safe to expose - no logic revealed
 
@@ -270,7 +270,7 @@ async function handleGenerate() {
   const result = await generateAppealLetter(violation)
   setLetter(result.letter) // Just displays the output
 }
-```
+\`\`\`
 
 **Why This Architecture Wins:**
 Competitors cannot reverse-engineer our IP. They see:
@@ -281,27 +281,27 @@ Competitors cannot reverse-engineer our IP. They see:
 ### 4.2 Environment Variable Security
 
 **Server-Only Secrets:**
-```
+\`\`\`
 STRIPE_SECRET_KEY: Never exposed to client
 SUPABASE_SERVICE_ROLE_KEY: Admin operations only
-```
+\`\`\`
 
 **Public Keys (Safe for Client):**
-```
+\`\`\`
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 NEXT_PUBLIC_SUPABASE_ANON_KEY
-```
+\`\`\`
 
 All validated in `/FINAL_PRODUCTION_AUDIT_V18.md` with zero secret leakage.
 
 ### 4.3 RLS Policy Enforcement
 
 **Every Supabase Query Requires User Authentication:**
-```sql
+\`\`\`sql
 CREATE POLICY "Users can only see their own properties"
 ON properties FOR SELECT
 USING (auth.uid() = user_id);
-```
+\`\`\`
 
 No user can access another user's property data, violation history, or compliance reports—even with direct database access attempts.
 
@@ -326,13 +326,13 @@ No user can access another user's property data, violation history, or complianc
 ### 5.2 Database Migrations Complete
 
 **Executed Scripts:**
-```
+\`\`\`
 ✅ 001_create_properties_schema.sql
 ✅ 002_create_profile_trigger.sql
 ✅ 003_drop_profile_trigger_use_app_fallback.sql
 ✅ 004_agentic_autonomous_expansion.sql
 ✅ 005_onboarding_agent_schema.sql
-```
+\`\`\`
 
 All tables created, RLS policies active, triggers functional.
 
@@ -340,9 +340,9 @@ All tables created, RLS policies active, triggers functional.
 
 **Merge Confirmation:**
 The latest changes have been successfully pulled from:
-```
+\`\`\`
 v0/techtitan0187-8440-2850aceb in v0-doggybagg-ordinance
-```
+\`\`\`
 
 **Automated Checks:** ✅ Passing
 - No TypeScript errors
@@ -355,7 +355,7 @@ v0/techtitan0187-8440-2850aceb in v0-doggybagg-ordinance
 **Pre-Launch Checklist:**
 Users must configure these in Vercel before [Publish]:
 
-```env
+\`\`\`env
 # Supabase (Auto-configured via v0 integration)
 NEXT_PUBLIC_SUPABASE_URL=https://xxx.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJxxx
@@ -365,7 +365,7 @@ STRIPE_SECRET_KEY=sk_live_xxx
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_xxx
 STRIPE_STARTER_PRICE_ID=price_xxx
 STRIPE_PROFESSIONAL_PRICE_ID=price_yyy
-```
+\`\`\`
 
 **Documentation Available:**
 `/STRIPE_SETUP_INSTRUCTIONS.md` provides step-by-step guidance for creating Stripe products and mapping price IDs.
