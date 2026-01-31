@@ -55,10 +55,10 @@ export function Header() {
                 Pricing
               </Link>
               <Link
-                href="/dashboard"
+                href="mailto:hello@doggybagg.cc?subject=General%20Inquiry"
                 className="text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
-                Dashboard
+                Contact
               </Link>
             </div>
 
@@ -113,10 +113,10 @@ export function Header() {
                 Pricing
               </Link>
               <Link
-                href="/dashboard"
+                href="mailto:hello@doggybagg.cc?subject=General%20Inquiry"
                 className="text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
-                Dashboard
+                Contact
               </Link>
               <div className="flex flex-col gap-2 pt-2">
                 <Link href="/auth/sign-in">
