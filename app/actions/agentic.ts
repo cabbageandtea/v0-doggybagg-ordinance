@@ -287,6 +287,11 @@ function generateLetterTemplate(violation: FetchedViolation): string {
     day: 'numeric' 
   })
 
+  // If property metadata is missing from the violation record, provide a safe fallback
+  const propertyAddressLine = property
+    ? `${property.address ?? 'Unknown Address'}, ${property.city ?? ''}, ${property.state ?? ''} ${property.zip_code ?? ''}`.replace(/,\s*,/g, ',').replace(/\s+,/g, ',').trim()
+    : 'Unknown Address'
+
   return `
 San Diego City Treasurer
 Office of Compliance and Enforcement
@@ -295,7 +300,7 @@ Office of Compliance and Enforcement
 ${date}
 
 RE: Formal Appeal - Violation Notice #${violation.id.slice(0, 8)}
-Property Address: ${property.address}, ${property.city}, ${property.state} ${property.zip_code}
+Property Address: ${propertyAddressLine}
 
 Dear City Treasurer,
 
