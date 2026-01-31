@@ -66,11 +66,11 @@ All three professional mailboxes are **active and fully integrated** into the Or
 All email links use the standard `mailto:` protocol with pre-filled subject lines for better user experience and email organization.
 
 **Example:**
-```html
+\`\`\`html
 <a href="mailto:support@doggybagg.cc?subject=Support%20Request">
   Contact Support
 </a>
-```
+\`\`\`
 
 ### ✅ Pre-filled Subject Lines
 Every email link includes a contextual subject line so your team immediately knows the nature of the inquiry:
