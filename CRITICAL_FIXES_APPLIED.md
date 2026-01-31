@@ -32,12 +32,12 @@ The dashboard (`/app/dashboard/page.tsx`) was displaying hardcoded sample data i
 
 #### 4. Proper Data Flow
 **Before:**
-```typescript
+\`\`\`typescript
 const properties = [ /* hardcoded array */ ]
-```
+\`\`\`
 
 **After:**
-```typescript
+\`\`\`typescript
 const [properties, setProperties] = useState<Property[]>([])
 
 useEffect(() => {
@@ -51,7 +51,7 @@ useEffect(() => {
   }
   loadProperties()
 }, [])
-```
+\`\`\`
 
 #### 5. Field Name Mapping
 Updated all property references to match database schema:
