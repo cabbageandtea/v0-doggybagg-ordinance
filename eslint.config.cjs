@@ -13,7 +13,7 @@ module.exports = [
       },
     },
 
-    plugins: { '@typescript-eslint': require('@typescript-eslint/eslint-plugin') },
+    plugins: { '@typescript-eslint': require('@typescript-eslint/eslint-plugin'), 'jsx-a11y': require('eslint-plugin-jsx-a11y') },
     rules: {
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
@@ -26,5 +26,13 @@ module.exports = [
     },
 
 
+  },
+  {
+    files: ['tests/**/*.{ts,tsx}'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
+    },
   },
 ]

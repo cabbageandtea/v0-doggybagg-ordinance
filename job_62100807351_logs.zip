@@ -1,0 +1,512 @@
+﻿2026-01-31T21:46:33.0444252Z Current runner version: '2.331.0'
+2026-01-31T21:46:33.0478298Z ##[group]Runner Image Provisioner
+2026-01-31T21:46:33.0479760Z Hosted Compute Agent
+2026-01-31T21:46:33.0480717Z Version: 20260123.484
+2026-01-31T21:46:33.0481767Z Commit: 6bd6555ca37d84114959e1c76d2c01448ff61c5d
+2026-01-31T21:46:33.0482848Z Build Date: 2026-01-23T19:41:17Z
+2026-01-31T21:46:33.0484010Z Worker ID: {032e3872-7a67-4bcb-8ec8-426328b9144c}
+2026-01-31T21:46:33.0485063Z Azure Region: centralus
+2026-01-31T21:46:33.0485892Z ##[endgroup]
+2026-01-31T21:46:33.0487978Z ##[group]Operating System
+2026-01-31T21:46:33.0488894Z Ubuntu
+2026-01-31T21:46:33.0489772Z 24.04.3
+2026-01-31T21:46:33.0490675Z LTS
+2026-01-31T21:46:33.0491810Z ##[endgroup]
+2026-01-31T21:46:33.0492651Z ##[group]Runner Image
+2026-01-31T21:46:33.0493791Z Image: ubuntu-24.04
+2026-01-31T21:46:33.0494698Z Version: 20260126.10.1
+2026-01-31T21:46:33.0496754Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260126.10/images/ubuntu/Ubuntu2404-Readme.md
+2026-01-31T21:46:33.0499205Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260126.10
+2026-01-31T21:46:33.0500773Z ##[endgroup]
+2026-01-31T21:46:33.0503088Z ##[group]GITHUB_TOKEN Permissions
+2026-01-31T21:46:33.0505894Z Contents: read
+2026-01-31T21:46:33.0506889Z Metadata: read
+2026-01-31T21:46:33.0507674Z Packages: read
+2026-01-31T21:46:33.0508642Z ##[endgroup]
+2026-01-31T21:46:33.0511500Z Secret source: Actions
+2026-01-31T21:46:33.0513169Z Prepare workflow directory
+2026-01-31T21:46:33.0881168Z Prepare all required actions
+2026-01-31T21:46:33.0938919Z Getting action download info
+2026-01-31T21:46:33.4743603Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2026-01-31T21:46:33.8228882Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-01-31T21:46:33.9455523Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-01-31T21:46:34.1017657Z Download action repository 'codecov/codecov-action@v4' (SHA:b9fd7d16f6d7d1b5d2bec1a2887e65ceed900238)
+2026-01-31T21:46:34.7105676Z Complete job name: checks
+2026-01-31T21:46:34.7979237Z ##[group]Run actions/checkout@v4
+2026-01-31T21:46:34.7980512Z with:
+2026-01-31T21:46:34.7981202Z   fetch-depth: 0
+2026-01-31T21:46:34.7982149Z   persist-credentials: true
+2026-01-31T21:46:34.7983147Z   repository: cabbageandtea/v0-doggybagg-ordinance
+2026-01-31T21:46:34.7984534Z   token: ***
+2026-01-31T21:46:34.7985244Z   ssh-strict: true
+2026-01-31T21:46:34.7985977Z   ssh-user: git
+2026-01-31T21:46:34.7986681Z   clean: true
+2026-01-31T21:46:34.7987439Z   sparse-checkout-cone-mode: true
+2026-01-31T21:46:34.7988367Z   fetch-tags: false
+2026-01-31T21:46:34.7989120Z   show-progress: true
+2026-01-31T21:46:34.7989877Z   lfs: false
+2026-01-31T21:46:34.7990569Z   submodules: false
+2026-01-31T21:46:34.7991330Z   set-safe-directory: true
+2026-01-31T21:46:34.7992536Z ##[endgroup]
+2026-01-31T21:46:34.9082429Z Syncing repository: cabbageandtea/v0-doggybagg-ordinance
+2026-01-31T21:46:34.9085146Z ##[group]Getting Git version info
+2026-01-31T21:46:34.9086755Z Working directory is '/home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance'
+2026-01-31T21:46:34.9088821Z [command]/usr/bin/git version
+2026-01-31T21:46:34.9957591Z git version 2.52.0
+2026-01-31T21:46:34.9986049Z ##[endgroup]
+2026-01-31T21:46:35.0000797Z Temporarily overriding HOME='/home/runner/work/_temp/1810769a-f3c2-42fa-86f6-2cbf07d0d581' before making global git config changes
+2026-01-31T21:46:35.0003646Z Adding repository directory to the temporary git global config as a safe directory
+2026-01-31T21:46:35.0006761Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance
+2026-01-31T21:46:35.0083534Z Deleting the contents of '/home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance'
+2026-01-31T21:46:35.0087505Z ##[group]Initializing the repository
+2026-01-31T21:46:35.0092317Z [command]/usr/bin/git init /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance
+2026-01-31T21:46:35.0519445Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-01-31T21:46:35.0521878Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-01-31T21:46:35.0523642Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-01-31T21:46:35.0524988Z hint: call:
+2026-01-31T21:46:35.0525650Z hint:
+2026-01-31T21:46:35.0526545Z hint: 	git config --global init.defaultBranch <name>
+2026-01-31T21:46:35.0527627Z hint:
+2026-01-31T21:46:35.0528645Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-01-31T21:46:35.0530351Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-01-31T21:46:35.0531773Z hint:
+2026-01-31T21:46:35.0532473Z hint: 	git branch -m <name>
+2026-01-31T21:46:35.0533286Z hint:
+2026-01-31T21:46:35.0534387Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-01-31T21:46:35.0552536Z Initialized empty Git repository in /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance/.git/
+2026-01-31T21:46:35.0566832Z [command]/usr/bin/git remote add origin https://github.com/cabbageandtea/v0-doggybagg-ordinance
+2026-01-31T21:46:35.0638028Z ##[endgroup]
+2026-01-31T21:46:35.0640566Z ##[group]Disabling automatic garbage collection
+2026-01-31T21:46:35.0643150Z [command]/usr/bin/git config --local gc.auto 0
+2026-01-31T21:46:35.0678681Z ##[endgroup]
+2026-01-31T21:46:35.0680133Z ##[group]Setting up auth
+2026-01-31T21:46:35.0688638Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-01-31T21:46:35.0725158Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-01-31T21:46:35.2085982Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-01-31T21:46:35.2117806Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-01-31T21:46:35.2339024Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-01-31T21:46:35.2379509Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-01-31T21:46:35.2628866Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-01-31T21:46:35.2666095Z ##[endgroup]
+2026-01-31T21:46:35.2668323Z ##[group]Fetching the repository
+2026-01-31T21:46:35.2678826Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +ea424a894c1e4e1dc950cdf1b9b321270cd4a124:refs/remotes/pull/10/merge
+2026-01-31T21:46:35.7670939Z From https://github.com/cabbageandtea/v0-doggybagg-ordinance
+2026-01-31T21:46:35.7673106Z  * [new branch]      chore/upgrade-next-eslint-ci             -> origin/chore/upgrade-next-eslint-ci
+2026-01-31T21:46:35.7673958Z  * [new branch]      feat/e2e-auth-and-codecov-onboarding     -> origin/feat/e2e-auth-and-codecov-onboarding
+2026-01-31T21:46:35.7674617Z  * [new branch]      main                                     -> origin/main
+2026-01-31T21:46:35.7675197Z  * [new branch]      v0/techtitan0187-8440-2a4a990d           -> origin/v0/techtitan0187-8440-2a4a990d
+2026-01-31T21:46:35.7740750Z  * [new branch]      v0/techtitan0187-8440-c22c39dd           -> origin/v0/techtitan0187-8440-c22c39dd
+2026-01-31T21:46:35.7742357Z  * [new branch]      v0/techtitan0187-8440-c635661f           -> origin/v0/techtitan0187-8440-c635661f
+2026-01-31T21:46:35.7743724Z  * [new ref]         ea424a894c1e4e1dc950cdf1b9b321270cd4a124 -> pull/10/merge
+2026-01-31T21:46:35.7756067Z ##[endgroup]
+2026-01-31T21:46:35.7756933Z ##[group]Determining the checkout info
+2026-01-31T21:46:35.7758349Z ##[endgroup]
+2026-01-31T21:46:35.7763458Z [command]/usr/bin/git sparse-checkout disable
+2026-01-31T21:46:35.7838614Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-01-31T21:46:35.7864237Z ##[group]Checking out the ref
+2026-01-31T21:46:35.7868002Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/10/merge
+2026-01-31T21:46:35.8046174Z Note: switching to 'refs/remotes/pull/10/merge'.
+2026-01-31T21:46:35.8046701Z 
+2026-01-31T21:46:35.8047139Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-01-31T21:46:35.8048098Z changes and commit them, and you can discard any commits you make in this
+2026-01-31T21:46:35.8049080Z state without impacting any branches by switching back to a branch.
+2026-01-31T21:46:35.8049699Z 
+2026-01-31T21:46:35.8050088Z If you want to create a new branch to retain commits you create, you may
+2026-01-31T21:46:35.8050983Z do so (now or later) by using -c with the switch command. Example:
+2026-01-31T21:46:35.8051797Z 
+2026-01-31T21:46:35.8052035Z   git switch -c <new-branch-name>
+2026-01-31T21:46:35.8052291Z 
+2026-01-31T21:46:35.8052442Z Or undo this operation with:
+2026-01-31T21:46:35.8052653Z 
+2026-01-31T21:46:35.8052768Z   git switch -
+2026-01-31T21:46:35.8052934Z 
+2026-01-31T21:46:35.8053197Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-01-31T21:46:35.8053580Z 
+2026-01-31T21:46:35.8053999Z HEAD is now at ea424a8 Merge 6b64cd992a53ace0ea29e94b432239697346fba0 into 2d1980a05ec3bbf24fdcfd6479cae2469979052a
+2026-01-31T21:46:35.8057319Z ##[endgroup]
+2026-01-31T21:46:35.8092528Z [command]/usr/bin/git log -1 --format=%H
+2026-01-31T21:46:35.8114195Z ea424a894c1e4e1dc950cdf1b9b321270cd4a124
+2026-01-31T21:46:35.8345695Z ##[group]Run actions/setup-node@v4
+2026-01-31T21:46:35.8346082Z with:
+2026-01-31T21:46:35.8346344Z   node-version: 20
+2026-01-31T21:46:35.8346622Z   always-auth: false
+2026-01-31T21:46:35.8346901Z   check-latest: false
+2026-01-31T21:46:35.8347355Z   token: ***
+2026-01-31T21:46:35.8347612Z ##[endgroup]
+2026-01-31T21:46:36.0332686Z Found in cache @ /opt/hostedtoolcache/node/20.20.0/x64
+2026-01-31T21:46:36.0336951Z ##[group]Environment details
+2026-01-31T21:46:38.1223945Z node: v20.20.0
+2026-01-31T21:46:38.1224424Z npm: 10.8.2
+2026-01-31T21:46:38.1224893Z yarn: 1.22.22
+2026-01-31T21:46:38.1225766Z ##[endgroup]
+2026-01-31T21:46:38.1335918Z ##[group]Run corepack enable
+2026-01-31T21:46:38.1336274Z [36;1mcorepack enable[0m
+2026-01-31T21:46:38.1336581Z [36;1mcorepack prepare pnpm@stable --activate || true[0m
+2026-01-31T21:46:38.1336952Z [36;1mif ! command -v pnpm >/dev/null 2>&1; then[0m
+2026-01-31T21:46:38.1337244Z [36;1m  npm i -g pnpm[0m
+2026-01-31T21:46:38.1337471Z [36;1mfi[0m
+2026-01-31T21:46:38.1337656Z [36;1mpnpm -v[0m
+2026-01-31T21:46:38.1383150Z shell: /usr/bin/bash -e {0}
+2026-01-31T21:46:38.1383418Z ##[endgroup]
+2026-01-31T21:46:38.6163508Z [31m[1mUsage Error[22m[39m: Tag not found (stable)
+2026-01-31T21:46:38.6164097Z 
+2026-01-31T21:46:38.6164778Z [1m$ [22mcorepack prepare [--activate] [--json] [-o,--output] ...
+2026-01-31T21:46:38.8726011Z ! Corepack is about to download https://registry.npmjs.org/pnpm/-/pnpm-10.28.2.tgz
+2026-01-31T21:46:40.0532698Z 10.28.2
+2026-01-31T21:46:40.0685055Z ##[group]Run pnpm install --frozen-lockfile
+2026-01-31T21:46:40.0685430Z [36;1mpnpm install --frozen-lockfile[0m
+2026-01-31T21:46:40.0718243Z shell: /usr/bin/bash -e {0}
+2026-01-31T21:46:40.0718494Z ##[endgroup]
+2026-01-31T21:46:40.4933799Z Lockfile is up to date, resolution step is skipped
+2026-01-31T21:46:40.5787143Z Progress: resolved 1, reused 0, downloaded 0, added 0
+2026-01-31T21:46:40.6716128Z Packages: +629
+2026-01-31T21:46:40.6717827Z ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-01-31T21:46:41.5796162Z Progress: resolved 629, reused 0, downloaded 127, added 112
+2026-01-31T21:46:42.5800721Z Progress: resolved 629, reused 0, downloaded 162, added 137
+2026-01-31T21:46:43.5800923Z Progress: resolved 629, reused 0, downloaded 172, added 138
+2026-01-31T21:46:44.5833678Z Progress: resolved 629, reused 0, downloaded 266, added 185
+2026-01-31T21:46:45.5808731Z Progress: resolved 629, reused 0, downloaded 567, added 559
+2026-01-31T21:46:46.0304418Z Progress: resolved 629, reused 0, downloaded 629, added 629, done
+2026-01-31T21:46:46.3724191Z 
+2026-01-31T21:46:46.3724778Z dependencies:
+2026-01-31T21:46:46.3725317Z + @emotion/is-prop-valid 1.4.0
+2026-01-31T21:46:46.3725898Z + @hookform/resolvers 3.10.0
+2026-01-31T21:46:46.3726489Z + @radix-ui/react-accordion 1.2.12
+2026-01-31T21:46:46.3727081Z + @radix-ui/react-alert-dialog 1.1.15
+2026-01-31T21:46:46.3727675Z + @radix-ui/react-aspect-ratio 1.1.8
+2026-01-31T21:46:46.3728275Z + @radix-ui/react-avatar 1.1.11
+2026-01-31T21:46:46.3728964Z + @radix-ui/react-checkbox 1.3.3
+2026-01-31T21:46:46.3729539Z + @radix-ui/react-collapsible 1.1.12
+2026-01-31T21:46:46.3730168Z + @radix-ui/react-context-menu 2.2.16
+2026-01-31T21:46:46.3730702Z + @radix-ui/react-dialog 1.1.15
+2026-01-31T21:46:46.3731293Z + @radix-ui/react-dropdown-menu 2.1.16
+2026-01-31T21:46:46.3732190Z + @radix-ui/react-hover-card 1.1.15
+2026-01-31T21:46:46.3732628Z + @radix-ui/react-label 2.1.8
+2026-01-31T21:46:46.3733097Z + @radix-ui/react-menubar 1.1.16
+2026-01-31T21:46:46.3733582Z + @radix-ui/react-navigation-menu 1.2.14
+2026-01-31T21:46:46.3734016Z + @radix-ui/react-popover 1.1.15
+2026-01-31T21:46:46.3734540Z + @radix-ui/react-progress 1.1.8
+2026-01-31T21:46:46.3735044Z + @radix-ui/react-radio-group 1.3.8
+2026-01-31T21:46:46.3735594Z + @radix-ui/react-scroll-area 1.2.10
+2026-01-31T21:46:46.3736104Z + @radix-ui/react-select 2.2.6
+2026-01-31T21:46:46.3736576Z + @radix-ui/react-separator 1.1.8
+2026-01-31T21:46:46.3737072Z + @radix-ui/react-slider 1.3.6
+2026-01-31T21:46:46.3737502Z + @radix-ui/react-slot 1.2.4
+2026-01-31T21:46:46.3737960Z + @radix-ui/react-switch 1.2.6
+2026-01-31T21:46:46.3738333Z + @radix-ui/react-tabs 1.1.13
+2026-01-31T21:46:46.3738609Z + @radix-ui/react-toast 1.2.15
+2026-01-31T21:46:46.3738919Z + @radix-ui/react-toggle 1.1.10
+2026-01-31T21:46:46.3739289Z + @radix-ui/react-toggle-group 1.1.11
+2026-01-31T21:46:46.3739801Z + @radix-ui/react-tooltip 1.2.8
+2026-01-31T21:46:46.3740270Z + @stripe/react-stripe-js 5.6.0
+2026-01-31T21:46:46.3740720Z + @stripe/stripe-js 8.7.0
+2026-01-31T21:46:46.3741131Z + @supabase/ssr 0.8.0
+2026-01-31T21:46:46.3741866Z + @supabase/supabase-js 2.93.3
+2026-01-31T21:46:46.3742387Z + @vercel/analytics 1.6.1
+2026-01-31T21:46:46.3742832Z + autoprefixer 10.4.24
+2026-01-31T21:46:46.3743327Z + class-variance-authority 0.7.1
+2026-01-31T21:46:46.3743784Z + clsx 2.1.1
+2026-01-31T21:46:46.3744127Z + cmdk 1.1.1
+2026-01-31T21:46:46.3744459Z + date-fns 4.1.0
+2026-01-31T21:46:46.3744912Z + embla-carousel-react 8.6.0
+2026-01-31T21:46:46.3745415Z + framer-motion 12.29.2
+2026-01-31T21:46:46.3745848Z + input-otp 1.4.2
+2026-01-31T21:46:46.3746258Z + lucide-react 0.454.0
+2026-01-31T21:46:46.3746665Z + next 16.1.6
+2026-01-31T21:46:46.3747033Z + next-themes 0.4.6
+2026-01-31T21:46:46.3747429Z + react 19.2.0
+2026-01-31T21:46:46.3747844Z + react-day-picker 9.13.0
+2026-01-31T21:46:46.3748320Z + react-dom 19.2.0
+2026-01-31T21:46:46.3748734Z + react-hook-form 7.71.1
+2026-01-31T21:46:46.3749252Z + react-resizable-panels 4.5.6
+2026-01-31T21:46:46.3750092Z + recharts 3.7.0
+2026-01-31T21:46:46.3750556Z + server-only 0.0.1
+2026-01-31T21:46:46.3750955Z + sonner 2.0.7
+2026-01-31T21:46:46.3751308Z + stripe 20.3.0
+2026-01-31T21:46:46.3751920Z + tailwind-merge 2.6.1
+2026-01-31T21:46:46.3752359Z + tailwindcss-animate 1.0.7
+2026-01-31T21:46:46.3752752Z + vaul 1.1.2
+2026-01-31T21:46:46.3753071Z + zod 3.25.76
+2026-01-31T21:46:46.3753256Z 
+2026-01-31T21:46:46.3753405Z devDependencies:
+2026-01-31T21:46:46.3753778Z + @playwright/test 1.58.1
+2026-01-31T21:46:46.3754207Z + @tailwindcss/postcss 4.1.18
+2026-01-31T21:46:46.3754696Z + @testing-library/jest-dom 6.9.1
+2026-01-31T21:46:46.3755185Z + @testing-library/react 16.3.2
+2026-01-31T21:46:46.3755610Z + @types/node 22.19.7
+2026-01-31T21:46:46.3755981Z + @types/react 19.2.10
+2026-01-31T21:46:46.3756620Z + @types/react-dom 19.2.3
+2026-01-31T21:46:46.3757125Z + @typescript-eslint/eslint-plugin 8.54.0
+2026-01-31T21:46:46.3757730Z + @typescript-eslint/parser 8.54.0
+2026-01-31T21:46:46.3758264Z + @vitest/coverage-v8 4.0.18
+2026-01-31T21:46:46.3758708Z + eslint 9.39.2
+2026-01-31T21:46:46.3759123Z + eslint-config-next 16.1.6
+2026-01-31T21:46:46.3759545Z + jsdom 27.4.0
+2026-01-31T21:46:46.3759906Z + postcss 8.5.6
+2026-01-31T21:46:46.3760298Z + tailwindcss 4.1.18
+2026-01-31T21:46:46.3760715Z + tw-animate-css 1.3.3
+2026-01-31T21:46:46.3761143Z + typescript 5.9.3
+2026-01-31T21:46:46.3761522Z + vitest 4.0.18
+2026-01-31T21:46:46.3762068Z + wait-on 7.2.0
+2026-01-31T21:46:46.3762366Z 
+2026-01-31T21:46:46.3972531Z ╭ Warning ─────────────────────────────────────────────────────────────────────╮
+2026-01-31T21:46:46.3973653Z │                                                                              │
+2026-01-31T21:46:46.3974766Z │   Ignored build scripts: esbuild@0.27.2, sharp@0.34.5,                       │
+2026-01-31T21:46:46.3976008Z │   unrs-resolver@1.11.1.                                                      │
+2026-01-31T21:46:46.3977181Z │   Run "pnpm approve-builds" to pick which dependencies should be allowed     │
+2026-01-31T21:46:46.3978458Z │   to run scripts.                                                            │
+2026-01-31T21:46:46.3979432Z │                                                                              │
+2026-01-31T21:46:46.3980572Z ╰──────────────────────────────────────────────────────────────────────────────╯
+2026-01-31T21:46:46.4204245Z Done in 6.2s using pnpm v10.28.2
+2026-01-31T21:46:46.4757244Z ##[group]Run # Run eslint --fix but don't fail the step if there are still errors (we want to attempt fixes)
+2026-01-31T21:46:46.4757979Z [36;1m# Run eslint --fix but don't fail the step if there are still errors (we want to attempt fixes)[0m
+2026-01-31T21:46:46.4758474Z [36;1mpnpm exec eslint . --ext .ts,.tsx --fix || true[0m
+2026-01-31T21:46:46.4758853Z [36;1mif [ -n "$(git status --porcelain)" ]; then[0m
+2026-01-31T21:46:46.4759178Z [36;1m  git config user.name "github-actions[bot]"[0m
+2026-01-31T21:46:46.4759592Z [36;1m  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"[0m
+2026-01-31T21:46:46.4759987Z [36;1m  git add -A[0m
+2026-01-31T21:46:46.4760333Z [36;1m  git commit -m "chore(lint): apply automatic ESLint fixes [ci skip]" || true[0m
+2026-01-31T21:46:46.4760723Z [36;1m  git push || true[0m
+2026-01-31T21:46:46.4760959Z [36;1mfi[0m
+2026-01-31T21:46:46.4792328Z shell: /usr/bin/bash -e {0}
+2026-01-31T21:46:46.4792569Z env:
+2026-01-31T21:46:46.4793159Z   GITHUB_TOKEN: ***
+2026-01-31T21:46:46.4793374Z ##[endgroup]
+2026-01-31T21:46:52.9068752Z 
+2026-01-31T21:46:52.9073612Z /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance/scripts/check-coverage-threshold.js
+2026-01-31T21:46:52.9079532Z   0:0  error  Parsing error: ESLint was configured to run on `<tsconfigRootDir>/scripts/check-coverage-threshold.js` using `parserOptions.project`: <tsconfigRootDir>/tsconfig.json
+2026-01-31T21:46:52.9084776Z However, that TSConfig does not include this file. Either:
+2026-01-31T21:46:52.9089062Z - Change ESLint's list of included files to not include this file
+2026-01-31T21:46:52.9093373Z - Change that TSConfig to include this file
+2026-01-31T21:46:52.9097755Z - Create a new TSConfig that includes this file and include it in your parserOptions.project
+2026-01-31T21:46:52.9102542Z See the typescript-eslint docs for more info: https://tseslint.com/none-of-those-tsconfigs-include-this-file
+2026-01-31T21:46:52.9105290Z 
+2026-01-31T21:46:52.9107937Z /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance/scripts/create_test_user.js
+2026-01-31T21:46:52.9110275Z   0:0  error  Parsing error: ESLint was configured to run on `<tsconfigRootDir>/scripts/create_test_user.js` using `parserOptions.project`: <tsconfigRootDir>/tsconfig.json
+2026-01-31T21:46:52.9113032Z However, that TSConfig does not include this file. Either:
+2026-01-31T21:46:52.9116724Z - Change ESLint's list of included files to not include this file
+2026-01-31T21:46:52.9118532Z - Change that TSConfig to include this file
+2026-01-31T21:46:52.9119555Z - Create a new TSConfig that includes this file and include it in your parserOptions.project
+2026-01-31T21:46:52.9120932Z See the typescript-eslint docs for more info: https://tseslint.com/none-of-those-tsconfigs-include-this-file
+2026-01-31T21:46:52.9121975Z 
+2026-01-31T21:46:52.9122653Z /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance/scripts/delete_test_user.js
+2026-01-31T21:46:52.9124739Z   0:0  error  Parsing error: ESLint was configured to run on `<tsconfigRootDir>/scripts/delete_test_user.js` using `parserOptions.project`: <tsconfigRootDir>/tsconfig.json
+2026-01-31T21:46:52.9126213Z However, that TSConfig does not include this file. Either:
+2026-01-31T21:46:52.9127049Z - Change ESLint's list of included files to not include this file
+2026-01-31T21:46:52.9127754Z - Change that TSConfig to include this file
+2026-01-31T21:46:52.9128697Z - Create a new TSConfig that includes this file and include it in your parserOptions.project
+2026-01-31T21:46:52.9130087Z See the typescript-eslint docs for more info: https://tseslint.com/none-of-those-tsconfigs-include-this-file
+2026-01-31T21:46:52.9130829Z 
+2026-01-31T21:46:52.9131686Z /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance/scripts/post-coverage-comment.js
+2026-01-31T21:46:52.9135039Z   0:0  error  Parsing error: ESLint was configured to run on `<tsconfigRootDir>/scripts/post-coverage-comment.js` using `parserOptions.project`: <tsconfigRootDir>/tsconfig.json
+2026-01-31T21:46:52.9136845Z However, that TSConfig does not include this file. Either:
+2026-01-31T21:46:52.9137698Z - Change ESLint's list of included files to not include this file
+2026-01-31T21:46:52.9138415Z - Change that TSConfig to include this file
+2026-01-31T21:46:52.9139355Z - Create a new TSConfig that includes this file and include it in your parserOptions.project
+2026-01-31T21:46:52.9140752Z See the typescript-eslint docs for more info: https://tseslint.com/none-of-those-tsconfigs-include-this-file
+2026-01-31T21:46:52.9141480Z 
+2026-01-31T21:46:52.9142332Z /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance/tests/agentic-server.test.ts
+2026-01-31T21:46:52.9177602Z ##[error]   5:40  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9186908Z ##[error]  12:38  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9188329Z ##[error]  14:43  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9189624Z ##[error]  16:39  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9190925Z ##[error]  24:38  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9192584Z ##[error]  25:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9193856Z ##[error]  46:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9195046Z ##[error]  63:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9196232Z ##[error]  81:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9196975Z 
+2026-01-31T21:46:52.9197332Z /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance/tests/agentic.test.ts
+2026-01-31T21:46:52.9198175Z ##[error]  19:80   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9199384Z ##[error]  43:108  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9200111Z 
+2026-01-31T21:46:52.9200444Z /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance/tests/header.test.tsx
+2026-01-31T21:46:52.9201324Z ##[error]  6:20  error  Unexpected any. Specify a different type               @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9203181Z ##[error]  8:5   error  Definition for rule 'jsx-a11y/alt-text' was not found  jsx-a11y/alt-text
+2026-01-31T21:46:52.9204327Z ##[error]  9:13  error  'fill' is assigned a value but never used              no-unused-vars
+2026-01-31T21:46:52.9205561Z ##[error]  9:13  error  'fill' is assigned a value but never used              @typescript-eslint/no-unused-vars
+2026-01-31T21:46:52.9206305Z 
+2026-01-31T21:46:52.9206660Z /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance/tests/onboarding.test.ts
+2026-01-31T21:46:52.9207488Z ##[error]    5:40  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9208689Z ##[error]   12:38  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9209872Z ##[error]   22:38  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9211073Z ##[error]   32:38  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9212427Z ##[error]   33:47  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9213628Z ##[error]   45:39  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9214855Z ##[error]   46:43  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9216239Z ##[error]   53:43  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9217505Z ##[error]   69:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9218843Z ##[error]   87:11  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9220046Z ##[error]   89:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9221239Z ##[error]   99:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9222598Z ##[error]  111:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9223336Z 
+2026-01-31T21:46:52.9223721Z /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance/tests/properties.error.test.ts
+2026-01-31T21:46:52.9224714Z ##[error]  7:12  error  'table' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+2026-01-31T21:46:52.9226137Z ##[error]  7:12  error  'table' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+2026-01-31T21:46:52.9227576Z ##[error]  9:58  error  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9228354Z 
+2026-01-31T21:46:52.9228714Z /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance/tests/properties.test.ts
+2026-01-31T21:46:52.9229635Z ##[error]   8:12  error  'table' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+2026-01-31T21:46:52.9231015Z ##[error]   8:12  error  'table' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+2026-01-31T21:46:52.9232800Z ##[error]  10:34  error  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9234203Z ##[error]  11:43  error  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9235580Z ##[error]  16:34  error  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9236937Z ##[error]  17:38  error  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9237875Z 
+2026-01-31T21:46:52.9238253Z /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance/tests/stripe.dynamic.test.ts
+2026-01-31T21:46:52.9239178Z ##[error]   1:36  error  'beforeEach' is defined but never used                                 no-unused-vars
+2026-01-31T21:46:52.9240497Z ##[error]   1:36  error  'beforeEach' is defined but never used                                 @typescript-eslint/no-unused-vars
+2026-01-31T21:46:52.9242082Z ##[error]  10:37  error  'cfg' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+2026-01-31T21:46:52.9243551Z ##[error]  10:37  error  'cfg' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+2026-01-31T21:46:52.9244976Z ##[error]  10:42  error  Unexpected any. Specify a different type                               @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9246321Z ##[error]  32:37  error  'cfg' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+2026-01-31T21:46:52.9247684Z ##[error]  32:37  error  'cfg' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+2026-01-31T21:46:52.9249091Z ##[error]  32:42  error  Unexpected any. Specify a different type                               @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9249873Z 
+2026-01-31T21:46:52.9250205Z /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance/tests/stripe.test.ts
+2026-01-31T21:46:52.9251102Z ##[error]   9:24  error  'cfg' is defined but never used. Allowed unused args must match /^_/u    no-unused-vars
+2026-01-31T21:46:52.9252763Z ##[error]   9:24  error  'cfg' is defined but never used. Allowed unused args must match /^_/u    @typescript-eslint/no-unused-vars
+2026-01-31T21:46:52.9254223Z ##[error]   9:29  error  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9255562Z ##[error]  20:12  error  'table' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+2026-01-31T21:46:52.9256940Z ##[error]  20:12  error  'table' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+2026-01-31T21:46:52.9258293Z ##[error]  20:48  error  'data' is defined but never used. Allowed unused args must match /^_/u   no-unused-vars
+2026-01-31T21:46:52.9259666Z ##[error]  20:48  error  'data' is defined but never used. Allowed unused args must match /^_/u   @typescript-eslint/no-unused-vars
+2026-01-31T21:46:52.9261077Z ##[error]  20:54  error  Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+2026-01-31T21:46:52.9261979Z 
+2026-01-31T21:46:52.9262345Z ✖ 57 problems (57 errors, 0 warnings)
+2026-01-31T21:46:52.9262532Z 
+2026-01-31T21:46:53.0230695Z ##[group]Run pnpm -s tsc --noEmit
+2026-01-31T21:46:53.0231009Z [36;1mpnpm -s tsc --noEmit[0m
+2026-01-31T21:46:53.0262179Z shell: /usr/bin/bash -e {0}
+2026-01-31T21:46:53.0262426Z ##[endgroup]
+2026-01-31T21:46:59.3929152Z ##[error]tests/agentic.test.ts(15,12): error TS18048: 'action' is possibly 'undefined'.
+2026-01-31T21:46:59.3933159Z ##[error]tests/agentic.test.ts(20,12): error TS18048: 'action' is possibly 'undefined'.
+2026-01-31T21:46:59.3935984Z ##[error]tests/agentic.test.ts(21,12): error TS18048: 'action' is possibly 'undefined'.
+2026-01-31T21:46:59.3937909Z ##[error]vitest.config.ts(17,7): error TS2769: No overload matches this call.
+2026-01-31T21:46:59.3939260Z   The last overload gave the following error.
+2026-01-31T21:46:59.3940336Z     Object literal may only specify known properties, and 'statements' does not exist in type '{ provider: "v8"; } & CoverageV8Options'.
+2026-01-31T21:46:59.4510288Z ##[error]Process completed with exit code 2.
+2026-01-31T21:46:59.4604296Z ##[group]Run actions/upload-artifact@v4
+2026-01-31T21:46:59.4604753Z with:
+2026-01-31T21:46:59.4605038Z   name: coverage-report
+2026-01-31T21:46:59.4605376Z   path: coverage
+2026-01-31T21:46:59.4605691Z   if-no-files-found: warn
+2026-01-31T21:46:59.4606270Z   compression-level: 6
+2026-01-31T21:46:59.4606602Z   overwrite: false
+2026-01-31T21:46:59.4606921Z   include-hidden-files: false
+2026-01-31T21:46:59.4607291Z ##[endgroup]
+2026-01-31T21:46:59.6816343Z ##[warning]No files were found with the provided path: coverage. No artifacts will be uploaded.
+2026-01-31T21:46:59.6956568Z ##[group]Run if [ -z "***" ]; then
+2026-01-31T21:46:59.6956998Z [36;1mif [ -z "***" ]; then[0m
+2026-01-31T21:46:59.6957443Z [36;1m  echo "WARNING: CODECOV_TOKEN secret not set; Codecov uploads will be unauthenticated or skipped."[0m
+2026-01-31T21:46:59.6958359Z [36;1melse[0m
+2026-01-31T21:46:59.6958781Z [36;1m  echo "Codecov token found."[0m
+2026-01-31T21:46:59.6959236Z [36;1mfi[0m
+2026-01-31T21:46:59.6992675Z shell: /usr/bin/bash -e {0}
+2026-01-31T21:46:59.6992977Z ##[endgroup]
+2026-01-31T21:46:59.7048580Z Codecov token found.
+2026-01-31T21:46:59.7140376Z ##[group]Run codecov/codecov-action@v4
+2026-01-31T21:46:59.7140660Z with:
+2026-01-31T21:46:59.7140946Z   token: ***
+2026-01-31T21:46:59.7141136Z   files: coverage/lcov.info
+2026-01-31T21:46:59.7141361Z   fail_ci_if_error: false
+2026-01-31T21:46:59.7141822Z ##[endgroup]
+2026-01-31T21:46:59.7991396Z ==> linux OS detected
+2026-01-31T21:47:00.1107966Z https://cli.codecov.io/latest/linux/codecov.SHA256SUM
+2026-01-31T21:47:00.2663840Z gpg: directory '/home/runner/.gnupg' created
+2026-01-31T21:47:00.2722110Z gpg: keybox '/home/runner/.gnupg/pubring.kbx' created
+2026-01-31T21:47:00.2867626Z gpg: /home/runner/.gnupg/trustdb.gpg: trustdb created
+2026-01-31T21:47:00.2868664Z gpg: key 806BB28AED779869: public key "Codecov Uploader (Codecov Uploader Verification Key) <security@codecov.io>" imported
+2026-01-31T21:47:00.3236794Z gpg: Total number processed: 1
+2026-01-31T21:47:00.3237330Z gpg:               imported: 1
+2026-01-31T21:47:00.3289475Z gpg: Signature made Fri Dec  5 15:31:48 2025 UTC
+2026-01-31T21:47:00.3290234Z gpg:                using RSA key 27034E7FDB850E0BBC2C62FF806BB28AED779869
+2026-01-31T21:47:00.3292612Z gpg: Good signature from "Codecov Uploader (Codecov Uploader Verification Key) <security@codecov.io>" [unknown]
+2026-01-31T21:47:00.3293397Z gpg: WARNING: This key is not certified with a trusted signature!
+2026-01-31T21:47:00.3293900Z gpg:          There is no indication that the signature belongs to the owner.
+2026-01-31T21:47:00.3294438Z Primary key fingerprint: 2703 4E7F DB85 0E0B BC2C  62FF 806B B28A ED77 9869
+2026-01-31T21:47:00.3530032Z ==> Uploader SHASUM verified (fd34214e2b2c738e48e3ac90b2c23ec4e975d0e9aee51f2cebe81b5704af3f6c  codecov)
+2026-01-31T21:47:00.3530879Z ==> Running version latest
+2026-01-31T21:47:00.4362665Z Could not pull latest version information: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+2026-01-31T21:47:00.4365359Z ==> Running git config --global --add safe.directory /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance
+2026-01-31T21:47:00.4457760Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance
+2026-01-31T21:47:00.4505369Z ==> Running command '/home/runner/work/_actions/codecov/codecov-action/v4/dist/codecov create-commit'
+2026-01-31T21:47:00.4508293Z [command]/home/runner/work/_actions/codecov/codecov-action/v4/dist/codecov create-commit --git-service github -C 6b64cd992a53ace0ea29e94b432239697346fba0
+2026-01-31T21:47:00.8046628Z info - 2026-01-31 21:47:00,804 -- ci service found: github-actions
+2026-01-31T21:47:00.8462608Z info - 2026-01-31 21:47:00,845 -- Using token to create a commit for protected branch `feat/e2e-auth-and-codecov-onboarding`
+2026-01-31T21:47:01.2210831Z info - 2026-01-31 21:47:01,220 -- Process Commit creating complete
+2026-01-31T21:47:01.3234214Z Sentry is attempting to send 2 pending events
+2026-01-31T21:47:01.3234692Z Waiting up to 2 seconds
+2026-01-31T21:47:01.3235001Z Press Ctrl-C to quit
+2026-01-31T21:47:01.4300278Z ==> Running command '/home/runner/work/_actions/codecov/codecov-action/v4/dist/codecov create-report'
+2026-01-31T21:47:01.4302600Z [command]/home/runner/work/_actions/codecov/codecov-action/v4/dist/codecov create-report --git-service github -C 6b64cd992a53ace0ea29e94b432239697346fba0
+2026-01-31T21:47:01.7794407Z info - 2026-01-31 21:47:01,778 -- ci service found: github-actions
+2026-01-31T21:47:02.1891768Z info - 2026-01-31 21:47:02,188 -- Process Report creating complete
+2026-01-31T21:47:02.1896926Z info - 2026-01-31 21:47:02,189 -- Finished creating report successfully --- {"response": "{\"status\":\"queued\"}\n"}
+2026-01-31T21:47:02.2942835Z ==> Running command '/home/runner/work/_actions/codecov/codecov-action/v4/dist/codecov do-upload'
+2026-01-31T21:47:02.2944336Z [command]/home/runner/work/_actions/codecov/codecov-action/v4/dist/codecov do-upload -f coverage/lcov.info --git-service github -C 6b64cd992a53ace0ea29e94b432239697346fba0
+2026-01-31T21:47:02.6431007Z info - 2026-01-31 21:47:02,642 -- ci service found: github-actions
+2026-01-31T21:47:02.6853486Z warning - 2026-01-31 21:47:02,684 -- xcrun is not installed or can't be found.
+2026-01-31T21:47:03.3749755Z warning - 2026-01-31 21:47:03,374 -- No gcov data found.
+2026-01-31T21:47:03.3753908Z warning - 2026-01-31 21:47:03,375 -- coverage.py is not installed or can't be found.
+2026-01-31T21:47:04.0586428Z warning - 2026-01-31 21:47:04,058 -- Some files were not found --- {"not_found_files": ["coverage/lcov.info"]}
+2026-01-31T21:47:04.0630666Z info - 2026-01-31 21:47:04,062 -- Found 0 coverage files to report
+2026-01-31T21:47:04.0660765Z Error: No coverage reports found. Please make sure you're generating reports successfully.
+2026-01-31T21:47:04.1813152Z ##[warning]Codecov:
+                        Failed to properly upload report: The process '/home/runner/work/_actions/codecov/codecov-action/v4/dist/codecov' failed with exit code 1
+2026-01-31T21:47:04.1942121Z ##[group]Run node scripts/check-coverage-threshold.js
+2026-01-31T21:47:04.1942555Z [36;1mnode scripts/check-coverage-threshold.js[0m
+2026-01-31T21:47:04.1974732Z shell: /usr/bin/bash -e {0}
+2026-01-31T21:47:04.1974993Z ##[endgroup]
+2026-01-31T21:47:04.2246855Z coverage/lcov.info not found — cannot check thresholds
+2026-01-31T21:47:04.2277835Z ##[error]Process completed with exit code 1.
+2026-01-31T21:47:04.2302718Z ##[group]Run node scripts/post-coverage-comment.js
+2026-01-31T21:47:04.2303094Z [36;1mnode scripts/post-coverage-comment.js[0m
+2026-01-31T21:47:04.2333891Z shell: /usr/bin/bash -e {0}
+2026-01-31T21:47:04.2334131Z env:
+2026-01-31T21:47:04.2334583Z   GITHUB_TOKEN: ***
+2026-01-31T21:47:04.2334890Z   GITHUB_EVENT_PATH: /home/runner/work/_temp/_github_workflow/event.json
+2026-01-31T21:47:04.2335327Z   GITHUB_REPOSITORY: cabbageandtea/v0-doggybagg-ordinance
+2026-01-31T21:47:04.2335641Z ##[endgroup]
+2026-01-31T21:47:04.2620343Z node:internal/modules/cjs/loader:1210
+2026-01-31T21:47:04.2621062Z   throw err;
+2026-01-31T21:47:04.2621705Z   ^
+2026-01-31T21:47:04.2621920Z 
+2026-01-31T21:47:04.2632902Z Error: Cannot find module 'node-fetch'
+2026-01-31T21:47:04.2633445Z Require stack:
+2026-01-31T21:47:04.2634309Z - /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance/scripts/post-coverage-comment.js
+2026-01-31T21:47:04.2635126Z     at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)
+2026-01-31T21:47:04.2635598Z     at Module._load (node:internal/modules/cjs/loader:1038:27)
+2026-01-31T21:47:04.2636011Z     at Module.require (node:internal/modules/cjs/loader:1289:19)
+2026-01-31T21:47:04.2636412Z     at require (node:internal/modules/helpers:182:18)
+2026-01-31T21:47:04.2637091Z     at Object.<anonymous> (/home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance/scripts/post-coverage-comment.js:4:15)
+2026-01-31T21:47:04.2637755Z     at Module._compile (node:internal/modules/cjs/loader:1521:14)
+2026-01-31T21:47:04.2638240Z     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+2026-01-31T21:47:04.2638688Z     at Module.load (node:internal/modules/cjs/loader:1266:32)
+2026-01-31T21:47:04.2639079Z     at Module._load (node:internal/modules/cjs/loader:1091:12)
+2026-01-31T21:47:04.2639825Z     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12) {
+2026-01-31T21:47:04.2640264Z   code: 'MODULE_NOT_FOUND',
+2026-01-31T21:47:04.2640497Z   requireStack: [
+2026-01-31T21:47:04.2640959Z     '/home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance/scripts/post-coverage-comment.js'
+2026-01-31T21:47:04.2641419Z   ]
+2026-01-31T21:47:04.2641802Z }
+2026-01-31T21:47:04.2641901Z 
+2026-01-31T21:47:04.2641983Z Node.js v20.20.0
+2026-01-31T21:47:04.2648604Z ##[error]Process completed with exit code 1.
+2026-01-31T21:47:04.2713045Z Post job cleanup.
+2026-01-31T21:47:04.3650339Z [command]/usr/bin/git version
+2026-01-31T21:47:04.3687018Z git version 2.52.0
+2026-01-31T21:47:04.3725250Z Copying '/home/runner/.gitconfig' to '/home/runner/work/_temp/92b165d4-2604-4f95-a405-b8215cc42887/.gitconfig'
+2026-01-31T21:47:04.3741878Z Temporarily overriding HOME='/home/runner/work/_temp/92b165d4-2604-4f95-a405-b8215cc42887' before making global git config changes
+2026-01-31T21:47:04.3743432Z Adding repository directory to the temporary git global config as a safe directory
+2026-01-31T21:47:04.3747798Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance
+2026-01-31T21:47:04.3782522Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-01-31T21:47:04.3819680Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-01-31T21:47:04.4096886Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-01-31T21:47:04.4121109Z http.https://github.com/.extraheader
+2026-01-31T21:47:04.4135821Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-01-31T21:47:04.4170043Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-01-31T21:47:04.4415496Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-01-31T21:47:04.4453820Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-01-31T21:47:04.4790592Z Cleaning up orphan processes

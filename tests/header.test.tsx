@@ -5,7 +5,6 @@ import { render, screen, fireEvent } from '@testing-library/react'
 vi.mock('next/image', () => ({
   default: (props: any) => {
     // strip Next's special props like `fill` which are not valid on <img>
-    // eslint-disable-next-line jsx-a11y/alt-text
     const { fill, ...rest } = props
     return <img {...rest} />
   },

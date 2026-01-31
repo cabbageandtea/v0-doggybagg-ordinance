@@ -21,4 +21,5 @@ export default defineConfig({
     },
     include: ['tests/**/*.test.*', 'app/**/(*.)test.*', 'lib/**/(*.)test.*'],
   },
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 } as any) 
