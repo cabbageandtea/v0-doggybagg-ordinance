@@ -20,7 +20,13 @@ jobs:
           node-version: 20
           cache: 'pnpm' 
       - name: Install pnpm
-        run: corepack enable && corepack prepare pnpm@stable --activate
+        run: |
+          corepack enable
+          corepack prepare pnpm@stable --activate || true
+          if ! command -v pnpm >/dev/null 2>&1; then
+            npm i -g pnpm
+          fi
+          pnpm -v
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Type check
