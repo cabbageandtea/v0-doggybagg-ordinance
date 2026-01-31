@@ -102,6 +102,14 @@ jobs:
           pnpm -v
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Create test user for E2E
+        if: env.PW_TEST_EMAIL != '' && env.PW_TEST_PASSWORD != '' && env.SUPABASE_SERVICE_ROLE_KEY != ''
+        env:
+          PW_TEST_EMAIL: ${{ secrets.PW_TEST_EMAIL }}
+          PW_TEST_PASSWORD: ${{ secrets.PW_TEST_PASSWORD }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+        run: node scripts/create_test_user.js
       - name: Build
         run: pnpm -s build
       - name: Start server
@@ -109,4 +117,14 @@ jobs:
       - name: Wait for server
         run: pnpm exec wait-on http://localhost:3000 --timeout 45000
       - name: Run Playwright E2E tests
+        env:
+          PW_TEST_EMAIL: ${{ secrets.PW_TEST_EMAIL }}
+          PW_TEST_PASSWORD: ${{ secrets.PW_TEST_PASSWORD }}
+          PW_BASE_URL: ${{ secrets.PW_BASE_URL }}
         run: pnpm -s e2e:ci
+      - name: Delete test user (cleanup)
+        if: always()
+        env:
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+        run: node scripts/delete_test_user.js || true
