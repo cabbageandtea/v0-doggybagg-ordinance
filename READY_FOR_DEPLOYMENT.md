@@ -33,15 +33,15 @@ Open your Stripe Dashboard and create two products:
 
 In Vercel project settings, add these two variables:
 
-```
+\`\`\`
 STRIPE_STARTER_PRICE_ID=price_xxxxxxxxxxxxx
 STRIPE_PROFESSIONAL_PRICE_ID=price_xxxxxxxxxxxxx
-```
+\`\`\`
 
 Optional but recommended:
-```
+\`\`\`
 NEXT_PUBLIC_SITE_URL=https://doggybagg.cc
-```
+\`\`\`
 
 ### Step 3: Deploy
 

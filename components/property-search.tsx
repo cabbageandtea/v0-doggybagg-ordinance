@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Search, MapPin, CheckCircle, AlertCircle, Clock } from "lucide-react"
@@ -159,12 +160,14 @@ export function PropertySearch() {
         )}
 
         {/* Auth Placeholder */}
-        <div className="rounded-lg border border-primary/20 bg-primary/5 p-4">
-          <p className="text-center text-sm text-muted-foreground">
-            <span className="font-medium text-primary">Sign in</span> to save properties 
-            and receive real-time violation alerts
-          </p>
-        </div>
+        <Link href="/auth/sign-up">
+          <div className="rounded-lg border border-primary/20 bg-primary/5 p-4 transition-all hover:bg-primary/10 cursor-pointer">
+            <p className="text-center text-sm text-muted-foreground">
+              <span className="font-medium text-primary">Sign up now</span> to save properties 
+              and receive real-time violation alerts
+            </p>
+          </div>
+        </Link>
       </div>
     </div>
   )

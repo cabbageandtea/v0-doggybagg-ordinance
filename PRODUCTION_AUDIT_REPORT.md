@@ -103,10 +103,10 @@ You need to create two products in your Stripe Dashboard:
 
 **After creating products**:
 Add these environment variables to Vercel:
-```
+\`\`\`
 STRIPE_STARTER_PRICE_ID=price_xxxxx
 STRIPE_PROFESSIONAL_PRICE_ID=price_xxxxx
-```
+\`\`\`
 
 ---
 
@@ -165,7 +165,7 @@ STRIPE_PROFESSIONAL_PRICE_ID=price_xxxxx
 ## 8. File Structure Audit ✅ COMPLETE
 
 ### New Files Created
-```
+\`\`\`
 /app/auth/
   ├── sign-in/page.tsx          ✅ NEW
   ├── sign-up/page.tsx          ✅ NEW
@@ -193,7 +193,7 @@ STRIPE_PROFESSIONAL_PRICE_ID=price_xxxxx
   ├── hero-section.tsx          ✅ UPDATED
   ├── pricing-section.tsx       ✅ UPDATED
   └── checkout.tsx              ✅ EXISTS
-```
+\`\`\`
 
 ---
 

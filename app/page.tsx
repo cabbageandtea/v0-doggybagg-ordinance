@@ -5,7 +5,9 @@ import { HeroSection } from "@/components/hero-section"
 import { BentoGrid } from "@/components/bento-grid"
 import { FineCalculator } from "@/components/fine-calculator"
 import { PropertySearch } from "@/components/property-search"
+import { TestimonialsSection } from "@/components/testimonials-section"
 import { PricingSection } from "@/components/pricing-section"
+import { FAQSection } from "@/components/faq-section"
 import { Footer } from "@/components/footer"
 import { MeshGradientBackground } from "@/components/mesh-gradient-background"
 
@@ -26,7 +28,9 @@ export default function Home() {
               </div>
             </div>
           </section>
+          <TestimonialsSection />
           <PricingSection />
+          <FAQSection />
         </main>
         <Footer />
       </div>
