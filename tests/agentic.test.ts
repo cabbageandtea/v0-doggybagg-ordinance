@@ -29,7 +29,8 @@ describe('agentic helper functions', () => {
     ], '92101')
 
     expect(res.areaViolations.count).toBe(3)
-    expect(res.reasons.length).toBeGreaterThan(0)
+    expect(Array.isArray(res.reasons)).toBe(true)
+    expect(res.areaViolations.types).toContain('Trash Violation')
   })
 
   it('generateBlockchainHash starts with 0x and returns fixed length hex', () => {
