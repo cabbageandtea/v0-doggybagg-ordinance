@@ -20,6 +20,8 @@ const navItems = [
   { label: "Upload Portfolio", href: "/upload", icon: Upload },
 ]
 
+const supportEmail = "mailto:support@doggybagg.cc?subject=Support%20Request"
+
 export function DashboardHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
@@ -68,7 +70,12 @@ export function DashboardHeader() {
             </div>
 
             {/* User Menu */}
-            <div className="hidden items-center gap-4 md:flex">
+            <div className="hidden items-center gap-2 md:flex">
+              <Link href={supportEmail}>
+                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
+                  Support
+                </Button>
+              </Link>
               <Button variant="ghost" size="icon" className="relative text-muted-foreground hover:text-foreground">
                 <Bell className="h-5 w-5" />
                 <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
