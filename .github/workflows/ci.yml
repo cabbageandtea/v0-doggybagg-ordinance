@@ -46,5 +46,7 @@ jobs:
         run: pnpm -s tsc --noEmit
       - name: Lint
         run: pnpm -s lint
+      - name: Run tests
+        run: pnpm -s test:coverage
       - name: Audit dependencies
         run: pnpm audit --json
