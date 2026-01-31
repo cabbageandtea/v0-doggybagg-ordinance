@@ -54,6 +54,14 @@ jobs:
         with:
           name: coverage-report
           path: coverage
+      - name: Check Codecov token
+        if: always()
+        run: |
+          if [ -z "${{ secrets.CODECOV_TOKEN }}" ]; then
+            echo "WARNING: CODECOV_TOKEN secret not set; Codecov uploads will be unauthenticated or skipped."
+          else
+            echo "Codecov token found."
+          fi
       - name: Upload coverage to Codecov
         if: always()
         uses: codecov/codecov-action@v4
