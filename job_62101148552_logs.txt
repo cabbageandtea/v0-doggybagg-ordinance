@@ -1,0 +1,287 @@
+﻿2026-01-31T21:58:35.3109058Z Current runner version: '2.331.0'
+2026-01-31T21:58:35.3131893Z ##[group]Runner Image Provisioner
+2026-01-31T21:58:35.3132725Z Hosted Compute Agent
+2026-01-31T21:58:35.3133234Z Version: 20260123.484
+2026-01-31T21:58:35.3133769Z Commit: 6bd6555ca37d84114959e1c76d2c01448ff61c5d
+2026-01-31T21:58:35.3134436Z Build Date: 2026-01-23T19:41:17Z
+2026-01-31T21:58:35.3134995Z Worker ID: {3ac0442d-eb21-42cd-8c5f-4c52dcf0bdc5}
+2026-01-31T21:58:35.3135623Z Azure Region: westcentralus
+2026-01-31T21:58:35.3136159Z ##[endgroup]
+2026-01-31T21:58:35.3137698Z ##[group]Operating System
+2026-01-31T21:58:35.3138289Z Ubuntu
+2026-01-31T21:58:35.3139027Z 24.04.3
+2026-01-31T21:58:35.3139517Z LTS
+2026-01-31T21:58:35.3139994Z ##[endgroup]
+2026-01-31T21:58:35.3140499Z ##[group]Runner Image
+2026-01-31T21:58:35.3141032Z Image: ubuntu-24.04
+2026-01-31T21:58:35.3141549Z Version: 20260126.10.1
+2026-01-31T21:58:35.3142673Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260126.10/images/ubuntu/Ubuntu2404-Readme.md
+2026-01-31T21:58:35.3144011Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260126.10
+2026-01-31T21:58:35.3144855Z ##[endgroup]
+2026-01-31T21:58:35.3145892Z ##[group]GITHUB_TOKEN Permissions
+2026-01-31T21:58:35.3147995Z Contents: read
+2026-01-31T21:58:35.3148444Z Metadata: read
+2026-01-31T21:58:35.3149158Z Packages: read
+2026-01-31T21:58:35.3149631Z ##[endgroup]
+2026-01-31T21:58:35.3151744Z Secret source: Actions
+2026-01-31T21:58:35.3152447Z Prepare workflow directory
+2026-01-31T21:58:35.3456350Z Prepare all required actions
+2026-01-31T21:58:35.3511547Z Getting action download info
+2026-01-31T21:58:35.7039273Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2026-01-31T21:58:35.7742723Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-01-31T21:58:35.9327706Z Complete job name: e2e
+2026-01-31T21:58:36.0072073Z ##[group]Run actions/checkout@v4
+2026-01-31T21:58:36.0072813Z with:
+2026-01-31T21:58:36.0073270Z   repository: cabbageandtea/v0-doggybagg-ordinance
+2026-01-31T21:58:36.0073979Z   token: ***
+2026-01-31T21:58:36.0074340Z   ssh-strict: true
+2026-01-31T21:58:36.0074722Z   ssh-user: git
+2026-01-31T21:58:36.0075108Z   persist-credentials: true
+2026-01-31T21:58:36.0075529Z   clean: true
+2026-01-31T21:58:36.0075923Z   sparse-checkout-cone-mode: true
+2026-01-31T21:58:36.0076373Z   fetch-depth: 1
+2026-01-31T21:58:36.0076743Z   fetch-tags: false
+2026-01-31T21:58:36.0077121Z   show-progress: true
+2026-01-31T21:58:36.0077503Z   lfs: false
+2026-01-31T21:58:36.0077862Z   submodules: false
+2026-01-31T21:58:36.0078257Z   set-safe-directory: true
+2026-01-31T21:58:36.0079108Z ##[endgroup]
+2026-01-31T21:58:36.1067002Z Syncing repository: cabbageandtea/v0-doggybagg-ordinance
+2026-01-31T21:58:36.1069023Z ##[group]Getting Git version info
+2026-01-31T21:58:36.1069897Z Working directory is '/home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance'
+2026-01-31T21:58:36.1070928Z [command]/usr/bin/git version
+2026-01-31T21:58:36.1140814Z git version 2.52.0
+2026-01-31T21:58:36.1162879Z ##[endgroup]
+2026-01-31T21:58:36.1175266Z Temporarily overriding HOME='/home/runner/work/_temp/1f555f80-5af0-405d-9b38-a4eb132cb195' before making global git config changes
+2026-01-31T21:58:36.1176490Z Adding repository directory to the temporary git global config as a safe directory
+2026-01-31T21:58:36.1180583Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance
+2026-01-31T21:58:36.1212560Z Deleting the contents of '/home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance'
+2026-01-31T21:58:36.1215367Z ##[group]Initializing the repository
+2026-01-31T21:58:36.1219198Z [command]/usr/bin/git init /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance
+2026-01-31T21:58:36.1312253Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-01-31T21:58:36.1313643Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-01-31T21:58:36.1315333Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-01-31T21:58:36.1316462Z hint: call:
+2026-01-31T21:58:36.1316860Z hint:
+2026-01-31T21:58:36.1317296Z hint: 	git config --global init.defaultBranch <name>
+2026-01-31T21:58:36.1317825Z hint:
+2026-01-31T21:58:36.1318320Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-01-31T21:58:36.1319345Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-01-31T21:58:36.1320098Z hint:
+2026-01-31T21:58:36.1320677Z hint: 	git branch -m <name>
+2026-01-31T21:58:36.1321095Z hint:
+2026-01-31T21:58:36.1321629Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-01-31T21:58:36.1322666Z Initialized empty Git repository in /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance/.git/
+2026-01-31T21:58:36.1325665Z [command]/usr/bin/git remote add origin https://github.com/cabbageandtea/v0-doggybagg-ordinance
+2026-01-31T21:58:36.1351236Z ##[endgroup]
+2026-01-31T21:58:36.1351935Z ##[group]Disabling automatic garbage collection
+2026-01-31T21:58:36.1354870Z [command]/usr/bin/git config --local gc.auto 0
+2026-01-31T21:58:36.1377117Z ##[endgroup]
+2026-01-31T21:58:36.1377754Z ##[group]Setting up auth
+2026-01-31T21:58:36.1383334Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-01-31T21:58:36.1406031Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-01-31T21:58:36.1677953Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-01-31T21:58:36.1702876Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-01-31T21:58:36.1867806Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-01-31T21:58:36.1892149Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-01-31T21:58:36.2057708Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-01-31T21:58:36.2084370Z ##[endgroup]
+2026-01-31T21:58:36.2085531Z ##[group]Fetching the repository
+2026-01-31T21:58:36.2093440Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +c311408a4608fc57d6b1ab72c05a6a88d42fda8a:refs/remotes/pull/10/merge
+2026-01-31T21:58:36.7050120Z From https://github.com/cabbageandtea/v0-doggybagg-ordinance
+2026-01-31T21:58:36.7050984Z  * [new ref]         c311408a4608fc57d6b1ab72c05a6a88d42fda8a -> pull/10/merge
+2026-01-31T21:58:36.7074936Z ##[endgroup]
+2026-01-31T21:58:36.7076013Z ##[group]Determining the checkout info
+2026-01-31T21:58:36.7077233Z ##[endgroup]
+2026-01-31T21:58:36.7082665Z [command]/usr/bin/git sparse-checkout disable
+2026-01-31T21:58:36.7114621Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-01-31T21:58:36.7187284Z ##[group]Checking out the ref
+2026-01-31T21:58:36.7189514Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/10/merge
+2026-01-31T21:58:36.7248129Z Note: switching to 'refs/remotes/pull/10/merge'.
+2026-01-31T21:58:36.7249396Z 
+2026-01-31T21:58:36.7250487Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-01-31T21:58:36.7251687Z changes and commit them, and you can discard any commits you make in this
+2026-01-31T21:58:36.7253277Z state without impacting any branches by switching back to a branch.
+2026-01-31T21:58:36.7254210Z 
+2026-01-31T21:58:36.7254674Z If you want to create a new branch to retain commits you create, you may
+2026-01-31T21:58:36.7255783Z do so (now or later) by using -c with the switch command. Example:
+2026-01-31T21:58:36.7256589Z 
+2026-01-31T21:58:36.7256906Z   git switch -c <new-branch-name>
+2026-01-31T21:58:36.7257352Z 
+2026-01-31T21:58:36.7257719Z Or undo this operation with:
+2026-01-31T21:58:36.7258300Z 
+2026-01-31T21:58:36.7258947Z   git switch -
+2026-01-31T21:58:36.7259313Z 
+2026-01-31T21:58:36.7259829Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-01-31T21:58:36.7260597Z 
+2026-01-31T21:58:36.7261557Z HEAD is now at c311408 Merge faa048015b03cd57b6cd5b0beb2b2b52ab0a2cbf into 2d1980a05ec3bbf24fdcfd6479cae2469979052a
+2026-01-31T21:58:36.7264474Z ##[endgroup]
+2026-01-31T21:58:36.7287725Z [command]/usr/bin/git log -1 --format=%H
+2026-01-31T21:58:36.7306662Z c311408a4608fc57d6b1ab72c05a6a88d42fda8a
+2026-01-31T21:58:36.7594342Z ##[group]Run actions/setup-node@v4
+2026-01-31T21:58:36.7595247Z with:
+2026-01-31T21:58:36.7595935Z   node-version: 20
+2026-01-31T21:58:36.7596675Z   always-auth: false
+2026-01-31T21:58:36.7597425Z   check-latest: false
+2026-01-31T21:58:36.7598390Z   token: ***
+2026-01-31T21:58:36.7599348Z ##[endgroup]
+2026-01-31T21:58:36.9226893Z Found in cache @ /opt/hostedtoolcache/node/20.20.0/x64
+2026-01-31T21:58:36.9231985Z ##[group]Environment details
+2026-01-31T21:58:37.2293016Z node: v20.20.0
+2026-01-31T21:58:37.2294010Z npm: 10.8.2
+2026-01-31T21:58:37.2294664Z yarn: 1.22.22
+2026-01-31T21:58:37.2296401Z ##[endgroup]
+2026-01-31T21:58:37.2406448Z ##[group]Run corepack enable
+2026-01-31T21:58:37.2407413Z [36;1mcorepack enable[0m
+2026-01-31T21:58:37.2408432Z [36;1mcorepack prepare pnpm@stable --activate || true[0m
+2026-01-31T21:58:37.2409986Z [36;1mif ! command -v pnpm >/dev/null 2>&1; then[0m
+2026-01-31T21:58:37.2410971Z [36;1m  npm i -g pnpm[0m
+2026-01-31T21:58:37.2411624Z [36;1mfi[0m
+2026-01-31T21:58:37.2412116Z [36;1mpnpm -v[0m
+2026-01-31T21:58:37.2443102Z shell: /usr/bin/bash -e {0}
+2026-01-31T21:58:37.2443824Z ##[endgroup]
+2026-01-31T21:58:37.6436708Z [31m[1mUsage Error[22m[39m: Tag not found (stable)
+2026-01-31T21:58:37.6438020Z 
+2026-01-31T21:58:37.8697653Z ! Corepack is about to download https://registry.npmjs.org/pnpm/-/pnpm-10.28.2.tgz
+2026-01-31T21:58:37.8701102Z [1m$ [22mcorepack prepare [--activate] [--json] [-o,--output] ...
+2026-01-31T21:58:38.8382012Z 10.28.2
+2026-01-31T21:58:38.8500357Z ##[group]Run pnpm install --frozen-lockfile
+2026-01-31T21:58:38.8500717Z [36;1mpnpm install --frozen-lockfile[0m
+2026-01-31T21:58:38.8521960Z shell: /usr/bin/bash -e {0}
+2026-01-31T21:58:38.8522235Z ##[endgroup]
+2026-01-31T21:58:39.2094487Z Lockfile is up to date, resolution step is skipped
+2026-01-31T21:58:39.2810844Z Progress: resolved 1, reused 0, downloaded 0, added 0
+2026-01-31T21:58:39.3645394Z Packages: +629
+2026-01-31T21:58:39.3646057Z ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-01-31T21:58:40.2861495Z Progress: resolved 629, reused 0, downloaded 147, added 142
+2026-01-31T21:58:41.2882049Z Progress: resolved 629, reused 0, downloaded 167, added 151
+2026-01-31T21:58:42.2886986Z Progress: resolved 629, reused 0, downloaded 215, added 170
+2026-01-31T21:58:43.2883820Z Progress: resolved 629, reused 0, downloaded 457, added 455
+2026-01-31T21:58:44.0684267Z Progress: resolved 629, reused 0, downloaded 629, added 629, done
+2026-01-31T21:58:44.3979903Z 
+2026-01-31T21:58:44.3980443Z dependencies:
+2026-01-31T21:58:44.3980976Z + @emotion/is-prop-valid 1.4.0
+2026-01-31T21:58:44.3981487Z + @hookform/resolvers 3.10.0
+2026-01-31T21:58:44.3982018Z + @radix-ui/react-accordion 1.2.12
+2026-01-31T21:58:44.3982611Z + @radix-ui/react-alert-dialog 1.1.15
+2026-01-31T21:58:44.3983191Z + @radix-ui/react-aspect-ratio 1.1.8
+2026-01-31T21:58:44.3983700Z + @radix-ui/react-avatar 1.1.11
+2026-01-31T21:58:44.3984226Z + @radix-ui/react-checkbox 1.3.3
+2026-01-31T21:58:44.3984775Z + @radix-ui/react-collapsible 1.1.12
+2026-01-31T21:58:44.3985275Z + @radix-ui/react-context-menu 2.2.16
+2026-01-31T21:58:44.3985734Z + @radix-ui/react-dialog 1.1.15
+2026-01-31T21:58:44.3986252Z + @radix-ui/react-dropdown-menu 2.1.16
+2026-01-31T21:58:44.3986805Z + @radix-ui/react-hover-card 1.1.15
+2026-01-31T21:58:44.3987651Z + @radix-ui/react-label 2.1.8
+2026-01-31T21:58:44.3988088Z + @radix-ui/react-menubar 1.1.16
+2026-01-31T21:58:44.3988618Z + @radix-ui/react-navigation-menu 1.2.14
+2026-01-31T21:58:44.3989332Z + @radix-ui/react-popover 1.1.15
+2026-01-31T21:58:44.3989893Z + @radix-ui/react-progress 1.1.8
+2026-01-31T21:58:44.3990396Z + @radix-ui/react-radio-group 1.3.8
+2026-01-31T21:58:44.3991015Z + @radix-ui/react-scroll-area 1.2.10
+2026-01-31T21:58:44.3991519Z + @radix-ui/react-select 2.2.6
+2026-01-31T21:58:44.3991989Z + @radix-ui/react-separator 1.1.8
+2026-01-31T21:58:44.3992437Z + @radix-ui/react-slider 1.3.6
+2026-01-31T21:58:44.3992866Z + @radix-ui/react-slot 1.2.4
+2026-01-31T21:58:44.3993358Z + @radix-ui/react-switch 1.2.6
+2026-01-31T21:58:44.3993799Z + @radix-ui/react-tabs 1.1.13
+2026-01-31T21:58:44.3994255Z + @radix-ui/react-toast 1.2.15
+2026-01-31T21:58:44.3995137Z + @radix-ui/react-toggle 1.1.10
+2026-01-31T21:58:44.3995919Z + @radix-ui/react-toggle-group 1.1.11
+2026-01-31T21:58:44.3996584Z + @radix-ui/react-tooltip 1.2.8
+2026-01-31T21:58:44.3997036Z + @stripe/react-stripe-js 5.6.0
+2026-01-31T21:58:44.3997469Z + @stripe/stripe-js 8.7.0
+2026-01-31T21:58:44.3997912Z + @supabase/ssr 0.8.0
+2026-01-31T21:58:44.3998342Z + @supabase/supabase-js 2.93.3
+2026-01-31T21:58:44.3998938Z + @vercel/analytics 1.6.1
+2026-01-31T21:58:44.3999383Z + autoprefixer 10.4.24
+2026-01-31T21:58:44.3999867Z + class-variance-authority 0.7.1
+2026-01-31T21:58:44.4000294Z + clsx 2.1.1
+2026-01-31T21:58:44.4000643Z + cmdk 1.1.1
+2026-01-31T21:58:44.4001011Z + date-fns 4.1.0
+2026-01-31T21:58:44.4001431Z + embla-carousel-react 8.6.0
+2026-01-31T21:58:44.4001902Z + framer-motion 12.29.2
+2026-01-31T21:58:44.4002326Z + input-otp 1.4.2
+2026-01-31T21:58:44.4002670Z + lucide-react 0.454.0
+2026-01-31T21:58:44.4002972Z + next 16.1.6
+2026-01-31T21:58:44.4003303Z + next-themes 0.4.6
+2026-01-31T21:58:44.4003635Z + react 19.2.0
+2026-01-31T21:58:44.4003999Z + react-day-picker 9.13.0
+2026-01-31T21:58:44.4004397Z + react-dom 19.2.0
+2026-01-31T21:58:44.4004778Z + react-hook-form 7.71.1
+2026-01-31T21:58:44.4005240Z + react-resizable-panels 4.5.6
+2026-01-31T21:58:44.4005639Z + recharts 3.7.0
+2026-01-31T21:58:44.4005984Z + server-only 0.0.1
+2026-01-31T21:58:44.4006613Z + sonner 2.0.7
+2026-01-31T21:58:44.4006942Z + stripe 20.3.0
+2026-01-31T21:58:44.4007306Z + tailwind-merge 2.6.1
+2026-01-31T21:58:44.4007691Z + tailwindcss-animate 1.0.7
+2026-01-31T21:58:44.4008054Z + vaul 1.1.2
+2026-01-31T21:58:44.4008359Z + zod 3.25.76
+2026-01-31T21:58:44.4008549Z 
+2026-01-31T21:58:44.4008818Z devDependencies:
+2026-01-31T21:58:44.4009191Z + @playwright/test 1.58.1
+2026-01-31T21:58:44.4009624Z + @tailwindcss/postcss 4.1.18
+2026-01-31T21:58:44.4010111Z + @testing-library/jest-dom 6.9.1
+2026-01-31T21:58:44.4010608Z + @testing-library/react 16.3.2
+2026-01-31T21:58:44.4011015Z + @types/node 22.19.7
+2026-01-31T21:58:44.4011411Z + @types/react 19.2.10
+2026-01-31T21:58:44.4011884Z + @types/react-dom 19.2.3
+2026-01-31T21:58:44.4012374Z + @typescript-eslint/eslint-plugin 8.54.0
+2026-01-31T21:58:44.4012939Z + @typescript-eslint/parser 8.54.0
+2026-01-31T21:58:44.4013404Z + @vitest/coverage-v8 4.0.18
+2026-01-31T21:58:44.4013795Z + eslint 9.39.2
+2026-01-31T21:58:44.4014286Z + eslint-config-next 16.1.6
+2026-01-31T21:58:44.4014671Z + jsdom 27.4.0
+2026-01-31T21:58:44.4014990Z + postcss 8.5.6
+2026-01-31T21:58:44.4015349Z + tailwindcss 4.1.18
+2026-01-31T21:58:44.4015726Z + tw-animate-css 1.3.3
+2026-01-31T21:58:44.4016097Z + typescript 5.9.3
+2026-01-31T21:58:44.4016455Z + vitest 4.0.18
+2026-01-31T21:58:44.4016762Z + wait-on 7.2.0
+2026-01-31T21:58:44.4017001Z 
+2026-01-31T21:58:44.4240379Z ╭ Warning ─────────────────────────────────────────────────────────────────────╮
+2026-01-31T21:58:44.4241457Z │                                                                              │
+2026-01-31T21:58:44.4242412Z │   Ignored build scripts: esbuild@0.27.2, sharp@0.34.5,                       │
+2026-01-31T21:58:44.4243377Z │   unrs-resolver@1.11.1.                                                      │
+2026-01-31T21:58:44.4244664Z │   Run "pnpm approve-builds" to pick which dependencies should be allowed     │
+2026-01-31T21:58:44.4245695Z │   to run scripts.                                                            │
+2026-01-31T21:58:44.4246560Z │                                                                              │
+2026-01-31T21:58:44.4247550Z ╰──────────────────────────────────────────────────────────────────────────────╯
+2026-01-31T21:58:44.4404675Z Done in 5.5s using pnpm v10.28.2
+2026-01-31T21:58:44.4693038Z ##[group]Run node scripts/create_test_user.js
+2026-01-31T21:58:44.4693375Z [36;1mnode scripts/create_test_user.js[0m
+2026-01-31T21:58:44.4712071Z shell: /usr/bin/bash -e {0}
+2026-01-31T21:58:44.4712323Z env:
+2026-01-31T21:58:44.4712617Z   PW_TEST_EMAIL: ***
+2026-01-31T21:58:44.4712863Z   PW_TEST_PASSWORD: ***
+2026-01-31T21:58:44.4714159Z   SUPABASE_SERVICE_ROLE_KEY: ***
+2026-01-31T21:58:44.4714489Z   SUPABASE_URL: ***
+2026-01-31T21:58:44.4714683Z ##[endgroup]
+2026-01-31T21:58:44.5396192Z Creating test user *** ...
+2026-01-31T21:58:44.8433599Z Create user returned error: A user with this email address has already been registered
+2026-01-31T21:58:45.0655677Z Error creating test user: Failed to create or find test user
+2026-01-31T21:58:45.0693870Z ##[error]Process completed with exit code 1.
+2026-01-31T21:58:45.0751509Z ##[group]Run node scripts/delete_test_user.js || true
+2026-01-31T21:58:45.0751856Z [36;1mnode scripts/delete_test_user.js || true[0m
+2026-01-31T21:58:45.0771045Z shell: /usr/bin/bash -e {0}
+2026-01-31T21:58:45.0771330Z env:
+2026-01-31T21:58:45.0772790Z   SUPABASE_SERVICE_ROLE_KEY: ***
+2026-01-31T21:58:45.0773130Z   SUPABASE_URL: ***
+2026-01-31T21:58:45.0773325Z ##[endgroup]
+2026-01-31T21:58:45.1482195Z .test_user.json not found; skipping delete
+2026-01-31T21:58:45.1607122Z Post job cleanup.
+2026-01-31T21:58:45.2459348Z [command]/usr/bin/git version
+2026-01-31T21:58:45.2490375Z git version 2.52.0
+2026-01-31T21:58:45.2534885Z Temporarily overriding HOME='/home/runner/work/_temp/9bc16c81-cc94-4b8b-ad04-07319a6fbf55' before making global git config changes
+2026-01-31T21:58:45.2535756Z Adding repository directory to the temporary git global config as a safe directory
+2026-01-31T21:58:45.2539749Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance
+2026-01-31T21:58:45.2567040Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-01-31T21:58:45.2593199Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-01-31T21:58:45.2766069Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-01-31T21:58:45.2782144Z http.https://github.com/.extraheader
+2026-01-31T21:58:45.2792530Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-01-31T21:58:45.2815990Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-01-31T21:58:45.2981101Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-01-31T21:58:45.3004708Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-01-31T21:58:45.3252896Z Cleaning up orphan processes

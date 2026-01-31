@@ -119,8 +119,8 @@ export async function generateAppealLetter(
 
     // PROPRIETARY ALGORITHM: Generate appeal letter based on violation type
     // This logic stays 100% server-side
-    const appealLetter = generateLetterTemplate(violation)
-    const citations = getMunicipalCitations(violation.violation_type)
+    const appealLetter = await generateLetterTemplate(violation)
+    const citations = await getMunicipalCitations(violation.violation_type)
 
     return {
       success: true,
@@ -207,7 +207,7 @@ export async function predictPropertyRisk(
     }
 
     // PROPRIETARY BAYESIAN MODEL: Calculate risk
-    const prediction = calculateBayesianRisk(areaViolations || [], zipCode)
+    const prediction = await calculateBayesianRisk(areaViolations || [], zipCode)
 
     return {
       success: true,
@@ -253,8 +253,8 @@ export async function generateComplianceCertificate(
     }
 
     // PROPRIETARY: Generate blockchain verification hash
-    const blockchainHash = generateBlockchainHash(property)
-    const complianceScore = calculateComplianceScore(property)
+    const blockchainHash = await generateBlockchainHash(property)
+    const complianceScore = await calculateComplianceScore(property)
 
     const certificate = {
       certificateId: `CERT-${Date.now()}-${propertyId.slice(0, 8)}`,
@@ -279,7 +279,7 @@ export async function generateComplianceCertificate(
 // ========== PROPRIETARY SERVER-SIDE ALGORITHMS ==========
 // These functions contain the core IP and never get exposed to client
 
-export function generateLetterTemplate(violation: FetchedViolation): string {
+export async function generateLetterTemplate(violation: FetchedViolation): Promise<string> {
   const property = violation.properties
   const date = new Date().toLocaleDateString('en-US', { 
     year: 'numeric', 
@@ -331,7 +331,7 @@ Generated via Ordinance.ai
   `.trim()
 }
 
-export function getMunicipalCitations(violationType: string): string[] {
+export async function getMunicipalCitations(violationType: string): Promise<string[]> {
   const citationMap: Record<string, string[]> = {
     'Short-Term Rental': [
       'SDMC 143.0101 - Short-Term Residential Occupancy Regulations',
@@ -351,7 +351,7 @@ export function getMunicipalCitations(violationType: string): string[] {
   return citationMap[violationType] || ['SDMC 143.0101 - General Compliance Standards']
 }
 
-export function calculateNextBestAction(violations: ViolationDetail[]): NextActionResult['action'] {
+export async function calculateNextBestAction(violations: ViolationDetail[]): Promise<NextActionResult['action']> {
   if (violations.length === 0) {
     return {
       priority: 'low' as const,
@@ -364,24 +364,24 @@ export function calculateNextBestAction(violations: ViolationDetail[]): NextActi
   
   // PROPRIETARY: Action prioritization algorithm
   if (latestViolation.fine_amount > 1000) {
+      return {
+        priority: 'high' as const,
+        title: 'Schedule Immediate Remediation',
+        description: `Fine escalation risk: $${latestViolation.fine_amount} → $${latestViolation.fine_amount * 1.5}`,
+        deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+        estimatedCost: latestViolation.fine_amount * 0.3,
+      }
+    }
+
     return {
-      priority: 'high' as const,
-      title: 'Schedule Immediate Remediation',
-      description: `Fine escalation risk: $${latestViolation.fine_amount} → $${latestViolation.fine_amount * 1.5}`,
-      deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-      estimatedCost: latestViolation.fine_amount * 0.3,
+      priority: 'medium' as const,
+      title: 'File Appeal Letter',
+      description: 'Submit formal appeal to San Diego City Treasurer within 30 days',
+      deadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
     }
   }
 
-  return {
-    priority: 'medium' as const,
-    title: 'File Appeal Letter',
-    description: 'Submit formal appeal to San Diego City Treasurer within 30 days',
-    deadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
-  }
-} 
-
-export function calculateBayesianRisk(areaViolations: Array<{ violation_type: string }>, zipCode: string) {
+export async function calculateBayesianRisk(areaViolations: Array<{ violation_type: string }>, zipCode: string) {
   const violationCount = areaViolations.length
   const violationTypes = [...new Set(areaViolations.map(v => v.violation_type))]
 
@@ -418,13 +418,13 @@ export function calculateBayesianRisk(areaViolations: Array<{ violation_type: st
   }
 } 
 
-export function generateBlockchainHash(property: MinimalProperty): string {
+export async function generateBlockchainHash(property: MinimalProperty): Promise<string> {
   // PROPRIETARY: Simulate blockchain verification hash
   const data = `${property.id}${property.address}${Date.now()}`
   return `0x${Buffer.from(data).toString('hex').slice(0, 64)}`
 }
 
-export function calculateComplianceScore(property: FetchedProperty): number {
+export async function calculateComplianceScore(property: FetchedProperty): Promise<number> {
   const activeViolations = property.ordinances?.filter((o: Ordinance) => o.status === 'active').length || 0
   return Math.max(0, 100 - (activeViolations * 15))
 } 
@@ -706,13 +706,13 @@ export async function generateFirstHealthCheck(): Promise<ComplianceHealthCheck>
 }
 
 // PROPRIETARY: Helper functions for health check
-export function calculateNeighborhoodRisk(violationCount: number): 'Low' | 'Medium' | 'High' {
+export async function calculateNeighborhoodRisk(violationCount: number): Promise<'Low' | 'Medium' | 'High'> {
   if (violationCount > 10) return 'High'
   if (violationCount > 5) return 'Medium'
   return 'Low'
 }
 
-export function generateHealthRecommendations(
+export async function generateHealthRecommendations(
   activeViolations: number,
   totalFines: number,
   neighborhoodRisk: string,
