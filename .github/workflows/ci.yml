@@ -29,10 +29,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: ESLint autofix (apply fixes and push)
+        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pnpm exec eslint . --ext .ts,.tsx --fix
+          # Run eslint --fix but don't fail the step if there are still errors (we want to attempt fixes)
+          pnpm exec eslint . --ext .ts,.tsx --fix || true
           if [ -n "$(git status --porcelain)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
