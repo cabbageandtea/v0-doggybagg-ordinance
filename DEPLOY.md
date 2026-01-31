@@ -4,9 +4,9 @@ One-page guide. See [EXECUTIVE_SUMMARY.md](./EXECUTIVE_SUMMARY.md) for full cont
 
 ---
 
-## 1. Supabase (2 min)
+## 1. Supabase – Fix "Database error saving new user" (2 min)
 
-Open **Supabase Dashboard** → **SQL Editor** → Run:
+Open **Supabase Dashboard** → **SQL Editor** → Run (see [SUPABASE_DATABASE_FIX.md](./SUPABASE_DATABASE_FIX.md) for details):
 
 ```sql
 -- From scripts/003_drop_profile_trigger_use_app_fallback.sql

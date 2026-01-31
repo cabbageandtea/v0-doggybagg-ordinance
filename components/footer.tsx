@@ -6,9 +6,9 @@ import { AlertTriangle } from "lucide-react"
 
 const footerLinks = {
   Product: [
-    { label: "Features", href: "#features" },
-    { label: "Calculator", href: "#calculator" },
-    { label: "Pricing", href: "#pricing" },
+    { label: "Features", href: "/#features" },
+    { label: "Calculator", href: "/#calculator" },
+    { label: "Pricing", href: "/#pricing" },
     { label: "API", href: "mailto:support@doggybagg.cc" },
   ],
   Company: [

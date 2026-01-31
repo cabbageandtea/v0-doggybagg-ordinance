@@ -37,19 +37,19 @@ export function Header() {
             {/* Desktop Navigation */}
             <div className="hidden items-center gap-8 md:flex">
               <Link
-                href="#features"
+                href="/#features"
                 className="text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 Features
               </Link>
               <Link
-                href="#calculator"
+                href="/#calculator"
                 className="text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 Calculator
               </Link>
               <Link
-                href="#pricing"
+                href="/#pricing"
                 className="text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 Pricing
@@ -95,19 +95,19 @@ export function Header() {
           {isMenuOpen && (
             <div className="mt-4 flex flex-col gap-4 border-t border-border pt-4 md:hidden">
               <Link
-                href="#features"
+                href="/#features"
                 className="text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 Features
               </Link>
               <Link
-                href="#calculator"
+                href="/#calculator"
                 className="text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 Calculator
               </Link>
               <Link
-                href="#pricing"
+                href="/#pricing"
                 className="text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 Pricing
