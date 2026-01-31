@@ -69,6 +69,9 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage/lcov.info
           fail_ci_if_error: false
+      - name: Check coverage thresholds
+        if: always()
+        run: node scripts/check-coverage-threshold.js
       - name: Post coverage comment (fallback)
         if: always()
         env:
