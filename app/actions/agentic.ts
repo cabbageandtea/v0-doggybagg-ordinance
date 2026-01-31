@@ -162,7 +162,7 @@ export async function suggestNextAction(
     }
 
     // PROPRIETARY ALGORITHM: Determine next best action
-    const action = calculateNextBestAction(violations || [])
+    const action = await calculateNextBestAction(violations || [])
 
     return {
       success: true,
@@ -653,7 +653,7 @@ export async function generateFirstHealthCheck(): Promise<ComplianceHealthCheck>
       .in('zip_code', zipCodes)
       .gte('violation_date', new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString())
 
-    const neighborhoodRiskLevel = calculateNeighborhoodRisk(areaViolations?.length || 0)
+    const neighborhoodRiskLevel = await calculateNeighborhoodRisk(areaViolations?.length || 0)
 
     // Calculate overall score (0-100)
     let overallScore = 100
@@ -669,7 +669,7 @@ export async function generateFirstHealthCheck(): Promise<ComplianceHealthCheck>
       overallScore >= 50 ? 'Fair' : 'At Risk'
 
     // Generate recommendations
-    const recommendations = generateHealthRecommendations(
+    const recommendations = await generateHealthRecommendations(
       activeViolations,
       totalFines,
       neighborhoodRiskLevel,
