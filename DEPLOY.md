@@ -8,10 +8,10 @@ One-page guide. See [EXECUTIVE_SUMMARY.md](./EXECUTIVE_SUMMARY.md) for full cont
 
 Open **Supabase Dashboard** → **SQL Editor** → Run (see [SUPABASE_DATABASE_FIX.md](./SUPABASE_DATABASE_FIX.md) for details):
 
-```sql
+\`\`\`sql
 -- From scripts/003_drop_profile_trigger_use_app_fallback.sql
 DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
-```
+\`\`\`
 
 This removes the trigger that caused "Database error saving new user." Profiles are now created by the app.
 
@@ -37,11 +37,11 @@ Detailed copy-paste: [VERCEL_ENV_SETUP.md](./VERCEL_ENV_SETUP.md)
 
 ## 3. Deploy
 
-```bash
+\`\`\`bash
 git add .
 git commit -m "feat: production ready"
 git push origin main
-```
+\`\`\`
 
 Vercel will build and deploy. Test at https://doggybagg.cc.
 

@@ -47,12 +47,12 @@
 
 **Code reference (lines 9–11):**
 
-```ts
+\`\`\`ts
 const STRIPE_PRICE_IDS: Record<string, string> = {
   'starter-plan': process.env.STRIPE_STARTER_PRICE_ID || 'REPLACE_WITH_STARTER_PRICE_ID',
   'professional-plan': process.env.STRIPE_PROFESSIONAL_PRICE_ID || 'REPLACE_WITH_PROFESSIONAL_PRICE_ID',
 }
-```
+\`\`\`
 
 **Behavior:**
 
@@ -93,14 +93,14 @@ Your `.env` / `.env.local` is not in the repo (correctly gitignored). Use this c
 
 **Exact list of what must be present for full production behavior:**
 
-```
+\`\`\`
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 STRIPE_SECRET_KEY=
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
 STRIPE_STARTER_PRICE_ID=
 STRIPE_PROFESSIONAL_PRICE_ID=
-```
+\`\`\`
 
 Compare your file to the above; any line you don’t have or that is empty/placeholder is **missing**.
 

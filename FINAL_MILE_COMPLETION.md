@@ -37,21 +37,21 @@
 
 **Active in:**
 1. **Auth callback** (`app/auth/callback/route.ts`, line 25):
-   ```ts
+   \`\`\`ts
    if (session?.user) {
      await ensureUserProfile()
    }
-   ```
+   \`\`\`
    
 2. **Sign-up page** (`app/auth/sign-up/page.tsx`, lines 44-48):
-   ```ts
+   \`\`\`ts
    if (data.session) {
      const { error: profileError } = await ensureUserProfile()
      if (profileError) {
        console.warn("[sign-up] ensureUserProfile:", profileError)
      }
    }
-   ```
+   \`\`\`
 
 ### Database Script
 
@@ -123,13 +123,13 @@ All navigation verified:
 
 ### Git Push Command
 
-```bash
+\`\`\`bash
 cd "c:\Users\malik\Ordinance.a\v0-doggybagg-ordinance"
 git add .
 git status  # Review changes
 git commit -m "feat: production ready - Stripe Price IDs mapped, profile fallback active, auth redirects hardened"
 git push origin main
-```
+\`\`\`
 
 ### Post-Deploy Verification
 

@@ -71,7 +71,7 @@ Go to **Vercel** → your project → **Settings** → **Environment Variables**
 
 Add these for **Production** (see `VERCEL_ENV_SETUP.md` for full guide):
 
-```
+\`\`\`
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGc...
 STRIPE_SECRET_KEY=sk_live_...
@@ -79,19 +79,19 @@ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_...
 STRIPE_STARTER_PRICE_ID=price_1SvPwKKhlGbF8HFhb05TCvm6
 STRIPE_PROFESSIONAL_PRICE_ID=price_1SvPxGKhIGbF8HFhBpsn4mMa
 NEXT_PUBLIC_SITE_URL=https://doggybagg.cc
-```
+\`\`\`
 
 ---
 
 ### Step 3: Deploy (1 minute)
 
 **Option A – Push to trigger build:**
-```bash
+\`\`\`bash
 cd "c:\Users\malik\Ordinance.a\v0-doggybagg-ordinance"
 git add .
 git commit -m "feat: production ready - Stripe live, profile fallback active"
 git push origin main
-```
+\`\`\`
 
 **Option B – Redeploy in Vercel:**
 - Go to **Deployments** tab

@@ -24,8 +24,8 @@ Property ordinance monitoring platform. Next.js + Supabase + Stripe.
 | **MCP** (Cursor) | [MCP_SETUP.md](./MCP_SETUP.md) |
 | **Vercel env setup** | [VERCEL_ENV_SETUP.md](./VERCEL_ENV_SETUP.md) |
 
-```bash
+\`\`\`bash
 pnpm install
 pnpm dev
 pnpm build
-```
+\`\`\`
