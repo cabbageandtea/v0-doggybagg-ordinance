@@ -1,7 +1,13 @@
 #!/usr/bin/env node
 const fs = require('fs')
 const path = require('path')
-const fetch = require('node-fetch')
+let fetchLib
+try {
+  fetchLib = globalThis.fetch ? globalThis.fetch.bind(globalThis) : require('node-fetch')
+} catch (err) {
+  // If node-fetch isn't installed and global fetch isn't available, show a helpful error later
+  fetchLib = null
+}
 
 async function main() {
   const lcovPath = path.resolve(process.cwd(), 'coverage/lcov.info')
@@ -52,16 +58,22 @@ async function main() {
 
   // Find existing comment with marker
   const listUrl = `https://api.github.com/repos/${owner}/${repo}/issues/${prNumber}/comments`
-  const listRes = await fetch(listUrl, { headers: { Authorization: `token ${token}`, 'User-Agent': 'coverage-script' } })
+  if (!fetchLib) {
+    console.error('No fetch implementation available (node-fetch not installed and global fetch missing); cannot post coverage comment')
+    console.log(body)
+    return
+  }
+
+  const listRes = await fetchLib(listUrl, { headers: { Authorization: `token ${token}`, 'User-Agent': 'coverage-script' } })
   const comments = await listRes.json()
   const existing = comments.find(c => c.body && c.body.includes('<!-- coverage-report -->'))
 
   if (existing) {
     const updateUrl = `https://api.github.com/repos/${owner}/${repo}/issues/comments/${existing.id}`
-    await fetch(updateUrl, { method: 'PATCH', headers: { Authorization: `token ${token}`, 'User-Agent': 'coverage-script', 'Content-Type': 'application/json' }, body: JSON.stringify({ body }) })
+    await fetchLib(updateUrl, { method: 'PATCH', headers: { Authorization: `token ${token}`, 'User-Agent': 'coverage-script', 'Content-Type': 'application/json' }, body: JSON.stringify({ body }) })
     console.log('Updated existing coverage comment')
   } else {
-    await fetch(listUrl, { method: 'POST', headers: { Authorization: `token ${token}`, 'User-Agent': 'coverage-script', 'Content-Type': 'application/json' }, body: JSON.stringify({ body }) })
+    await fetchLib(listUrl, { method: 'POST', headers: { Authorization: `token ${token}`, 'User-Agent': 'coverage-script', 'Content-Type': 'application/json' }, body: JSON.stringify({ body }) })
     console.log('Posted new coverage comment')
   }
 }

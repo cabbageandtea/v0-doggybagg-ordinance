@@ -71,6 +71,9 @@ jobs:
           fail_ci_if_error: false
       - name: Check coverage thresholds
         if: always()
+        env:
+          COVERAGE_FUNCTIONS: '13'
+          COVERAGE_BRANCHES: '37'
         run: node scripts/check-coverage-threshold.js
       - name: Post coverage comment (fallback)
         if: always()
