@@ -2,7 +2,7 @@
 
 import Stripe from 'stripe'
 import { stripe } from '@/lib/stripe'
-import { PRODUCTS, getProductById } from '@/lib/products'
+import { getProductById } from '@/lib/products'
 import { createClient } from '@/lib/supabase/server'
 
 // Live Stripe Price IDs – set in .env.local and Vercel. See DEPLOY.md.

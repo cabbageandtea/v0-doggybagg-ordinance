@@ -5,7 +5,6 @@ import { getUserProperties, deleteProperty, type Property } from "@/app/actions/
 import { useRouter } from "next/navigation"
 import { GuidedOnboardingTour } from "@/components/guided-onboarding-tour"
 import { PhoneVerificationModal } from "@/components/phone-verification-modal"
-import { RiskPredictionCard } from "@/components/risk-prediction-card"
 import { 
   Building2, 
   AlertTriangle, 
@@ -61,36 +60,6 @@ function calculateStats(properties: Property[]) {
   }
 }
 
-const stats = [
-  {
-    label: "Total Properties",
-    value: "24",
-    change: "+3",
-    trend: "up",
-    icon: Building2,
-  },
-  {
-    label: "Active Violations",
-    value: "2",
-    change: "-1",
-    trend: "down",
-    icon: AlertTriangle,
-  },
-  {
-    label: "Compliant",
-    value: "18",
-    change: "+2",
-    trend: "up",
-    icon: CheckCircle,
-  },
-  {
-    label: "Avg Risk Score",
-    value: "34",
-    change: "-5",
-    trend: "down",
-    icon: TrendingUp,
-  },
-]
 
 function getStatusBadge(status: string) {
   switch (status) {
@@ -166,7 +135,7 @@ export default function DashboardPage() {
       setIsLoading(false)
     }
 
-    loadProperties()
+    void loadProperties()
   }, [])
 
   const stats = properties.length > 0 ? calculateStats(properties) : {
@@ -249,7 +218,7 @@ export default function DashboardPage() {
           <AlertTriangle className="mx-auto h-12 w-12 text-destructive mb-4" />
           <h3 className="text-lg font-semibold text-foreground mb-2">Failed to Load Properties</h3>
           <p className="text-muted-foreground mb-4">{error}</p>
-          <Button onClick={() => router.refresh()} variant="outline">
+          <Button onClick={() => void router.refresh()} variant="outline">
             Try Again
           </Button>
         </div>

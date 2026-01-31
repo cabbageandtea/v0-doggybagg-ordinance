@@ -31,10 +31,8 @@ export function GuidedOnboardingTour({ onComplete }: GuidedTourProps) {
   const [isLoading, setIsLoading] = useState(true)
   const [showHealthCheck, setShowHealthCheck] = useState(false)
   const [healthCheck, setHealthCheck] = useState<ComplianceHealthCheck['report'] | null>(null)
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 })
-
   useEffect(() => {
-    loadOnboardingStatus()
+    void loadOnboardingStatus()
   }, [])
 
   async function loadOnboardingStatus() {
@@ -187,7 +185,7 @@ export function GuidedOnboardingTour({ onComplete }: GuidedTourProps) {
                 className="w-full gap-2 glow-accent group"
                 onClick={() => {
                   if (stepInfo?.action) {
-                    handleStepComplete(stepInfo.action)
+                    void handleStepComplete(stepInfo.action)
                   }
                   // Scroll to target element
                   const target = document.getElementById(stepInfo?.targetId || '')
@@ -209,7 +207,7 @@ export function GuidedOnboardingTour({ onComplete }: GuidedTourProps) {
               {/* Skip Option */}
               <button
                 onClick={() => {
-                  if (onComplete) onComplete()
+                  if (onComplete) void onComplete()
                 }}
                 className="w-full text-xs text-muted-foreground hover:text-foreground transition-colors"
               >
@@ -229,7 +227,7 @@ export function GuidedOnboardingTour({ onComplete }: GuidedTourProps) {
           className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
           onClick={() => {
             setShowHealthCheck(false)
-            if (onComplete) onComplete()
+            if (onComplete) void onComplete()
           }}
         >
           <motion.div
