@@ -4,9 +4,12 @@ Run in **Supabase Dashboard → SQL Editor** in this order.
 
 ## Order
 
-1. **001_create_properties_schema.sql** – Tables (`profiles`, `properties`, etc.) and RLS.
-2. **002_create_profile_trigger.sql** – Trigger on `auth.users` to create a profile on sign-up.
-3. **003_drop_profile_trigger_use_app_fallback.sql** – Optional. Run only if you get "Database error saving new user" and you prefer to create profiles in the app instead of via trigger.
+1. **001_create_properties_schema.sql** – Tables (`profiles`, `properties`, `payment_transactions`, etc.) and RLS.
+2. **006_properties_user_and_stro_columns.sql** – Adds `user_id`, `stro_tier`, `license_id`, `reporting_status`, `risk_score` for dashboard.
+3. **002_create_profile_trigger.sql** – Trigger on `auth.users` to create a profile on sign-up.
+4. **003_drop_profile_trigger_use_app_fallback.sql** – Optional. Run if you get "Database error saving new user".
+5. **004_agentic_autonomous_expansion.sql** – Agent tables, neighborhood intelligence (requires 001).
+6. **005_onboarding_agent_schema.sql** – Onboarding, compliance health checks.
 
 ## "Database error saving new user"
 

@@ -128,17 +128,9 @@ create index if not exists idx_health_checks_user_id on public.compliance_health
 create index if not exists idx_health_checks_generated_at on public.compliance_health_checks(generated_at desc);
 create index if not exists idx_onboarding_actions_user_id on public.onboarding_actions(user_id);
 
--- Auto-update timestamp function
-create or replace function public.update_updated_at_column()
-returns trigger as $$
-begin
-  new.updated_at = now();
-  return new;
-end;
-$$ language plpgsql;
-
--- Trigger to auto-update updated_at
-create trigger update_user_onboarding_updated_at
+-- Trigger to auto-update updated_at (uses centralized handle_updated_at from 001)
+drop trigger if exists user_onboarding_updated_at on public.user_onboarding;
+create trigger user_onboarding_updated_at
   before update on public.user_onboarding
   for each row
-  execute function public.update_updated_at_column();
+  execute function public.handle_updated_at();

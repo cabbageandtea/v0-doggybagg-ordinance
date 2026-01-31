@@ -74,14 +74,14 @@ export async function startCheckoutSession(productId: string) {
   // Create Checkout Session
   const session = await stripe.checkout.sessions.create(sessionConfig)
 
-  // Log the transaction in the database
-  const { error: insertError } = await supabase.from('payments').insert({
+  // Log the transaction in the database (payment_transactions table)
+  const { error: insertError } = await supabase.from('payment_transactions').insert({
     user_id: user.id,
     stripe_session_id: session.id,
-    amount_cents: product.priceInCents,
+    amount: product.priceInCents / 100,
     status: 'pending',
+    product_id: product.id,
     metadata: {
-      product_id: product.id,
       product_name: product.name,
       subscription_tier: product.subscriptionTier,
       search_credits: product.searchCredits,
