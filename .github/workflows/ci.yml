@@ -28,10 +28,6 @@ jobs:
           pnpm -v
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Type check
-        run: pnpm -s tsc --noEmit
-      - name: Lint
-        run: pnpm -s lint
       - name: ESLint autofix (apply fixes and push)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -44,5 +40,9 @@ jobs:
             git commit -m "chore(lint): apply automatic ESLint fixes [ci skip]" || true
             git push || true
           fi
+      - name: Type check
+        run: pnpm -s tsc --noEmit
+      - name: Lint
+        run: pnpm -s lint
       - name: Audit dependencies
         run: pnpm audit --json
