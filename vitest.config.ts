@@ -12,13 +12,12 @@ export default defineConfig({
     globals: true,
     setupFiles: './vitest.setup.ts',
     coverage: {
+      provider: 'c8',
       reporter: ['text', 'lcov'],
-      100: {
-        statements: 0,
-        branches: 0,
-        functions: 0,
-        lines: 0,
-      },
+      statements: 70,
+      branches: 60,
+      functions: 60,
+      lines: 70,
     },
     include: ['tests/**/*.test.*', 'app/**/(*.)test.*', 'lib/**/(*.)test.*'],
   },
