@@ -30,4 +30,10 @@ describe('stripe actions', () => {
   it('startCheckoutSession throws for invalid product id', async () => {
     await expect(startCheckoutSession('not-found')).rejects.toThrow()
   })
+
+  it('getPaymentStatus returns status for a session', async () => {
+    const { status, paymentStatus } = await (await import('@/app/actions/stripe')).then(m => m.getPaymentStatus('sess_123'))
+    expect(status).toBe('complete')
+    expect(paymentStatus).toBe('paid')
+  })
 })

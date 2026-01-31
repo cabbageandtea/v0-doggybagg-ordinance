@@ -6,6 +6,9 @@ Property ordinance monitoring platform. Next.js + Supabase + Stripe.
 [![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app)
 [![Coverage](https://img.shields.io/codecov/c/gh/cabbageandtea/v0-doggybagg-ordinance?style=for-the-badge)](https://codecov.io/gh/cabbageandtea/v0-doggybagg-ordinance)
 
+## Codecov (optional)
+To enable Codecov uploads from CI for private repos, add a `CODECOV_TOKEN` secret in your GitHub repository settings and connect the repository to Codecov. The GitHub Action will read the token from `secrets.CODECOV_TOKEN` and upload `coverage/lcov.info` after tests run.
+
 ## Production deploy
 
 **→ [DEPLOY.md](./DEPLOY.md)** — 3 steps: Supabase script, Vercel env vars, push.
