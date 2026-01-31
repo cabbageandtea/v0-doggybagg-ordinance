@@ -300,19 +300,19 @@ Real-time San Diego municipal code violation monitoring for property owners, man
 ## Environment Variables Required
 
 ### Stripe
-```
+\`\`\`
 STRIPE_SECRET_KEY=sk_live_xxxxx
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_xxxxx
 STRIPE_STARTER_PRICE_ID=price_xxxxx (optional)
 STRIPE_PROFESSIONAL_PRICE_ID=price_xxxxx (optional)
-```
+\`\`\`
 
 ### Supabase
-```
+\`\`\`
 NEXT_PUBLIC_SUPABASE_URL=https://xxx.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJxxx...
 NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL=https://yourdomain.com/protected
-```
+\`\`\`
 
 ---
 
@@ -420,11 +420,11 @@ NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL=https://yourdomain.com/protected
 ## Deployment Steps
 
 ### 1. Final Code Push
-```bash
+\`\`\`bash
 git add .
 git commit -m "Final production polish and enhancements"
 git push origin main
-```
+\`\`\`
 
 ### 2. Vercel Deployment
 - Push triggers automatic deployment

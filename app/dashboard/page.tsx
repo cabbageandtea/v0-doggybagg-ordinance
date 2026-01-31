@@ -1,6 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { getUserProperties, deleteProperty, type Property } from "@/app/actions/properties"
+import { useRouter } from "next/navigation"
 import { 
   Building2, 
   AlertTriangle, 
@@ -40,63 +42,21 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-// Sample property data
-const properties = [
-  {
-    id: "1",
-    address: "1234 Pacific Beach Dr, San Diego, CA 92109",
-    stroTier: 1,
-    licenseId: "STR-2024-00142",
-    reportingStatus: "compliant",
-    riskScore: 12,
-    lastChecked: "2 hours ago",
-  },
-  {
-    id: "2",
-    address: "5678 La Jolla Shores Dr, San Diego, CA 92037",
-    stroTier: 2,
-    licenseId: "STR-2024-00891",
-    reportingStatus: "warning",
-    riskScore: 45,
-    lastChecked: "4 hours ago",
-  },
-  {
-    id: "3",
-    address: "910 Gaslamp Quarter Way, San Diego, CA 92101",
-    stroTier: 3,
-    licenseId: "STR-2023-01567",
-    reportingStatus: "violation",
-    riskScore: 78,
-    lastChecked: "1 hour ago",
-  },
-  {
-    id: "4",
-    address: "2468 Ocean Front Walk, San Diego, CA 92109",
-    stroTier: 1,
-    licenseId: "STR-2024-00234",
-    reportingStatus: "compliant",
-    riskScore: 8,
-    lastChecked: "30 minutes ago",
-  },
-  {
-    id: "5",
-    address: "1357 North Park Ave, San Diego, CA 92104",
-    stroTier: 4,
-    licenseId: "STR-2023-02891",
-    reportingStatus: "warning",
-    riskScore: 52,
-    lastChecked: "6 hours ago",
-  },
-  {
-    id: "6",
-    address: "8024 Coronado Bay Rd, San Diego, CA 92118",
-    stroTier: 2,
-    licenseId: "STR-2024-00567",
-    reportingStatus: "compliant",
-    riskScore: 22,
-    lastChecked: "3 hours ago",
-  },
-]
+// Stats helper - calculate from properties
+function calculateStats(properties: Property[]) {
+  const compliantCount = properties.filter(p => p.reporting_status === 'compliant').length
+  const violationCount = properties.filter(p => p.reporting_status === 'violation').length  
+  const avgRisk = properties.length > 0 
+    ? Math.round(properties.reduce((sum, p) => sum + (p.risk_score || 0), 0) / properties.length)
+    : 0
+
+  return {
+    totalProperties: properties.length,
+    activeViolations: violationCount,
+    compliant: compliantCount,
+    avgRiskScore: avgRisk,
+  }
+}
 
 const stats = [
   {
@@ -176,21 +136,128 @@ function getTierBadge(tier: number) {
 }
 
 export default function DashboardPage() {
+  const router = useRouter()
   const [searchQuery, setSearchQuery] = useState("")
   const [statusFilter, setStatusFilter] = useState("all")
+  const [properties, setProperties] = useState<Property[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  // Load properties on mount
+  useEffect(() => {
+    async function loadProperties() {
+      setIsLoading(true)
+      setError(null)
+      
+      const result = await getUserProperties()
+      
+      if (result.error) {
+        console.error('[v0] Failed to load properties:', result.error)
+        setError(result.error)
+        setProperties([])
+      } else {
+        setProperties(result.properties || [])
+      }
+      
+      setIsLoading(false)
+    }
+
+    loadProperties()
+  }, [])
+
+  const stats = properties.length > 0 ? calculateStats(properties) : {
+    totalProperties: 0,
+    activeViolations: 0,
+    compliant: 0,
+    avgRiskScore: 0,
+  }
+
+  const statsDisplay = [
+    {
+      label: "Total Properties",
+      value: stats.totalProperties.toString(),
+      change: "+0",
+      trend: "up" as const,
+      icon: Building2,
+    },
+    {
+      label: "Active Violations",
+      value: stats.activeViolations.toString(),
+      change: "-0",
+      trend: "down" as const,
+      icon: AlertTriangle,
+    },
+    {
+      label: "Compliant",
+      value: stats.compliant.toString(),
+      change: "+0",
+      trend: "up" as const,
+      icon: CheckCircle,
+    },
+    {
+      label: "Avg Risk Score",
+      value: stats.avgRiskScore.toString(),
+      change: "-0",
+      trend: "down" as const,
+      icon: TrendingUp,
+    },
+  ]
 
   const filteredProperties = properties.filter((property) => {
     const matchesSearch = property.address.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      property.licenseId.toLowerCase().includes(searchQuery.toLowerCase())
-    const matchesStatus = statusFilter === "all" || property.reportingStatus === statusFilter
+      (property.license_id || '').toLowerCase().includes(searchQuery.toLowerCase())
+    const matchesStatus = statusFilter === "all" || property.reporting_status === statusFilter
     return matchesSearch && matchesStatus
   })
+
+  const handleDeleteProperty = async (propertyId: string) => {
+    if (!confirm('Are you sure you want to remove this property from monitoring?')) {
+      return
+    }
+
+    const result = await deleteProperty(propertyId)
+    
+    if (result.success) {
+      // Refresh the list
+      setProperties(properties.filter(p => p.id !== propertyId))
+    } else {
+      alert(`Failed to delete property: ${result.error}`)
+    }
+  }
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <div className="text-center">
+            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent mb-4"></div>
+            <p className="text-muted-foreground">Loading your properties...</p>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="container mx-auto px-4">
+        <div className="liquid-glass-glow rounded-2xl p-8 text-center">
+          <AlertTriangle className="mx-auto h-12 w-12 text-destructive mb-4" />
+          <h3 className="text-lg font-semibold text-foreground mb-2">Failed to Load Properties</h3>
+          <p className="text-muted-foreground mb-4">{error}</p>
+          <Button onClick={() => router.refresh()} variant="outline">
+            Try Again
+          </Button>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="container mx-auto px-4">
       {/* Stats Bento Grid */}
       <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {stats.map((stat) => (
+        {statsDisplay.map((stat) => (
           <div
             key={stat.label}
             className="liquid-glass rounded-2xl p-6 transition-all duration-300 hover:scale-[1.02]"
@@ -233,7 +300,11 @@ export default function DashboardPage() {
               <Download className="h-4 w-4" />
               Export
             </Button>
-            <Button size="sm" className="gap-2 glow-accent bg-primary text-primary-foreground hover:bg-primary/90">
+            <Button 
+              size="sm" 
+              className="gap-2 glow-accent bg-primary text-primary-foreground hover:bg-primary/90"
+              onClick={() => router.push('/upload')}
+            >
               Add Property
             </Button>
           </div>
@@ -287,20 +358,20 @@ export default function DashboardPage() {
                     <div>
                       <p className="font-medium text-foreground">{property.address}</p>
                       <p className="text-xs text-muted-foreground">
-                        Last checked: {property.lastChecked}
+                        Added: {new Date(property.created_at).toLocaleDateString()}
                       </p>
                     </div>
                   </TableCell>
-                  <TableCell>{getTierBadge(property.stroTier)}</TableCell>
+                  <TableCell>{getTierBadge(property.stro_tier || 1)}</TableCell>
                   <TableCell>
                     <code className="rounded bg-secondary/50 px-2 py-1 text-sm text-foreground">
-                      {property.licenseId}
+                      {property.license_id || 'N/A'}
                     </code>
                   </TableCell>
-                  <TableCell>{getStatusBadge(property.reportingStatus)}</TableCell>
+                  <TableCell>{getStatusBadge(property.reporting_status)}</TableCell>
                   <TableCell className="text-right">
-                    <span className={`font-mono font-bold ${getRiskScoreColor(property.riskScore)}`}>
-                      {property.riskScore}
+                    <span className={`font-mono font-bold ${getRiskScoreColor(property.risk_score || 0)}`}>
+                      {property.risk_score || 0}
                     </span>
                   </TableCell>
                   <TableCell>
@@ -319,9 +390,12 @@ export default function DashboardPage() {
                           <TrendingUp className="h-4 w-4" />
                           Risk History
                         </DropdownMenuItem>
-                        <DropdownMenuItem className="cursor-pointer gap-2 text-destructive">
+                        <DropdownMenuItem 
+                          className="cursor-pointer gap-2 text-destructive"
+                          onClick={() => handleDeleteProperty(property.id)}
+                        >
                           <AlertTriangle className="h-4 w-4" />
-                          Report Issue
+                          Remove Property
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -332,10 +406,24 @@ export default function DashboardPage() {
           </Table>
         </div>
 
-        {filteredProperties.length === 0 && (
+        {filteredProperties.length === 0 && properties.length === 0 && (
           <div className="py-12 text-center">
             <Building2 className="mx-auto h-12 w-12 text-muted-foreground" />
-            <p className="mt-4 text-muted-foreground">No properties found matching your criteria</p>
+            <p className="mt-4 text-foreground font-semibold">No properties yet</p>
+            <p className="mt-2 text-sm text-muted-foreground">Add your first property to start monitoring compliance</p>
+            <Button 
+              className="mt-4 glow-accent"
+              onClick={() => router.push('/upload')}
+            >
+              Add Your First Property
+            </Button>
+          </div>
+        )}
+        
+        {filteredProperties.length === 0 && properties.length > 0 && (
+          <div className="py-12 text-center">
+            <Search className="mx-auto h-12 w-12 text-muted-foreground" />
+            <p className="mt-4 text-muted-foreground">No properties match your search criteria</p>
           </div>
         )}
 

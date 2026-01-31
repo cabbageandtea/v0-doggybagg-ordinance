@@ -41,13 +41,13 @@ Use `.env.example` as the reference; copy to `.env.local` and fill in secrets (n
 ## Recommended next steps (manual)
 
 1. **Commit the fixes** (from repo root):
-   ```bash
+   \`\`\`bash
    git add .gitignore README.md next.config.mjs MCP_SETUP.md ENV_AUDIT.md GIT_AUDIT.md .env.example
    git add components/dashboard-footer.tsx lib/supabase/client.ts
    git status   # review
    git commit -m "chore: git audit, MCP links, env template, README developer setup"
    git push origin main
-   ```
+   \`\`\`
 2. **Ensure `.env.example` is tracked:** If it was previously ignored, run `git add -f .env.example` before committing.
 3. **Do not commit:** `.env`, `.env.local`, or any file containing real secrets or API keys.
 

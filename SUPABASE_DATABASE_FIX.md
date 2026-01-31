@@ -9,9 +9,9 @@ If sign-up fails with **"Database error saving new user"**, a legacy trigger on 
 1. Open **Supabase Dashboard** → your project → **SQL Editor**
 2. Paste and run:
 
-```sql
+\`\`\`sql
 DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
-```
+\`\`\`
 
 3. Confirm: **"Success. No rows returned"**
 

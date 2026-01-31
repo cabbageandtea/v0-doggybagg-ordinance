@@ -19,12 +19,12 @@
 
 **Lines 9–11:** The only place Stripe Price IDs are wired:
 
-```ts
+\`\`\`ts
 const STRIPE_PRICE_IDS: Record<string, string> = {
   'starter-plan': process.env.STRIPE_STARTER_PRICE_ID || 'REPLACE_WITH_STARTER_PRICE_ID',
   'professional-plan': process.env.STRIPE_PROFESSIONAL_PRICE_ID || 'REPLACE_WITH_PROFESSIONAL_PRICE_ID',
 }
-```
+\`\`\`
 
 **Mapping:**
 
@@ -46,10 +46,10 @@ Your real `.env` / `.env.local` is gitignored, so it wasn’t read. Add or updat
 
 **Local (`.env.local`):**
 
-```env
+\`\`\`env
 STRIPE_STARTER_PRICE_ID=price_xxxxxxxxxxxxxxxxxxxxxxxx
 STRIPE_PROFESSIONAL_PRICE_ID=price_xxxxxxxxxxxxxxxxxxxxxxxx
-```
+\`\`\`
 
 **Production (Vercel → Settings → Environment Variables):**
 
