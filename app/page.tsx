@@ -5,6 +5,7 @@ import { HeroSection } from "@/components/hero-section"
 import { BentoGrid } from "@/components/bento-grid"
 import { FineCalculator } from "@/components/fine-calculator"
 import { PropertySearch } from "@/components/property-search"
+import { NeighborhoodWatchWidget } from "@/components/neighborhood-watch-widget"
 import { TestimonialsSection } from "@/components/testimonials-section"
 import { PricingSection } from "@/components/pricing-section"
 import { FAQSection } from "@/components/faq-section"
@@ -28,6 +29,7 @@ export default function Home() {
               </div>
             </div>
           </section>
+          <NeighborhoodWatchWidget />
           <TestimonialsSection />
           <PricingSection />
           <FAQSection />

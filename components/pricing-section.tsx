@@ -6,6 +6,22 @@ import Link from "next/link"
 
 const plans = [
   {
+    name: "Community Alert",
+    description: "Protect your home. Always free.",
+    price: 0,
+    period: "",
+    features: [
+      "1 property monitored",
+      "Weekly violation checks",
+      "SMS alerts only",
+      "Community support",
+      "24-hour history",
+    ],
+    cta: "Start Free Protection",
+    highlighted: false,
+    isFree: true,
+  },
+  {
     name: "Starter",
     description: "Perfect for single property owners",
     price: 29,
@@ -102,8 +118,24 @@ export function PricingSection() {
           </div>
         </div>
 
+        {/* Community CTA Banner */}
+        <div className="mb-12 mx-auto max-w-4xl">
+          <div className="liquid-glass rounded-2xl p-6 text-center border-2 border-primary/30">
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-green-500/20 px-4 py-1.5">
+              <span className="text-sm font-medium text-green-400">100% Free Forever</span>
+            </div>
+            <h3 className="mb-2 text-xl font-bold text-foreground">
+              Protect Your Home. Get Notified of City Violations for Free.
+            </h3>
+            <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
+              Single-property owners deserve protection too. Monitor your address and receive SMS alerts 
+              when San Diego issues violations—no credit card required.
+            </p>
+          </div>
+        </div>
+
         {/* Pricing Grid */}
-        <div className="grid gap-8 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {plans.map((plan) => (
             <div
               key={plan.name}
@@ -126,7 +158,9 @@ export function PricingSection() {
               </div>
 
               <div className="mb-6 flex items-baseline">
-                {plan.price !== null ? (
+                {plan.isFree ? (
+                  <span className="text-4xl font-bold text-green-400">FREE</span>
+                ) : plan.price !== null ? (
                   <>
                     <span className="text-4xl font-bold text-foreground">${plan.price}</span>
                     <span className="ml-1 text-muted-foreground">{plan.period}</span>
@@ -145,7 +179,15 @@ export function PricingSection() {
                 ))}
               </ul>
 
-              {plan.name === "Starter" ? (
+              {plan.name === "Community Alert" ? (
+                <Link href="/auth/sign-up?tier=community-free">
+                  <Button
+                    className="w-full bg-green-500 text-white hover:bg-green-600"
+                  >
+                    {plan.cta}
+                  </Button>
+                </Link>
+              ) : plan.name === "Starter" ? (
                 <Link href="/checkout/starter-plan">
                   <Button
                     className={`w-full ${

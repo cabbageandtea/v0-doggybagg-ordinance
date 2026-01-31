@@ -16,6 +16,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { DIYAppealGuide } from "@/components/diy-appeal-guide"
 import { 
   Bot, 
   FileText, 
@@ -85,18 +86,18 @@ export function ResolutionCenter({ violation, propertyId }: ResolutionCenterProp
   }
 
   return (
-    <div className="liquid-glass-glow rounded-2xl p-6 space-y-4">
+    <div className="liquid-glass-glow rounded-2xl p-4 sm:p-6 space-y-4">
       <div className="flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/20">
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/20 flex-shrink-0">
           <Bot className="h-5 w-5 text-primary" />
         </div>
-        <div>
-          <h3 className="text-lg font-semibold text-foreground">AI Agent Resolution</h3>
-          <p className="text-sm text-muted-foreground">Automated compliance assistance</p>
+        <div className="min-w-0">
+          <h3 className="text-base sm:text-lg font-semibold text-foreground">AI Agent Resolution</h3>
+          <p className="text-xs sm:text-sm text-muted-foreground truncate">Automated compliance assistance</p>
         </div>
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-2">
+      <div className="grid gap-3 grid-cols-1 sm:grid-cols-2">
         {/* Appeal Letter Generator */}
         <Dialog>
           <DialogTrigger asChild>
@@ -263,12 +264,16 @@ export function ResolutionCenter({ violation, propertyId }: ResolutionCenterProp
         </Dialog>
       </div>
 
-      <div className="flex items-start gap-2 rounded-lg border border-primary/20 bg-primary/5 p-3">
-        <AlertTriangle className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-        <p className="text-xs text-muted-foreground">
-          AI-generated content for informational purposes. Not legal advice. 
-          Verify all details before submission to City Treasurer.
-        </p>
+      <div className="space-y-3">
+        <div className="flex items-start gap-2 rounded-lg border border-primary/20 bg-primary/5 p-3">
+          <AlertTriangle className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+          <p className="text-xs text-muted-foreground">
+            AI-generated content for informational purposes. Not legal advice. 
+            Verify all details before submission to City Treasurer.
+          </p>
+        </div>
+
+        <DIYAppealGuide />
       </div>
     </div>
   )
