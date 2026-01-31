@@ -279,7 +279,7 @@ export async function generateComplianceCertificate(
 // ========== PROPRIETARY SERVER-SIDE ALGORITHMS ==========
 // These functions contain the core IP and never get exposed to client
 
-function generateLetterTemplate(violation: FetchedViolation): string {
+export function generateLetterTemplate(violation: FetchedViolation): string {
   const property = violation.properties
   const date = new Date().toLocaleDateString('en-US', { 
     year: 'numeric', 
@@ -331,7 +331,7 @@ Generated via Ordinance.ai
   `.trim()
 }
 
-function getMunicipalCitations(violationType: string): string[] {
+export function getMunicipalCitations(violationType: string): string[] {
   const citationMap: Record<string, string[]> = {
     'Short-Term Rental': [
       'SDMC 143.0101 - Short-Term Residential Occupancy Regulations',
@@ -351,7 +351,7 @@ function getMunicipalCitations(violationType: string): string[] {
   return citationMap[violationType] || ['SDMC 143.0101 - General Compliance Standards']
 }
 
-function calculateNextBestAction(violations: ViolationDetail[]): NextActionResult['action'] {
+export function calculateNextBestAction(violations: ViolationDetail[]): NextActionResult['action'] {
   if (violations.length === 0) {
     return {
       priority: 'low' as const,
@@ -381,7 +381,7 @@ function calculateNextBestAction(violations: ViolationDetail[]): NextActionResul
   }
 } 
 
-function calculateBayesianRisk(areaViolations: Array<{ violation_type: string }>, zipCode: string) {
+export function calculateBayesianRisk(areaViolations: Array<{ violation_type: string }>, zipCode: string) {
   const violationCount = areaViolations.length
   const violationTypes = [...new Set(areaViolations.map(v => v.violation_type))]
 
@@ -418,13 +418,13 @@ function calculateBayesianRisk(areaViolations: Array<{ violation_type: string }>
   }
 } 
 
-function generateBlockchainHash(property: MinimalProperty): string {
+export function generateBlockchainHash(property: MinimalProperty): string {
   // PROPRIETARY: Simulate blockchain verification hash
   const data = `${property.id}${property.address}${Date.now()}`
   return `0x${Buffer.from(data).toString('hex').slice(0, 64)}`
 }
 
-function calculateComplianceScore(property: FetchedProperty): number {
+export function calculateComplianceScore(property: FetchedProperty): number {
   const activeViolations = property.ordinances?.filter((o: Ordinance) => o.status === 'active').length || 0
   return Math.max(0, 100 - (activeViolations * 15))
 } 
@@ -706,13 +706,13 @@ export async function generateFirstHealthCheck(): Promise<ComplianceHealthCheck>
 }
 
 // PROPRIETARY: Helper functions for health check
-function calculateNeighborhoodRisk(violationCount: number): 'Low' | 'Medium' | 'High' {
+export function calculateNeighborhoodRisk(violationCount: number): 'Low' | 'Medium' | 'High' {
   if (violationCount > 10) return 'High'
   if (violationCount > 5) return 'Medium'
   return 'Low'
 }
 
-function generateHealthRecommendations(
+export function generateHealthRecommendations(
   activeViolations: number,
   totalFines: number,
   neighborhoodRisk: string,
