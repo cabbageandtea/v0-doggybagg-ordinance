@@ -12,13 +12,15 @@ import {
 describe('agentic helper functions', () => {
   it('calculateNextBestAction returns low priority when no violations', () => {
     const action = calculateNextBestAction([])
-    expect(action.priority).toBe('low')
+    expect(action).toBeDefined()
+    expect(action!.priority).toBe('low')
   })
 
   it('calculateNextBestAction returns high priority for large fines', () => {
     const action = calculateNextBestAction([{ id: 'v1', fine_amount: 2000 } as any])
-    expect(action.priority).toBe('high')
-    expect(action.title).toContain('Schedule Immediate Remediation')
+    expect(action).toBeDefined()
+    expect(action!.priority).toBe('high')
+    expect(action!.title).toContain('Schedule Immediate Remediation')
   })
 
   it('calculateBayesianRisk summarizes violations', () => {
