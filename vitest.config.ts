@@ -14,10 +14,10 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'lcov'],
-      statements: 70,
+      statements: 75,
       branches: 60,
-      functions: 60,
-      lines: 70,
+      functions: 70,
+      lines: 75,
     },
     include: ['tests/**/*.test.*', 'app/**/(*.)test.*', 'lib/**/(*.)test.*'],
   },

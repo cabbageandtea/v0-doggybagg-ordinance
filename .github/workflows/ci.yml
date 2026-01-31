@@ -69,5 +69,41 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage/lcov.info
           fail_ci_if_error: false
+      - name: Post coverage comment (fallback)
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_EVENT_PATH: ${{ github.event_path }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/post-coverage-comment.js
       - name: Audit dependencies
         run: pnpm audit --json
+
+  e2e:
+    needs: checks
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@stable --activate || true
+          if ! command -v pnpm >/dev/null 2>&1; then
+            npm i -g pnpm
+          fi
+          pnpm -v
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Build
+        run: pnpm -s build
+      - name: Start server
+        run: pnpm -s start &
+      - name: Wait for server
+        run: pnpm exec wait-on http://localhost:3000 --timeout 45000
+      - name: Run Playwright E2E tests
+        run: pnpm -s e2e:ci
