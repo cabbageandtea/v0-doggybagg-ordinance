@@ -3,6 +3,9 @@
 import { useState, useEffect } from "react"
 import { getUserProperties, deleteProperty, type Property } from "@/app/actions/properties"
 import { useRouter } from "next/navigation"
+import { GuidedOnboardingTour } from "@/components/guided-onboarding-tour"
+import { PhoneVerificationModal } from "@/components/phone-verification-modal"
+import { RiskPredictionCard } from "@/components/risk-prediction-card"
 import { 
   Building2, 
   AlertTriangle, 
@@ -142,6 +145,7 @@ export default function DashboardPage() {
   const [properties, setProperties] = useState<Property[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [showOnboarding, setShowOnboarding] = useState(true)
 
   // Load properties on mount
   useEffect(() => {
@@ -255,6 +259,36 @@ export default function DashboardPage() {
 
   return (
     <div className="container mx-auto px-4">
+      {/* Guided Onboarding Tour */}
+      {showOnboarding && (
+        <GuidedOnboardingTour 
+          onComplete={() => setShowOnboarding(false)} 
+        />
+      )}
+
+      {/* Top Actions Bar */}
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
+          <p className="text-sm text-muted-foreground">Monitor your property compliance</p>
+        </div>
+        <div className="flex items-center gap-2">
+          <PhoneVerificationModal 
+            onVerified={() => {
+              console.log('[v0] Phone verified successfully')
+              // Refresh onboarding status
+            }}
+          />
+          <Button 
+            id="add-property-button"
+            className="gap-2 glow-accent"
+            onClick={() => router.push('/upload')}
+          >
+            Add Property
+          </Button>
+        </div>
+      </div>
+
       {/* Stats Bento Grid */}
       <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {statsDisplay.map((stat) => (

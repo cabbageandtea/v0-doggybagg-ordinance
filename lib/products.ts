@@ -13,6 +13,21 @@ export interface Product {
 
 export const PRODUCTS: Product[] = [
   {
+    id: 'community-free',
+    name: 'Community Alert',
+    description: 'Free protection for your home',
+    priceInCents: 0, // FREE
+    searchCredits: 1,
+    subscriptionTier: 'free',
+    features: [
+      '1 property monitored',
+      'Weekly violation checks',
+      'SMS alerts only',
+      'Community support',
+      '24-hour history',
+    ],
+  },
+  {
     id: 'starter-plan',
     name: 'Starter',
     description: 'Perfect for single property owners',
