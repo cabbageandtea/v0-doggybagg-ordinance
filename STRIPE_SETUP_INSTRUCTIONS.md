@@ -53,17 +53,17 @@ Once you've created both products in Stripe, you'll need to update the checkout 
 
 Replace the product lookup logic with actual Stripe Price IDs:
 
-```typescript
+\`\`\`typescript
 // Map product IDs to Stripe Price IDs
 const STRIPE_PRICE_IDS: Record<string, string> = {
   'starter-plan': 'price_YOUR_STARTER_PRICE_ID_HERE',
   'professional-plan': 'price_YOUR_PROFESSIONAL_PRICE_ID_HERE',
 }
-```
+\`\`\`
 
 Then in the `startCheckoutSession` function, use:
 
-```typescript
+\`\`\`typescript
 const stripePriceId = STRIPE_PRICE_IDS[productId]
 
 if (!stripePriceId) {
@@ -82,11 +82,11 @@ const session = await stripe.checkout.sessions.create({
   cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/#pricing`,
   customer_email: user.email,
 })
-```
+\`\`\`
 
 ## Quick Command (if using Stripe CLI)
 
-```bash
+\`\`\`bash
 # Create Starter Plan
 stripe products create \
   --name="Starter Plan" \
@@ -110,7 +110,7 @@ stripe prices create \
   --unit-amount=9900 \
   --currency=usd \
   --recurring[interval]=month
-```
+\`\`\`
 
 ## Verification
 
