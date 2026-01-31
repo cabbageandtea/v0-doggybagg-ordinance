@@ -13,6 +13,7 @@
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
     "e2e:ci": "playwright test --reporter=github",
+    "check:server-actions-async": "node scripts/check-server-actions-async.js",
     "start": "next start"
   },
   "dependencies": {

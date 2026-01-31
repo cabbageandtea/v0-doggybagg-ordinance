@@ -28,6 +28,8 @@ jobs:
           pnpm -v
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Server Actions async check
+        run: pnpm -s check:server-actions-async
       - name: ESLint autofix (apply fixes and push)
         continue-on-error: true
         env:
