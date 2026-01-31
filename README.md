@@ -9,6 +9,27 @@ Property ordinance monitoring platform. Next.js + Supabase + Stripe.
 ## Codecov (optional)
 To enable Codecov uploads from CI for private repos, add a `CODECOV_TOKEN` secret in your GitHub repository settings and connect the repository to Codecov. The GitHub Action will read the token from `secrets.CODECOV_TOKEN` and upload `coverage/lcov.info` after tests run.
 
+Notes:
+- For public repositories, Codecov uploads often work without a token, but adding a token is recommended.
+- If you want comments on PRs or additional configuration, you can configure it in your Codecov repository settings or adjust `.codecov.yml`.
+
+## Testing & E2E
+- Run unit tests with coverage:
+
+```bash
+pnpm test:coverage
+```
+
+- Run Playwright E2E locally (requires a running app):
+
+```bash
+pnpm build
+pnpm start &
+pnpm test:e2e
+```
+
+- CI note: The workflow runs unit tests, uploads coverage, attempts to upload to Codecov, posts a coverage summary comment on PRs (fallback), and runs Playwright E2E on PRs/main. Coverage thresholds are enforced in CI and will fail the checks if coverage drops below configured levels.
+
 ## Production deploy
 
 **→ [DEPLOY.md](./DEPLOY.md)** — 3 steps: Supabase script, Vercel env vars, push.
