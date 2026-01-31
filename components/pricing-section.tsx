@@ -105,7 +105,7 @@ export function PricingSection() {
                 <span className="text-5xl font-bold text-foreground">$499</span>
                 <span className="text-muted-foreground">one-time</span>
               </div>
-              <Link href="https://buy.stripe.com/test_28E6oAd3ka4ecIQbNX7Re00" target="_blank" rel="noopener noreferrer">
+              <Link href={process.env.NEXT_PUBLIC_STRIPE_PORTFOLIO_AUDIT_LINK || 'mailto:support@doggybagg.cc?subject=Portfolio%20Audit%20Inquiry'} target="_blank" rel="noopener noreferrer">
                 <Button
                   size="lg"
                   className="group glow-accent-intense bg-primary px-8 py-6 text-lg font-semibold text-primary-foreground hover:bg-primary/90"

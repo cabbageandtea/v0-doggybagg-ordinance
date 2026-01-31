@@ -37,11 +37,12 @@ Add these for the **Production** environment. Click **Add** for each:
 | `STRIPE_STARTER_PRICE_ID` | `price_1SvPwKKhlGbF8HFhb05TCvm6` | Starter plan ($29/month) |
 | `STRIPE_PROFESSIONAL_PRICE_ID` | `price_1SvPxGKhlGbF8HFhBpsn4mMa` | Professional plan ($99/month) |
 
-### Site URL
+### Site URL & Portfolio Audit
 
 | Name | Value | Notes |
 |------|-------|-------|
 | `NEXT_PUBLIC_SITE_URL` | `https://doggybagg.cc` | Used for auth redirects |
+| `NEXT_PUBLIC_STRIPE_PORTFOLIO_AUDIT_LINK` | `https://buy.stripe.com/...` | Live Stripe Payment Link for $499 Portfolio Audit (hero + pricing CTAs). Get from Stripe Dashboard → Payment links. Use live link, not `test_` URL. |
 
 ---
 

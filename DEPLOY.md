@@ -26,9 +26,10 @@ This removes the trigger that caused "Database error saving new user." Profiles 
 | `NEXT_PUBLIC_SUPABASE_URL` | From Supabase Dashboard → Project Settings → API |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | From Supabase Dashboard → Project Settings → API |
 | `STRIPE_SECRET_KEY` | From Stripe Dashboard → Developers → API keys |
-| `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | From Stripe Dashboard |
+| `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | From Stripe Dashboard (use this exact name, not `STRIPE_PUBLISHABLE_KEY`) |
+| `NEXT_PUBLIC_STRIPE_PORTFOLIO_AUDIT_LINK` | Live $499 Portfolio Audit Payment Link (Stripe Dashboard → Payment links) |
 | `STRIPE_STARTER_PRICE_ID` | `price_1SvPwKKhlGbF8HFhb05TCvm6` |
-| `STRIPE_PROFESSIONAL_PRICE_ID` | `price_1SvPxGKhIGbF8HFhBpsn4mMa` |
+| `STRIPE_PROFESSIONAL_PRICE_ID` | `price_1SvPxGKhlGbF8HFhBpsn4mMa` |
 | `NEXT_PUBLIC_SITE_URL` | `https://doggybagg.cc` |
 
 Detailed copy-paste: [VERCEL_ENV_SETUP.md](./VERCEL_ENV_SETUP.md)

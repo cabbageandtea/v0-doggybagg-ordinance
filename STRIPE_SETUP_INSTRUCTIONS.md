@@ -78,8 +78,8 @@ const session = await stripe.checkout.sessions.create({
     },
   ],
   mode: 'subscription',
-  success_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-  cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/#pricing`,
+  success_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://doggybagg.cc'}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+  cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://doggybagg.cc'}/#pricing`,
   customer_email: user.email,
 })
 \`\`\`

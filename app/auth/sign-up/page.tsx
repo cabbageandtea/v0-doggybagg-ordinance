@@ -42,10 +42,7 @@ export default function SignUpPage() {
 
       // If email confirmation is disabled, we get a session immediately; ensure profile exists
       if (data.session) {
-        const { error: profileError } = await ensureUserProfile()
-        if (profileError) {
-          console.warn("[sign-up] ensureUserProfile:", profileError)
-        }
+        await ensureUserProfile()
       }
 
       router.push("/auth/verify-email")
