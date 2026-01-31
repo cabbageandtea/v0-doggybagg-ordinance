@@ -38,7 +38,7 @@ export function RiskPredictionCard({ propertyId, zipCode }: RiskPredictionCardPr
   }
 
   useEffect(() => {
-    loadPrediction()
+    void loadPrediction()
   }, [propertyId, zipCode])
 
   const getRiskColor = (level: string) => {

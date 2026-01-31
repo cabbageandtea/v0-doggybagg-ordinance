@@ -71,7 +71,7 @@ export function ResolutionCenter({ violation, propertyId }: ResolutionCenterProp
 
   const handleCopy = () => {
     if (appealLetter) {
-      navigator.clipboard.writeText(appealLetter)
+      void navigator.clipboard.writeText(appealLetter)
       setIsCopied(true)
       setTimeout(() => setIsCopied(false), 2000)
     }
