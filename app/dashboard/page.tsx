@@ -391,7 +391,7 @@ export default function DashboardPage() {
                     <div>
                       <p className="font-medium text-foreground">{property.address}</p>
                       <p className="text-xs text-muted-foreground">
-                        Added: {new Date(property.created_at).toLocaleDateString()}
+                        Added: {property.created_at ? new Date(property.created_at).toLocaleDateString() : '—'}
                       </p>
                     </div>
                   </TableCell>

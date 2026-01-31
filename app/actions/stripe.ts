@@ -10,7 +10,7 @@ const STRIPE_PRICE_IDS: Record<string, string> = {
   'professional-plan': process.env.STRIPE_PROFESSIONAL_PRICE_ID || 'REPLACE_WITH_PROFESSIONAL_PRICE_ID',
 }
 
-export async function startCheckoutSession(productId: string) {
+export async function startCheckoutSession(productId: string): Promise<string> {
   const product = getProductById(productId)
   
   if (!product) {
@@ -91,8 +91,13 @@ export async function startCheckoutSession(productId: string) {
     console.error('[v0] Failed to log payment transaction:', insertError)
   }
 
-  return session.client_secret
-}
+  const clientSecret = session.client_secret
+  if (!clientSecret) {
+    throw new Error('Failed to create checkout session: no client_secret returned')
+  }
+
+  return clientSecret
+} 
 
 export async function getPaymentStatus(sessionId: string) {
   const session = await stripe.checkout.sessions.retrieve(sessionId)
