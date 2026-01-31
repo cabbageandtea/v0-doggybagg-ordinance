@@ -1,32 +1,59 @@
 import { describe, it, expect, vi } from 'vitest'
 import { getOnboardingStatus, updateOnboardingProgress, generateFirstHealthCheck } from '@/app/actions/agentic'
 
-// Helper to create a flexible supabase mock
+// Helper to create a flexible supabase mock with chainable methods
 function createSupabaseMock(overrides: any = {}) {
   return {
     auth: { getUser: async () => ({ data: { user: { id: 'u1' } } }) },
     from: (table: string) => {
       if (table === 'profiles') {
-        return { select: async () => ({ data: [{ subscription_tier: overrides.subscription_tier || 'free' }], error: null }), eq: () => ({ single: async () => ({ data: { subscription_tier: overrides.subscription_tier || 'free' } }) }) }
-      }
-      if (table === 'user_onboarding') {
-        return { select: async () => ({ data: [{ phone_verified: overrides.phone_verified || false, viewed_risk_score: overrides.viewed_risk_score || false }], error: null }), eq: () => ({ single: async () => ({ data: { phone_verified: overrides.phone_verified || false, viewed_risk_score: overrides.viewed_risk_score || false } }) }) }
-      }
-      if (table === 'properties') {
         return {
-          select: async () => ({ data: overrides.properties || [], error: null }),
-          eq: (_col: string, _val: any) => ({ order: () => ({ select: async () => ({ data: overrides.properties || [], error: null }) }) }),
-        }
-      }
-      if (table === 'ordinances') {
-        return {
-          select: async () => ({ data: overrides.areaViolations || [], error: null }),
-          in: async () => ({ data: overrides.areaViolations || [], error: null }),
-          gte: async () => ({ data: overrides.areaViolations || [], error: null }),
+          select: (_cols?: string) => ({
+            eq: (_col: string, _val: any) => ({
+              single: async () => ({ data: { subscription_tier: overrides.subscription_tier || 'free' }, error: null }),
+            }),
+          }),
         }
       }
 
-      return { select: async () => ({ data: [], error: null }) }
+      if (table === 'user_onboarding') {
+        return {
+          select: (_cols?: string) => ({
+            eq: (_col: string, _val: any) => ({
+              single: async () => ({ data: { phone_verified: overrides.phone_verified || false, viewed_risk_score: overrides.viewed_risk_score || false }, error: null }),
+            }),
+          }),
+        }
+      }
+
+      if (table === 'properties') {
+        return {
+          select: (_cols?: string) => ({
+            eq: (_col: string, _val: any) => ({
+              order: (_col2?: string, _opts?: any) => ({ data: overrides.properties || [], error: null }),
+              // Some code paths expect the eq() result directly
+              data: overrides.properties || [],
+              error: null,
+            }),
+          }),
+        }
+      }
+
+      if (table === 'ordinances') {
+        return {
+          select: (_cols?: string) => ({
+            in: (_col: string, _vals: any) => ({
+              gte: (_col2: string, _val2: any) => ({ data: overrides.areaViolations || [], error: null }),
+            }),
+          }),
+        }
+      }
+
+      if (table === 'compliance_health_checks') {
+        return { insert: async (_payload: any) => ({ error: null }) }
+      }
+
+      return { select: (_?: string) => ({ data: [], error: null }) }
     },
   }
 }
