@@ -49,12 +49,12 @@ v21 transforms Ordinance.ai from an investor-focused tool to a **community defen
 - **Mobile-Optimized** - Accessible on-the-go
 
 **Key Components:**
-```
+\`\`\`
 Step 1: Review AI-Generated Letter (~5 min)
 Step 2: Gather Supporting Documentation (~30 min)
 Step 3: Submit to City Treasurer (~10 min)
 Step 4: Track Appeal Status (Ongoing)
-```
+\`\`\`
 
 **City Contact Directory:**
 - Treasurer's Office: (619) 533-6000
@@ -141,11 +141,11 @@ Step 4: Track Appeal Status (Ongoing)
 - Touch-optimized cards
 
 **Tailwind Breakpoints Used:**
-```
+\`\`\`
 sm: 640px  (tablet)
 md: 768px  (desktop)
 lg: 1024px (large desktop)
-```
+\`\`\`
 
 **Testing Checklist:**
 - ✅ iPhone SE (375px width)

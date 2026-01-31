@@ -96,28 +96,28 @@ Ordinance.ai has evolved from a compliance monitoring dashboard into a **compreh
 ### New Tables Deployed
 
 **`user_onboarding`** - Track guided tour progress
-```sql
+\`\`\`sql
 - phone_verified (boolean)
 - viewed_risk_score (boolean)
 - last_step_completed (text)
 - completed_at (timestamp)
-```
+\`\`\`
 
 **`compliance_health_checks`** - Store generated reports
-```sql
+\`\`\`sql
 - overall_score (integer)
 - properties_count (integer)
 - active_violations (integer)
 - neighborhood_risk (text)
 - report_data (jsonb)
-```
+\`\`\`
 
 **`onboarding_actions`** - Analytics log
-```sql
+\`\`\`sql
 - action_type (text)
 - action_data (jsonb)
 - created_at (timestamp)
-```
+\`\`\`
 
 **`agent_actions_log`** - Audit trail for AI decisions
 **`neighborhood_intelligence`** - Historical violation patterns
