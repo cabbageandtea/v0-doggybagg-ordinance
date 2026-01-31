@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react"
 import { getUserProperties, deleteProperty, type Property } from "@/app/actions/properties"
 import { useRouter } from "next/navigation"
+import { OnboardingAgent } from "@/components/onboarding/onboarding-agent"
+import { PhoneVerification } from "@/components/onboarding/phone-verification"
 import { 
   Building2, 
   AlertTriangle, 
@@ -255,12 +257,16 @@ export default function DashboardPage() {
 
   return (
     <div className="container mx-auto px-4">
+      {/* Onboarding Agent */}
+      <OnboardingAgent />
+
       {/* Stats Bento Grid */}
       <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {statsDisplay.map((stat) => (
+        {statsDisplay.map((stat, idx) => (
           <div
             key={stat.label}
             className="liquid-glass rounded-2xl p-6 transition-all duration-300 hover:scale-[1.02]"
+            data-onboarding={idx === 3 ? "risk-score" : undefined}
           >
             <div className="flex items-start justify-between">
               <div>
@@ -296,6 +302,7 @@ export default function DashboardPage() {
             </p>
           </div>
           <div className="flex gap-2">
+            <PhoneVerification />
             <Button variant="outline" size="sm" className="gap-2 border-border text-foreground hover:bg-secondary bg-transparent">
               <Download className="h-4 w-4" />
               Export
@@ -304,6 +311,7 @@ export default function DashboardPage() {
               size="sm" 
               className="gap-2 glow-accent bg-primary text-primary-foreground hover:bg-primary/90"
               onClick={() => router.push('/upload')}
+              data-onboarding="add-property-btn"
             >
               Add Property
             </Button>
@@ -414,6 +422,7 @@ export default function DashboardPage() {
             <Button 
               className="mt-4 glow-accent"
               onClick={() => router.push('/upload')}
+              data-onboarding="add-property-btn"
             >
               Add Your First Property
             </Button>

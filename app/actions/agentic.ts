@@ -402,3 +402,337 @@ function calculateComplianceScore(property: any): number {
   const activeViolations = property.ordinances?.filter((o: any) => o.status === 'active').length || 0
   return Math.max(0, 100 - (activeViolations * 15))
 }
+
+// ========== AUTONOMOUS ONBOARDING AGENT ==========
+
+export type OnboardingStatus = {
+  success: boolean
+  status?: {
+    isComplete: boolean
+    currentStep: number
+    totalSteps: number
+    completedSteps: string[]
+    userTier: 'free' | 'starter' | 'professional' | 'enterprise'
+    nextAction: string
+  }
+  error?: string
+}
+
+export type ComplianceHealthCheck = {
+  success: boolean
+  report?: {
+    overallScore: number
+    portfolioHealth: 'Excellent' | 'Good' | 'Fair' | 'At Risk'
+    propertiesMonitored: number
+    activeViolations: number
+    neighborhoodRiskLevel: 'Low' | 'Medium' | 'High'
+    recommendations: Array<{
+      priority: 'high' | 'medium' | 'low'
+      action: string
+      reason: string
+    }>
+    generatedAt: string
+  }
+  error?: string
+}
+
+/**
+ * ONBOARDING AGENT: Check onboarding status
+ * Determines user tier and returns appropriate next steps
+ */
+export async function getOnboardingStatus(): Promise<OnboardingStatus> {
+  try {
+    const supabase = await createClient()
+    
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) {
+      return { success: false, error: 'Authentication required' }
+    }
+
+    // Get user profile to determine tier
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('subscription_tier')
+      .eq('id', user.id)
+      .single()
+
+    // Get onboarding progress
+    const { data: onboarding } = await supabase
+      .from('user_onboarding')
+      .select('*')
+      .eq('user_id', user.id)
+      .single()
+
+    // Get user's properties count
+    const { data: properties } = await supabase
+      .from('properties')
+      .select('id')
+      .eq('user_id', user.id)
+
+    const userTier = profile?.subscription_tier || 'free'
+    const propertiesCount = properties?.length || 0
+    
+    // PROPRIETARY: Determine completed steps
+    const completedSteps = []
+    let currentStep = 1
+
+    if (propertiesCount > 0) {
+      completedSteps.push('add_property')
+      currentStep = 2
+    }
+    if (onboarding?.phone_verified) {
+      completedSteps.push('verify_phone')
+      currentStep = 3
+    }
+    if (onboarding?.viewed_risk_score) {
+      completedSteps.push('view_risk')
+      currentStep = 4
+    }
+
+    const isComplete = completedSteps.length >= 3
+
+    // Intelligent next action based on tier
+    let nextAction = 'Add your first property'
+    if (currentStep === 2) {
+      nextAction = 'Verify your phone for SMS alerts'
+    } else if (currentStep === 3) {
+      nextAction = userTier === 'free' 
+        ? 'View Neighborhood Watch heat map'
+        : 'Upload bulk properties or setup API'
+    }
+
+    return {
+      success: true,
+      status: {
+        isComplete,
+        currentStep,
+        totalSteps: 3,
+        completedSteps,
+        userTier: userTier as any,
+        nextAction,
+      },
+    }
+  } catch (error) {
+    console.error('[v0] Onboarding status check failed:', error)
+    return { success: false, error: 'Failed to check onboarding status' }
+  }
+}
+
+/**
+ * ONBOARDING AGENT: Update progress
+ */
+export async function updateOnboardingProgress(
+  step: 'add_property' | 'verify_phone' | 'view_risk'
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const supabase = await createClient()
+    
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) {
+      return { success: false, error: 'Authentication required' }
+    }
+
+    // Upsert onboarding progress
+    const updateData: any = {}
+    if (step === 'verify_phone') updateData.phone_verified = true
+    if (step === 'view_risk') updateData.viewed_risk_score = true
+
+    await supabase
+      .from('user_onboarding')
+      .upsert({
+        user_id: user.id,
+        ...updateData,
+        last_step_completed: step,
+        completed_at: step === 'view_risk' ? new Date().toISOString() : null,
+      })
+
+    // Log analytics
+    await supabase
+      .from('onboarding_actions')
+      .insert({
+        user_id: user.id,
+        action_type: step,
+        action_data: { timestamp: new Date().toISOString() },
+      })
+
+    return { success: true }
+  } catch (error) {
+    console.error('[v0] Onboarding progress update failed:', error)
+    return { success: false, error: 'Failed to update progress' }
+  }
+}
+
+/**
+ * ONBOARDING AGENT: Generate First Compliance Health Check
+ * PROPRIETARY: Multi-factor analysis algorithm
+ */
+export async function generateFirstHealthCheck(): Promise<ComplianceHealthCheck> {
+  try {
+    const supabase = await createClient()
+    
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError || !user) {
+      return { success: false, error: 'Authentication required' }
+    }
+
+    // Get user's properties
+    const { data: properties } = await supabase
+      .from('properties')
+      .select(`
+        *,
+        ordinances (
+          status,
+          violation_type,
+          fine_amount,
+          zip_code
+        )
+      `)
+      .eq('user_id', user.id)
+
+    if (!properties || properties.length === 0) {
+      return {
+        success: true,
+        report: {
+          overallScore: 100,
+          portfolioHealth: 'Excellent',
+          propertiesMonitored: 0,
+          activeViolations: 0,
+          neighborhoodRiskLevel: 'Low',
+          recommendations: [
+            {
+              priority: 'high',
+              action: 'Add your first property to begin monitoring',
+              reason: 'No properties currently monitored',
+            },
+          ],
+          generatedAt: new Date().toISOString(),
+        },
+      }
+    }
+
+    // PROPRIETARY ALGORITHM: Calculate health metrics
+    const activeViolations = properties.reduce((sum, p) => 
+      sum + (p.ordinances?.filter((o: any) => o.status === 'active').length || 0), 0
+    )
+
+    const totalFines = properties.reduce((sum, p) =>
+      sum + (p.ordinances?.reduce((s: number, o: any) => s + (o.fine_amount || 0), 0) || 0), 0
+    )
+
+    // Get neighborhood risk
+    const zipCodes = [...new Set(properties.map(p => p.zip_code).filter(Boolean))]
+    const { data: areaViolations } = await supabase
+      .from('ordinances')
+      .select('violation_type')
+      .in('zip_code', zipCodes)
+      .gte('violation_date', new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString())
+
+    const neighborhoodRiskLevel = calculateNeighborhoodRisk(areaViolations?.length || 0)
+
+    // Calculate overall score (0-100)
+    let overallScore = 100
+    overallScore -= activeViolations * 15
+    overallScore -= Math.min(20, (totalFines / 1000) * 5)
+    if (neighborhoodRiskLevel === 'High') overallScore -= 10
+    if (neighborhoodRiskLevel === 'Medium') overallScore -= 5
+    overallScore = Math.max(0, Math.round(overallScore))
+
+    const portfolioHealth = 
+      overallScore >= 85 ? 'Excellent' :
+      overallScore >= 70 ? 'Good' :
+      overallScore >= 50 ? 'Fair' : 'At Risk'
+
+    // Generate recommendations
+    const recommendations = generateHealthRecommendations(
+      activeViolations,
+      totalFines,
+      neighborhoodRiskLevel,
+      properties.length
+    )
+
+    const report = {
+      overallScore,
+      portfolioHealth,
+      propertiesMonitored: properties.length,
+      activeViolations,
+      neighborhoodRiskLevel,
+      recommendations,
+      generatedAt: new Date().toISOString(),
+    }
+
+    // Store health check in database
+    await supabase
+      .from('compliance_health_checks')
+      .insert({
+        user_id: user.id,
+        overall_score: overallScore,
+        properties_count: properties.length,
+        active_violations: activeViolations,
+        neighborhood_risk: neighborhoodRiskLevel,
+        report_data: report,
+      })
+
+    return { success: true, report }
+  } catch (error) {
+    console.error('[v0] Health check generation failed:', error)
+    return { success: false, error: 'Failed to generate health check' }
+  }
+}
+
+// PROPRIETARY: Helper functions for health check
+function calculateNeighborhoodRisk(violationCount: number): 'Low' | 'Medium' | 'High' {
+  if (violationCount > 10) return 'High'
+  if (violationCount > 5) return 'Medium'
+  return 'Low'
+}
+
+function generateHealthRecommendations(
+  activeViolations: number,
+  totalFines: number,
+  neighborhoodRisk: string,
+  propertiesCount: number
+) {
+  const recommendations = []
+
+  if (activeViolations > 0) {
+    recommendations.push({
+      priority: 'high' as const,
+      action: 'File appeals for active violations immediately',
+      reason: `${activeViolations} active violations requiring attention`,
+    })
+  }
+
+  if (totalFines > 1000) {
+    recommendations.push({
+      priority: 'high' as const,
+      action: 'Schedule compliance remediation to avoid escalation',
+      reason: `$${totalFines} in outstanding fines at risk of doubling`,
+    })
+  }
+
+  if (neighborhoodRisk === 'High') {
+    recommendations.push({
+      priority: 'medium' as const,
+      action: 'Increase monitoring frequency in high-risk areas',
+      reason: 'Elevated enforcement activity detected in your neighborhoods',
+    })
+  }
+
+  if (propertiesCount === 1) {
+    recommendations.push({
+      priority: 'low' as const,
+      action: 'Consider upgrading to monitor additional properties',
+      reason: 'Expand portfolio protection and reduce per-property costs',
+    })
+  }
+
+  if (recommendations.length === 0) {
+    recommendations.push({
+      priority: 'low' as const,
+      action: 'Maintain current compliance practices',
+      reason: 'All properties are in good standing',
+    })
+  }
+
+  return recommendations
+}
