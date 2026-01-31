@@ -1,15 +1,22 @@
 import { describe, it, expect, vi } from 'vitest'
 import { getUserProperties, addProperty, deleteProperty } from '@/app/actions/properties'
 
-// Mock supabase createClient
+// Mock supabase createClient with chainable query methods
 vi.mock('@/lib/supabase/server', () => ({
   createClient: vi.fn(async () => ({
     auth: { getUser: async () => ({ data: { user: { id: 'u1' } } }) },
     from: (table: string) => ({
-      select: async () => ({ data: [{ id: 'p1', address: '123 Main St' }], error: null }),
+      select: (_?: string) => ({
+        eq: (_col: string, _val: any) => ({
+          order: (_col2?: string, _opts?: any) => ({ data: [{ id: 'p1', address: '123 Main St' }], error: null }),
+        }),
+      }),
       insert: async () => ({ error: null }),
-      delete: async () => ({ error: null }),
-      order: () => ({ select: async () => ({ data: [], error: null }) }),
+      delete: () => ({
+        eq: (_col: string, _val: any) => ({
+          eq: (_col2: string, _val2: any) => ({ error: null }),
+        }),
+      }),
     }),
   })),
 }))

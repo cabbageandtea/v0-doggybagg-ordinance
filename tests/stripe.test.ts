@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { startCheckoutSession } from '@/app/actions/stripe'
+import { startCheckoutSession, getPaymentStatus } from '@/app/actions/stripe'
 
 // Mock Stripe
 vi.mock('@/lib/stripe', () => ({
@@ -32,8 +32,8 @@ describe('stripe actions', () => {
   })
 
   it('getPaymentStatus returns status for a session', async () => {
-    const { status, paymentStatus } = await (await import('@/app/actions/stripe')).then(m => m.getPaymentStatus('sess_123'))
-    expect(status).toBe('complete')
-    expect(paymentStatus).toBe('paid')
+    const res = await getPaymentStatus('sess_123')
+    expect(res.status).toBe('complete')
+    expect(res.paymentStatus).toBe('paid')
   })
 })
