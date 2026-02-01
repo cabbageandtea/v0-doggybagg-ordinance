@@ -17,14 +17,18 @@ function getClient(): PostHog | null {
   return client
 }
 
-/** Server-side: capture checkout_completed with user ID for reliable attribution */
+/**
+ * Server-side: capture checkout_completed with user ID for reliable attribution.
+ * distinctId (Supabase user UUID) links to PostHog user identity; bridges anonymous → known.
+ */
 export function captureCheckoutCompletedServer(
   distinctId: string,
-  props?: { productId?: string }
+  props?: { productId?: string; value?: number }
 ) {
   try {
     const c = getClient()
     if (c) {
+      c.identify({ distinctId })
       c.capture({
         distinctId,
         event: "checkout_completed",

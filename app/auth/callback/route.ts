@@ -26,5 +26,13 @@ export async function GET(request: Request) {
     await ensureUserProfile(supabase)
   }
 
-  return NextResponse.redirect(new URL('/dashboard', baseUrl))
+  const redirectPath = requestUrl.searchParams.get("redirect")
+  const safeRedirect =
+    redirectPath &&
+    redirectPath.startsWith("/") &&
+    !redirectPath.includes("//")
+      ? redirectPath
+      : "/dashboard"
+
+  return NextResponse.redirect(new URL(safeRedirect, baseUrl))
 }

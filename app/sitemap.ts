@@ -2,6 +2,10 @@ import { MetadataRoute } from "next"
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://doggybagg.cc"
 
+/**
+ * Tactile/landing pages: /privacy, /help, /about, /terms, etc.
+ * /not-found is excluded (404 error page—do not index).
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     { url: baseUrl, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 1 },

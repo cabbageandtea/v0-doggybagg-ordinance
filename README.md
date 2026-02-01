@@ -3,6 +3,7 @@
 San Diego property compliance monitoring platform. Next.js + Supabase + Stripe.
 
 > **🚀 New to this project?** Read **[START_HERE.md](./START_HERE.md)** for a simple launch checklist.
+> **📈 Growth (SEO, ads, support)?** See **[GROWTH_GUIDE.md](./GROWTH_GUIDE.md)**.
 
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://doggybagg.cc)
 [![Coverage](https://img.shields.io/codecov/c/gh/cabbageandtea/v0-doggybagg-ordinance?style=for-the-badge)](https://codecov.io/gh/cabbageandtea/v0-doggybagg-ordinance)

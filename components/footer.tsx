@@ -24,6 +24,7 @@ const footerLinks = {
   ],
   Support: [
     { label: "Help Center", href: "/help" },
+    { label: "Email Support", href: "mailto:support@doggybagg.cc?subject=DoggyBagg%20Support" },
     { label: "Documentation", href: "/docs" },
     { label: "Status", href: "/status" },
   ],

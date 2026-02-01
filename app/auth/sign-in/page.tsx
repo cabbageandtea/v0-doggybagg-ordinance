@@ -111,8 +111,11 @@ export default function SignInPage() {
           </form>
 
           <p className="mt-4 text-center text-sm text-muted-foreground">
-            Don't have an account?{" "}
-            <Link href="/auth/sign-up" className="text-primary hover:underline">
+            Don&apos;t have an account?{" "}
+            <Link
+              href={searchParams.get("redirect") ? `/auth/sign-up?redirect=${encodeURIComponent(searchParams.get("redirect")!)}` : "/auth/sign-up"}
+              className="text-primary hover:underline"
+            >
               Sign up
             </Link>
           </p>

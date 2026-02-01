@@ -6,6 +6,7 @@
  */
 
 import posthog from "posthog-js"
+import { trackAdsSignUp, trackAdsPurchase, trackAdsLead } from "@/lib/ads"
 
 /** Identify user by Supabase UUID; call when user context is available (auth, dashboard) */
 export function identifyUser(userId: string) {
@@ -40,6 +41,7 @@ export function trackViewedRiskScore(userId?: string) {
 /** Aha! moment events – wire in respective components; pass userId when available */
 export function trackSignedUp(userId?: string) {
   captureWithIdentify("signed_up", undefined, userId)
+  trackAdsSignUp()
 }
 
 export function trackSignedIn(userId?: string) {
@@ -94,4 +96,5 @@ export function trackCtaClick(props: { cta: string; location: string }, userId?:
 /** Portfolio audit lead – fired when user clicks audit CTA with qualification data */
 export function trackPortfolioAuditLead(props: { propertyCount?: string; email?: string }, userId?: string) {
   captureWithIdentify("portfolio_audit_lead", props as Record<string, unknown>, userId)
+  trackAdsLead()
 }

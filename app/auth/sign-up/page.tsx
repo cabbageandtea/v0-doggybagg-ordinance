@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { createClient } from "@/lib/supabase/client"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { ensureUserProfile } from "@/app/actions/profile"
 import { trackSignedUp } from "@/lib/analytics"
 
@@ -20,6 +20,8 @@ export default function SignUpPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const redirectTo = searchParams.get("redirect")
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -28,11 +30,15 @@ export default function SignUpPage() {
 
     try {
       const supabase = createClient()
+      const callbackUrl = new URL("/auth/callback", window.location.origin)
+      if (redirectTo && redirectTo.startsWith("/") && !redirectTo.includes("//")) {
+        callbackUrl.searchParams.set("redirect", redirectTo)
+      }
       const { data, error: signUpError } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback`,
+          emailRedirectTo: callbackUrl.toString(),
           data: {
             full_name: fullName,
           },
@@ -46,9 +52,11 @@ export default function SignUpPage() {
       // If email confirmation is disabled, we get a session immediately; ensure profile exists
       if (data.session) {
         await ensureUserProfile()
+        const safeRedirect = redirectTo && redirectTo.startsWith("/") && !redirectTo.includes("//") ? redirectTo : "/dashboard"
+        router.push(safeRedirect)
+      } else {
+        router.push(redirectTo ? `/auth/verify-email?redirect=${encodeURIComponent(redirectTo)}` : "/auth/verify-email")
       }
-
-      router.push("/auth/verify-email")
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Failed to sign up")
     } finally {
@@ -130,7 +138,10 @@ export default function SignUpPage() {
 
           <p className="mt-4 text-center text-sm text-muted-foreground">
             Already have an account?{" "}
-            <Link href="/auth/sign-in" className="text-primary hover:underline">
+            <Link
+              href={redirectTo ? `/auth/sign-in?redirect=${encodeURIComponent(redirectTo)}` : "/auth/sign-in"}
+              className="text-primary hover:underline"
+            >
               Sign in
             </Link>
           </p>

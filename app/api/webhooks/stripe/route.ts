@@ -162,9 +162,10 @@ export async function POST(request: NextRequest) {
             .eq("id", userId)
         }
 
-        // Server-side telemetry: checkout_completed (reliable attribution)
+        // Server-side telemetry: checkout_completed (reliable attribution, PostHog user identity)
         if (userId) {
-          captureCheckoutCompletedServer(userId, productId ? { productId } : undefined)
+          const value = session.amount_total != null ? session.amount_total / 100 : undefined
+          captureCheckoutCompletedServer(userId, { productId, value })
         }
         break
       }

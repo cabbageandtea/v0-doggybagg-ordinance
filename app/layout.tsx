@@ -1,11 +1,15 @@
 import React from "react"
 import type { Metadata, Viewport } from 'next'
+import { headers } from 'next/headers'
 import { Inter, Space_Grotesk, Syne } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { QueryProvider } from '@/providers/query-provider'
 import { PostHogProvider } from '@/providers/posthog-provider'
 import { PostHogIdentifyBridge } from '@/components/posthog-identify-bridge'
 import { CookieConsent } from '@/components/cookie-consent'
+import { StructuredData } from '@/components/structured-data'
+import { FAQStructuredData } from '@/components/structured-data'
+import { AdsScripts } from '@/components/ads-scripts'
 import './globals.css'
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -85,14 +89,19 @@ export const viewport: Viewport = {
   viewportFit: 'cover',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const headersList = await headers()
+  const nonce = headersList.get('x-nonce')
   return (
     <html lang="en" className="dark">
       <body className={`${inter.variable} ${spaceGrotesk.variable} ${syne.variable} font-sans antialiased`}>
+        <StructuredData />
+        <FAQStructuredData />
+        <AdsScripts nonce={nonce} />
         <PostHogProvider>
           <PostHogIdentifyBridge />
           <QueryProvider>{children}</QueryProvider>

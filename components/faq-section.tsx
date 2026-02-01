@@ -92,13 +92,21 @@ export function FAQSection() {
             <p className="mb-4 text-sm text-muted-foreground">
               Our team is here to help you protect your property investments
             </p>
-            <a
-              href="mailto:support@doggybagg.cc"
-              className="inline-flex items-center gap-2 text-primary hover:underline"
-            >
-              Contact our team
-              <span>→</span>
-            </a>
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              <a
+                href="/help"
+                className="inline-flex items-center gap-2 text-primary hover:underline"
+              >
+                Help Center <span>→</span>
+              </a>
+              <span className="text-muted-foreground">|</span>
+              <a
+                href="mailto:support@doggybagg.cc?subject=DoggyBagg%20Support"
+                className="inline-flex items-center gap-2 text-primary hover:underline"
+              >
+                support@doggybagg.cc
+              </a>
+            </div>
           </div>
         </div>
       </div>
