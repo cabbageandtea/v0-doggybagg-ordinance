@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <div className="relative min-h-screen overflow-hidden">
       <MeshGradientBackground />
-      <div className="relative z-10">
+      <div className="relative z-10 pt-[88px]">
         <Header />
         <TrustBar />
         <main className="pt-1">

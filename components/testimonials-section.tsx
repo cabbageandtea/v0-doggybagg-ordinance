@@ -8,7 +8,7 @@ const testimonials = [
     role: "Real Estate Investor",
     company: "Pacific Properties",
     content:
-      "Ordinance.ai caught a $15,000 STR violation on one of my La Jolla properties within 12 hours of filing. That early detection saved me from escalating penalties. Worth every penny.",
+      "DoggyBagg caught a $15,000 STR violation on one of my La Jolla properties within 12 hours of filing. That early detection saved me from escalating penalties. Worth every penny.",
     rating: 5,
   },
   {
@@ -16,7 +16,7 @@ const testimonials = [
     role: "Property Manager",
     company: "Coastal Management Group",
     content:
-      "Managing 40+ properties across San Diego, I was drowning in compliance tracking. Ordinance.ai automated everything and gives me peace of mind that nothing slips through the cracks.",
+      "Managing 40+ properties across San Diego, I was drowning in compliance tracking. DoggyBagg automated everything and gives me peace of mind that nothing slips through the cracks.",
     rating: 5,
   },
   {

@@ -74,7 +74,7 @@ export function ADMTModal() {
 
         <div className="py-6">
           <p className="mb-6 text-sm text-muted-foreground text-center">
-            Ordinance.ai uses automated systems to analyze property compliance risk. 
+            DoggyBagg uses automated systems to analyze property compliance risk. 
             Before proceeding, please review how your data is processed.
           </p>
 
@@ -110,7 +110,7 @@ export function ADMTModal() {
               htmlFor="acknowledge"
               className="text-sm text-muted-foreground leading-relaxed cursor-pointer"
             >
-              I understand that Ordinance.ai uses automated systems to generate risk 
+              I understand that DoggyBagg uses automated systems to generate risk 
               assessments and that I can request human review of any automated decision. 
               I acknowledge my rights under CCPA regarding my personal data.
             </Label>

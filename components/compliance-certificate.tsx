@@ -123,7 +123,7 @@ export function ComplianceCertificate({ propertyId, propertyAddress }: Complianc
                     CERTIFICATE OF COMPLIANCE
                   </h1>
                   <p className="text-sm text-muted-foreground">
-                    DoggyBagg LLC - Ordinance.ai Platform
+                    DoggyBagg LLC
                   </p>
                   <p className="text-xs text-muted-foreground mt-1">
                     San Diego Municipal Code Compliance Verification

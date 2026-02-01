@@ -16,7 +16,7 @@ interface FeedbackTriggerProps {
 
 export function FeedbackTrigger({
   source = "unknown",
-  mailto = "mailto:support@doggybagg.cc?subject=Ordinance.ai%20Feedback",
+  mailto = "mailto:support@doggybagg.cc?subject=DoggyBagg%20Feedback",
   className = "",
   variant = "floating",
 }: FeedbackTriggerProps) {

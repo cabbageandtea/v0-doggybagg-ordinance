@@ -12,7 +12,7 @@ export function DashboardFooter() {
           <div className="flex items-start gap-3">
             <AlertTriangle className="h-5 w-5 shrink-0 text-destructive" />
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Ordinance.ai is a data-monitoring utility by DoggyBagg LLC. Registry matching 
+              DoggyBagg is a data-monitoring utility by DoggyBagg LLC. Registry matching 
               is based on public San Diego municipal records. Not legal or tax advice. We do 
               not warrant 100% accuracy; verify all findings with the San Diego City Treasurer. 
               Liability is limited to the greater of $100 or the amount paid in the last 12 months.

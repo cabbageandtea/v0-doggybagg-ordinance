@@ -12,7 +12,7 @@ const footerLinks = {
     { label: "API", href: "mailto:maliklomax@doggybagg.cc?subject=API%20Access%20Request" },
   ],
   Company: [
-    { label: "About", href: "mailto:hello@doggybagg.cc?subject=About%20Ordinance.ai" },
+    { label: "About", href: "mailto:hello@doggybagg.cc?subject=About%20DoggyBagg" },
     { label: "Blog", href: "mailto:hello@doggybagg.cc?subject=Blog%20Inquiry" },
     { label: "Careers", href: "mailto:maliklomax@doggybagg.cc?subject=Career%20Inquiry" },
     { label: "Contact", href: "mailto:hello@doggybagg.cc?subject=General%20Inquiry" },
@@ -108,7 +108,7 @@ export function Footer() {
             <div>
               <h5 className="mb-2 font-semibold text-foreground">Legal Disclaimer</h5>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Ordinance.ai is a data-monitoring utility by DoggyBagg LLC. Registry matching 
+                DoggyBagg is a data-monitoring utility by DoggyBagg LLC. Registry matching 
                 is based on public San Diego municipal records. Not legal or tax advice. We do 
                 not warrant 100% accuracy; verify all findings with the San Diego City Treasurer. 
                 Liability is limited to the greater of $100 or the amount paid in the last 12 months.

@@ -15,7 +15,7 @@ import { Header } from '@/components/header'
 describe('Header component', () => {
   it('renders logo and links', () => {
     render(<Header />)
-    expect(screen.getByText(/Ordinance.ai/i)).toBeInTheDocument()
+    expect(screen.getByText(/DoggyBagg/i)).toBeInTheDocument()
     expect(screen.getByText(/Get Started/i)).toBeInTheDocument()
   })
 

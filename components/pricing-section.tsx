@@ -95,9 +95,6 @@ export function PricingSection() {
                   <Star className="h-4 w-4 text-primary" />
                   <span className="text-sm font-medium text-primary">One-Time Analysis</span>
                 </span>
-                <span className="rounded-full border border-amber-500/40 bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-400">
-                  Limited spots this week
-                </span>
               </div>
               <h3 className="mb-4 text-2xl font-bold text-foreground md:text-3xl">
                 Portfolio Audit

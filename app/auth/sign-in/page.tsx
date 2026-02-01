@@ -69,7 +69,7 @@ export default function SignInPage() {
         <div className="liquid-glass rounded-2xl p-8">
           <h1 className="mb-2 text-2xl font-bold text-foreground">Sign In</h1>
           <p className="mb-6 text-sm text-muted-foreground">
-            Welcome back to Ordinance.ai
+            Welcome back to DoggyBagg
           </p>
 
           <form onSubmit={handleSignIn} className="space-y-4">

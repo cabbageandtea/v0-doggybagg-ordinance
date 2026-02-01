@@ -10,7 +10,7 @@ import { HelpCircle } from "lucide-react"
 
 const faqs = [
   {
-    question: "How does Ordinance.ai detect violations?",
+    question: "How does DoggyBagg detect violations?",
     answer:
       "We continuously monitor all San Diego municipal databases, including the City Treasurer, Code Enforcement, and STRO registries. Our AI system cross-references property addresses with active violation reports and sends real-time alerts when new filings are detected.",
   },
