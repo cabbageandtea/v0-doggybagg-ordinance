@@ -3,7 +3,6 @@
 Property ordinance monitoring platform. Next.js + Supabase + Stripe.
 
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://doggybagg.cc)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app)
 [![Coverage](https://img.shields.io/codecov/c/gh/cabbageandtea/v0-doggybagg-ordinance?style=for-the-badge)](https://codecov.io/gh/cabbageandtea/v0-doggybagg-ordinance)
 
 ## Codecov (optional)

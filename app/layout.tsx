@@ -54,19 +54,12 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
+        url: '/images/darkdoggylogo.jpg',
+        type: 'image/jpeg',
+        sizes: '32x32',
       },
     ],
-    apple: '/apple-icon.png',
+    apple: '/images/darkdoggylogo.jpg',
   },
 }
 
@@ -88,15 +81,6 @@ export default function RootLayout({
           <QueryProvider>{children}</QueryProvider>
           <Analytics />
         </PostHogProvider>
-        <a
-          href="https://v0.app"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="fixed bottom-6 right-6 z-[1000] flex items-center gap-1.5 rounded-lg border border-white/12 bg-[#121212] px-3 py-2 text-sm text-white shadow-lg transition-opacity hover:opacity-90"
-          aria-label="Built with v0"
-        >
-          Built with v0
-        </a>
       </body>
     </html>
   )
