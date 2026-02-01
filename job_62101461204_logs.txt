@@ -1,0 +1,425 @@
+﻿2026-01-31T22:07:53.9889917Z Current runner version: '2.331.0'
+2026-01-31T22:07:53.9914854Z ##[group]Runner Image Provisioner
+2026-01-31T22:07:53.9915751Z Hosted Compute Agent
+2026-01-31T22:07:53.9916358Z Version: 20260123.484
+2026-01-31T22:07:53.9916973Z Commit: 6bd6555ca37d84114959e1c76d2c01448ff61c5d
+2026-01-31T22:07:53.9917731Z Build Date: 2026-01-23T19:41:17Z
+2026-01-31T22:07:53.9918445Z Worker ID: {7005128a-e499-47e6-b972-8faf5ae568f5}
+2026-01-31T22:07:53.9919105Z Azure Region: westus
+2026-01-31T22:07:53.9919961Z ##[endgroup]
+2026-01-31T22:07:53.9921535Z ##[group]Operating System
+2026-01-31T22:07:53.9922147Z Ubuntu
+2026-01-31T22:07:53.9922744Z 24.04.3
+2026-01-31T22:07:53.9923267Z LTS
+2026-01-31T22:07:53.9923794Z ##[endgroup]
+2026-01-31T22:07:53.9924338Z ##[group]Runner Image
+2026-01-31T22:07:53.9924931Z Image: ubuntu-24.04
+2026-01-31T22:07:53.9925477Z Version: 20260126.10.1
+2026-01-31T22:07:53.9926760Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260126.10/images/ubuntu/Ubuntu2404-Readme.md
+2026-01-31T22:07:53.9928335Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260126.10
+2026-01-31T22:07:53.9929272Z ##[endgroup]
+2026-01-31T22:07:53.9930706Z ##[group]GITHUB_TOKEN Permissions
+2026-01-31T22:07:53.9932806Z Contents: read
+2026-01-31T22:07:53.9933393Z Metadata: read
+2026-01-31T22:07:53.9934033Z Packages: read
+2026-01-31T22:07:53.9934574Z ##[endgroup]
+2026-01-31T22:07:53.9936701Z Secret source: Actions
+2026-01-31T22:07:53.9937601Z Prepare workflow directory
+2026-01-31T22:07:54.0265024Z Prepare all required actions
+2026-01-31T22:07:54.0303159Z Getting action download info
+2026-01-31T22:07:54.4584126Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2026-01-31T22:07:54.5725087Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-01-31T22:07:54.7645744Z Complete job name: e2e
+2026-01-31T22:07:54.8357868Z ##[group]Run actions/checkout@v4
+2026-01-31T22:07:54.8358726Z with:
+2026-01-31T22:07:54.8359241Z   repository: cabbageandtea/v0-doggybagg-ordinance
+2026-01-31T22:07:54.8360267Z   token: ***
+2026-01-31T22:07:54.8360663Z   ssh-strict: true
+2026-01-31T22:07:54.8361079Z   ssh-user: git
+2026-01-31T22:07:54.8361504Z   persist-credentials: true
+2026-01-31T22:07:54.8361969Z   clean: true
+2026-01-31T22:07:54.8362380Z   sparse-checkout-cone-mode: true
+2026-01-31T22:07:54.8362876Z   fetch-depth: 1
+2026-01-31T22:07:54.8363285Z   fetch-tags: false
+2026-01-31T22:07:54.8363699Z   show-progress: true
+2026-01-31T22:07:54.8364118Z   lfs: false
+2026-01-31T22:07:54.8364510Z   submodules: false
+2026-01-31T22:07:54.8364938Z   set-safe-directory: true
+2026-01-31T22:07:54.8365657Z ##[endgroup]
+2026-01-31T22:07:54.9505499Z Syncing repository: cabbageandtea/v0-doggybagg-ordinance
+2026-01-31T22:07:54.9507318Z ##[group]Getting Git version info
+2026-01-31T22:07:54.9508258Z Working directory is '/home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance'
+2026-01-31T22:07:54.9509615Z [command]/usr/bin/git version
+2026-01-31T22:07:54.9607642Z git version 2.52.0
+2026-01-31T22:07:54.9635814Z ##[endgroup]
+2026-01-31T22:07:54.9652743Z Temporarily overriding HOME='/home/runner/work/_temp/07c6dcb1-0a6f-4eb3-85d8-e9fc7e6ff614' before making global git config changes
+2026-01-31T22:07:54.9655141Z Adding repository directory to the temporary git global config as a safe directory
+2026-01-31T22:07:54.9660287Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance
+2026-01-31T22:07:54.9705636Z Deleting the contents of '/home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance'
+2026-01-31T22:07:54.9708796Z ##[group]Initializing the repository
+2026-01-31T22:07:54.9713275Z [command]/usr/bin/git init /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance
+2026-01-31T22:07:54.9870921Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-01-31T22:07:54.9872184Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-01-31T22:07:54.9873499Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-01-31T22:07:54.9874318Z hint: call:
+2026-01-31T22:07:54.9874730Z hint:
+2026-01-31T22:07:54.9875634Z hint: 	git config --global init.defaultBranch <name>
+2026-01-31T22:07:54.9876589Z hint:
+2026-01-31T22:07:54.9877223Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-01-31T22:07:54.9878181Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-01-31T22:07:54.9878906Z hint:
+2026-01-31T22:07:54.9879297Z hint: 	git branch -m <name>
+2026-01-31T22:07:54.9880095Z hint:
+2026-01-31T22:07:54.9880707Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-01-31T22:07:54.9882121Z Initialized empty Git repository in /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance/.git/
+2026-01-31T22:07:54.9887784Z [command]/usr/bin/git remote add origin https://github.com/cabbageandtea/v0-doggybagg-ordinance
+2026-01-31T22:07:54.9923367Z ##[endgroup]
+2026-01-31T22:07:54.9924630Z ##[group]Disabling automatic garbage collection
+2026-01-31T22:07:54.9928416Z [command]/usr/bin/git config --local gc.auto 0
+2026-01-31T22:07:54.9957364Z ##[endgroup]
+2026-01-31T22:07:54.9958624Z ##[group]Setting up auth
+2026-01-31T22:07:54.9965203Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-01-31T22:07:54.9996576Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-01-31T22:07:55.0358941Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-01-31T22:07:55.0389785Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-01-31T22:07:55.0620343Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-01-31T22:07:55.0667495Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-01-31T22:07:55.0924358Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-01-31T22:07:55.0963358Z ##[endgroup]
+2026-01-31T22:07:55.0964641Z ##[group]Fetching the repository
+2026-01-31T22:07:55.0973497Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +361ebd7a213f2fa26684fcbc49591fff4c4cc606:refs/remotes/pull/10/merge
+2026-01-31T22:07:55.7930158Z From https://github.com/cabbageandtea/v0-doggybagg-ordinance
+2026-01-31T22:07:55.7933442Z  * [new ref]         361ebd7a213f2fa26684fcbc49591fff4c4cc606 -> pull/10/merge
+2026-01-31T22:07:55.7966273Z ##[endgroup]
+2026-01-31T22:07:55.7967143Z ##[group]Determining the checkout info
+2026-01-31T22:07:55.7968302Z ##[endgroup]
+2026-01-31T22:07:55.7974602Z [command]/usr/bin/git sparse-checkout disable
+2026-01-31T22:07:55.8021807Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-01-31T22:07:55.8048699Z ##[group]Checking out the ref
+2026-01-31T22:07:55.8053348Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/10/merge
+2026-01-31T22:07:55.8196418Z Note: switching to 'refs/remotes/pull/10/merge'.
+2026-01-31T22:07:55.8197496Z 
+2026-01-31T22:07:55.8198309Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-01-31T22:07:55.8200782Z changes and commit them, and you can discard any commits you make in this
+2026-01-31T22:07:55.8203304Z state without impacting any branches by switching back to a branch.
+2026-01-31T22:07:55.8204878Z 
+2026-01-31T22:07:55.8205822Z If you want to create a new branch to retain commits you create, you may
+2026-01-31T22:07:55.8208627Z do so (now or later) by using -c with the switch command. Example:
+2026-01-31T22:07:55.8210184Z 
+2026-01-31T22:07:55.8211049Z   git switch -c <new-branch-name>
+2026-01-31T22:07:55.8212160Z 
+2026-01-31T22:07:55.8212729Z Or undo this operation with:
+2026-01-31T22:07:55.8213543Z 
+2026-01-31T22:07:55.8213888Z   git switch -
+2026-01-31T22:07:55.8214456Z 
+2026-01-31T22:07:55.8215405Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-01-31T22:07:55.8216889Z 
+2026-01-31T22:07:55.8218643Z HEAD is now at 361ebd7 Merge 176329a900670060ccf16ab4f0d05c735de83c44 into 2d1980a05ec3bbf24fdcfd6479cae2469979052a
+2026-01-31T22:07:55.8222303Z ##[endgroup]
+2026-01-31T22:07:55.8245923Z [command]/usr/bin/git log -1 --format=%H
+2026-01-31T22:07:55.8268486Z 361ebd7a213f2fa26684fcbc49591fff4c4cc606
+2026-01-31T22:07:55.8578203Z ##[group]Run actions/setup-node@v4
+2026-01-31T22:07:55.8579053Z with:
+2026-01-31T22:07:55.8579692Z   node-version: 20
+2026-01-31T22:07:55.8580289Z   always-auth: false
+2026-01-31T22:07:55.8580890Z   check-latest: false
+2026-01-31T22:07:55.8581732Z   token: ***
+2026-01-31T22:07:55.8582260Z ##[endgroup]
+2026-01-31T22:07:56.0399965Z Found in cache @ /opt/hostedtoolcache/node/20.20.0/x64
+2026-01-31T22:07:56.0407174Z ##[group]Environment details
+2026-01-31T22:07:56.4216321Z node: v20.20.0
+2026-01-31T22:07:56.4217324Z npm: 10.8.2
+2026-01-31T22:07:56.4218181Z yarn: 1.22.22
+2026-01-31T22:07:56.4220067Z ##[endgroup]
+2026-01-31T22:07:56.4402764Z ##[group]Run corepack enable
+2026-01-31T22:07:56.4403682Z [36;1mcorepack enable[0m
+2026-01-31T22:07:56.4404615Z [36;1mcorepack prepare pnpm@stable --activate || true[0m
+2026-01-31T22:07:56.4405611Z [36;1mif ! command -v pnpm >/dev/null 2>&1; then[0m
+2026-01-31T22:07:56.4406509Z [36;1m  npm i -g pnpm[0m
+2026-01-31T22:07:56.4407263Z [36;1mfi[0m
+2026-01-31T22:07:56.4407949Z [36;1mpnpm -v[0m
+2026-01-31T22:07:56.4453376Z shell: /usr/bin/bash -e {0}
+2026-01-31T22:07:56.4454197Z ##[endgroup]
+2026-01-31T22:07:56.7845910Z [31m[1mUsage Error[22m[39m: Tag not found (stable)
+2026-01-31T22:07:56.7846654Z 
+2026-01-31T22:07:56.7847418Z [1m$ [22mcorepack prepare [--activate] [--json] [-o,--output] ...
+2026-01-31T22:07:56.9934504Z ! Corepack is about to download https://registry.npmjs.org/pnpm/-/pnpm-10.28.2.tgz
+2026-01-31T22:07:58.1242769Z 10.28.2
+2026-01-31T22:07:58.1406406Z ##[group]Run pnpm install --frozen-lockfile
+2026-01-31T22:07:58.1406795Z [36;1mpnpm install --frozen-lockfile[0m
+2026-01-31T22:07:58.1440147Z shell: /usr/bin/bash -e {0}
+2026-01-31T22:07:58.1440413Z ##[endgroup]
+2026-01-31T22:07:58.5395128Z Lockfile is up to date, resolution step is skipped
+2026-01-31T22:07:58.6221874Z Progress: resolved 1, reused 0, downloaded 0, added 0
+2026-01-31T22:07:58.7415911Z Packages: +629
+2026-01-31T22:07:58.7418261Z ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-01-31T22:07:59.6334294Z Progress: resolved 629, reused 0, downloaded 136, added 111
+2026-01-31T22:08:00.6321125Z Progress: resolved 629, reused 0, downloaded 160, added 120
+2026-01-31T22:08:01.6334103Z Progress: resolved 629, reused 0, downloaded 172, added 124
+2026-01-31T22:08:02.6351598Z Progress: resolved 629, reused 0, downloaded 310, added 179
+2026-01-31T22:08:03.6342092Z Progress: resolved 629, reused 0, downloaded 598, added 428
+2026-01-31T22:08:04.0297465Z Progress: resolved 629, reused 0, downloaded 629, added 629, done
+2026-01-31T22:08:04.3615569Z 
+2026-01-31T22:08:04.3616470Z dependencies:
+2026-01-31T22:08:04.3617050Z + @emotion/is-prop-valid 1.4.0
+2026-01-31T22:08:04.3617801Z + @hookform/resolvers 3.10.0
+2026-01-31T22:08:04.3618356Z + @radix-ui/react-accordion 1.2.12
+2026-01-31T22:08:04.3618959Z + @radix-ui/react-alert-dialog 1.1.15
+2026-01-31T22:08:04.3619868Z + @radix-ui/react-aspect-ratio 1.1.8
+2026-01-31T22:08:04.3620565Z + @radix-ui/react-avatar 1.1.11
+2026-01-31T22:08:04.3621129Z + @radix-ui/react-checkbox 1.3.3
+2026-01-31T22:08:04.3621687Z + @radix-ui/react-collapsible 1.1.12
+2026-01-31T22:08:04.3622276Z + @radix-ui/react-context-menu 2.2.16
+2026-01-31T22:08:04.3622796Z + @radix-ui/react-dialog 1.1.15
+2026-01-31T22:08:04.3623359Z + @radix-ui/react-dropdown-menu 2.1.16
+2026-01-31T22:08:04.3624429Z + @radix-ui/react-hover-card 1.1.15
+2026-01-31T22:08:04.3624743Z + @radix-ui/react-label 2.1.8
+2026-01-31T22:08:04.3625243Z + @radix-ui/react-menubar 1.1.16
+2026-01-31T22:08:04.3625838Z + @radix-ui/react-navigation-menu 1.2.14
+2026-01-31T22:08:04.3626429Z + @radix-ui/react-popover 1.1.15
+2026-01-31T22:08:04.3627051Z + @radix-ui/react-progress 1.1.8
+2026-01-31T22:08:04.3627607Z + @radix-ui/react-radio-group 1.3.8
+2026-01-31T22:08:04.3628196Z + @radix-ui/react-scroll-area 1.2.10
+2026-01-31T22:08:04.3628784Z + @radix-ui/react-select 2.2.6
+2026-01-31T22:08:04.3629325Z + @radix-ui/react-separator 1.1.8
+2026-01-31T22:08:04.3630075Z + @radix-ui/react-slider 1.3.6
+2026-01-31T22:08:04.3630550Z + @radix-ui/react-slot 1.2.4
+2026-01-31T22:08:04.3631079Z + @radix-ui/react-switch 1.2.6
+2026-01-31T22:08:04.3631575Z + @radix-ui/react-tabs 1.1.13
+2026-01-31T22:08:04.3632095Z + @radix-ui/react-toast 1.2.15
+2026-01-31T22:08:04.3632630Z + @radix-ui/react-toggle 1.1.10
+2026-01-31T22:08:04.3633204Z + @radix-ui/react-toggle-group 1.1.11
+2026-01-31T22:08:04.3633787Z + @radix-ui/react-tooltip 1.2.8
+2026-01-31T22:08:04.3634333Z + @stripe/react-stripe-js 5.6.0
+2026-01-31T22:08:04.3634842Z + @stripe/stripe-js 8.7.0
+2026-01-31T22:08:04.3635276Z + @supabase/ssr 0.8.0
+2026-01-31T22:08:04.3635741Z + @supabase/supabase-js 2.93.3
+2026-01-31T22:08:04.3636192Z + @vercel/analytics 1.6.1
+2026-01-31T22:08:04.3636599Z + autoprefixer 10.4.24
+2026-01-31T22:08:04.3637057Z + class-variance-authority 0.7.1
+2026-01-31T22:08:04.3637461Z + clsx 2.1.1
+2026-01-31T22:08:04.3637761Z + cmdk 1.1.1
+2026-01-31T22:08:04.3638064Z + date-fns 4.1.0
+2026-01-31T22:08:04.3638443Z + embla-carousel-react 8.6.0
+2026-01-31T22:08:04.3638868Z + framer-motion 12.29.2
+2026-01-31T22:08:04.3639244Z + input-otp 1.4.2
+2026-01-31T22:08:04.3639857Z + lucide-react 0.454.0
+2026-01-31T22:08:04.3640201Z + next 16.1.6
+2026-01-31T22:08:04.3640533Z + next-themes 0.4.6
+2026-01-31T22:08:04.3640897Z + react 19.2.0
+2026-01-31T22:08:04.3641303Z + react-day-picker 9.13.0
+2026-01-31T22:08:04.3641769Z + react-dom 19.2.0
+2026-01-31T22:08:04.3642192Z + react-hook-form 7.71.1
+2026-01-31T22:08:04.3642718Z + react-resizable-panels 4.5.6
+2026-01-31T22:08:04.3643520Z + recharts 3.7.0
+2026-01-31T22:08:04.3643967Z + server-only 0.0.1
+2026-01-31T22:08:04.3644353Z + sonner 2.0.7
+2026-01-31T22:08:04.3644711Z + stripe 20.3.0
+2026-01-31T22:08:04.3645205Z + tailwind-merge 2.6.1
+2026-01-31T22:08:04.3645675Z + tailwindcss-animate 1.0.7
+2026-01-31T22:08:04.3646099Z + vaul 1.1.2
+2026-01-31T22:08:04.3646434Z + zod 3.25.76
+2026-01-31T22:08:04.3646639Z 
+2026-01-31T22:08:04.3646799Z devDependencies:
+2026-01-31T22:08:04.3647214Z + @playwright/test 1.58.1
+2026-01-31T22:08:04.3647695Z + @tailwindcss/postcss 4.1.18
+2026-01-31T22:08:04.3648241Z + @testing-library/jest-dom 6.9.1
+2026-01-31T22:08:04.3648801Z + @testing-library/react 16.3.2
+2026-01-31T22:08:04.3649280Z + @types/node 22.19.7
+2026-01-31T22:08:04.3649908Z + @types/react 19.2.10
+2026-01-31T22:08:04.3650424Z + @types/react-dom 19.2.3
+2026-01-31T22:08:04.3650993Z + @typescript-eslint/eslint-plugin 8.54.0
+2026-01-31T22:08:04.3651617Z + @typescript-eslint/parser 8.54.0
+2026-01-31T22:08:04.3652171Z + @vitest/coverage-v8 4.0.18
+2026-01-31T22:08:04.3652607Z + eslint 9.39.2
+2026-01-31T22:08:04.3653013Z + eslint-config-next 16.1.6
+2026-01-31T22:08:04.3653433Z + jsdom 27.4.0
+2026-01-31T22:08:04.3653860Z + postcss 8.5.6
+2026-01-31T22:08:04.3654272Z + tailwindcss 4.1.18
+2026-01-31T22:08:04.3654705Z + tw-animate-css 1.3.3
+2026-01-31T22:08:04.3655039Z + typescript 5.9.3
+2026-01-31T22:08:04.3655321Z + vitest 4.0.18
+2026-01-31T22:08:04.3655652Z + wait-on 7.2.0
+2026-01-31T22:08:04.3655833Z 
+2026-01-31T22:08:04.3870282Z ╭ Warning ─────────────────────────────────────────────────────────────────────╮
+2026-01-31T22:08:04.3871439Z │                                                                              │
+2026-01-31T22:08:04.3872564Z │   Ignored build scripts: esbuild@0.27.2, sharp@0.34.5,                       │
+2026-01-31T22:08:04.3873594Z │   unrs-resolver@1.11.1.                                                      │
+2026-01-31T22:08:04.3874268Z │   Run "pnpm approve-builds" to pick which dependencies should be allowed     │
+2026-01-31T22:08:04.3875417Z │   to run scripts.                                                            │
+2026-01-31T22:08:04.3876408Z │                                                                              │
+2026-01-31T22:08:04.3877444Z ╰──────────────────────────────────────────────────────────────────────────────╯
+2026-01-31T22:08:04.4109244Z Done in 6.1s using pnpm v10.28.2
+2026-01-31T22:08:04.4712990Z ##[group]Run node scripts/create_test_user.js
+2026-01-31T22:08:04.4713345Z [36;1mnode scripts/create_test_user.js[0m
+2026-01-31T22:08:04.4745264Z shell: /usr/bin/bash -e {0}
+2026-01-31T22:08:04.4745513Z env:
+2026-01-31T22:08:04.4745768Z   PW_TEST_EMAIL: ***
+2026-01-31T22:08:04.4746016Z   PW_TEST_PASSWORD: ***
+2026-01-31T22:08:04.4747400Z   SUPABASE_SERVICE_ROLE_KEY: ***
+2026-01-31T22:08:04.4747748Z   SUPABASE_URL: ***
+2026-01-31T22:08:04.4747973Z ##[endgroup]
+2026-01-31T22:08:04.5523740Z Creating test user *** ...
+2026-01-31T22:08:05.1038342Z Test user created, id: c4665c5a-fb9e-4f52-8102-fd2c1bc99ac8
+2026-01-31T22:08:05.1805641Z ##[group]Run pnpm -s build
+2026-01-31T22:08:05.1805941Z [36;1mpnpm -s build[0m
+2026-01-31T22:08:05.1838817Z shell: /usr/bin/bash -e {0}
+2026-01-31T22:08:05.1839072Z ##[endgroup]
+2026-01-31T22:08:06.0936100Z ⚠ No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/docs/messages/no-cache
+2026-01-31T22:08:06.1035893Z Attention: Next.js now collects completely anonymous telemetry regarding usage.
+2026-01-31T22:08:06.1037105Z This information is used to shape Next.js' roadmap and prioritize features.
+2026-01-31T22:08:06.1038645Z You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+2026-01-31T22:08:06.1041122Z https://nextjs.org/telemetry
+2026-01-31T22:08:06.1041480Z 
+2026-01-31T22:08:06.1164268Z ▲ Next.js 16.1.6 (Turbopack)
+2026-01-31T22:08:06.1164666Z 
+2026-01-31T22:08:06.1594051Z ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+2026-01-31T22:08:06.1916714Z   Creating an optimized production build ...
+2026-01-31T22:08:14.3306764Z 
+2026-01-31T22:08:14.3307663Z > Build error occurred
+2026-01-31T22:08:14.3360234Z Error: Turbopack build failed with 8 errors:
+2026-01-31T22:08:14.3361092Z ./app/actions/agentic.ts:282:17
+2026-01-31T22:08:14.3361720Z Ecmascript file had an error
+2026-01-31T22:08:14.3363443Z [0m [90m 280 |[39m [90m// These functions contain the core IP and never get exposed to client[39m
+2026-01-31T22:08:14.3364486Z  [90m 281 |[39m
+2026-01-31T22:08:14.3366293Z [31m[1m>[22m[39m[90m 282 |[39m [36mexport[39m [36mfunction[39m generateLetterTemplate(violation[33m:[39m [33mFetchedViolation[39m)[33m:[39m string {
+2026-01-31T22:08:14.3370764Z  [90m     |[39m                 [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+2026-01-31T22:08:14.3373995Z  [90m 283 |[39m   [36mconst[39m property [33m=[39m violation[33m.[39mproperties
+2026-01-31T22:08:14.3375661Z  [90m 284 |[39m   [36mconst[39m date [33m=[39m [36mnew[39m [33mDate[39m()[33m.[39mtoLocaleDateString([32m'en-US'[39m[33m,[39m { 
+2026-01-31T22:08:14.3376999Z  [90m 285 |[39m     year[33m:[39m [32m'numeric'[39m[33m,[39m [0m
+2026-01-31T22:08:14.3377460Z 
+2026-01-31T22:08:14.3377765Z Server Actions must be async functions.
+2026-01-31T22:08:14.3378119Z 
+2026-01-31T22:08:14.3378496Z 
+2026-01-31T22:08:14.3378506Z 
+2026-01-31T22:08:14.3378796Z ./app/actions/agentic.ts:334:17
+2026-01-31T22:08:14.3379311Z Ecmascript file had an error
+2026-01-31T22:08:14.3380093Z [0m [90m 332 |[39m }
+2026-01-31T22:08:14.3380559Z  [90m 333 |[39m
+2026-01-31T22:08:14.3382032Z [31m[1m>[22m[39m[90m 334 |[39m [36mexport[39m [36mfunction[39m getMunicipalCitations(violationType[33m:[39m string)[33m:[39m string[] {
+2026-01-31T22:08:14.3385626Z  [90m     |[39m                 [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+2026-01-31T22:08:14.3388486Z  [90m 335 |[39m   [36mconst[39m citationMap[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[][33m>[39m [33m=[39m {
+2026-01-31T22:08:14.3389987Z  [90m 336 |[39m     [32m'Short-Term Rental'[39m[33m:[39m [
+2026-01-31T22:08:14.3391588Z  [90m 337 |[39m       [32m'SDMC 143.0101 - Short-Term Residential Occupancy Regulations'[39m[33m,[39m[0m
+2026-01-31T22:08:14.3392286Z 
+2026-01-31T22:08:14.3392567Z Server Actions must be async functions.
+2026-01-31T22:08:14.3392901Z 
+2026-01-31T22:08:14.3392910Z 
+2026-01-31T22:08:14.3392917Z 
+2026-01-31T22:08:14.3393183Z ./app/actions/agentic.ts:354:17
+2026-01-31T22:08:14.3393693Z Ecmascript file had an error
+2026-01-31T22:08:14.3394256Z [0m [90m 352 |[39m }
+2026-01-31T22:08:14.3394710Z  [90m 353 |[39m
+2026-01-31T22:08:14.3396607Z [31m[1m>[22m[39m[90m 354 |[39m [36mexport[39m [36mfunction[39m calculateNextBestAction(violations[33m:[39m [33mViolationDetail[39m[])[33m:[39m [33mNextActionResult[39m[[32m'action'[39m] {
+2026-01-31T22:08:14.3400691Z  [90m     |[39m                 [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+2026-01-31T22:08:14.3403310Z  [90m 355 |[39m   [36mif[39m (violations[33m.[39mlength [33m===[39m [35m0[39m) {
+2026-01-31T22:08:14.3404205Z  [90m 356 |[39m     [36mreturn[39m {
+2026-01-31T22:08:14.3405222Z  [90m 357 |[39m       priority[33m:[39m [32m'low'[39m [36mas[39m [36mconst[39m[33m,[39m[0m
+2026-01-31T22:08:14.3405822Z 
+2026-01-31T22:08:14.3406108Z Server Actions must be async functions.
+2026-01-31T22:08:14.3406440Z 
+2026-01-31T22:08:14.3406450Z 
+2026-01-31T22:08:14.3406458Z 
+2026-01-31T22:08:14.3406712Z ./app/actions/agentic.ts:384:17
+2026-01-31T22:08:14.3407216Z Ecmascript file had an error
+2026-01-31T22:08:14.3407772Z [0m [90m 382 |[39m } 
+2026-01-31T22:08:14.3408210Z  [90m 383 |[39m
+2026-01-31T22:08:14.3410397Z [31m[1m>[22m[39m[90m 384 |[39m [36mexport[39m [36mfunction[39m calculateBayesianRisk(areaViolations[33m:[39m [33mArray[39m[33m<[39m{ violation_type[33m:[39m string }[33m>[39m[33m,[39m zipCode[33m:[39m string) {
+2026-01-31T22:08:14.3414057Z  [90m     |[39m                 [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+2026-01-31T22:08:14.3416465Z  [90m 385 |[39m   [36mconst[39m violationCount [33m=[39m areaViolations[33m.[39mlength
+2026-01-31T22:08:14.3418504Z  [90m 386 |[39m   [36mconst[39m violationTypes [33m=[39m [[33m...[39m[36mnew[39m [33mSet[39m(areaViolations[33m.[39mmap(v [33m=>[39m v[33m.[39mviolation_type))]
+2026-01-31T22:08:14.3420008Z  [90m 387 |[39m[0m
+2026-01-31T22:08:14.3420234Z 
+2026-01-31T22:08:14.3420502Z Server Actions must be async functions.
+2026-01-31T22:08:14.3420828Z 
+2026-01-31T22:08:14.3420837Z 
+2026-01-31T22:08:14.3420854Z 
+2026-01-31T22:08:14.3421096Z ./app/actions/agentic.ts:421:17
+2026-01-31T22:08:14.3421560Z Ecmascript file had an error
+2026-01-31T22:08:14.3422047Z [0m [90m 419 |[39m } 
+2026-01-31T22:08:14.3422460Z  [90m 420 |[39m
+2026-01-31T22:08:14.3423927Z [31m[1m>[22m[39m[90m 421 |[39m [36mexport[39m [36mfunction[39m generateBlockchainHash(property[33m:[39m [33mMinimalProperty[39m)[33m:[39m string {
+2026-01-31T22:08:14.3427722Z  [90m     |[39m                 [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+2026-01-31T22:08:14.3430480Z  [90m 422 |[39m   [90m// PROPRIETARY: Simulate blockchain verification hash[39m
+2026-01-31T22:08:14.3431703Z  [90m 423 |[39m   [36mconst[39m data [33m=[39m [32m`${property.id}${property.address}${Date.now()}`[39m
+2026-01-31T22:08:14.3432975Z  [90m 424 |[39m   [36mreturn[39m [32m`0x${Buffer.from(data).toString('hex').slice(0, 64)}`[39m[0m
+2026-01-31T22:08:14.3433604Z 
+2026-01-31T22:08:14.3433883Z Server Actions must be async functions.
+2026-01-31T22:08:14.3434217Z 
+2026-01-31T22:08:14.3434233Z 
+2026-01-31T22:08:14.3434241Z 
+2026-01-31T22:08:14.3434561Z ./app/actions/agentic.ts:427:17
+2026-01-31T22:08:14.3435037Z Ecmascript file had an error
+2026-01-31T22:08:14.3435534Z [0m [90m 425 |[39m }
+2026-01-31T22:08:14.3435932Z  [90m 426 |[39m
+2026-01-31T22:08:14.3437433Z [31m[1m>[22m[39m[90m 427 |[39m [36mexport[39m [36mfunction[39m calculateComplianceScore(property[33m:[39m [33mFetchedProperty[39m)[33m:[39m number {
+2026-01-31T22:08:14.3441333Z  [90m     |[39m                 [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+2026-01-31T22:08:14.3445323Z  [90m 428 |[39m   [36mconst[39m activeViolations [33m=[39m property[33m.[39mordinances[33m?[39m[33m.[39mfilter((o[33m:[39m [33mOrdinance[39m) [33m=>[39m o[33m.[39mstatus [33m===[39m [32m'active'[39m)[33m.[39mlength [33m||[39m [35m0[39m
+2026-01-31T22:08:14.3447846Z  [90m 429 |[39m   [36mreturn[39m [33mMath[39m[33m.[39mmax([35m0[39m[33m,[39m [35m100[39m [33m-[39m (activeViolations [33m*[39m [35m15[39m))
+2026-01-31T22:08:14.3448919Z  [90m 430 |[39m } [0m
+2026-01-31T22:08:14.3449176Z 
+2026-01-31T22:08:14.3449591Z Server Actions must be async functions.
+2026-01-31T22:08:14.3449925Z 
+2026-01-31T22:08:14.3449935Z 
+2026-01-31T22:08:14.3449944Z 
+2026-01-31T22:08:14.3450184Z ./app/actions/agentic.ts:709:17
+2026-01-31T22:08:14.3450655Z Ecmascript file had an error
+2026-01-31T22:08:14.3451139Z [0m [90m 707 |[39m
+2026-01-31T22:08:14.3451859Z  [90m 708 |[39m [90m// PROPRIETARY: Helper functions for health check[39m
+2026-01-31T22:08:14.3454031Z [31m[1m>[22m[39m[90m 709 |[39m [36mexport[39m [36mfunction[39m calculateNeighborhoodRisk(violationCount[33m:[39m number)[33m:[39m [32m'Low'[39m [33m|[39m [32m'Medium'[39m [33m|[39m [32m'High'[39m {
+2026-01-31T22:08:14.3458411Z  [90m     |[39m                 [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+2026-01-31T22:08:14.3461388Z  [90m 710 |[39m   [36mif[39m (violationCount [33m>[39m [35m10[39m) [36mreturn[39m [32m'High'[39m
+2026-01-31T22:08:14.3462711Z  [90m 711 |[39m   [36mif[39m (violationCount [33m>[39m [35m5[39m) [36mreturn[39m [32m'Medium'[39m
+2026-01-31T22:08:14.3463681Z  [90m 712 |[39m   [36mreturn[39m [32m'Low'[39m[0m
+2026-01-31T22:08:14.3464040Z 
+2026-01-31T22:08:14.3464315Z Server Actions must be async functions.
+2026-01-31T22:08:14.3464640Z 
+2026-01-31T22:08:14.3464649Z 
+2026-01-31T22:08:14.3464657Z 
+2026-01-31T22:08:14.3465095Z ./app/actions/agentic.ts:715:17
+2026-01-31T22:08:14.3465614Z Ecmascript file had an error
+2026-01-31T22:08:14.3466185Z [0m [90m 713 |[39m }
+2026-01-31T22:08:14.3466608Z  [90m 714 |[39m
+2026-01-31T22:08:14.3467555Z [31m[1m>[22m[39m[90m 715 |[39m [36mexport[39m [36mfunction[39m generateHealthRecommendations(
+2026-01-31T22:08:14.3471649Z  [90m     |[39m                 [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+2026-01-31T22:08:14.3474516Z  [90m 716 |[39m   activeViolations[33m:[39m number[33m,[39m
+2026-01-31T22:08:14.3475305Z  [90m 717 |[39m   totalFines[33m:[39m number[33m,[39m
+2026-01-31T22:08:14.3476136Z  [90m 718 |[39m   neighborhoodRisk[33m:[39m string[33m,[39m[0m
+2026-01-31T22:08:14.3476574Z 
+2026-01-31T22:08:14.3476842Z Server Actions must be async functions.
+2026-01-31T22:08:14.3477163Z 
+2026-01-31T22:08:14.3477172Z 
+2026-01-31T22:08:14.3477180Z 
+2026-01-31T22:08:14.3477454Z     at <unknown> (./app/actions/agentic.ts:282:17)
+2026-01-31T22:08:14.3478060Z     at <unknown> (./app/actions/agentic.ts:334:17)
+2026-01-31T22:08:14.3478648Z     at <unknown> (./app/actions/agentic.ts:354:17)
+2026-01-31T22:08:14.3479234Z     at <unknown> (./app/actions/agentic.ts:384:17)
+2026-01-31T22:08:14.3479994Z     at <unknown> (./app/actions/agentic.ts:421:17)
+2026-01-31T22:08:14.3480597Z     at <unknown> (./app/actions/agentic.ts:427:17)
+2026-01-31T22:08:14.3481188Z     at <unknown> (./app/actions/agentic.ts:709:17)
+2026-01-31T22:08:14.3481742Z     at <unknown> (./app/actions/agentic.ts:715:17)
+2026-01-31T22:08:14.4120764Z ##[error]Process completed with exit code 1.
+2026-01-31T22:08:14.4181344Z ##[group]Run node scripts/delete_test_user.js || true
+2026-01-31T22:08:14.4181735Z [36;1mnode scripts/delete_test_user.js || true[0m
+2026-01-31T22:08:14.4213353Z shell: /usr/bin/bash -e {0}
+2026-01-31T22:08:14.4213591Z env:
+2026-01-31T22:08:14.4215069Z   SUPABASE_SERVICE_ROLE_KEY: ***
+2026-01-31T22:08:14.4215427Z   SUPABASE_URL: ***
+2026-01-31T22:08:14.4215625Z ##[endgroup]
+2026-01-31T22:08:14.5037700Z Deleting test user *** c4665c5a-fb9e-4f52-8102-fd2c1bc99ac8
+2026-01-31T22:08:14.6802507Z Deleted user
+2026-01-31T22:08:14.7666965Z Post job cleanup.
+2026-01-31T22:08:14.8630326Z [command]/usr/bin/git version
+2026-01-31T22:08:14.8667069Z git version 2.52.0
+2026-01-31T22:08:14.8712686Z Temporarily overriding HOME='/home/runner/work/_temp/02c08628-f362-4044-beac-7fd7449ecdb3' before making global git config changes
+2026-01-31T22:08:14.8714521Z Adding repository directory to the temporary git global config as a safe directory
+2026-01-31T22:08:14.8726994Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/v0-doggybagg-ordinance/v0-doggybagg-ordinance
+2026-01-31T22:08:14.8763496Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-01-31T22:08:14.8797486Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-01-31T22:08:14.9030664Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-01-31T22:08:14.9052191Z http.https://github.com/.extraheader
+2026-01-31T22:08:14.9065372Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-01-31T22:08:14.9097858Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-01-31T22:08:14.9320303Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-01-31T22:08:14.9352544Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-01-31T22:08:14.9683021Z Cleaning up orphan processes

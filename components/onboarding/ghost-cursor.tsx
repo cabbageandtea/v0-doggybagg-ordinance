@@ -11,7 +11,7 @@ type GhostCursorProps = {
   isActive: boolean
 }
 
-export function GhostCursor({ targetElement, message, onComplete, isActive }: GhostCursorProps) {
+export function GhostCursor({ targetElement, message, onComplete: _onComplete, isActive }: GhostCursorProps) {
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const [showPulse, setShowPulse] = useState(true)
 

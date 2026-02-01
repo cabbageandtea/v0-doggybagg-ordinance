@@ -16,7 +16,6 @@ import {
   CheckCircle,
   FileText,
   Mail,
-  MapPin,
   Clock,
   Phone,
   AlertTriangle,

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { 
   getOnboardingStatus, 
-  updateOnboardingProgress,
   generateFirstHealthCheck,
   type OnboardingStatus,
   type ComplianceHealthCheck
@@ -32,7 +31,7 @@ export function OnboardingAgent() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    loadOnboardingStatus()
+    void loadOnboardingStatus()
   }, [])
 
   async function loadOnboardingStatus() {
@@ -56,10 +55,6 @@ export function OnboardingAgent() {
     setIsLoading(false)
   }
 
-  async function handleStepComplete(step: 'add_property' | 'verify_phone' | 'view_risk') {
-    await updateOnboardingProgress(step)
-    await loadOnboardingStatus()
-  }
 
   async function generateHealthCheckReport() {
     const result = await generateFirstHealthCheck()
