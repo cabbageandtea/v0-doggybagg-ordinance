@@ -120,7 +120,7 @@ jobs:
       - name: Start server
         run: pnpm -s start &
       - name: Wait for server
-        run: pnpm exec wait-on http://localhost:3000 --timeout 45000
+        run: pnpm exec wait-on http://127.0.0.1:3000 --timeout 60000
       - name: Run Playwright E2E tests
         env:
           PW_TEST_EMAIL: ${{ secrets.PW_TEST_EMAIL }}
