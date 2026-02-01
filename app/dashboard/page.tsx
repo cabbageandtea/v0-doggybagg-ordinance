@@ -152,7 +152,8 @@ export default function DashboardPage() {
       p.risk_score ?? 0,
       p.created_at ? new Date(p.created_at).toLocaleDateString() : "",
     ])
-    const csv = [headers.join(","), ...rows.map((r) => r.join(","))].join("\n")
+    const footer = ["", "Exported from DoggyBagg — doggybagg.cc — San Diego property compliance monitoring"]
+    const csv = [headers.join(","), ...rows.map((r) => r.join(",")), ...footer].join("\n")
     const blob = new Blob([csv], { type: "text/csv" })
     const url = URL.createObjectURL(blob)
     const a = document.createElement("a")

@@ -1,4 +1,4 @@
--- Ordinance.ai Onboarding Agent Schema
+-- DoggyBagg Onboarding Agent Schema
 -- Tracks user onboarding progress and milestones
 
 -- User Onboarding State

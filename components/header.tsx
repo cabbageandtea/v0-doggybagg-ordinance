@@ -16,7 +16,7 @@ export function Header() {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3">
-              <div className="relative h-10 w-10 overflow-hidden rounded-xl bg-background/50">
+              <div className="relative h-10 w-10 overflow-hidden rounded-full bg-background/50">
                 <Image
                   src="/images/og-image.png"
                   alt="DoggyBagg"

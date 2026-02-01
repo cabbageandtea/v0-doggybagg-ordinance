@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 /**
  * Branded loading skeleton for perceived performance.
- * Uses liquid-glass styling and Ordinance.ai / DoggyBagg visual identity.
+ * Uses liquid-glass styling and DoggyBagg visual identity.
  */
 export default function Loading() {
   return (

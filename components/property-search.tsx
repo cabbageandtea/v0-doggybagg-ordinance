@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { trackPropertySearch, trackCtaClick } from "@/lib/analytics"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Search, MapPin, CheckCircle, AlertCircle, Clock } from "lucide-react"
@@ -25,20 +26,44 @@ const mockResults = [
   },
 ]
 
+const SEARCH_COOLDOWN_MS = 3000 // Rate limit: 1 search per 3 seconds
+
 export function PropertySearch() {
   const [searchQuery, setSearchQuery] = useState("")
   const [isSearching, setIsSearching] = useState(false)
   const [showResults, setShowResults] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [lastSearchAt, setLastSearchAt] = useState(0)
+
+  /** Basic San Diego address validation: at least a street number and street name */
+  const isValidAddress = (q: string) => {
+    const t = q.trim()
+    if (t.length < 5) return false
+    const hasNumber = /\d/.test(t)
+    const hasLetter = /[a-zA-Z]/.test(t)
+    return hasNumber && hasLetter
+  }
 
   const handleSearch = async () => {
     if (!searchQuery.trim()) return
+    if (!isValidAddress(searchQuery)) {
+      setError("Enter a valid San Diego address (e.g., 123 Main St)")
+      return
+    }
+    const now = Date.now()
+    if (now - lastSearchAt < SEARCH_COOLDOWN_MS) {
+      setError(`Please wait ${Math.ceil((SEARCH_COOLDOWN_MS - (now - lastSearchAt)) / 1000)}s before searching again`)
+      return
+    }
+    setLastSearchAt(now)
     setIsSearching(true)
     setError(null)
+    setShowResults(false)
     try {
       // Mock: replace with real API when backend is wired
       await new Promise((r) => setTimeout(r, 1500))
       setShowResults(true)
+      trackPropertySearch({ queryLength: searchQuery.trim().length, hasResults: true })
     } catch (err) {
       setError(err instanceof Error ? err.message : "Search failed. Please try again.")
     } finally {
@@ -124,10 +149,12 @@ export function PropertySearch() {
           </div>
         )}
 
-        {/* Sample Results */}
+        {/* Results */}
         {showResults && (
           <div className="space-y-3">
-            <p className="text-sm text-muted-foreground">Sample results for demonstration:</p>
+            <p className="text-sm text-muted-foreground">
+              Sample results for <span className="font-medium text-foreground">&quot;{searchQuery}&quot;</span> — demo mode.
+            </p>
             {mockResults.map((result) => (
               <div
                 key={result.address}
@@ -173,7 +200,7 @@ export function PropertySearch() {
         )}
 
         {/* Auth Placeholder */}
-        <Link href="/auth/sign-up">
+        <Link href="/auth/sign-up" onClick={() => trackCtaClick({ cta: "sign_up", location: "property_search" })}>
           <div className="rounded-lg border border-primary/20 bg-primary/5 p-4 transition-all hover:bg-primary/10 cursor-pointer">
             <p className="text-center text-sm text-muted-foreground">
               <span className="font-medium text-primary">Sign up now</span> to save properties 

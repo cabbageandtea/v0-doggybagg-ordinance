@@ -1,4 +1,4 @@
-// Ordinance.ai Product Catalog
+// DoggyBagg Product Catalog
 // This is the source of truth for all products and pricing
 
 export interface Product {

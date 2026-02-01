@@ -1,4 +1,4 @@
--- Ordinance.ai Property Data Schema
+-- DoggyBagg Property Data Schema
 -- Creates tables for storing property information, ordinance violations, and user searches
 
 -- Properties table - stores basic property information

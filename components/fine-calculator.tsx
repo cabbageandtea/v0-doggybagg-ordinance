@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { trackCalculatorUsed } from "@/lib/analytics"
 import { Label } from "@/components/ui/label"
 import { 
   Select,
@@ -42,6 +43,16 @@ export function FineCalculator() {
 
   const fines = calculateFine()
 
+  const handleViolationChange = (value: string) => {
+    setViolationType(value)
+    const v = violationTypes.find((t) => t.value === value)
+    if (v) {
+      const base = v.baseFine * properties[0]
+      const penalties = v.dailyPenalty * daysUnresolved[0] * properties[0]
+      trackCalculatorUsed({ violationType: value, estimatedTotal: base + penalties })
+    }
+  }
+
   return (
     <div className="liquid-glass-glow rounded-2xl p-4 sm:p-6 md:p-8">
       <div className="mb-4 sm:mb-6 flex items-center gap-3">
@@ -58,7 +69,7 @@ export function FineCalculator() {
         {/* Violation Type */}
         <div className="space-y-2">
           <Label className="text-sm sm:text-base text-foreground">Violation Type</Label>
-          <Select value={violationType} onValueChange={setViolationType}>
+          <Select value={violationType} onValueChange={handleViolationChange}>
             <SelectTrigger className="border-border bg-input text-foreground h-10 sm:h-11 text-sm sm:text-base">
               <SelectValue placeholder="Select violation type" />
             </SelectTrigger>

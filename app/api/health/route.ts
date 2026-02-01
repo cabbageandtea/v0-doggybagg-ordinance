@@ -4,7 +4,7 @@ export async function GET() {
   return NextResponse.json({
     status: 'ok',
     timestamp: new Date().toISOString(),
-    service: 'Ordinance.ai API',
+    service: 'DoggyBagg API',
     version: '1.0.0',
   })
 }

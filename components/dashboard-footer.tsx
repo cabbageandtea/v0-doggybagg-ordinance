@@ -26,14 +26,14 @@ export function DashboardFooter() {
             &copy; 2026 DoggyBagg LLC. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <Link href="mailto:support@doggybagg.cc?subject=Privacy%20Policy" className="text-xs text-muted-foreground hover:text-foreground">
+            <Link href="/privacy" className="text-xs text-muted-foreground hover:text-foreground">
               Privacy
             </Link>
-            <Link href="mailto:support@doggybagg.cc?subject=Terms%20of%20Service" className="text-xs text-muted-foreground hover:text-foreground">
+            <Link href="/terms" className="text-xs text-muted-foreground hover:text-foreground">
               Terms
             </Link>
-            <Link href="mailto:support@doggybagg.cc?subject=CCPA%20Notice" className="text-xs text-muted-foreground hover:text-foreground">
-              CCPA Notice
+            <Link href="/privacy#cookies" className="text-xs text-muted-foreground hover:text-foreground">
+              Cookies
             </Link>
             <Link href="mailto:support@doggybagg.cc" className="text-xs text-muted-foreground hover:text-foreground">
               Support

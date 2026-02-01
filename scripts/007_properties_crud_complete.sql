@@ -1,4 +1,4 @@
--- Properties CRUD – ensures full update support for Ordinance.ai
+-- Properties CRUD – ensures full update support for DoggyBagg
 -- Run after 001 and 006. Idempotent (safe to re-run).
 
 -- Ensure address can be updated (no constraint blocking)

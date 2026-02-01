@@ -23,7 +23,7 @@ export default function PrivacyPage() {
             explains how we collect, use, and protect your information.
           </p>
           <div className="space-y-6 text-muted-foreground">
-            <section>
+            <section id="cookies">
               <h2 className="mb-2 text-lg font-semibold text-foreground">Cookies</h2>
               <p>
                 We use cookies and similar technologies for analytics (e.g., PostHog), session

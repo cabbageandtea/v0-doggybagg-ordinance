@@ -327,7 +327,7 @@ Respectfully submitted,
 
 [PROPERTY OWNER]
 DoggyBagg Compliance Platform
-Generated via Ordinance.ai
+Generated via DoggyBagg
   `.trim()
 }
 

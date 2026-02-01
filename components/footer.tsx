@@ -9,23 +9,23 @@ const footerLinks = {
     { label: "Features", href: "/#features" },
     { label: "Calculator", href: "/#calculator" },
     { label: "Pricing", href: "/#pricing" },
-    { label: "API", href: "mailto:maliklomax@doggybagg.cc?subject=API%20Access%20Request" },
+    { label: "API", href: "/docs" },
   ],
   Company: [
-    { label: "About", href: "mailto:hello@doggybagg.cc?subject=About%20DoggyBagg" },
-    { label: "Blog", href: "mailto:hello@doggybagg.cc?subject=Blog%20Inquiry" },
-    { label: "Careers", href: "mailto:maliklomax@doggybagg.cc?subject=Career%20Inquiry" },
+    { label: "About", href: "/about" },
+    { label: "Blog", href: "/blog" },
+    { label: "Careers", href: "/careers" },
     { label: "Contact", href: "mailto:hello@doggybagg.cc?subject=General%20Inquiry" },
   ],
   Legal: [
     { label: "Privacy Policy", href: "/privacy" },
-    { label: "Terms of Service", href: "mailto:hello@doggybagg.cc?subject=Terms%20of%20Service" },
-    { label: "Cookie Policy", href: "mailto:hello@doggybagg.cc?subject=Cookie%20Policy" },
+    { label: "Terms of Service", href: "/terms" },
+    { label: "Cookie Policy", href: "/privacy#cookies" },
   ],
   Support: [
-    { label: "Help Center", href: "mailto:support@doggybagg.cc?subject=Help%20Request" },
-    { label: "Documentation", href: "mailto:support@doggybagg.cc?subject=Documentation%20Request" },
-    { label: "Status", href: "mailto:support@doggybagg.cc?subject=System%20Status%20Inquiry" },
+    { label: "Help Center", href: "/help" },
+    { label: "Documentation", href: "/docs" },
+    { label: "Status", href: "/status" },
   ],
 }
 
@@ -38,7 +38,7 @@ export function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <Link href="/" className="mb-6 flex items-center gap-3">
-              <div className="relative h-10 w-10 overflow-hidden rounded-xl bg-background/50">
+              <div className="relative h-10 w-10 overflow-hidden rounded-full bg-background/50">
                 <Image
                   src="/images/og-image.png"
                   alt="DoggyBagg"
@@ -126,10 +126,10 @@ export function Footer() {
             <Link href="/privacy" className="text-xs text-muted-foreground hover:text-foreground">
               Privacy
             </Link>
-            <Link href="mailto:hello@doggybagg.cc?subject=Terms%20of%20Service" className="text-xs text-muted-foreground hover:text-foreground">
+            <Link href="/terms" className="text-xs text-muted-foreground hover:text-foreground">
               Terms
             </Link>
-            <Link href="mailto:hello@doggybagg.cc?subject=Cookie%20Policy" className="text-xs text-muted-foreground hover:text-foreground">
+            <Link href="/privacy#cookies" className="text-xs text-muted-foreground hover:text-foreground">
               Cookies
             </Link>
           </div>

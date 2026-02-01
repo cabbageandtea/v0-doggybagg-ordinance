@@ -1,6 +1,6 @@
-# Ordinance.ai / doggybagg.cc
+# DoggyBagg (doggybagg.cc)
 
-Property ordinance monitoring platform. Next.js + Supabase + Stripe.
+San Diego property compliance monitoring platform. Next.js + Supabase + Stripe.
 
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://doggybagg.cc)
 [![Coverage](https://img.shields.io/codecov/c/gh/cabbageandtea/v0-doggybagg-ordinance?style=for-the-badge)](https://codecov.io/gh/cabbageandtea/v0-doggybagg-ordinance)

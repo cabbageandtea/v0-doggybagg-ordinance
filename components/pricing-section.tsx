@@ -1,8 +1,93 @@
 "use client"
 
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { Check, Star, ArrowRight, Zap } from "lucide-react"
 import Link from "next/link"
+import { trackPortfolioAuditLead } from "@/lib/analytics"
+
+const auditHref = process.env.NEXT_PUBLIC_STRIPE_PORTFOLIO_AUDIT_LINK || "mailto:support@doggybagg.cc?subject=Portfolio%20Audit%20Inquiry"
+
+function PortfolioAuditCTA() {
+  const [propertyCount, setPropertyCount] = useState("")
+  const [email, setEmail] = useState("")
+
+  const handleAuditClick = () => {
+    if (propertyCount || email) {
+      trackPortfolioAuditLead({ propertyCount: propertyCount || undefined, email: email || undefined })
+    }
+  }
+
+  return (
+    <div className="mb-16 mx-auto max-w-3xl">
+      <div className="liquid-glass-glow rounded-2xl p-8 text-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-primary/10" />
+        <div className="relative z-10">
+          <div className="mb-4 flex flex-wrap items-center justify-center gap-2">
+            <span className="inline-flex items-center gap-2 rounded-full bg-primary/20 px-4 py-2">
+              <Star className="h-4 w-4 text-primary" />
+              <span className="text-sm font-medium text-primary">One-Time Analysis</span>
+            </span>
+          </div>
+          <h3 className="mb-4 text-2xl font-bold text-foreground md:text-3xl">
+            Portfolio Audit
+          </h3>
+          <p className="mb-6 text-muted-foreground max-w-xl mx-auto">
+            Full portfolio analysis. Violations, risk scores, and clear next steps. One report, no surprises.
+          </p>
+          <div className="mb-6 flex items-center justify-center gap-4">
+            <span className="text-5xl font-bold text-foreground">$499</span>
+            <span className="text-muted-foreground">one-time</span>
+          </div>
+          <div className="mb-6 mx-auto flex max-w-sm flex-col gap-3 sm:flex-row sm:justify-center">
+            <div className="flex-1 space-y-1.5 text-left sm:text-center">
+              <Label htmlFor="audit-properties" className="text-xs text-muted-foreground">Properties (optional)</Label>
+              <Select value={propertyCount} onValueChange={setPropertyCount}>
+                <SelectTrigger id="audit-properties" className="h-10 border-border bg-secondary/30">
+                  <SelectValue placeholder="How many?" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="1-5">1–5</SelectItem>
+                  <SelectItem value="6-10">6–10</SelectItem>
+                  <SelectItem value="11+">11+</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="flex-1 space-y-1.5 text-left sm:text-center">
+              <Label htmlFor="audit-email" className="text-xs text-muted-foreground">Email (optional)</Label>
+              <Input
+                id="audit-email"
+                type="email"
+                placeholder="you@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="h-10 border-border bg-secondary/30"
+              />
+            </div>
+          </div>
+          <Link href={auditHref} target="_blank" rel="noopener noreferrer" onClick={handleAuditClick}>
+            <Button
+              size="lg"
+              className="group glow-accent-intense bg-primary px-8 py-6 text-lg font-semibold text-primary-foreground hover:bg-primary/90"
+            >
+              Get My $499 Portfolio Audit
+              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </Link>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 const plans = [
   {
@@ -86,38 +171,7 @@ export function PricingSection() {
         </div>
 
         {/* Portfolio Audit CTA */}
-        <div className="mb-16 mx-auto max-w-3xl">
-          <div className="liquid-glass-glow rounded-2xl p-8 text-center relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-primary/10" />
-            <div className="relative z-10">
-              <div className="mb-4 flex flex-wrap items-center justify-center gap-2">
-                <span className="inline-flex items-center gap-2 rounded-full bg-primary/20 px-4 py-2">
-                  <Star className="h-4 w-4 text-primary" />
-                  <span className="text-sm font-medium text-primary">One-Time Analysis</span>
-                </span>
-              </div>
-              <h3 className="mb-4 text-2xl font-bold text-foreground md:text-3xl">
-                Portfolio Audit
-              </h3>
-              <p className="mb-6 text-muted-foreground max-w-xl mx-auto">
-                Full portfolio analysis. Violations, risk scores, and clear next steps. One report, no surprises.
-              </p>
-              <div className="mb-6 flex items-center justify-center gap-4">
-                <span className="text-5xl font-bold text-foreground">$499</span>
-                <span className="text-muted-foreground">one-time</span>
-              </div>
-              <Link href={process.env.NEXT_PUBLIC_STRIPE_PORTFOLIO_AUDIT_LINK || 'mailto:support@doggybagg.cc?subject=Portfolio%20Audit%20Inquiry'} target="_blank" rel="noopener noreferrer">
-                <Button
-                  size="lg"
-                  className="group glow-accent-intense bg-primary px-8 py-6 text-lg font-semibold text-primary-foreground hover:bg-primary/90"
-                >
-                  Get My $499 Portfolio Audit
-                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
+        <PortfolioAuditCTA />
 
         {/* Community CTA Banner */}
         <div className="mb-12 mx-auto max-w-4xl">

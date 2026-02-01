@@ -14,7 +14,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { Shield, Brain, Eye, FileText, Scale } from "lucide-react"
 
-const ADMT_STORAGE_KEY = "ordinance_admt_acknowledged"
+const ADMT_STORAGE_KEY = "doggybagg_admt_acknowledged"
 
 const compliancePoints = [
   {

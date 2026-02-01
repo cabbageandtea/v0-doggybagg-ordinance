@@ -75,3 +75,23 @@ export function trackFeedbackClicked(props?: { source: string }, userId?: string
 export function trackConsentGiven() {
   captureWithIdentify("consent_given", undefined, undefined)
 }
+
+/** Property search – fired when user runs a search */
+export function trackPropertySearch(props?: { queryLength: number; hasResults?: boolean }, userId?: string) {
+  captureWithIdentify("property_search", props as Record<string, unknown>, userId)
+}
+
+/** Fine calculator – fired when user selects a violation type and views estimate */
+export function trackCalculatorUsed(props?: { violationType: string; estimatedTotal: number }, userId?: string) {
+  captureWithIdentify("calculator_used", props as Record<string, unknown>, userId)
+}
+
+/** CTA click – fired for key conversion buttons */
+export function trackCtaClick(props: { cta: string; location: string }, userId?: string) {
+  captureWithIdentify("cta_click", props as Record<string, unknown>, userId)
+}
+
+/** Portfolio audit lead – fired when user clicks audit CTA with qualification data */
+export function trackPortfolioAuditLead(props: { propertyCount?: string; email?: string }, userId?: string) {
+  captureWithIdentify("portfolio_audit_lead", props as Record<string, unknown>, userId)
+}
