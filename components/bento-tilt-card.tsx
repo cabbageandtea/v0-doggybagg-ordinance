@@ -8,10 +8,12 @@ interface BentoTiltCardProps {
   className?: string
   /** Tailwind col/row span for grid layout */
   gridClass?: string
-  /** Max tilt in degrees (default 12) */
+  /** Max tilt in degrees (default 8). Set 0 or noTilt for static card. */
   maxTilt?: number
   /** Whether to show shine overlay */
   shine?: boolean
+  /** Disable 3D tilt for calmer, more static feel */
+  noTilt?: boolean
 }
 
 export function BentoTiltCard({
@@ -20,6 +22,7 @@ export function BentoTiltCard({
   gridClass = "",
   maxTilt = 8,
   shine = true,
+  noTilt = false,
 }: BentoTiltCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
   const x = useMotionValue(0.5)
@@ -51,6 +54,16 @@ export function BentoTiltCard({
     x.set(0.5)
     y.set(0.5)
   }, [x, y])
+
+  if (noTilt) {
+    return (
+      <div className={`relative overflow-hidden rounded-2xl ${gridClass} ${className}`}>
+        <div className="liquid-glass h-full w-full p-6 backdrop-blur-xl">
+          <div className="relative z-20">{children}</div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <motion.div

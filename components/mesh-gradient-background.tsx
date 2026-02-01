@@ -43,14 +43,14 @@ export function MeshGradientBackground() {
         this.y = Math.random() * canvas.height
         this.radius = Math.random() * 400 + 200
         this.color = gradientColors[Math.floor(Math.random() * gradientColors.length)]
-        this.speedX = (Math.random() - 0.5) * 0.12
-        this.speedY = (Math.random() - 0.5) * 0.12
+        this.speedX = (Math.random() - 0.5) * 0.03
+        this.speedY = (Math.random() - 0.5) * 0.03
         this.phase = Math.random() * Math.PI * 2
       }
 
       update(canvas: HTMLCanvasElement, time: number) {
-        this.x += this.speedX + Math.sin(time * 0.0008 + this.phase) * 0.15
-        this.y += this.speedY + Math.cos(time * 0.0008 + this.phase) * 0.15
+        this.x += this.speedX + Math.sin(time * 0.0003 + this.phase) * 0.05
+        this.y += this.speedY + Math.cos(time * 0.0003 + this.phase) * 0.05
 
         if (this.x < -this.radius) this.x = canvas.width + this.radius
         if (this.x > canvas.width + this.radius) this.x = -this.radius

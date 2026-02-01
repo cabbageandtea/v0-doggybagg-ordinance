@@ -2,7 +2,7 @@
 
 import { useRef, memo } from "react"
 import Image from "next/image"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { motion } from "framer-motion"
 import {
   Bell,
   FileSearch,
@@ -77,6 +77,7 @@ const FeatureCard = memo(function FeatureCard({
     <BentoTiltCard
       gridClass={feature.gridClass}
       className={feature.highlight ? "liquid-glass-glow border-primary/30" : ""}
+      noTilt
     >
       <div className="flex h-full flex-col">
         <div
@@ -107,62 +108,43 @@ const FeatureCard = memo(function FeatureCard({
   )
 })
 
-/** Parallax stats: each stat moves at a slightly different scroll rate */
-function ParallaxStats() {
-  const ref = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  })
-  const y1 = useTransform(scrollYProgress, [0, 0.3], [0, 8])
-  const y2 = useTransform(scrollYProgress, [0, 0.35], [0, -4])
-  const y3 = useTransform(scrollYProgress, [0, 0.4], [0, 6])
-
+/** Static stats – no parallax; calmer, more trustworthy feel */
+function StatsRow() {
   return (
-    <div ref={ref} className="grid w-full max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">
-      <motion.div style={{ y: y1 }} className="group flex flex-col items-center justify-center rounded-xl border border-border/50 bg-background/30 p-4">
+    <div className="grid w-full max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">
+      <div className="group flex flex-col items-center justify-center rounded-xl border border-border/50 bg-background/30 p-4">
         <div className="mb-1 flex items-center gap-2 text-primary">
           <Shield className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" />
           <span className="text-2xl font-bold text-foreground">$2.4M+</span>
         </div>
         <p className="text-xs text-muted-foreground">Fines Detected</p>
-      </motion.div>
-      <motion.div style={{ y: y2 }} className="group flex flex-col items-center justify-center rounded-xl border border-border/50 bg-background/30 p-4">
+      </div>
+      <div className="group flex flex-col items-center justify-center rounded-xl border border-border/50 bg-background/30 p-4">
         <div className="mb-1 flex items-center gap-2 text-primary">
           <Eye className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" />
           <span className="text-2xl font-bold text-foreground">12,000+</span>
         </div>
         <p className="text-xs text-muted-foreground">Properties Monitored</p>
-      </motion.div>
-      <motion.div style={{ y: y3 }} className="group flex flex-col items-center justify-center rounded-xl border border-border/50 bg-background/30 p-4">
+      </div>
+      <div className="group flex flex-col items-center justify-center rounded-xl border border-border/50 bg-background/30 p-4">
         <div className="mb-1 flex items-center gap-2 text-primary">
           <Zap className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" />
           <span className="text-2xl font-bold text-foreground">24/7</span>
         </div>
         <p className="text-xs text-muted-foreground">Real-time Alerts</p>
-      </motion.div>
+      </div>
     </div>
   )
 }
 
-/** Kinetic headline: subtle scroll reaction, slower and gentler */
-function KineticHeadline() {
-  const ref = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  })
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.008])
-  const y = useTransform(scrollYProgress, [0, 0.4], [0, -0.5])
-
+/** Static headline – no scroll motion for calmer feel */
+function BentoHeadline() {
   return (
-    <motion.div ref={ref} style={{ scale, y }} className="mb-6">
-      <h1 className="font-display text-4xl font-bold tracking-tight text-foreground md:text-6xl lg:text-7xl text-balance">
-        San Diego&apos;s
-        <br />
-        <span className="text-glow text-primary">Compliance</span> Command Center
-      </h1>
-    </motion.div>
+    <h1 className="mb-6 font-display text-4xl font-bold tracking-tight text-foreground md:text-6xl lg:text-7xl text-balance">
+      San Diego&apos;s
+      <br />
+      <span className="text-glow text-primary">Compliance</span> Command Center
+    </h1>
   )
 }
 
@@ -175,6 +157,7 @@ export function BentoGrid() {
           <BentoTiltCard
             gridClass="md:col-span-4 md:row-span-1"
             className="liquid-glass-glow min-h-[320px] flex flex-col justify-center items-center text-center py-16"
+            noTilt
           >
             <motion.div
               className="mb-6"
@@ -197,7 +180,7 @@ export function BentoGrid() {
               </span>
               <span className="text-sm font-medium text-primary">Stop fines before they stop you</span>
             </div>
-            <KineticHeadline />
+            <BentoHeadline />
             <p className="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground md:text-xl text-pretty">
               Real-time alerts. AI risk scores. Appeal support. The compliance shield for San Diego investors—so you stay ahead.
             </p>
@@ -228,8 +211,7 @@ export function BentoGrid() {
                 </TactileButton>
               </Link>
             </div>
-            {/* Stats - subtle parallax (each moves at different rate) */}
-            <ParallaxStats />
+            <StatsRow />
           </BentoTiltCard>
         </div>
 
