@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useRef } from 'react'
+import { useRouter } from 'next/navigation'
 import {
   EmbeddedCheckout,
   EmbeddedCheckoutProvider,
@@ -19,6 +20,7 @@ interface CheckoutProps {
 }
 
 export default function Checkout({ productId }: CheckoutProps) {
+  const router = useRouter()
   const hasTrackedStarted = useRef(false)
 
   const startCheckoutSessionForProduct = useCallback(async () => {
@@ -29,11 +31,18 @@ export default function Checkout({ productId }: CheckoutProps) {
     return startCheckoutSession(productId)
   }, [productId])
 
+  const handleComplete = useCallback(() => {
+    router.push('/checkout/success')
+  }, [router])
+
   return (
     <div id="checkout" className="w-full max-w-2xl mx-auto">
       <EmbeddedCheckoutProvider
         stripe={stripePromise}
-        options={{ fetchClientSecret: startCheckoutSessionForProduct }}
+        options={{
+          fetchClientSecret: startCheckoutSessionForProduct,
+          onComplete: handleComplete,
+        }}
       >
         <EmbeddedCheckout />
       </EmbeddedCheckoutProvider>

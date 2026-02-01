@@ -4,6 +4,7 @@ import { stripe } from "@/lib/stripe"
 import { createClient } from "@supabase/supabase-js"
 import { parseCheckoutMetadata } from "@/lib/validation/stripe-webhook"
 import { captureCheckoutCompletedServer } from "@/lib/analytics-server"
+import { sendReceiptEmail, sendPaymentFailedEmail } from "@/lib/emails"
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET
 
@@ -166,6 +167,30 @@ export async function POST(request: NextRequest) {
         if (userId) {
           const value = session.amount_total != null ? session.amount_total / 100 : undefined
           captureCheckoutCompletedServer(userId, { productId, value })
+        }
+
+        // Branded receipt email (support@doggybagg.cc reply-to)
+        const customerEmail = session.customer_details?.email ?? session.customer_email
+        if (customerEmail) {
+          const productName = productId === "starter-plan" ? "Starter" : productId === "professional-plan" ? "Professional" : productId ?? "Subscription"
+          void sendReceiptEmail(customerEmail, {
+            productName,
+            amount: session.amount_total ?? undefined,
+            currency: session.currency ?? "usd",
+          })
+        }
+        break
+      }
+
+      case "invoice.payment_failed": {
+        const invoice = event.data.object as Stripe.Invoice
+        let customerEmail: string | null = invoice.customer_email ?? null
+        if (!customerEmail && typeof invoice.customer === "string") {
+          const customer = await stripe.customers.retrieve(invoice.customer)
+          customerEmail = (customer as Stripe.Customer).email ?? null
+        }
+        if (customerEmail) {
+          void sendPaymentFailedEmail(customerEmail)
         }
         break
       }

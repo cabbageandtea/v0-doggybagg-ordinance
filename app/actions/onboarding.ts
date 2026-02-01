@@ -2,12 +2,49 @@
 
 import { createClient } from '@/lib/supabase/server'
 
+export type SubscriptionTier = 'free' | 'starter' | 'professional' | 'enterprise'
+
 export interface UserOnboardingProgress {
   has_completed_tour: boolean
   has_added_property: boolean
   has_verified_phone: boolean
   has_viewed_risk_score: boolean
   has_generated_health_check: boolean
+}
+
+/** Property limits by tier (from lib/products) */
+export const TIER_LIMITS: Record<SubscriptionTier, number> = {
+  free: 1,
+  starter: 5,
+  professional: 10,
+  enterprise: 999999,
+}
+
+/**
+ * Fetch the current user's subscription_tier from profiles.
+ * Used by dashboard to show tier-aware UI (hide upgrade prompts, show limits).
+ */
+export async function getSubscriptionTier(): Promise<{
+  tier: SubscriptionTier
+  error: string | null
+}> {
+  try {
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return { tier: 'free', error: 'Not authenticated' }
+
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('subscription_tier')
+      .eq('id', user.id)
+      .maybeSingle()
+
+    const tier = (profile?.subscription_tier as SubscriptionTier) || 'free'
+    return { tier, error: null }
+  } catch (err) {
+    console.error('[onboarding] getSubscriptionTier failed:', err)
+    return { tier: 'free', error: 'Failed to load tier' }
+  }
 }
 
 export type OnboardingMilestone =

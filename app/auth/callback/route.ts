@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { ensureUserProfile } from '@/app/actions/profile'
+import { sendWelcomeEmail } from '@/lib/emails'
 
 export async function GET(request: Request) {
   const requestUrl = new URL(request.url)
@@ -21,9 +22,23 @@ export async function GET(request: Request) {
     return NextResponse.redirect(signInUrl)
   }
 
-  // Use the same supabase instance (with session) so ensureUserProfile sees the user
   if (session?.user) {
     await ensureUserProfile(supabase)
+    try {
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('welcome_email_sent_at')
+        .eq('id', session.user.id)
+        .single()
+      if (profile?.welcome_email_sent_at == null && session.user.email) {
+        const { ok } = await sendWelcomeEmail(session.user.email, session.user.user_metadata?.full_name as string | undefined)
+        if (ok) {
+          await supabase.from('profiles').update({ welcome_email_sent_at: new Date().toISOString() }).eq('id', session.user.id)
+        }
+      }
+    } catch {
+      // welcome_email_sent_at column may not exist until 011_notification_preferences.sql is run
+    }
   }
 
   const redirectPath = requestUrl.searchParams.get("redirect")

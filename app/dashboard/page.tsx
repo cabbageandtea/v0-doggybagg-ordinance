@@ -46,6 +46,7 @@ import {
 import { PropertyDetailDialog } from "@/components/property-detail-dialog"
 import { PropertyEditDialog } from "@/components/property-edit-dialog"
 import { PropertyCreateDialog } from "@/components/property-create-dialog"
+import { useSubscriptionTier, getTierLimit, isPaidTier } from "@/lib/hooks/use-subscription-tier"
 
 // Stats helper - calculate from properties
 function calculateStats(properties: Property[]) {
@@ -121,8 +122,12 @@ export default function DashboardPage() {
   const [createOpen, setCreateOpen] = useState(false)
 
   const { data: properties = [], isLoading, error: queryError } = useProperties()
+  const { data: tier = "free" } = useSubscriptionTier()
   const deleteMutation = useDeleteProperty()
   const onboarding = useOnboarding()
+
+  const tierLimit = getTierLimit(tier)
+  const showUpgradePrompt = !isPaidTier(tier)
 
   // Zero-effort: fire has_viewed_risk_score when user scrolls to stats section
   useOnboardingViewTrigger("neighborhood-watch", () => void onboarding.refetch())
@@ -226,14 +231,26 @@ export default function DashboardPage() {
       {/* Top Actions Bar */}
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Command Center</h1>
+          <div className="flex items-center gap-3">
+            <h1 className="text-2xl font-bold text-foreground">Command Center</h1>
+            {isPaidTier(tier) && (
+              <Badge className="bg-primary/20 text-primary border-primary/30 capitalize">
+                {tier}
+              </Badge>
+            )}
+          </div>
           <p className="text-sm text-muted-foreground">
             {properties.length > 0
-              ? "Your portfolio at a glance"
+              ? `Your portfolio at a glance · ${properties.length}/${tierLimit} properties`
               : "Add properties to start monitoring"}
           </p>
         </div>
         <div className="flex items-center gap-2">
+          {showUpgradePrompt && (
+            <Button variant="outline" size="sm" asChild>
+              <a href="/#pricing">Upgrade</a>
+            </Button>
+          )}
           <PhoneVerificationModal
             highlight={onboarding.primaryCta === "verify_phone"}
             onVerified={async () => {

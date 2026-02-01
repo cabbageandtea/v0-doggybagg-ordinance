@@ -62,6 +62,7 @@ export function BentoTiltCard({
         rotateY,
         transformStyle: "preserve-3d",
         perspective: 1000,
+        willChange: "transform",
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}

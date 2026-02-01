@@ -3,6 +3,7 @@ import { CheckCircle, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { CheckoutSuccessTracker } from './checkout-success-tracker'
+import { CheckoutSuccessActions } from './checkout-success-actions'
 
 export default function CheckoutSuccessPage() {
   return (
@@ -29,12 +30,7 @@ export default function CheckoutSuccessPage() {
           </p>
 
           <div className="space-y-3">
-            <Link href="/dashboard">
-              <Button size="lg" className="w-full gap-2 bg-primary hover:bg-primary/90">
-                Go to Dashboard
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            </Link>
+            <CheckoutSuccessActions />
             
             <Link href="/">
               <Button variant="outline" size="lg" className="w-full bg-transparent">

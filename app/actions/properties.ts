@@ -1,6 +1,7 @@
 'use server'
 
 import { createClient } from '@/lib/supabase/server'
+import { sendEmailNotification } from '@/app/actions/notifications'
 
 export interface Property {
   id: string
@@ -186,6 +187,23 @@ export async function updateProperty(
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return { success: false, error: 'User not authenticated' }
 
+    // If reporting_status is changing to violation, fetch current for notification trigger
+    const isNewViolation = updates.reporting_status === 'violation'
+    let address: string | undefined
+    if (isNewViolation) {
+      const { data: existing } = await supabase
+        .from('properties')
+        .select('address, reporting_status')
+        .eq('id', propertyId)
+        .eq('user_id', user.id)
+        .single()
+      if (existing?.reporting_status !== 'violation') {
+        address = existing?.address
+      } else {
+        // Already violation, no new notification
+      }
+    }
+
     const { error } = await supabase
       .from('properties')
       .update(trimmed)
@@ -195,6 +213,10 @@ export async function updateProperty(
     if (error) {
       console.error('[v0] Error updating property:', error)
       return { success: false, error: error.message }
+    }
+
+    if (isNewViolation && address) {
+      void sendEmailNotification(user.id, { propertyAddress: address })
     }
     return { success: true, error: null }
   } catch (error) {
