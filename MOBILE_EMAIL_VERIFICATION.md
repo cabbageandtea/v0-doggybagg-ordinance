@@ -13,11 +13,11 @@
 - **Location**: `/components/dashboard-header.tsx` - Line 74
 
 ### Email Routing Strategy
-```
+\`\`\`
 hello@doggybagg.cc        → General inquiries, company info, legal/privacy
 support@doggybagg.cc      → Customer support, help center, documentation
 maliklomax@doggybagg.cc   → API access, careers, portfolio strategy calls
-```
+\`\`\`
 
 All email addresses include pre-filled subject lines for optimal inbox organization.
 
@@ -83,11 +83,11 @@ All email addresses include pre-filled subject lines for optimal inbox organizat
   - Cancellation policy
 
 **FAQ Contact Link**:
-```html
+\`\`\`html
 <a href="mailto:support@doggybagg.cc">
   Contact our team
 </a>
-```
+\`\`\`
 ✅ Correctly points to support@doggybagg.cc
 
 ---

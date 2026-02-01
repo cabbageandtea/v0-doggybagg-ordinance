@@ -275,7 +275,6 @@ export default function DashboardPage() {
         <div className="flex items-center gap-2">
           <PhoneVerificationModal 
             onVerified={() => {
-              console.log('[v0] Phone verified successfully')
               // Refresh onboarding status
             }}
           />

@@ -54,7 +54,6 @@ export async function startCheckoutSession(productId: string) {
     ]
   } else {
     // Fallback to dynamic pricing for development
-    console.log('[v0] Using dynamic pricing - configure Stripe Price IDs for production')
     sessionConfig.line_items = [
       {
         price_data: {

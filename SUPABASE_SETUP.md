@@ -17,10 +17,10 @@ Configure Supabase for doggybagg.cc auth and database.
 ## 2. Add to Environment
 
 **Local (.env.local):**
-```env
+\`\`\`env
 NEXT_PUBLIC_SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-```
+\`\`\`
 
 **Vercel (Production):**  
 Project → **Settings** → **Environment Variables** → add the same two for **Production**
@@ -44,9 +44,9 @@ For local dev, add: `http://localhost:3000/auth/callback`
 
 Run in **SQL Editor**:
 
-```sql
+\`\`\`sql
 DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
-```
+\`\`\`
 
 See [SUPABASE_DATABASE_FIX.md](./SUPABASE_DATABASE_FIX.md) for details.
 
