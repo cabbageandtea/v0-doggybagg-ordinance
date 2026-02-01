@@ -52,7 +52,7 @@ const features = [
   },
   {
     title: "San Diego Coverage",
-    description: "Every zone. Every district. Full county coverage.",
+    description: "Every zone. Every district. Full county coverage. LA & Austin coming soon.",
     icon: MapPin,
     gridClass: "md:col-span-1 md:row-span-1",
     highlight: false,
@@ -181,10 +181,23 @@ export function BentoGrid() {
               <span className="text-sm font-medium text-primary">Stop fines before they stop you</span>
             </div>
             <BentoHeadline />
-            <p className="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground md:text-xl text-pretty">
+            <p className="mx-auto mb-4 max-w-2xl text-lg text-muted-foreground md:text-xl text-pretty">
               Real-time alerts. AI risk scores. Appeal support. The compliance shield for San Diego investors—so you stay ahead.
             </p>
+            <p className="mx-auto mb-8 text-sm text-muted-foreground/90">
+              One fine can cost $1,000–$10,000. DoggyBagg starts at $29/mo.
+            </p>
             <div className="mb-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <a href="#calculator">
+                <TactileButton
+                  variant="outline"
+                  size="lg"
+                  className="border-primary/50 text-primary hover:bg-primary/10 px-8 py-6"
+                >
+                  See your risk
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </TactileButton>
+              </a>
               <Link
                 href={
                   process.env.NEXT_PUBLIC_STRIPE_PORTFOLIO_AUDIT_LINK ||

@@ -9,6 +9,7 @@ const footerLinks = {
     { label: "Features", href: "/#features" },
     { label: "Calculator", href: "/#calculator" },
     { label: "Pricing", href: "/#pricing" },
+    { label: "Data Sources", href: "/learn/data-sources" },
     { label: "API", href: "/docs" },
   ],
   Company: [
@@ -25,6 +26,7 @@ const footerLinks = {
   Support: [
     { label: "Help Center", href: "/help" },
     { label: "Email Support", href: "mailto:support@doggybagg.cc?subject=DoggyBagg%20Support" },
+    { label: "Refer Landlords, Earn", href: "mailto:support@doggybagg.cc?subject=Referral%20Partner%20Inquiry" },
     { label: "Documentation", href: "/docs" },
     { label: "Status", href: "/status" },
   ],

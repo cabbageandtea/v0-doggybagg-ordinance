@@ -132,6 +132,9 @@ export function NeighborhoodWatchWidget() {
             Real-time enforcement heat maps for San Diego neighborhoods. See where the city
             is actively monitoring before violations hit your property.
           </p>
+          <p className="mt-3 text-xs text-primary/80 max-w-xl mx-auto">
+            Similar properties in your area have been cited recently. Predictive alerts coming soon.
+          </p>
         </motion.div>
 
         {/* Heat Map Grid */}

@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button"
 import { Pencil, Copy } from "lucide-react"
 import type { Property } from "@/app/actions/properties"
 import { copyToClipboardWithToast } from "@/lib/copy-toast"
+import { ComplianceScoreBadge } from "@/components/compliance-score-badge"
 
 function getStatusBadge(status: string) {
   switch (status) {
@@ -119,16 +120,14 @@ export function PropertyDetailDialog({
               <p className="text-sm text-muted-foreground">Status</p>
               {getStatusBadge(property.reporting_status)}
             </div>
-            <div>
-              <p className="text-sm text-muted-foreground">Risk Score</p>
-              <span
-                className={`font-mono font-bold ${getRiskScoreColor(
-                  property.risk_score || 0
-                )}`}
-              >
-                {property.risk_score ?? 0}
-              </span>
-            </div>
+          </div>
+          <div>
+            <p className="text-sm text-muted-foreground mb-2">Compliance Score</p>
+            <ComplianceScoreBadge
+              score={property.risk_score ?? 0}
+              address={property.address}
+              showShareHint
+            />
           </div>
           <div>
             <p className="text-sm text-muted-foreground">Added</p>

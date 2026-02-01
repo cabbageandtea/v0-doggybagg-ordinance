@@ -44,6 +44,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { PropertyDetailDialog } from "@/components/property-detail-dialog"
+import { toast } from "sonner"
 import { PropertyEditDialog } from "@/components/property-edit-dialog"
 import { PropertyCreateDialog } from "@/components/property-create-dialog"
 import { useSubscriptionTier, getTierLimit, isPaidTier } from "@/lib/hooks/use-subscription-tier"
@@ -308,7 +309,24 @@ export default function DashboardPage() {
       <PropertyCreateDialog
         open={createOpen}
         onOpenChange={setCreateOpen}
-        onSuccess={() => void onboarding.refetch()}
+        onSuccess={() => {
+          void onboarding.refetch()
+          if (properties.length === 0) {
+            toast.success("Property added! Share DoggyBagg with other landlords.", {
+              action: {
+                label: "Share",
+                onClick: () => {
+                  const u = "https://doggybagg.cc"
+                  if (typeof navigator !== "undefined" && navigator.share) {
+                    void navigator.share({ title: "DoggyBagg", url: u, text: "San Diego property compliance monitoring" })
+                  } else {
+                    void navigator.clipboard?.writeText(u).then(() => toast.success("Link copied"))
+                  }
+                },
+              },
+            })
+          }
+        }}
       />
 
       {/* Property Table Card */}

@@ -165,8 +165,11 @@ export function PricingSection() {
           <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl text-balance">
             Choose Your <span className="text-glow text-primary">Protection</span> Level
           </h2>
-          <p className="mx-auto max-w-2xl text-muted-foreground text-pretty">
+          <p className="mx-auto max-w-2xl text-muted-foreground text-pretty mb-2">
             Start monitoring your San Diego properties today. No lock-in. Cancel anytime.
+          </p>
+          <p className="text-sm text-amber-400/90 font-medium">
+            One fine can cost $1,000–$10,000. Protection starts at $29/mo.
           </p>
         </div>
 

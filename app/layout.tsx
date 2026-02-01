@@ -80,6 +80,7 @@ export const metadata: Metadata = {
     ],
     apple: '/images/og-image.png',
   },
+  manifest: '/manifest.json',
 }
 
 export const viewport: Viewport = {
