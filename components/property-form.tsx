@@ -86,6 +86,8 @@ export function PropertyForm({
         </Label>
         <Input
           id="address"
+          name="street-address"
+          autoComplete="street-address"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
           placeholder="123 Main St, San Diego, CA 92101"
@@ -118,6 +120,8 @@ export function PropertyForm({
         </Label>
         <Input
           id="license_id"
+          name="license-id"
+          autoComplete="off"
           value={licenseId}
           onChange={(e) => setLicenseId(e.target.value)}
           placeholder="STR-2024-001"

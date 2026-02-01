@@ -8,8 +8,9 @@ import {
 } from "@/components/ui/dialog"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Pencil } from "lucide-react"
+import { Pencil, Copy } from "lucide-react"
 import type { Property } from "@/app/actions/properties"
+import { copyToClipboardWithToast } from "@/lib/copy-toast"
 
 function getStatusBadge(status: string) {
   switch (status) {
@@ -87,14 +88,30 @@ export function PropertyDetailDialog({
           </div>
           <div className="flex flex-wrap gap-4">
             <div>
+              <p className="text-sm text-muted-foreground">Property ID</p>
+              <button
+                type="button"
+                onClick={() => copyToClipboardWithToast(property.id, "Property ID copied")}
+                className="group flex items-center gap-1.5 rounded bg-secondary/50 px-2 py-1 text-sm hover:bg-secondary transition-colors cursor-pointer"
+              >
+                <code className="font-mono truncate max-w-[140px]">{property.id.slice(0, 8)}…</code>
+                <Copy className="h-3 w-3 shrink-0 opacity-60 group-hover:opacity-100" />
+              </button>
+            </div>
+            <div>
               <p className="text-sm text-muted-foreground">STRO Tier</p>
               <Badge variant="secondary">Tier {property.stro_tier || 1}</Badge>
             </div>
             <div>
               <p className="text-sm text-muted-foreground">License ID</p>
-              <code className="rounded bg-secondary/50 px-2 py-1 text-sm">
-                {property.license_id || "N/A"}
-              </code>
+              <button
+                type="button"
+                onClick={() => copyToClipboardWithToast(property.license_id || "N/A", "License ID copied")}
+                className="group flex items-center gap-1.5 rounded bg-secondary/50 px-2 py-1 text-sm hover:bg-secondary transition-colors cursor-pointer"
+              >
+                <code className="font-mono">{property.license_id || "N/A"}</code>
+                <Copy className="h-3 w-3 shrink-0 opacity-60 group-hover:opacity-100" />
+              </button>
             </div>
           </div>
           <div className="flex flex-wrap gap-4">
@@ -124,7 +141,7 @@ export function PropertyDetailDialog({
             </p>
           </div>
           <p className="text-xs text-muted-foreground border-t border-border pt-4">
-            Risk history and compliance timeline coming soon.
+            Full risk history and San Diego compliance timeline coming soon.
           </p>
         </div>
       </DialogContent>

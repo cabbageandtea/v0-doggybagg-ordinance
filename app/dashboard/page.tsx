@@ -437,11 +437,19 @@ export default function DashboardPage() {
         </div>
 
         {filteredProperties.length === 0 && properties.length === 0 && (
-          <div className="py-12 text-center">
-            <Building2 className="mx-auto h-12 w-12 text-muted-foreground" />
-            <p className="mt-4 text-foreground font-semibold">No properties yet</p>
-            <p className="mt-2 text-sm text-muted-foreground">Add your first property to start monitoring compliance</p>
-            <Button className="mt-4 glow-accent" onClick={() => setCreateOpen(true)}>
+          <div className="py-16 px-6 text-center">
+            <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-primary/10 ring-4 ring-primary/20">
+              <Building2 className="h-14 w-14 text-primary" />
+            </div>
+            <h3 className="text-xl font-bold text-foreground">No properties yet</h3>
+            <p className="mt-3 max-w-sm mx-auto text-sm text-muted-foreground">
+              Add your first San Diego property to start monitoring compliance. Take it with you—DoggyBagg protects your portfolio 24/7.
+            </p>
+            <Button 
+              size="lg" 
+              className="mt-6 glow-accent-intense bg-primary px-8 py-6 text-base font-semibold text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25" 
+              onClick={() => setCreateOpen(true)}
+            >
               Add Your First Property
             </Button>
           </div>

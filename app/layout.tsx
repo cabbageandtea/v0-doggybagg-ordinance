@@ -6,6 +6,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { QueryProvider } from '@/providers/query-provider'
 import { PostHogProvider } from '@/providers/posthog-provider'
 import { PostHogIdentifyBridge } from '@/components/posthog-identify-bridge'
+import { Toaster } from 'sonner'
 import { CookieConsent } from '@/components/cookie-consent'
 import { StructuredData } from '@/components/structured-data'
 import { FAQStructuredData } from '@/components/structured-data'
@@ -106,6 +107,7 @@ export default async function RootLayout({
           <PostHogIdentifyBridge />
           <QueryProvider>{children}</QueryProvider>
           <Analytics />
+          <Toaster position="bottom-center" richColors closeButton />
           <CookieConsent />
         </PostHogProvider>
       </body>

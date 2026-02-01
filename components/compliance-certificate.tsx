@@ -16,11 +16,11 @@ import {
   Award, 
   Download, 
   Shield, 
-  CheckCircle,
   ExternalLink,
   Copy,
   FileCheck
 } from "lucide-react"
+import { copyToClipboardWithToast } from "@/lib/copy-toast"
 
 type ComplianceCertificateProps = {
   propertyId: string
@@ -40,7 +40,6 @@ type CertificateData = {
 export function ComplianceCertificate({ propertyId, propertyAddress }: ComplianceCertificateProps) {
   const [certificate, setCertificate] = useState<CertificateData | null>(null)
   const [isGenerating, setIsGenerating] = useState(false)
-  const [isCopied, setIsCopied] = useState(false)
 
   const handleGenerate = async () => {
     setIsGenerating(true)
@@ -57,9 +56,13 @@ export function ComplianceCertificate({ propertyId, propertyAddress }: Complianc
 
   const handleCopyHash = () => {
     if (certificate?.blockchainHash) {
-      void navigator.clipboard.writeText(certificate.blockchainHash)
-      setIsCopied(true)
-      setTimeout(() => setIsCopied(false), 2000)
+      void copyToClipboardWithToast(certificate.blockchainHash, "Verification hash copied")
+    }
+  }
+
+  const handleCopyCertId = () => {
+    if (certificate?.certificateId) {
+      void copyToClipboardWithToast(certificate.certificateId, "Certificate ID copied")
     }
   }
 
@@ -135,7 +138,14 @@ export function ComplianceCertificate({ propertyId, propertyAddress }: Complianc
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-1">
                       <p className="text-xs text-muted-foreground">Certificate ID</p>
-                      <p className="font-mono text-sm text-foreground">{certificate.certificateId}</p>
+                      <button
+                        type="button"
+                        onClick={handleCopyCertId}
+                        className="group flex items-center gap-1.5 text-left"
+                      >
+                        <code className="font-mono text-sm text-foreground truncate">{certificate.certificateId}</code>
+                        <Copy className="h-3 w-3 shrink-0 opacity-60 group-hover:opacity-100 transition-opacity" />
+                      </button>
                     </div>
                     <div className="space-y-1">
                       <p className="text-xs text-muted-foreground">Issue Date</p>
@@ -206,17 +216,8 @@ export function ComplianceCertificate({ propertyId, propertyAddress }: Complianc
                       onClick={handleCopyHash}
                       className="gap-2 bg-transparent"
                     >
-                      {isCopied ? (
-                        <>
-                          <CheckCircle className="h-3 w-3" />
-                          Copied
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="h-3 w-3" />
-                          Copy Hash
-                        </>
-                      )}
+                      <Copy className="h-3 w-3" />
+                      Copy Hash
                     </Button>
                     <Button 
                       size="sm" 

@@ -90,7 +90,7 @@ export function DashboardHeader() {
                   <Link key={item.href} href={item.href}>
                     <Button 
                       variant={isActive ? "secondary" : "ghost"} 
-                      className={`gap-2 ${isActive ? "bg-primary/20 text-primary border-glow" : "text-muted-foreground hover:text-foreground"}`}
+                      className={`gap-2 transition-all duration-200 ${isActive ? "bg-primary/20 text-primary border-glow" : "text-muted-foreground hover:text-foreground hover:scale-[1.02] hover:bg-primary/10 hover:ring-1 hover:ring-primary/30"}`}
                     >
                       <item.icon className="h-4 w-4" />
                       {item.label}
@@ -161,7 +161,7 @@ export function DashboardHeader() {
                   <Link key={item.href} href={item.href}>
                     <Button 
                       variant={isActive ? "secondary" : "ghost"} 
-                      className={`w-full justify-start gap-2 ${isActive ? "bg-primary/20 text-primary" : "text-muted-foreground"}`}
+                      className={`w-full justify-start gap-2 transition-all duration-200 active:scale-[0.98] ${isActive ? "bg-primary/20 text-primary" : "text-muted-foreground hover:bg-primary/5"}`}
                     >
                       <item.icon className="h-4 w-4" />
                       {item.label}

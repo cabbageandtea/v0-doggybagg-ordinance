@@ -409,6 +409,8 @@ export default function UploadPage() {
                     </Label>
                     <Input
                       id="address"
+                      name="street-address"
+                      autoComplete="street-address"
                       value={quickAdd.address}
                       onChange={(e) => setQuickAdd((p) => ({ ...p, address: e.target.value }))}
                       placeholder="123 Main St, San Diego, CA 92101"
@@ -443,6 +445,8 @@ export default function UploadPage() {
                     </Label>
                     <Input
                       id="license_id"
+                      name="license-id"
+                      autoComplete="off"
                       value={quickAdd.license_id}
                       onChange={(e) => setQuickAdd((p) => ({ ...p, license_id: e.target.value }))}
                       placeholder="STR-2024-001"

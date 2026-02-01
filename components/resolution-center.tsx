@@ -18,6 +18,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { DIYAppealGuide } from "@/components/diy-appeal-guide"
+import { copyToClipboardWithToast } from "@/lib/copy-toast"
 import { 
   Bot, 
   FileText, 
@@ -40,7 +41,6 @@ export function ResolutionCenter({ violation, propertyId }: ResolutionCenterProp
   const [appealLetter, setAppealLetter] = useState<string | null>(null)
   const [citations, setCitations] = useState<string[] | null>(null)
   const [nextAction, setNextAction] = useState<NextActionResult['action'] | null>(null)
-  const [isCopied, setIsCopied] = useState(false)
 
   const handleGenerateAppeal = async () => {
     setIsGenerating(true)
@@ -69,11 +69,9 @@ export function ResolutionCenter({ violation, propertyId }: ResolutionCenterProp
     setIsGenerating(false)
   }
 
-  const handleCopy = () => {
+  const handleCopyLetter = () => {
     if (appealLetter) {
-      void navigator.clipboard.writeText(appealLetter)
-      setIsCopied(true)
-      setTimeout(() => setIsCopied(false), 2000)
+      void copyToClipboardWithToast(appealLetter, "Appeal letter copied")
     }
   }
 
@@ -150,21 +148,12 @@ export function ResolutionCenter({ violation, propertyId }: ResolutionCenterProp
 
                 <div className="flex gap-2">
                   <Button 
-                    onClick={handleCopy}
+                    onClick={handleCopyLetter}
                     className="gap-2 bg-transparent"
                     variant="outline"
                   >
-                    {isCopied ? (
-                      <>
-                        <CheckCircle className="h-4 w-4" />
-                        Copied!
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="h-4 w-4" />
-                        Copy Letter
-                      </>
-                    )}
+                    <Copy className="h-4 w-4" />
+                    Copy Letter
                   </Button>
                   <Button className="gap-2 glow-accent">
                     <Download className="h-4 w-4" />

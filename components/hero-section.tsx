@@ -27,8 +27,8 @@ export function HeroSection() {
 
           {/* Subheadline */}
           <p className="mx-auto mb-10 max-w-2xl text-lg text-muted-foreground md:text-xl text-pretty">
-            Real-time municipal code violation monitoring. Detect fines before they 
-            escalate and stay compliant with San Diego City ordinances.
+            Take it with you. Real-time San Diego municipal code violation monitoring. 
+            Detect fines before they escalate—stay compliant with City ordinances.
           </p>
 
           {/* CTA Buttons */}
