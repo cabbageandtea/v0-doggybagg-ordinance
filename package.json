@@ -14,7 +14,12 @@
     "test:e2e": "playwright test",
     "e2e:ci": "playwright test --reporter=github",
     "check:server-actions-async": "node scripts/check-server-actions-async.js",
-    "start": "next start"
+    "start": "next start",
+    "workflow:setup": "bash scripts/setup-workflow.sh",
+    "workflow:feature": "node scripts/workflow-cli.js feature",
+    "workflow:hotfix": "node scripts/workflow-cli.js hotfix",
+    "workflow:release": "node scripts/workflow-cli.js release",
+    "workflow:status": "node scripts/workflow-cli.js status"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
