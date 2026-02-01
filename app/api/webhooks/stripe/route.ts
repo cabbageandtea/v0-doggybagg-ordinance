@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server"
 import Stripe from "stripe"
 import { stripe } from "@/lib/stripe"
 import { createClient } from "@supabase/supabase-js"
+import { parseCheckoutMetadata } from "@/lib/validation/stripe-webhook"
+import { captureCheckoutCompletedServer } from "@/lib/analytics-server"
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET
 
@@ -18,6 +20,39 @@ function logProductionWarning() {
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 
+/** Log webhook delivery failures for first-24h launch monitoring */
+function logWebhookFailure(context: string, error: unknown) {
+  const msg = error instanceof Error ? error.message : String(error)
+  console.error(`[stripe-webhook] DELIVERY_FAILURE: ${context} - ${msg}`)
+}
+
+/** Dead letter: log validation failure to webhook_logs for debugging */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function deadLetter(
+  supabaseClient: any,
+  context: string,
+  error: unknown,
+  eventId?: string,
+  eventType?: string,
+  rawBody?: string,
+  payload?: unknown
+) {
+  logWebhookFailure(context, error)
+  const errMsg = error instanceof Error ? error.message : String(error)
+  const row = {
+    source: "stripe",
+    event_id: eventId ?? null,
+    event_type: eventType ?? null,
+    context,
+    error_message: errMsg,
+    payload: payload ? JSON.parse(JSON.stringify(payload)) : null,
+    raw_body: rawBody ?? null,
+  }
+  // webhook_logs from scripts/010; not in generated types
+  const sb = supabaseClient as { from: (t: string) => { insert: (r: object) => PromiseLike<unknown> } }
+  await sb.from("webhook_logs").insert(row)
+}
+
 /**
  * Stripe webhook handler with:
  * - stripe-signature verification
@@ -30,6 +65,7 @@ export async function POST(request: NextRequest) {
   const signature = request.headers.get("stripe-signature")
 
   if (!signature) {
+    logWebhookFailure("missing_signature", "Missing stripe-signature header")
     return NextResponse.json(
       { error: "Missing stripe-signature header" },
       { status: 400 }
@@ -47,7 +83,7 @@ export async function POST(request: NextRequest) {
     event = stripe.webhooks.constructEvent(rawBody, signature, webhookSecret)
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error"
-    console.error("[stripe-webhook] Signature verification failed:", message)
+    logWebhookFailure("signature_verification", err)
     return NextResponse.json(
       { error: `Webhook signature verification failed: ${message}` },
       { status: 400 }
@@ -78,12 +114,32 @@ export async function POST(request: NextRequest) {
       case "checkout.session.completed": {
         const session = event.data.object as Stripe.Checkout.Session
         const sessionId = session.id
-        const userId = session.metadata?.userId as string | undefined
 
         if (!sessionId) {
-          console.error("[stripe-webhook] checkout.session.completed missing session id")
+          await deadLetter(supabase, "checkout_session_missing_id", "Missing session id", event.id, event.type, rawBody, session)
           break
         }
+
+        const md = session.metadata as Record<string, string> | null | undefined
+        const parseResult = parseCheckoutMetadata(md)
+
+        if (!parseResult.success) {
+          await deadLetter(
+            supabase,
+            "metadata_validation_failed",
+            parseResult.error,
+            event.id,
+            event.type,
+            rawBody,
+            { metadata: md, sessionId }
+          )
+          // Still process payment_transactions (may have minimal metadata); skip profile/tier update
+        }
+
+        const meta = parseResult.success ? parseResult.data : null
+        const userId = meta?.userId
+        const subscriptionTier = meta?.subscriptionTier ?? meta?.subscription_tier
+        const productId = meta?.productId
 
         // Mark payment_transactions as completed
         const { error: updateError } = await supabase
@@ -95,15 +151,20 @@ export async function POST(request: NextRequest) {
           .eq("stripe_session_id", sessionId)
 
         if (updateError) {
-          console.error("[stripe-webhook] Failed to update payment_transactions:", updateError)
+          await deadLetter(supabase, "payment_transactions_update", updateError, event.id, event.type, undefined, { sessionId })
         }
 
-        // Optionally update profiles.subscription_tier from metadata
-        if (userId && session.metadata?.subscription_tier) {
+        // Update profiles.subscription_tier from validated metadata
+        if (userId && subscriptionTier) {
           await supabase
             .from("profiles")
-            .update({ subscription_tier: session.metadata.subscription_tier })
+            .update({ subscription_tier: subscriptionTier })
             .eq("id", userId)
+        }
+
+        // Server-side telemetry: checkout_completed (reliable attribution)
+        if (userId) {
+          captureCheckoutCompletedServer(userId, productId ? { productId } : undefined)
         }
         break
       }
@@ -122,7 +183,11 @@ export async function POST(request: NextRequest) {
       event_type: event.type,
     })
   } catch (err) {
-    console.error("[stripe-webhook] Processing error:", err)
+    try {
+      await deadLetter(supabase, "processing", err, event.id, event.type, rawBody, { message: "Unhandled exception in webhook handler" })
+    } catch {
+      logWebhookFailure("processing", err)
+    }
     return NextResponse.json(
       { error: "Webhook processing failed" },
       { status: 500 }

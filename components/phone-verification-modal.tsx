@@ -13,6 +13,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Smartphone, CheckCircle, AlertCircle } from "lucide-react"
+import { trackPhoneVerified } from "@/lib/analytics"
 
 type PhoneVerificationModalProps = {
   onVerified?: () => void | Promise<void>
@@ -57,6 +58,7 @@ export function PhoneVerificationModal({ onVerified, highlight }: PhoneVerificat
     
     setStep('verified')
     setIsLoading(false)
+    trackPhoneVerified()
 
     // Call parent callback
     setTimeout(() => {

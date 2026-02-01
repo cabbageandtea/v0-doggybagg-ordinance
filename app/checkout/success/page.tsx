@@ -1,10 +1,16 @@
+import { Suspense } from 'react'
 import { CheckCircle, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { CheckoutSuccessTracker } from './checkout-success-tracker'
 
 export default function CheckoutSuccessPage() {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-background">
+    <>
+      <Suspense fallback={null}>
+        <CheckoutSuccessTracker />
+      </Suspense>
+      <main className="flex min-h-screen items-center justify-center bg-background">
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-md text-center">
           <div className="mb-6 flex justify-center">
@@ -50,6 +56,7 @@ export default function CheckoutSuccessPage() {
           </div>
         </div>
       </div>
-    </main>
+      </main>
+    </>
   )
 }

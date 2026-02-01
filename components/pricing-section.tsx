@@ -81,7 +81,7 @@ export function PricingSection() {
             Choose Your <span className="text-glow text-primary">Protection</span> Level
           </h2>
           <p className="mx-auto max-w-2xl text-muted-foreground text-pretty">
-            Start monitoring your San Diego properties today. Cancel anytime.
+            Start monitoring your San Diego properties today. No lock-in. Cancel anytime.
           </p>
         </div>
 
@@ -90,9 +90,14 @@ export function PricingSection() {
           <div className="liquid-glass-glow rounded-2xl p-8 text-center relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-primary/10" />
             <div className="relative z-10">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/20 px-4 py-2">
-                <Star className="h-4 w-4 text-primary" />
-                <span className="text-sm font-medium text-primary">One-Time Analysis</span>
+              <div className="mb-4 flex flex-wrap items-center justify-center gap-2">
+                <span className="inline-flex items-center gap-2 rounded-full bg-primary/20 px-4 py-2">
+                  <Star className="h-4 w-4 text-primary" />
+                  <span className="text-sm font-medium text-primary">One-Time Analysis</span>
+                </span>
+                <span className="rounded-full border border-amber-500/40 bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-400">
+                  Limited spots this week
+                </span>
               </div>
               <h3 className="mb-4 text-2xl font-bold text-foreground md:text-3xl">
                 Portfolio Audit

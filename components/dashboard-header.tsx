@@ -64,17 +64,17 @@ export function DashboardHeader() {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3">
-              <div className="relative h-10 w-10 overflow-hidden rounded-xl glow-accent">
+              <div className="relative h-10 w-10 overflow-hidden rounded-xl bg-background/50">
                 <Image
-                  src="/images/darkdoggylogo.jpg"
-                  alt="Ordinance.ai Logo"
+                  src="/images/og-image.png"
+                  alt="DoggyBagg"
                   fill
-                  className="object-cover"
+                  className="object-contain p-0.5"
                 />
               </div>
               <div className="flex flex-col">
                 <span className="text-lg font-bold text-foreground tracking-tight">
-                  Ordinance.ai
+                  DoggyBagg
                 </span>
                 <span className="text-xs text-muted-foreground">
                   Dashboard

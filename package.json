@@ -12,6 +12,7 @@
     "test:watch": "vitest --watch",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
+    "perf:bench": "node scripts/performance-bench.js",
     "e2e:ci": "playwright test --reporter=github",
     "check:server-actions-async": "node scripts/check-server-actions-async.js",
     "start": "next start"
@@ -64,6 +65,7 @@
     "next": "16.1.6",
     "next-themes": "latest",
     "posthog-js": "^1.336.4",
+    "posthog-node": "^5.24.7",
     "react": "19.2.0",
     "react-day-picker": "latest",
     "react-dom": "19.2.0",

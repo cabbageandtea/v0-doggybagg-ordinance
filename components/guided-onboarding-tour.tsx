@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { useOnboarding } from "@/providers/onboarding-provider"
 import { updateOnboardingMilestone } from "@/app/actions/onboarding"
 import { generateFirstHealthCheck, type ComplianceHealthCheck } from "@/app/actions/agentic"
+import { trackHealthCheckGenerated, trackOnboardingTourCompleted } from "@/lib/analytics"
 import {
   MapPin,
   Smartphone,
@@ -51,6 +52,7 @@ export function GuidedOnboardingTour({ onComplete }: GuidedTourProps) {
         if (healthResult.success && healthResult.report) {
           setHealthCheck(healthResult.report)
           setShowHealthCheck(true)
+          trackHealthCheckGenerated()
           await updateOnboardingMilestone("has_generated_health_check")
           await refetch()
         }
@@ -209,6 +211,7 @@ export function GuidedOnboardingTour({ onComplete }: GuidedTourProps) {
               {/* Skip Option */}
               <button
                 onClick={() => {
+                  trackOnboardingTourCompleted()
                   if (onComplete) void onComplete()
                 }}
                 className="w-full text-xs text-muted-foreground hover:text-foreground transition-colors"
@@ -228,6 +231,7 @@ export function GuidedOnboardingTour({ onComplete }: GuidedTourProps) {
           exit={{ opacity: 0 }}
           className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
           onClick={() => {
+            trackOnboardingTourCompleted()
             setShowHealthCheck(false)
             if (onComplete) void onComplete()
           }}
@@ -337,6 +341,7 @@ export function GuidedOnboardingTour({ onComplete }: GuidedTourProps) {
               <Button
                 className="w-full gap-2 glow-accent"
                 onClick={() => {
+                  trackOnboardingTourCompleted()
                   setShowHealthCheck(false)
                   if (onComplete) onComplete()
                 }}

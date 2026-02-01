@@ -225,8 +225,12 @@ export default function DashboardPage() {
       {/* Top Actions Bar */}
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
-          <p className="text-sm text-muted-foreground">Monitor your property compliance</p>
+          <h1 className="text-2xl font-bold text-foreground">Command Center</h1>
+          <p className="text-sm text-muted-foreground">
+            {properties.length > 0
+              ? "Your portfolio at a glance"
+              : "Add properties to start monitoring"}
+          </p>
         </div>
         <div className="flex items-center gap-2">
           <PhoneVerificationModal

@@ -4,6 +4,8 @@ import { Inter, Space_Grotesk } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { QueryProvider } from '@/providers/query-provider'
 import { PostHogProvider } from '@/providers/posthog-provider'
+import { PostHogIdentifyBridge } from '@/components/posthog-identify-bridge'
+import { CookieConsent } from '@/components/cookie-consent'
 import './globals.css'
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -11,14 +13,18 @@ const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://doggybagg.cc'
 
+/** 160-char high-converting summary for social and SEO */
+const metaDescription =
+  'Stop fines before they stop you. DoggyBagg monitors San Diego municipal code violations 24/7. Detect early, protect your portfolio, stay compliant. Start free.'
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Ordinance.ai | San Diego Property Fine Monitoring | DoggyBagg LLC',
-    template: '%s | Ordinance.ai',
+    default: 'DoggyBagg | AI-Powered Property Compliance',
+    template: '%s | DoggyBagg',
   },
-  description: 'AI-powered municipal code violation monitoring for San Diego property investors. Detect fines early, protect your portfolio, and stay compliant with Ordinance.ai.',
-  generator: 'Ordinance.ai',
+  description: metaDescription,
+  generator: 'DoggyBagg',
   keywords: ['San Diego', 'property fines', 'municipal code', 'real estate', 'compliance', 'AI monitoring', 'STRO', 'short-term rental'],
   authors: [{ name: 'DoggyBagg LLC', url: siteUrl }],
   creator: 'DoggyBagg LLC',
@@ -26,22 +32,32 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: siteUrl,
-    siteName: 'Ordinance.ai',
-    title: 'Ordinance.ai | San Diego Property Fine Monitoring',
-    description: 'AI-powered municipal code violation monitoring for San Diego property investors. Detect fines early, protect your portfolio.',
+    siteName: 'DoggyBagg',
+    title: 'DoggyBagg | AI-Powered Property Compliance',
+    description: metaDescription,
     images: [
+      {
+        url: '/images/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'DoggyBagg - Take it with you | San Diego Property Compliance',
+      },
       {
         url: '/images/darkdoggylogo.jpg',
         width: 1200,
         height: 630,
-        alt: 'Ordinance.ai - Property Compliance Monitoring',
+        alt: 'DoggyBagg - San Diego Property Compliance Monitoring',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ordinance.ai | San Diego Property Fine Monitoring',
-    description: 'AI-powered municipal code violation monitoring for San Diego property investors.',
+    title: 'DoggyBagg | AI-Powered Property Compliance',
+    description: metaDescription,
+    images: ['/images/og-image.png'],
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || 'REPLACE_WITH_GOOGLE_SITE_VERIFICATION',
   },
   robots: {
     index: true,
@@ -53,13 +69,10 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      {
-        url: '/images/darkdoggylogo.jpg',
-        type: 'image/jpeg',
-        sizes: '32x32',
-      },
+      { url: '/images/og-image.png', type: 'image/png', sizes: '32x32' },
+      { url: '/images/og-image.png', type: 'image/png', sizes: '192x192' },
     ],
-    apple: '/images/darkdoggylogo.jpg',
+    apple: '/images/og-image.png',
   },
 }
 
@@ -78,8 +91,10 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
         <PostHogProvider>
+          <PostHogIdentifyBridge />
           <QueryProvider>{children}</QueryProvider>
           <Analytics />
+          <CookieConsent />
         </PostHogProvider>
       </body>
     </html>

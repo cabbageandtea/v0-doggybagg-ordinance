@@ -10,6 +10,7 @@ import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { createClient } from "@/lib/supabase/client"
 import { useRouter, useSearchParams } from "next/navigation"
+import { trackSignedIn } from "@/lib/analytics"
 
 export default function SignInPage() {
   const [email, setEmail] = useState("")
@@ -33,12 +34,14 @@ export default function SignInPage() {
 
     try {
       const supabase = createClient()
-      const { error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       })
 
       if (error) throw error
+
+      trackSignedIn(data.user?.id)
 
       const redirectTo = searchParams.get("redirect") || "/dashboard"
       const safeRedirect = redirectTo.startsWith("/") && !redirectTo.includes("//") ? redirectTo : "/dashboard"

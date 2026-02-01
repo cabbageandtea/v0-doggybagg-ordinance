@@ -1,8 +1,9 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
+import { motion, useInView } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { TactileButton } from "@/components/tactile-button"
 import { 
   MapPin, 
   TrendingUp, 
@@ -80,9 +81,13 @@ const mockNeighborhoodData: NeighborhoodData[] = [
   }
 ]
 
+const springTransition = { type: "spring" as const, stiffness: 100, damping: 20 }
+
 export function NeighborhoodWatchWidget() {
   const [data, setData] = useState<NeighborhoodData[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const sectionRef = useRef<HTMLElement>(null)
+  const isInView = useInView(sectionRef, { once: true, margin: "-80px" })
 
   useEffect(() => {
     // Simulate loading from API
@@ -108,9 +113,14 @@ export function NeighborhoodWatchWidget() {
   }
 
   return (
-    <section className="py-12 sm:py-20">
+    <section id="neighborhood-watch" ref={sectionRef} className="py-12 sm:py-20">
       <div className="container mx-auto px-4">
-        <div className="mb-8 sm:mb-12 text-center">
+        <motion.div
+          className="mb-8 sm:mb-12 text-center"
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          transition={springTransition}
+        >
           <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/20 px-4 py-2">
             <Eye className="h-4 w-4 text-primary" />
             <span className="text-sm font-medium text-primary">Live Enforcement Data</span>
@@ -119,10 +129,10 @@ export function NeighborhoodWatchWidget() {
             Neighborhood <span className="text-glow text-primary">Watch</span> Dashboard
           </h2>
           <p className="mx-auto max-w-2xl text-sm sm:text-base text-muted-foreground text-pretty">
-            Real-time enforcement heat maps for San Diego neighborhoods. See where the city 
+            Real-time enforcement heat maps for San Diego neighborhoods. See where the city
             is actively monitoring before violations hit your property.
           </p>
-        </div>
+        </motion.div>
 
         {/* Heat Map Grid */}
         {isLoading ? (
@@ -134,11 +144,19 @@ export function NeighborhoodWatchWidget() {
           </div>
         ) : (
           <>
-            <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-8">
-              {data.map((neighborhood) => (
-                <div
+            <motion.div
+              className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-8"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ ...springTransition, delay: 0.1 }}
+            >
+              {data.map((neighborhood, idx) => (
+                <motion.div
                   key={neighborhood.zipCode}
-                  className="liquid-glass rounded-xl p-4 sm:p-6 border border-border hover:border-primary/30 transition-all duration-300 hover:scale-[1.02]"
+                  className="liquid-glass rounded-xl p-4 sm:p-6 border border-border hover:border-primary/30 transition-colors duration-300"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                  transition={{ ...springTransition, delay: 0.15 + idx * 0.05 }}
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-2">
@@ -186,12 +204,17 @@ export function NeighborhoodWatchWidget() {
                       </span>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             {/* CTA Section */}
-            <div className="liquid-glass-glow rounded-2xl p-6 sm:p-8 text-center">
+            <motion.div
+              className="liquid-glass-glow rounded-2xl p-6 sm:p-8 text-center"
+              initial={{ opacity: 0, y: 24 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+              transition={{ ...springTransition, delay: 0.4 }}
+            >
               <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2">
                 Is Your Neighborhood at Risk?
               </h3>
@@ -201,25 +224,25 @@ export function NeighborhoodWatchWidget() {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Link href="/auth/sign-up?tier=community-free">
-                  <Button 
-                    size="lg" 
+                  <TactileButton
+                    size="lg"
                     className="w-full sm:w-auto glow-accent bg-green-500 text-white hover:bg-green-600"
                   >
                     Start Free Monitoring
-                  </Button>
+                  </TactileButton>
                 </Link>
                 <Link href="#pricing">
-                  <Button 
-                    size="lg" 
+                  <TactileButton
                     variant="outline"
+                    size="lg"
                     className="w-full sm:w-auto gap-2 bg-transparent"
                   >
                     View All Plans
                     <ChevronRight className="h-4 w-4" />
-                  </Button>
+                  </TactileButton>
                 </Link>
               </div>
-            </div>
+            </motion.div>
           </>
         )}
       </div>

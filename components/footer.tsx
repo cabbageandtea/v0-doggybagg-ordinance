@@ -18,7 +18,7 @@ const footerLinks = {
     { label: "Contact", href: "mailto:hello@doggybagg.cc?subject=General%20Inquiry" },
   ],
   Legal: [
-    { label: "Privacy Policy", href: "mailto:hello@doggybagg.cc?subject=Privacy%20Policy" },
+    { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Service", href: "mailto:hello@doggybagg.cc?subject=Terms%20of%20Service" },
     { label: "Cookie Policy", href: "mailto:hello@doggybagg.cc?subject=Cookie%20Policy" },
   ],
@@ -38,26 +38,26 @@ export function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <Link href="/" className="mb-6 flex items-center gap-3">
-              <div className="relative h-10 w-10 overflow-hidden rounded-xl glow-accent">
+              <div className="relative h-10 w-10 overflow-hidden rounded-xl bg-background/50">
                 <Image
-                  src="/images/darkdoggylogo.jpg"
-                  alt="Ordinance.ai Logo"
+                  src="/images/og-image.png"
+                  alt="DoggyBagg"
                   fill
-                  className="object-cover"
+                  className="object-contain p-0.5"
                 />
               </div>
               <div className="flex flex-col">
                 <span className="text-lg font-bold text-foreground tracking-tight">
-                  Ordinance.ai
+                  DoggyBagg
                 </span>
                 <span className="text-xs text-muted-foreground">
-                  by DoggyBagg LLC
+                  Take it with you
                 </span>
               </div>
             </Link>
             <p className="mb-6 max-w-sm text-sm text-muted-foreground">
-              AI-powered municipal code violation monitoring for San Diego 
-              property investors. Protect your portfolio with real-time alerts.
+              The compliance shield for San Diego investors. Stop fines before they stop you—
+              real-time alerts, AI risk scoring, appeal support.
             </p>
             <div className="flex gap-4">
               <Link

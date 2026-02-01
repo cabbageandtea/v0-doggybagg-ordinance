@@ -2,6 +2,8 @@
 
 **Phase 2 Verification Complete**
 
+For a concise pre-launch checklist (OG image, Search Console, etc.), see **LAUNCH_CHECKLIST.md**.
+
 ---
 
 ## Manual Vercel Env Vars Checklist

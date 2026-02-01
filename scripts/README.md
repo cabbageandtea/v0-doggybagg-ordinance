@@ -8,8 +8,24 @@ Run in **Supabase Dashboard → SQL Editor** in this order.
 2. **006_properties_user_and_stro_columns.sql** – Adds `user_id`, `stro_tier`, `license_id`, `reporting_status`, `risk_score` for dashboard.
 3. **007_properties_crud_complete.sql** – Optional. Index for faster single-property lookups.
 4. **008_stripe_webhook_events.sql** – Required for Stripe webhook idempotency. Run before enabling webhooks.
+5. **009_city_registry_cache_rls.sql** – RLS for `city_registry_cache` (run only if table exists).
+6. **010_webhook_logs.sql** – Dead letter table for webhook validation failures. Required for Stripe webhook fail-safe.
+
+**security-test.sql** – Manual RLS verification. Run as `anon` role to test policies.
 
 **How to run:** No Supabase CLI in this project. Run each script manually in **Supabase Dashboard → SQL Editor**. Paste the file contents and Execute.
+
+## Performance Benchmark
+
+**performance-bench.js** — Stress-tests the Tactile landing page (3D Tilt cards, Tactile Buttons), reports FCP.
+
+```bash
+pnpm run build && pnpm start
+# In another terminal:
+pnpm run perf:bench
+```
+
+Requires `npx playwright install chromium` on first run.
 4. **002_create_profile_trigger.sql** – Trigger on `auth.users` to create a profile on sign-up.
 5. **003_drop_profile_trigger_use_app_fallback.sql** – Optional. Run if you get "Database error saving new user".
 6. **004_agentic_autonomous_expansion.sql** – Agent tables, neighborhood intelligence (requires 001).

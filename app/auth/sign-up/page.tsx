@@ -11,6 +11,7 @@ import Link from "next/link"
 import { createClient } from "@/lib/supabase/client"
 import { useRouter } from "next/navigation"
 import { ensureUserProfile } from "@/app/actions/profile"
+import { trackSignedUp } from "@/lib/analytics"
 
 export default function SignUpPage() {
   const [email, setEmail] = useState("")
@@ -39,6 +40,8 @@ export default function SignUpPage() {
       })
 
       if (signUpError) throw signUpError
+
+      trackSignedUp(data.user?.id)
 
       // If email confirmation is disabled, we get a session immediately; ensure profile exists
       if (data.session) {
