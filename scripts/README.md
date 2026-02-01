@@ -6,10 +6,14 @@ Run in **Supabase Dashboard → SQL Editor** in this order.
 
 1. **001_create_properties_schema.sql** – Tables (`profiles`, `properties`, `payment_transactions`, etc.) and RLS.
 2. **006_properties_user_and_stro_columns.sql** – Adds `user_id`, `stro_tier`, `license_id`, `reporting_status`, `risk_score` for dashboard.
-3. **002_create_profile_trigger.sql** – Trigger on `auth.users` to create a profile on sign-up.
-4. **003_drop_profile_trigger_use_app_fallback.sql** – Optional. Run if you get "Database error saving new user".
-5. **004_agentic_autonomous_expansion.sql** – Agent tables, neighborhood intelligence (requires 001).
-6. **005_onboarding_agent_schema.sql** – Onboarding, compliance health checks.
+3. **007_properties_crud_complete.sql** – Optional. Index for faster single-property lookups.
+4. **008_stripe_webhook_events.sql** – Required for Stripe webhook idempotency. Run before enabling webhooks.
+
+**How to run:** No Supabase CLI in this project. Run each script manually in **Supabase Dashboard → SQL Editor**. Paste the file contents and Execute.
+4. **002_create_profile_trigger.sql** – Trigger on `auth.users` to create a profile on sign-up.
+5. **003_drop_profile_trigger_use_app_fallback.sql** – Optional. Run if you get "Database error saving new user".
+6. **004_agentic_autonomous_expansion.sql** – Agent tables, neighborhood intelligence (requires 001).
+7. **005_onboarding_agent_schema.sql** – Onboarding, compliance health checks.
 
 ## "Database error saving new user"
 

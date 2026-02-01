@@ -21,8 +21,9 @@ export async function GET(request: Request) {
     return NextResponse.redirect(signInUrl)
   }
 
+  // Use the same supabase instance (with session) so ensureUserProfile sees the user
   if (session?.user) {
-    await ensureUserProfile()
+    await ensureUserProfile(supabase)
   }
 
   return NextResponse.redirect(new URL('/dashboard', baseUrl))

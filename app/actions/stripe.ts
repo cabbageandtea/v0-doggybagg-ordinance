@@ -92,13 +92,11 @@ export async function startCheckoutSession(productId: string): Promise<string> {
     console.error('[v0] Failed to log payment transaction:', insertError)
   }
 
-  const clientSecret = session.client_secret
-  if (!clientSecret) {
-    throw new Error('Failed to create checkout session: no client_secret returned')
+  if (!session.client_secret) {
+    throw new Error('Failed to create checkout session')
   }
-
-  return clientSecret
-} 
+  return session.client_secret
+}
 
 export async function getPaymentStatus(sessionId: string) {
   const session = await stripe.checkout.sessions.retrieve(sessionId)

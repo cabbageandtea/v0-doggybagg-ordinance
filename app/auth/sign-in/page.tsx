@@ -40,8 +40,10 @@ export default function SignInPage() {
 
       if (error) throw error
 
+      const redirectTo = searchParams.get("redirect") || "/dashboard"
+      const safeRedirect = redirectTo.startsWith("/") && !redirectTo.includes("//") ? redirectTo : "/dashboard"
       router.refresh()
-      router.push("/dashboard")
+      router.push(safeRedirect)
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Failed to sign in")
     } finally {

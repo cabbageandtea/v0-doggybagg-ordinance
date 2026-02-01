@@ -1,23 +1,23 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { getUserProperties, deleteProperty, type Property } from "@/app/actions/properties"
+import { useState } from "react"
+import { useProperties, useDeleteProperty, type Property } from "@/lib/hooks/use-properties"
+import { useOnboarding } from "@/providers/onboarding-provider"
+import { useOnboardingViewTrigger } from "@/lib/hooks/use-onboarding-view-trigger"
+import { updateOnboardingMilestone } from "@/app/actions/onboarding"
 import { useRouter } from "next/navigation"
 import { GuidedOnboardingTour } from "@/components/guided-onboarding-tour"
 import { PhoneVerificationModal } from "@/components/phone-verification-modal"
-import { 
-  Building2, 
-  AlertTriangle, 
-  CheckCircle, 
-  TrendingUp, 
+import {
+  Building2,
+  AlertTriangle,
+  CheckCircle,
+  TrendingUp,
   Search,
   Filter,
   Download,
   MoreHorizontal,
-  ChevronDown,
   ExternalLink,
-  ArrowUpRight,
-  ArrowDownRight
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -43,6 +43,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { PropertyDetailDialog } from "@/components/property-detail-dialog"
+import { PropertyEditDialog } from "@/components/property-edit-dialog"
+import { PropertyCreateDialog } from "@/components/property-create-dialog"
 
 // Stats helper - calculate from properties
 function calculateStats(properties: Property[]) {
@@ -59,7 +62,6 @@ function calculateStats(properties: Property[]) {
     avgRiskScore: avgRisk,
   }
 }
-
 
 function getStatusBadge(status: string) {
   switch (status) {
@@ -111,32 +113,20 @@ export default function DashboardPage() {
   const router = useRouter()
   const [searchQuery, setSearchQuery] = useState("")
   const [statusFilter, setStatusFilter] = useState("all")
-  const [properties, setProperties] = useState<Property[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
   const [showOnboarding, setShowOnboarding] = useState(true)
+  const [detailProperty, setDetailProperty] = useState<Property | null>(null)
+  const [detailOpen, setDetailOpen] = useState(false)
+  const [editProperty, setEditProperty] = useState<Property | null>(null)
+  const [editOpen, setEditOpen] = useState(false)
+  const [createOpen, setCreateOpen] = useState(false)
 
-  // Load properties on mount
-  useEffect(() => {
-    async function loadProperties() {
-      setIsLoading(true)
-      setError(null)
-      
-      const result = await getUserProperties()
-      
-      if (result.error) {
-        console.error('[v0] Failed to load properties:', result.error)
-        setError(result.error)
-        setProperties([])
-      } else {
-        setProperties(result.properties || [])
-      }
-      
-      setIsLoading(false)
-    }
+  const { data: properties = [], isLoading, error: queryError } = useProperties()
+  const deleteMutation = useDeleteProperty()
+  const onboarding = useOnboarding()
 
-    void loadProperties()
-  }, [])
+  // Zero-effort: fire has_viewed_risk_score when user scrolls to stats section
+  useOnboardingViewTrigger("neighborhood-watch", () => void onboarding.refetch())
+  const error = queryError ? String(queryError) : null
 
   const stats = properties.length > 0 ? calculateStats(properties) : {
     totalProperties: 0,
@@ -146,35 +136,36 @@ export default function DashboardPage() {
   }
 
   const statsDisplay = [
-    {
-      label: "Total Properties",
-      value: stats.totalProperties.toString(),
-      change: "+0",
-      trend: "up" as const,
-      icon: Building2,
-    },
-    {
-      label: "Active Violations",
-      value: stats.activeViolations.toString(),
-      change: "-0",
-      trend: "down" as const,
-      icon: AlertTriangle,
-    },
-    {
-      label: "Compliant",
-      value: stats.compliant.toString(),
-      change: "+0",
-      trend: "up" as const,
-      icon: CheckCircle,
-    },
-    {
-      label: "Avg Risk Score",
-      value: stats.avgRiskScore.toString(),
-      change: "-0",
-      trend: "down" as const,
-      icon: TrendingUp,
-    },
+    { label: "Total Properties", value: stats.totalProperties.toString(), icon: Building2 },
+    { label: "Active Violations", value: stats.activeViolations.toString(), icon: AlertTriangle },
+    { label: "Compliant", value: stats.compliant.toString(), icon: CheckCircle },
+    { label: "Avg Risk Score", value: stats.avgRiskScore.toString(), icon: TrendingUp },
   ]
+
+  const exportToCSV = () => {
+    const headers = ["Address", "STRO Tier", "License ID", "Status", "Risk Score", "Added"]
+    const rows = filteredProperties.map((p) => [
+      `"${p.address.replace(/"/g, '""')}"`,
+      p.stro_tier ?? 1,
+      p.license_id || "",
+      p.reporting_status || "pending",
+      p.risk_score ?? 0,
+      p.created_at ? new Date(p.created_at).toLocaleDateString() : "",
+    ])
+    const csv = [headers.join(","), ...rows.map((r) => r.join(","))].join("\n")
+    const blob = new Blob([csv], { type: "text/csv" })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = `doggybagg-properties-${new Date().toISOString().slice(0, 10)}.csv`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  const openDetail = (property: Property) => {
+    setDetailProperty(property)
+    setDetailOpen(true)
+  }
 
   const filteredProperties = properties.filter((property) => {
     const matchesSearch = property.address.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -184,18 +175,14 @@ export default function DashboardPage() {
   })
 
   const handleDeleteProperty = async (propertyId: string) => {
-    if (!confirm('Are you sure you want to remove this property from monitoring?')) {
-      return
-    }
+    if (!confirm("Are you sure you want to remove this property from monitoring?")) return
+    const result = await deleteMutation.mutateAsync(propertyId)
+    if (!result.success) alert(`Failed to delete property: ${result.error}`)
+  }
 
-    const result = await deleteProperty(propertyId)
-    
-    if (result.success) {
-      // Refresh the list
-      setProperties(properties.filter(p => p.id !== propertyId))
-    } else {
-      alert(`Failed to delete property: ${result.error}`)
-    }
+  const handleEdit = (property: Property) => {
+    setEditProperty(property)
+    setEditOpen(true)
   }
 
   if (isLoading) {
@@ -242,23 +229,28 @@ export default function DashboardPage() {
           <p className="text-sm text-muted-foreground">Monitor your property compliance</p>
         </div>
         <div className="flex items-center gap-2">
-          <PhoneVerificationModal 
-            onVerified={() => {
-              // Refresh onboarding status
+          <PhoneVerificationModal
+            highlight={onboarding.primaryCta === "verify_phone"}
+            onVerified={async () => {
+              await updateOnboardingMilestone("has_verified_phone")
+              await onboarding.refetch()
             }}
           />
-          <Button 
+          <Button
             id="add-property-button"
-            className="gap-2 glow-accent"
-            onClick={() => router.push('/upload')}
+            className={`gap-2 ${onboarding.primaryCta === "add_property" ? "glow-accent ring-2 ring-primary/50 ring-offset-2 ring-offset-background" : "glow-accent"}`}
+            onClick={() => setCreateOpen(true)}
           >
             Add Property
+          </Button>
+          <Button variant="outline" onClick={() => router.push("/upload")}>
+            Upload CSV
           </Button>
         </div>
       </div>
 
-      {/* Stats Bento Grid */}
-      <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {/* Stats Bento Grid - id for onboarding "view risk" step */}
+      <div id="neighborhood-watch" className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {statsDisplay.map((stat) => (
           <div
             key={stat.label}
@@ -273,20 +265,29 @@ export default function DashboardPage() {
                 <stat.icon className="h-6 w-6 text-primary" />
               </div>
             </div>
-            <div className="mt-4 flex items-center gap-1">
-              {stat.trend === "up" ? (
-                <ArrowUpRight className="h-4 w-4 text-green-400" />
-              ) : (
-                <ArrowDownRight className="h-4 w-4 text-red-400" />
-              )}
-              <span className={`text-sm ${stat.trend === "up" ? "text-green-400" : "text-red-400"}`}>
-                {stat.change}
-              </span>
-              <span className="text-xs text-muted-foreground ml-1">vs last month</span>
-            </div>
           </div>
         ))}
       </div>
+
+      <PropertyDetailDialog
+        property={detailProperty}
+        open={detailOpen}
+        onOpenChange={setDetailOpen}
+        onEdit={handleEdit}
+      />
+      <PropertyEditDialog
+        property={editProperty}
+        open={editOpen}
+        onOpenChange={(open) => {
+          setEditOpen(open)
+          if (!open) setEditProperty(null)
+        }}
+      />
+      <PropertyCreateDialog
+        open={createOpen}
+        onOpenChange={setCreateOpen}
+        onSuccess={() => void onboarding.refetch()}
+      />
 
       {/* Property Table Card */}
       <div className="liquid-glass-glow rounded-2xl p-6">
@@ -298,14 +299,20 @@ export default function DashboardPage() {
             </p>
           </div>
           <div className="flex gap-2">
-            <Button variant="outline" size="sm" className="gap-2 border-border text-foreground hover:bg-secondary bg-transparent">
+            <Button
+              variant="outline"
+              size="sm"
+              className="gap-2 border-border bg-transparent text-foreground hover:bg-secondary"
+              onClick={exportToCSV}
+              disabled={filteredProperties.length === 0}
+            >
               <Download className="h-4 w-4" />
-              Export
+              Export CSV
             </Button>
-            <Button 
-              size="sm" 
+            <Button
+              size="sm"
               className="gap-2 glow-accent bg-primary text-primary-foreground hover:bg-primary/90"
-              onClick={() => router.push('/upload')}
+              onClick={() => setCreateOpen(true)}
             >
               Add Property
             </Button>
@@ -384,13 +391,12 @@ export default function DashboardPage() {
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end" className="liquid-glass border-border">
-                        <DropdownMenuItem className="cursor-pointer gap-2">
+                        <DropdownMenuItem
+                          className="cursor-pointer gap-2"
+                          onClick={() => openDetail(property)}
+                        >
                           <ExternalLink className="h-4 w-4" />
                           View Details
-                        </DropdownMenuItem>
-                        <DropdownMenuItem className="cursor-pointer gap-2">
-                          <TrendingUp className="h-4 w-4" />
-                          Risk History
                         </DropdownMenuItem>
                         <DropdownMenuItem 
                           className="cursor-pointer gap-2 text-destructive"
@@ -413,10 +419,7 @@ export default function DashboardPage() {
             <Building2 className="mx-auto h-12 w-12 text-muted-foreground" />
             <p className="mt-4 text-foreground font-semibold">No properties yet</p>
             <p className="mt-2 text-sm text-muted-foreground">Add your first property to start monitoring compliance</p>
-            <Button 
-              className="mt-4 glow-accent"
-              onClick={() => router.push('/upload')}
-            >
+            <Button className="mt-4 glow-accent" onClick={() => setCreateOpen(true)}>
               Add Your First Property
             </Button>
           </div>
@@ -429,13 +432,21 @@ export default function DashboardPage() {
           </div>
         )}
 
-        {/* Pagination hint */}
         <div className="mt-4 flex items-center justify-between text-sm text-muted-foreground">
           <p>Showing {filteredProperties.length} of {properties.length} properties</p>
-          <Button variant="ghost" size="sm" className="gap-1 text-primary hover:text-primary/80">
-            View All
-            <ChevronDown className="h-4 w-4" />
-          </Button>
+          {(searchQuery || statusFilter !== "all") && (
+            <Button
+              variant="ghost"
+              size="sm"
+              className="gap-1 text-primary hover:text-primary/80"
+              onClick={() => {
+                setSearchQuery("")
+                setStatusFilter("all")
+              }}
+            >
+              Clear filters
+            </Button>
+          )}
         </div>
       </div>
     </div>

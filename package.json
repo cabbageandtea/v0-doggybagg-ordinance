@@ -1,5 +1,5 @@
 {
-  "name": "my-v0-project",
+  "name": "ordinance-ai",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -50,6 +50,7 @@
     "@stripe/stripe-js": "8.7.0",
     "@supabase/ssr": "0.8.0",
     "@supabase/supabase-js": "latest",
+    "@tanstack/react-query": "^5.90.20",
     "@vercel/analytics": "latest",
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.1",

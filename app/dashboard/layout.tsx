@@ -6,6 +6,7 @@ import { MeshGradientBackground } from "@/components/mesh-gradient-background"
 import { DashboardHeader } from "@/components/dashboard-header"
 import { DashboardFooter } from "@/components/dashboard-footer"
 import { ADMTModal } from "@/components/admt-modal"
+import { OnboardingProvider } from "@/providers/onboarding-provider"
 
 export default function DashboardLayout({
   children,
@@ -13,7 +14,7 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   return (
-    <>
+    <OnboardingProvider>
       <MeshGradientBackground />
       <DashboardHeader />
       <main className="min-h-screen pt-24 pb-8">
@@ -21,6 +22,6 @@ export default function DashboardLayout({
       </main>
       <DashboardFooter />
       <ADMTModal />
-    </>
+    </OnboardingProvider>
   )
 }

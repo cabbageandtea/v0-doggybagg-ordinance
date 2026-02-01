@@ -3,65 +3,70 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { 
-  getOnboardingStatus, 
-  updateOnboardingProgress,
-  generateFirstHealthCheck,
-  type OnboardingStatus,
-  type ComplianceHealthCheck
-} from "@/app/actions/agentic"
-import { 
-  MapPin, 
-  Smartphone, 
-  TrendingUp, 
-  CheckCircle, 
+import { useOnboarding } from "@/providers/onboarding-provider"
+import { updateOnboardingMilestone } from "@/app/actions/onboarding"
+import { generateFirstHealthCheck, type ComplianceHealthCheck } from "@/app/actions/agentic"
+import {
+  MapPin,
+  Smartphone,
+  TrendingUp,
+  CheckCircle,
   ArrowRight,
   Sparkles,
-  Upload,
-  Zap
+  Zap,
 } from "lucide-react"
 
 type GuidedTourProps = {
   onComplete?: () => void
 }
 
-export function GuidedOnboardingTour({ onComplete }: GuidedTourProps) {
-  const [status, setStatus] = useState<OnboardingStatus['status'] | null>(null)
-  const [currentStep, setCurrentStep] = useState(1)
-  const [isLoading, setIsLoading] = useState(true)
-  const [showHealthCheck, setShowHealthCheck] = useState(false)
-  const [healthCheck, setHealthCheck] = useState<ComplianceHealthCheck['report'] | null>(null)
-  useEffect(() => {
-    void loadOnboardingStatus()
-  }, [])
+const TOTAL_STEPS = 4
 
-  async function loadOnboardingStatus() {
-    setIsLoading(true)
-    const result = await getOnboardingStatus()
-    if (result.success && result.status) {
-      setStatus(result.status)
-      setCurrentStep(result.status.currentStep)
-      
-      // If onboarding is complete, generate health check
-      if (result.status.isComplete && !healthCheck) {
+export function GuidedOnboardingTour({ onComplete }: GuidedTourProps) {
+  const { progress, isLoading, primaryCta, refetch } = useOnboarding()
+  const [showHealthCheck, setShowHealthCheck] = useState(false)
+  const [healthCheck, setHealthCheck] = useState<ComplianceHealthCheck["report"] | null>(null)
+
+  const currentStep = !progress
+    ? 1
+    : !progress.has_added_property
+      ? 1
+      : !progress.has_verified_phone
+        ? 2
+        : !progress.has_viewed_risk_score
+          ? 3
+          : 4
+
+  const isComplete = progress
+    ? progress.has_added_property &&
+      progress.has_verified_phone &&
+      progress.has_viewed_risk_score &&
+      (progress.has_generated_health_check || !!healthCheck)
+    : false
+
+  useEffect(() => {
+    if (isComplete && !healthCheck && progress?.has_viewed_risk_score) {
+      void (async () => {
         const healthResult = await generateFirstHealthCheck()
         if (healthResult.success && healthResult.report) {
           setHealthCheck(healthResult.report)
           setShowHealthCheck(true)
+          await updateOnboardingMilestone("has_generated_health_check")
+          await refetch()
         }
-      }
+      })()
     }
-    setIsLoading(false)
-  }
+  }, [isComplete, healthCheck, progress?.has_viewed_risk_score, refetch])
 
-  async function handleStepComplete(step: 'add_property' | 'verify_phone' | 'view_risk') {
-    await updateOnboardingProgress(step)
-    await loadOnboardingStatus()
+  async function handleStepComplete(
+    step: "add_property" | "verify_phone" | "view_risk"
+  ) {
+    if (step === "verify_phone") await updateOnboardingMilestone("has_verified_phone")
+    if (step === "view_risk") await updateOnboardingMilestone("has_viewed_risk_score")
+    await refetch()
   }
 
   function getStepDetails(step: number) {
-    const isFree = status?.userTier === 'free'
-    
     const steps = [
       {
         title: "Add Your First Property",
@@ -80,13 +85,11 @@ export function GuidedOnboardingTour({ onComplete }: GuidedTourProps) {
         color: "text-green-400",
       },
       {
-        title: isFree ? "View Neighborhood Watch" : "Bulk Upload & API Setup",
-        description: isFree 
-          ? "See real-time enforcement heat maps for San Diego neighborhoods"
-          : "Upload multiple properties or integrate with your systems",
-        icon: isFree ? TrendingUp : Upload,
+        title: "View Neighborhood Watch",
+        description: "See real-time enforcement heat maps for San Diego neighborhoods",
+        icon: TrendingUp,
         action: "view_risk" as const,
-        targetId: isFree ? "neighborhood-watch" : "bulk-upload-button",
+        targetId: "neighborhood-watch",
         color: "text-purple-400",
       },
     ]
@@ -95,19 +98,21 @@ export function GuidedOnboardingTour({ onComplete }: GuidedTourProps) {
   }
 
   const stepInfo = getStepDetails(currentStep)
+  const nextAction =
+    currentStep === 1
+      ? "Add your first property"
+      : currentStep === 2
+        ? "Verify your phone for SMS alerts"
+        : currentStep === 3
+          ? "View Neighborhood Watch heat map"
+          : "Generate your health check"
 
-  if (isLoading) {
-    return null
-  }
-
-  // Don't show tour if already complete and health check shown
-  if (status?.isComplete && !showHealthCheck) {
-    return null
-  }
+  if (isLoading) return null
+  if (isComplete && !showHealthCheck) return null
 
   return (
     <AnimatePresence>
-      {!status?.isComplete && (
+      {!isComplete && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -151,14 +156,14 @@ export function GuidedOnboardingTour({ onComplete }: GuidedTourProps) {
                   Setup Progress
                 </span>
                 <span className="text-xs font-bold text-primary">
-                  {currentStep} of {status?.totalSteps}
+                  {currentStep} of {TOTAL_STEPS}
                 </span>
               </div>
               <div className="h-2 bg-secondary/30 rounded-full overflow-hidden">
                 <motion.div
                   className="h-full bg-gradient-to-r from-primary to-primary/60"
                   initial={{ width: 0 }}
-                  animate={{ width: `${(currentStep / (status?.totalSteps || 3)) * 100}%` }}
+                  animate={{ width: `${(currentStep / TOTAL_STEPS) * 100}%` }}
                   transition={{ duration: 0.5 }}
                 />
               </div>
@@ -184,11 +189,8 @@ export function GuidedOnboardingTour({ onComplete }: GuidedTourProps) {
               <Button
                 className="w-full gap-2 glow-accent group"
                 onClick={() => {
-                  if (stepInfo?.action) {
-                    void handleStepComplete(stepInfo.action)
-                  }
-                  // Scroll to target element
-                  const target = document.getElementById(stepInfo?.targetId || '')
+                  if (stepInfo?.action) void handleStepComplete(stepInfo.action)
+                  const target = document.getElementById(stepInfo?.targetId || "")
                   if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'center' })
                     // Highlight target
@@ -200,7 +202,7 @@ export function GuidedOnboardingTour({ onComplete }: GuidedTourProps) {
                 }}
               >
                 <Zap className="h-4 w-4" />
-                {status?.nextAction}
+                {nextAction}
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
 

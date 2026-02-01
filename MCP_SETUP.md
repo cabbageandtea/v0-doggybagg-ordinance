@@ -60,12 +60,9 @@ instead of `https://mcp.vercel.com` in the `url` field.
 
 **Setup:**
 
-1. Get a v0 API key: [v0 → Settings → API Keys](https://v0.app/chat/settings/keys).
-2. In `~/.cursor/mcp.json`, in the **v0** server:
-   - Replace **both** `YOUR_V0_API_KEY_HERE` with your key:
-     - In `args`: `"--header", "Authorization: Bearer YOUR_ACTUAL_KEY"`
-     - In `env.V0_API_KEY`: `"YOUR_ACTUAL_KEY"`
-   - Use the same value in both places.
+1. Get a v0 API key: [v0 → Settings → API Keys](https://v0.app/chat/settings/keys) (Premium or Team plan required).
+2. Set the **environment variable** (Cursor reads from your system). In PowerShell (permanent): `[System.Environment]::SetEnvironmentVariable("V0_API_KEY", "your-actual-key", "User")`. Or use System Properties → Environment Variables → User variables → New → `V0_API_KEY`.
+3. **Restart Cursor** so it inherits the new variable.
 
 **Security:** Don’t commit `mcp.json` if it contains real tokens. Your global config is in `C:\Users\malik\.cursor\mcp.json` (outside the repo), so it won’t be committed with the project.
 

@@ -663,7 +663,7 @@ export async function generateFirstHealthCheck(): Promise<ComplianceHealthCheck>
     if (neighborhoodRiskLevel === 'Medium') overallScore -= 5
     overallScore = Math.max(0, Math.round(overallScore))
 
-    const portfolioHealth: 'Excellent' | 'Good' | 'Fair' | 'At Risk' = 
+    const portfolioHealth: 'Excellent' | 'Good' | 'Fair' | 'At Risk' =
       overallScore >= 85 ? 'Excellent' :
       overallScore >= 70 ? 'Good' :
       overallScore >= 50 ? 'Fair' : 'At Risk'

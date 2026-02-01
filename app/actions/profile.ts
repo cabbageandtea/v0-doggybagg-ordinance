@@ -1,14 +1,18 @@
 'use server'
 
 import { createClient } from '@/lib/supabase/server'
+import type { SupabaseClient } from '@supabase/supabase-js'
 
 /**
  * Ensures the current user has a row in public.profiles.
  * Call after sign-up or after exchangeCodeForSession so profile exists
  * even if the DB trigger on auth.users was not applied or failed (e.g. RLS).
+ * Pass supabase client when calling from auth callback so session is available.
  */
-export async function ensureUserProfile(): Promise<{ ok: boolean; error?: string }> {
-  const supabase = await createClient()
+export async function ensureUserProfile(
+  supabaseInstance?: SupabaseClient
+): Promise<{ ok: boolean; error?: string }> {
+  const supabase = supabaseInstance ?? (await createClient())
   const {
     data: { user },
   } = await supabase.auth.getUser()

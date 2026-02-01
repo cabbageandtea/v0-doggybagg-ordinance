@@ -1,11 +1,13 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Menu, X, LayoutDashboard, Upload, Settings, LogOut, Bell } from "lucide-react"
+import { createClient } from "@/lib/supabase/client"
+import type { User } from "@supabase/supabase-js"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,9 +24,38 @@ const navItems = [
 
 const supportEmail = "mailto:support@doggybagg.cc?subject=Support%20Request"
 
+function getInitials(user: User | null): string {
+  if (!user) return "?"
+  const name = user.user_metadata?.full_name || user.user_metadata?.name
+  if (name && typeof name === "string") {
+    const parts = name.trim().split(/\s+/)
+    if (parts.length >= 2) return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+    if (parts[0]) return parts[0].slice(0, 2).toUpperCase()
+  }
+  if (user.email) return user.email[0].toUpperCase()
+  return "?"
+}
+
 export function DashboardHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [user, setUser] = useState<User | null>(null)
   const pathname = usePathname()
+  const router = useRouter()
+
+  useEffect(() => {
+    void (async () => {
+      const { data } = await createClient().auth.getUser()
+      setUser(data.user)
+    })()
+  }, [])
+
+  const handleSignOut = async () => {
+    await createClient().auth.signOut()
+    router.refresh()
+    router.push("/")
+  }
+
+  const displayName = user?.user_metadata?.full_name || user?.user_metadata?.name || user?.email?.split("@")[0] || "Account"
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
@@ -76,31 +107,29 @@ export function DashboardHeader() {
                   Support
                 </Button>
               </Link>
-              <Button variant="ghost" size="icon" className="relative text-muted-foreground hover:text-foreground">
-                <Bell className="h-5 w-5" />
-                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
-                  3
-                </span>
-              </Button>
-              
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" className="gap-2 text-muted-foreground hover:text-foreground">
                     <Avatar className="h-8 w-8">
                       <AvatarFallback className="bg-primary/20 text-primary text-sm">
-                        JD
+                        {getInitials(user)}
                       </AvatarFallback>
                     </Avatar>
-                    <span className="hidden lg:inline">John Doe</span>
+                    <span className="hidden lg:inline truncate max-w-[120px]">{displayName}</span>
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-48 liquid-glass border-border">
-                  <DropdownMenuItem className="gap-2 cursor-pointer">
-                    <Settings className="h-4 w-4" />
-                    Settings
+                  <DropdownMenuItem asChild className="gap-2 cursor-pointer">
+                    <Link href="/dashboard">
+                      <Settings className="h-4 w-4" />
+                      Dashboard
+                    </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem className="gap-2 cursor-pointer text-destructive">
+                  <DropdownMenuItem
+                    className="gap-2 cursor-pointer text-destructive"
+                    onClick={handleSignOut}
+                  >
                     <LogOut className="h-4 w-4" />
                     Sign Out
                   </DropdownMenuItem>
@@ -141,15 +170,15 @@ export function DashboardHeader() {
                 )
               })}
               <div className="flex items-center justify-between border-t border-border pt-4 mt-2">
-                <div className="flex items-center gap-2">
-                  <Avatar className="h-8 w-8">
+                <div className="flex items-center gap-2 min-w-0">
+                  <Avatar className="h-8 w-8 shrink-0">
                     <AvatarFallback className="bg-primary/20 text-primary text-sm">
-                      JD
+                      {getInitials(user)}
                     </AvatarFallback>
                   </Avatar>
-                  <span className="text-sm text-foreground">John Doe</span>
+                  <span className="text-sm text-foreground truncate">{displayName}</span>
                 </div>
-                <Button variant="ghost" size="icon" className="text-destructive">
+                <Button variant="ghost" size="icon" className="text-destructive shrink-0" onClick={handleSignOut}>
                   <LogOut className="h-4 w-4" />
                 </Button>
               </div>

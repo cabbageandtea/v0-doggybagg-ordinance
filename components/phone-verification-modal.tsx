@@ -15,10 +15,11 @@ import {
 import { Smartphone, CheckCircle, AlertCircle } from "lucide-react"
 
 type PhoneVerificationModalProps = {
-  onVerified?: () => void
+  onVerified?: () => void | Promise<void>
+  highlight?: boolean
 }
 
-export function PhoneVerificationModal({ onVerified }: PhoneVerificationModalProps) {
+export function PhoneVerificationModal({ onVerified, highlight }: PhoneVerificationModalProps) {
   const [open, setOpen] = useState(false)
   const [phone, setPhone] = useState("")
   const [code, setCode] = useState("")
@@ -76,7 +77,7 @@ export function PhoneVerificationModal({ onVerified }: PhoneVerificationModalPro
         <Button
           id="verify-phone-button"
           variant="outline"
-          className="gap-2 border-primary/30 bg-transparent"
+          className={`gap-2 border-primary/30 bg-transparent ${highlight ? "ring-2 ring-primary/50 ring-offset-2 ring-offset-background" : ""}`}
         >
           <Smartphone className="h-4 w-4" />
           Verify Phone

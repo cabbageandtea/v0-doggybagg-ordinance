@@ -31,7 +31,18 @@ export async function updateSession(request: NextRequest) {
     },
   )
 
-  await supabase.auth.getUser()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  const pathname = request.nextUrl.pathname
+  const isProtected = pathname.startsWith('/dashboard') || pathname.startsWith('/upload')
+
+  if (isProtected && !user) {
+    const signInUrl = new URL('/auth/sign-in', request.url)
+    signInUrl.searchParams.set('redirect', pathname)
+    return NextResponse.redirect(signInUrl)
+  }
 
   return response
 }
