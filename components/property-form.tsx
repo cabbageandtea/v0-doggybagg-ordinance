@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/select"
 import { Loader2, Plus } from "lucide-react"
 import type { Property, AddPropertyInput, UpdatePropertyInput } from "@/app/actions/properties"
+import { trackAddProperty } from "@/lib/analytics"
 
 export interface PropertyFormProps {
   /** For create: pass null. For edit: pass the property. */
@@ -54,6 +55,7 @@ export function PropertyForm({
           setAddress("")
           setStroTier(1)
           setLicenseId("")
+          trackAddProperty({ source: "dialog" })
           onSuccess?.()
         } else {
           setError(result.error ?? "Failed to add property")

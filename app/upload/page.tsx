@@ -27,6 +27,7 @@ import {
 import { MeshGradientBackground } from "@/components/mesh-gradient-background"
 import { DashboardHeader } from "@/components/dashboard-header"
 import { useAddProperty, useAddPropertiesBulk, type AddPropertyInput } from "@/lib/hooks/use-properties"
+import { trackAddProperty } from "@/lib/analytics"
 
 type UploadStatus = "idle" | "uploading" | "processing" | "success" | "error"
 
@@ -169,6 +170,7 @@ export default function UploadPage() {
     )
 
     const result = await addBulkMutation.mutateAsync(properties)
+    if (result.success > 0) trackAddProperty({ source: "upload", count: result.success })
 
     setUploadedFile((prev) =>
       prev
@@ -213,6 +215,7 @@ export default function UploadPage() {
     })
     if (result.success) {
       setQuickAdd({ address: "", stro_tier: 1, license_id: "" })
+      trackAddProperty({ source: "upload" })
     } else {
       setQuickAddError(result.error || "Failed to add property")
     }
