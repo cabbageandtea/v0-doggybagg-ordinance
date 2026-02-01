@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react"
 import { updateOnboardingMilestone } from "@/app/actions/onboarding"
+import { trackViewedRiskScore } from "@/lib/analytics"
 
 /**
  * Zero-effort onboarding trigger: fires has_viewed_risk_score when the user
@@ -33,6 +34,7 @@ export function useOnboardingViewTrigger(
 
         hasFired.current = true
         observer.disconnect()
+        trackViewedRiskScore()
         void updateOnboardingMilestone("has_viewed_risk_score").then(() => {
           onFiredRef.current?.()
         })

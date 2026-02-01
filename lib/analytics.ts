@@ -15,3 +15,14 @@ export function trackAddProperty(props?: { source?: "dialog" | "upload"; count?:
     // No-op if PostHog not initialized
   }
 }
+
+/** Track when user scrolls to #neighborhood-watch (has_viewed_risk_score milestone) */
+export function trackViewedRiskScore() {
+  try {
+    if (posthog && typeof posthog.capture === "function") {
+      posthog.capture("has_viewed_risk_score")
+    }
+  } catch {
+    // No-op if PostHog not initialized
+  }
+}
