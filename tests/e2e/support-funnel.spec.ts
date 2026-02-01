@@ -19,6 +19,16 @@ test.describe("Support funnel", () => {
     await expect(page).toHaveURL(/\/help/)
   })
 
+  test("robots.txt serves without auth proxy", async ({ request }) => {
+    const baseUrl = process.env.PW_BASE_URL || "http://localhost:3000"
+    const res = await request.get(`${baseUrl}/robots.txt`)
+    expect(res.ok()).toBeTruthy()
+    const body = await res.text()
+    expect(body).toContain("Disallow: /dashboard")
+    expect(body).toContain("Disallow: /auth")
+    expect(body).toContain("Sitemap:")
+  })
+
   test("privacy and help pages are in sitemap", async ({ request }) => {
     const baseUrl = process.env.PW_BASE_URL || "http://localhost:3000"
     const res = await request.get(`${baseUrl}/sitemap.xml`)

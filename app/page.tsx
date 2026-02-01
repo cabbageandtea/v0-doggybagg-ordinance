@@ -14,6 +14,7 @@ import { FAQSection } from "@/components/faq-section"
 import { Footer } from "@/components/footer"
 import { FeedbackTrigger } from "@/components/feedback-trigger"
 import { MeshGradientBackground } from "@/components/mesh-gradient-background"
+import { SectionErrorBoundary } from "@/components/section-error-boundary"
 
 export default function Home() {
   return (
@@ -23,20 +24,36 @@ export default function Home() {
         <Header />
         <TrustBar />
         <main className="pt-1">
-          <BentoGrid />
-          <WhyDoggyBagg />
+          <SectionErrorBoundary>
+            <BentoGrid />
+          </SectionErrorBoundary>
+          <SectionErrorBoundary>
+            <WhyDoggyBagg />
+          </SectionErrorBoundary>
           <section id="calculator" className="py-20">
             <div className="container mx-auto px-4">
               <div className="grid gap-8 lg:grid-cols-2">
-                <FineCalculator />
-                <PropertySearch />
+                <SectionErrorBoundary>
+                  <FineCalculator />
+                </SectionErrorBoundary>
+                <SectionErrorBoundary>
+                  <PropertySearch />
+                </SectionErrorBoundary>
               </div>
             </div>
           </section>
-          <NeighborhoodWatchWidget />
-          <TestimonialsSection />
-          <PricingSection />
-          <FAQSection />
+          <SectionErrorBoundary>
+            <NeighborhoodWatchWidget />
+          </SectionErrorBoundary>
+          <SectionErrorBoundary>
+            <TestimonialsSection />
+          </SectionErrorBoundary>
+          <SectionErrorBoundary>
+            <PricingSection />
+          </SectionErrorBoundary>
+          <SectionErrorBoundary>
+            <FAQSection />
+          </SectionErrorBoundary>
         </main>
         <Footer />
         <StickyCTA />
