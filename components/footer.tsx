@@ -123,7 +123,7 @@ export function Footer() {
             &copy; 2026 DoggyBagg LLC. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <Link href="mailto:hello@doggybagg.cc?subject=Privacy%20Policy" className="text-xs text-muted-foreground hover:text-foreground">
+            <Link href="/privacy" className="text-xs text-muted-foreground hover:text-foreground">
               Privacy
             </Link>
             <Link href="mailto:hello@doggybagg.cc?subject=Terms%20of%20Service" className="text-xs text-muted-foreground hover:text-foreground">

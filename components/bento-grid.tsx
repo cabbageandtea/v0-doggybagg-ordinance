@@ -31,14 +31,14 @@ const features = [
   },
   {
     title: "Historical Data Analysis",
-    description: "Access complete violation history and identify patterns in municipal enforcement.",
+    description: "Full violation history. Spot patterns before they become problems.",
     icon: FileSearch,
     gridClass: "md:col-span-1 md:row-span-1",
     highlight: false,
   },
   {
     title: "Portfolio Analytics",
-    description: "Comprehensive dashboards showing risk scores and compliance status across all properties.",
+    description: "One-screen view of risk scores and compliance status across every property.",
     icon: BarChart3,
     gridClass: "md:col-span-1 md:row-span-2",
     highlight: false,
@@ -52,14 +52,14 @@ const features = [
   },
   {
     title: "San Diego Coverage",
-    description: "Complete coverage of all San Diego County municipal zones and districts.",
+    description: "Every zone. Every district. Full county coverage.",
     icon: MapPin,
     gridClass: "md:col-span-1 md:row-span-1",
     highlight: false,
   },
   {
     title: "Trend Forecasting",
-    description: "AI-powered predictions for enforcement trends in specific neighborhoods.",
+    description: "Predict enforcement by neighborhood. See risk before it lands.",
     icon: TrendingUp,
     gridClass: "md:col-span-1 md:row-span-1",
     highlight: false,
@@ -80,13 +80,13 @@ const FeatureCard = memo(function FeatureCard({
     >
       <div className="flex h-full flex-col">
         <div
-          className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl ${
+          className={`group/icon mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl transition-colors ${
             feature.highlight
               ? "bg-primary/20 text-primary glow-accent"
               : "bg-secondary text-foreground"
           }`}
         >
-          <Icon className="h-6 w-6" />
+          <Icon className="h-6 w-6 transition-transform duration-200 group-hover/icon:scale-110" />
         </div>
         <h3 className="mb-2 text-lg font-semibold text-foreground">{feature.title}</h3>
         <p className="flex-grow text-sm text-muted-foreground">{feature.description}</p>
@@ -107,19 +107,57 @@ const FeatureCard = memo(function FeatureCard({
   )
 })
 
-/** Kinetic headline: transform-only animations to avoid layout repaints */
+/** Parallax stats: each stat moves at a slightly different scroll rate */
+function ParallaxStats() {
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  })
+  const y1 = useTransform(scrollYProgress, [0, 0.3], [0, 8])
+  const y2 = useTransform(scrollYProgress, [0, 0.35], [0, -4])
+  const y3 = useTransform(scrollYProgress, [0, 0.4], [0, 6])
+
+  return (
+    <div ref={ref} className="grid w-full max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">
+      <motion.div style={{ y: y1 }} className="group flex flex-col items-center justify-center rounded-xl border border-border/50 bg-background/30 p-4">
+        <div className="mb-1 flex items-center gap-2 text-primary">
+          <Shield className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" />
+          <span className="text-2xl font-bold text-foreground">$2.4M+</span>
+        </div>
+        <p className="text-xs text-muted-foreground">Fines Detected</p>
+      </motion.div>
+      <motion.div style={{ y: y2 }} className="group flex flex-col items-center justify-center rounded-xl border border-border/50 bg-background/30 p-4">
+        <div className="mb-1 flex items-center gap-2 text-primary">
+          <Eye className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" />
+          <span className="text-2xl font-bold text-foreground">12,000+</span>
+        </div>
+        <p className="text-xs text-muted-foreground">Properties Monitored</p>
+      </motion.div>
+      <motion.div style={{ y: y3 }} className="group flex flex-col items-center justify-center rounded-xl border border-border/50 bg-background/30 p-4">
+        <div className="mb-1 flex items-center gap-2 text-primary">
+          <Zap className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" />
+          <span className="text-2xl font-bold text-foreground">24/7</span>
+        </div>
+        <p className="text-xs text-muted-foreground">Real-time Alerts</p>
+      </motion.div>
+    </div>
+  )
+}
+
+/** Kinetic headline: subtle scroll reaction, slower and gentler */
 function KineticHeadline() {
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   })
-  const scale = useTransform(scrollYProgress, [0, 0.3], [1, 1.02])
-  const y = useTransform(scrollYProgress, [0, 0.2], [0, -2])
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.008])
+  const y = useTransform(scrollYProgress, [0, 0.4], [0, -0.5])
 
   return (
     <motion.div ref={ref} style={{ scale, y }} className="mb-6">
-      <h1 className="text-4xl font-bold tracking-tight text-foreground md:text-6xl lg:text-7xl text-balance">
+      <h1 className="font-display text-4xl font-bold tracking-tight text-foreground md:text-6xl lg:text-7xl text-balance">
         San Diego&apos;s
         <br />
         <span className="text-glow text-primary">Compliance</span> Command Center
@@ -140,9 +178,9 @@ export function BentoGrid() {
           >
             <motion.div
               className="mb-6"
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              transition={{ duration: 0.7, delay: 0.25 }}
             >
               <Image
                 src="/images/og-image.png"
@@ -161,8 +199,7 @@ export function BentoGrid() {
             </div>
             <KineticHeadline />
             <p className="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground md:text-xl text-pretty">
-              The compliance shield for San Diego investors. Real-time violation alerts, AI risk scoring,
-              and appeal support—so you stay ahead, not behind.
+              Real-time alerts. AI risk scores. Appeal support. The compliance shield for San Diego investors—so you stay ahead.
             </p>
             <div className="mb-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link
@@ -191,30 +228,8 @@ export function BentoGrid() {
                 </TactileButton>
               </Link>
             </div>
-            {/* Stats */}
-            <div className="grid w-full max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">
-              <div className="flex flex-col items-center justify-center rounded-xl border border-border/50 bg-background/30 p-4">
-                <div className="mb-1 flex items-center gap-2 text-primary">
-                  <Shield className="h-5 w-5" />
-                  <span className="text-2xl font-bold text-foreground">$2.4M+</span>
-                </div>
-                <p className="text-xs text-muted-foreground">Fines Detected</p>
-              </div>
-              <div className="flex flex-col items-center justify-center rounded-xl border border-border/50 bg-background/30 p-4">
-                <div className="mb-1 flex items-center gap-2 text-primary">
-                  <Eye className="h-5 w-5" />
-                  <span className="text-2xl font-bold text-foreground">12,000+</span>
-                </div>
-                <p className="text-xs text-muted-foreground">Properties Monitored</p>
-              </div>
-              <div className="flex flex-col items-center justify-center rounded-xl border border-border/50 bg-background/30 p-4">
-                <div className="mb-1 flex items-center gap-2 text-primary">
-                  <Zap className="h-5 w-5" />
-                  <span className="text-2xl font-bold text-foreground">24/7</span>
-                </div>
-                <p className="text-xs text-muted-foreground">Real-time Alerts</p>
-              </div>
-            </div>
+            {/* Stats - subtle parallax (each moves at different rate) */}
+            <ParallaxStats />
           </BentoTiltCard>
         </div>
 
@@ -224,8 +239,7 @@ export function BentoGrid() {
             Enterprise-Grade <span className="text-glow text-primary">Monitoring</span>
           </h2>
           <p className="mx-auto max-w-2xl text-muted-foreground text-pretty">
-            Stay ahead of municipal code enforcement with AI-powered detection and comprehensive
-            portfolio management tools.
+            AI-powered detection and portfolio tools. Stay ahead of the city.
           </p>
         </div>
 

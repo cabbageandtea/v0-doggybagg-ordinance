@@ -18,7 +18,7 @@ export function BentoTiltCard({
   children,
   className = "",
   gridClass = "",
-  maxTilt = 12,
+  maxTilt = 8,
   shine = true,
 }: BentoTiltCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
@@ -65,7 +65,7 @@ export function BentoTiltCard({
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      transition={{ type: "spring", stiffness: 120, damping: 28 }}
     >
       <div
         className="liquid-glass h-full w-full p-6 backdrop-blur-xl"

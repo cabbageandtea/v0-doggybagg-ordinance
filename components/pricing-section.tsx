@@ -38,7 +38,7 @@ const plans = [
   },
   {
     name: "Professional",
-    description: "For serious real estate investors",
+    description: "For portfolio owners who mean business",
     price: 99,
     period: "/month",
     features: [
@@ -55,7 +55,7 @@ const plans = [
   },
   {
     name: "Enterprise",
-    description: "Custom solutions for portfolios",
+    description: "Custom for large portfolios",
     price: null,
     period: "",
     features: [
@@ -100,8 +100,7 @@ export function PricingSection() {
                 Portfolio Audit
               </h3>
               <p className="mb-6 text-muted-foreground max-w-xl mx-auto">
-                Get a comprehensive violation analysis of your entire portfolio. 
-                Includes historical data, risk assessment, and compliance recommendations.
+                Full portfolio analysis. Violations, risk scores, and clear next steps. One report, no surprises.
               </p>
               <div className="mb-6 flex items-center justify-center gap-4">
                 <span className="text-5xl font-bold text-foreground">$499</span>

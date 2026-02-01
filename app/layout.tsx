@@ -1,6 +1,6 @@
 import React from "react"
 import type { Metadata, Viewport } from 'next'
-import { Inter, Space_Grotesk } from 'next/font/google'
+import { Inter, Space_Grotesk, Syne } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { QueryProvider } from '@/providers/query-provider'
 import { PostHogProvider } from '@/providers/posthog-provider'
@@ -10,6 +10,7 @@ import './globals.css'
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space" });
+const syne = Syne({ subsets: ["latin"], variable: "--font-syne", weight: ["400", "500", "600", "700"] });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://doggybagg.cc'
 
@@ -80,6 +81,8 @@ export const viewport: Viewport = {
   themeColor: '#1a1a2e',
   width: 'device-width',
   initialScale: 1,
+  maximumScale: 5,
+  viewportFit: 'cover',
 }
 
 export default function RootLayout({
@@ -89,7 +92,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${spaceGrotesk.variable} ${syne.variable} font-sans antialiased`}>
         <PostHogProvider>
           <PostHogIdentifyBridge />
           <QueryProvider>{children}</QueryProvider>

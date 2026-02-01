@@ -42,15 +42,15 @@ export function WhyDoggyBagg() {
       <div className="container mx-auto px-4">
         <motion.div
           className="mb-12 text-center"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.7 }}
         >
           <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl text-balance">
             Why <span className="text-glow text-primary">DoggyBagg</span> Wins
           </h2>
           <p className="mx-auto max-w-2xl text-muted-foreground text-pretty">
-            Generic compliance tools miss what matters. We're built by investors who got burned.
+            Generic tools miss what matters. We're built by investors who got burned—and built it right.
           </p>
         </motion.div>
 
@@ -61,9 +61,9 @@ export function WhyDoggyBagg() {
               <motion.div
                 key={item.title}
                 className="liquid-glass rounded-2xl border border-border/50 p-6"
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
+                transition={{ duration: 0.6, delay: i * 0.08 }}
               >
                 <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/20 text-primary">
                   <Icon className="h-6 w-6" />
@@ -86,6 +86,7 @@ export function WhyDoggyBagg() {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.5 }}
         >
+          <p className="mb-3 text-sm text-muted-foreground">No credit card required</p>
           <Link href="/auth/sign-up">
             <TactileButton
               size="lg"

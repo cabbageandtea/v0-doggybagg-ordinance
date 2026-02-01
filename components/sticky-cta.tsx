@@ -33,8 +33,8 @@ export function StickyCTA() {
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          className="fixed bottom-0 left-0 right-0 z-40 md:hidden"
+          transition={{ type: "spring", stiffness: 150, damping: 26 }}
+          className="fixed bottom-0 left-0 right-0 z-40 md:hidden pb-[env(safe-area-inset-bottom)]"
         >
           <div className="liquid-glass-glow mx-4 mb-4 rounded-2xl border border-primary/30 p-4 shadow-xl">
             <p className="mb-2 text-sm font-medium text-foreground">

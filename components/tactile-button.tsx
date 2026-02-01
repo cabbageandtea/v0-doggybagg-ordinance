@@ -39,8 +39,8 @@ export const TactileButton = forwardRef<HTMLButtonElement, TactileButtonProps>(
     <motion.button
       ref={ref}
       className={cn(tactileButtonVariants({ variant, size, className }))}
-      whileTap={{ scale: 0.95 }}
-      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+      whileTap={{ scale: 0.97 }}
+      transition={{ type: "spring", stiffness: 180, damping: 22 }}
       {...props}
     >
       {children}

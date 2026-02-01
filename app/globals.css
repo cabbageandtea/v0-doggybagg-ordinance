@@ -1,4 +1,16 @@
 @import 'tailwindcss';
+
+/* Nav link micro-interaction: underline from center */
+.nav-link-hover {
+  @apply relative;
+}
+.nav-link-hover::after {
+  content: '';
+  @apply absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 bg-primary transition-all duration-300;
+}
+.nav-link-hover:hover::after {
+  @apply w-full;
+}
 @import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
@@ -84,7 +96,7 @@
 @theme inline {
   --font-sans: var(--font-inter), 'Inter', system-ui, sans-serif;
   --font-mono: 'Geist Mono', 'Geist Mono Fallback';
-  --font-display: var(--font-space), 'Space Grotesk', system-ui, sans-serif;
+  --font-display: var(--font-syne), var(--font-space), 'Syne', 'Space Grotesk', system-ui, sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -126,6 +138,10 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
   }
   body {
     @apply bg-background text-foreground;
@@ -179,7 +195,7 @@
     radial-gradient(ellipse at 50% 50%, oklch(0.65 0.12 45 / 0.08) 0%, transparent 60%),
     oklch(0.12 0.01 250);
   background-size: 200% 200%;
-  animation: gradient-shift 15s ease infinite;
+  animation: gradient-shift 25s ease infinite;
 }
 
 .liquid-glass {

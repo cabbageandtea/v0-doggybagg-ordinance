@@ -33,7 +33,8 @@ export function FeedbackTrigger({
       <button
         type="button"
         onClick={handleClick}
-        className={`fixed bottom-6 right-6 z-50 ${baseClasses} ${className}`}
+        className={`fixed right-6 z-50 ${baseClasses} ${className}`}
+        style={{ bottom: 'max(1.5rem, calc(1.5rem + env(safe-area-inset-bottom)))' }}
         aria-label="Send feedback"
       >
         <MessageCircle className="h-4 w-4" />

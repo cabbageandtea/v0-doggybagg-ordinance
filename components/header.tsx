@@ -39,25 +39,25 @@ export function Header() {
             <div className="hidden items-center gap-8 md:flex">
               <Link
                 href="/#features"
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="nav-link-hover pb-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 Features
               </Link>
               <Link
                 href="/#calculator"
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="nav-link-hover pb-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 Calculator
               </Link>
               <Link
                 href="/#pricing"
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="nav-link-hover pb-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 Pricing
               </Link>
               <Link
                 href="mailto:hello@doggybagg.cc?subject=General%20Inquiry"
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="nav-link-hover pb-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 Contact
               </Link>
@@ -72,7 +72,7 @@ export function Header() {
               </Link>
               <Link href="/auth/sign-up">
                 <Button className="glow-accent bg-primary text-primary-foreground hover:bg-primary/90">
-                  Get Started
+                  Start Free
                 </Button>
               </Link>
             </div>
@@ -97,37 +97,41 @@ export function Header() {
             <div className="mt-4 flex flex-col gap-4 border-t border-border pt-4 md:hidden">
               <Link
                 href="/#features"
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="min-h-[44px] flex items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
+                onClick={() => setIsMenuOpen(false)}
               >
                 Features
               </Link>
               <Link
                 href="/#calculator"
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="min-h-[44px] flex items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
+                onClick={() => setIsMenuOpen(false)}
               >
                 Calculator
               </Link>
               <Link
                 href="/#pricing"
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="min-h-[44px] flex items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
+                onClick={() => setIsMenuOpen(false)}
               >
                 Pricing
               </Link>
               <Link
                 href="mailto:hello@doggybagg.cc?subject=General%20Inquiry"
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="min-h-[44px] flex items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
+                onClick={() => setIsMenuOpen(false)}
               >
                 Contact
               </Link>
               <div className="flex flex-col gap-2 pt-2">
-                <Link href="/auth/sign-in">
-                  <Button variant="ghost" className="w-full justify-start text-muted-foreground">
+                <Link href="/auth/sign-in" onClick={() => setIsMenuOpen(false)}>
+                  <Button variant="ghost" className="h-11 w-full justify-start text-muted-foreground">
                     Sign In
                   </Button>
                 </Link>
-                <Link href="/auth/sign-up">
-                  <Button className="w-full glow-accent bg-primary text-primary-foreground">
-                    Get Started
+                <Link href="/auth/sign-up" onClick={() => setIsMenuOpen(false)}>
+                  <Button className="h-11 w-full glow-accent bg-primary text-primary-foreground">
+                    Start Free
                   </Button>
                 </Link>
               </div>

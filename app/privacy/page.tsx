@@ -19,7 +19,7 @@ export default function PrivacyPage() {
           <div className="liquid-glass-glow mx-auto max-w-3xl rounded-2xl border border-primary/10 p-8 md:p-12">
             <h1 className="mb-8 text-3xl font-bold text-foreground">Privacy Policy</h1>
           <p className="mb-4 text-muted-foreground">
-            DoggyBagg LLC (&quot;we&quot;) operates doggybagg.cc and Ordinance.ai. This page
+            DoggyBagg LLC (&quot;we&quot;) operates doggybagg.cc. This page
             explains how we collect, use, and protect your information.
           </p>
           <div className="space-y-6 text-muted-foreground">

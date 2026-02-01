@@ -81,7 +81,7 @@ const mockNeighborhoodData: NeighborhoodData[] = [
   }
 ]
 
-const springTransition = { type: "spring" as const, stiffness: 100, damping: 20 }
+const springTransition = { type: "spring" as const, stiffness: 50, damping: 26 }
 
 export function NeighborhoodWatchWidget() {
   const [data, setData] = useState<NeighborhoodData[]>([])
@@ -117,8 +117,8 @@ export function NeighborhoodWatchWidget() {
       <div className="container mx-auto px-4">
         <motion.div
           className="mb-8 sm:mb-12 text-center"
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 12 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
           transition={springTransition}
         >
           <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/20 px-4 py-2">
@@ -154,9 +154,9 @@ export function NeighborhoodWatchWidget() {
                 <motion.div
                   key={neighborhood.zipCode}
                   className="liquid-glass rounded-xl p-4 sm:p-6 border border-border hover:border-primary/30 transition-colors duration-300"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                  transition={{ ...springTransition, delay: 0.15 + idx * 0.05 }}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
+                  transition={{ ...springTransition, delay: 0.2 + idx * 0.08 }}
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-2">
@@ -211,9 +211,9 @@ export function NeighborhoodWatchWidget() {
             {/* CTA Section */}
             <motion.div
               className="liquid-glass-glow rounded-2xl p-6 sm:p-8 text-center"
-              initial={{ opacity: 0, y: 24 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-              transition={{ ...springTransition, delay: 0.4 }}
+              initial={{ opacity: 0, y: 12 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+              transition={{ ...springTransition, delay: 0.5 }}
             >
               <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2">
                 Is Your Neighborhood at Risk?
@@ -222,15 +222,18 @@ export function NeighborhoodWatchWidget() {
                 Get instant alerts when enforcement activity increases in your area. 
                 Protect your property before violations escalate.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Link href="/auth/sign-up?tier=community-free">
-                  <TactileButton
-                    size="lg"
-                    className="w-full sm:w-auto glow-accent bg-green-500 text-white hover:bg-green-600"
-                  >
-                    Start Free Monitoring
-                  </TactileButton>
-                </Link>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                <div className="text-center sm:text-left">
+                  <p className="mb-2 text-xs text-muted-foreground">No credit card required</p>
+                  <Link href="/auth/sign-up?tier=community-free">
+                    <TactileButton
+                      size="lg"
+                      className="w-full sm:w-auto glow-accent bg-green-500 text-white hover:bg-green-600"
+                    >
+                      Start Free Monitoring
+                    </TactileButton>
+                  </Link>
+                </div>
                 <Link href="#pricing">
                   <TactileButton
                     variant="outline"
