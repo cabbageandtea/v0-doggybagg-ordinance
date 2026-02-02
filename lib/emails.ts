@@ -221,6 +221,51 @@ export async function sendFollowUpAuditEmail(to: string): Promise<{ ok: boolean;
   return { ok: true }
 }
 
+/** Sentinel high-priority targets — sent to admin@doggybagg.cc daily */
+export async function sendSentinelTargetsEmail(
+  targets: Array<{
+    type: string
+    address: string
+    caseId?: string
+    licenseId?: string
+    contact?: { name?: string; phone?: string }
+  }>
+): Promise<{ ok: boolean; error?: string }> {
+  const resend = getResend()
+  if (!resend) return { ok: false, error: "Email not configured" }
+
+  const rows = targets
+    .slice(0, 50)
+    .map(
+      (t) =>
+        `<tr><td>${t.type}</td><td>${t.address}</td><td>${t.caseId ?? t.licenseId ?? "-"}</td><td>${t.contact?.name ?? "-"}</td><td>${t.contact?.phone ?? "-"}</td></tr>`
+    )
+    .join("")
+
+  const body = wrapBody(`
+    <h2 style="margin: 0 0 16px;">Municipal Sentinel — High-Priority Targets</h2>
+    <p>Today's distressed leads and new STRO entrants for $499 Portfolio Audit outreach.</p>
+    <table style="width:100%; border-collapse: collapse; font-size: 13px;">
+      <thead><tr style="background: #f3f4f6;"><th style="padding: 8px; text-align: left;">Type</th><th>Address</th><th>Case/License</th><th>Contact</th><th>Phone</th></tr></thead>
+      <tbody>${rows || "<tr><td colspan='5'>No targets today</td></tr>"}</tbody>
+    </table>
+    <p style="margin-top: 16px;"><a href="${siteUrl}/dashboard" style="color: #6366f1; font-weight: 600;">DoggyBagg Dashboard</a></p>
+  `)
+
+  const { error } = await resend.emails.send({
+    from: fromEmail,
+    to: "admin@doggybagg.cc",
+    replyTo,
+    subject: `Sentinel: ${targets.length} High-Priority Targets | DoggyBagg`,
+    html: body,
+  })
+  if (error) {
+    console.error("[emails] sendSentinelTargetsEmail failed:", error)
+    return { ok: false, error: error.message }
+  }
+  return { ok: true }
+}
+
 export async function sendComplianceViolationEmail(
   to: string,
   opts: { propertyAddress: string; violationType?: string }

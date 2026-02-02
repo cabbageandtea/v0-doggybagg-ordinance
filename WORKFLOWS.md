@@ -24,3 +24,31 @@ Durable post-purchase and background workflows via [Workflow DevKit](https://use
 
 - `RESEND_API_KEY` — For sending emails
 - No extra env vars for Workflow DevKit (uses Vercel when deployed)
+
+---
+
+## Municipal Sentinel Workflow
+
+**File:** `app/workflows/sentinel.ts`  
+**Trigger:** Vercel Cron `/api/cron/sentinel` daily at 7:00 UTC  
+**Function:** `municipalSentinelWorkflow()`
+
+### Steps
+
+1. **Enforcement Sniper** — Code enforcement (STR, noise) + parking citations from seshat.datasd.org
+2. **License Sniper** — STRO CSV diff; new Tier 3/4 in 92109, 92037
+3. **Enrich & Email** — Contact lookup (STRO has built-in; CE/parking: wire Google Search MCP), send targets to admin@doggybagg.cc
+
+### Prerequisites
+
+- Run `scripts/014_sniper_tables.sql` in Supabase
+- `CRON_SECRET` in Vercel (same as ingest)
+- `RESEND_API_KEY` for admin email
+
+### Contact Search
+
+Wire `lib/snipers/contact-search.ts` to Google Search MCP or SerpAPI for CE/parking address lookups:
+
+```bash
+npx -y @modelcontextprotocol/server-google-search
+```
