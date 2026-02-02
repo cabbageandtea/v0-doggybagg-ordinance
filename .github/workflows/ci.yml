@@ -50,6 +50,8 @@ jobs:
         run: pnpm -s lint:ci
       - name: Run tests
         run: pnpm -s test:coverage
+      - name: Build
+        run: pnpm -s build
       - name: Upload coverage report
         if: always()
         uses: actions/upload-artifact@v4
@@ -85,7 +87,7 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: node scripts/post-coverage-comment.js
       - name: Audit dependencies
-        run: pnpm audit --json
+        run: pnpm audit --audit-level=high
 
   e2e:
     needs: checks
