@@ -13,6 +13,7 @@ Run in **Supabase Dashboard → SQL Editor** in this order.
 7. **013_ordinances_municipal_case_id.sql** – Adds `municipal_case_id` for idempotent San Diego data sync. Required for `/api/cron/ingest`.
 8. **014_sniper_tables.sql** – `sniper_stro_snapshots`, `sniper_runs` for Lead Sniper / Municipal Sentinel. Required for `/api/cron/sentinel`.
 9. **015_docket_logs.sql** – `sentinel_docket_history` for Municipal Docket Scraper (legislative alerts dedupe).
+10. **016_stro_expiration.sql** – `expiration_date` on `sniper_stro_snapshots` for Renewal Sentinel.
 
 **security-test.sql** – Manual RLS verification. Run as `anon` role to test policies.
 

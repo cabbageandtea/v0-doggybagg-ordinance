@@ -20,6 +20,27 @@ type StroRow = {
   local_contact_contact_name?: string
   local_contact_phone?: string
   host_contact_name?: string
+  expiration_date?: string
+  license_expiration_date?: string
+  expiration_year?: string
+  expiry_date?: string
+}
+
+/** Parse expiration date from CSV row; returns ISO date string or null */
+function parseExpirationDate(row: StroRow): string | null {
+  const raw =
+    row.expiration_date ??
+    row.license_expiration_date ??
+    row.expiry_date
+  if (raw) {
+    const d = new Date(raw.trim())
+    if (!Number.isNaN(d.getTime())) return d.toISOString().slice(0, 10)
+  }
+  const year = row.expiration_year?.trim()
+  if (year && /^\d{4}$/.test(year)) {
+    return `${year}-12-31`
+  }
+  return null
 }
 
 export async function runLicenseSniper(): Promise<NewEntrant[]> {
@@ -91,6 +112,7 @@ async function runLicenseSniperInner(): Promise<NewEntrant[]> {
         local_contact_name: row.local_contact_contact_name,
         local_contact_phone: row.local_contact_phone,
         host_contact_name: row.host_contact_name,
+        expiration_date: parseExpirationDate(row),
       })
     }
     return []
@@ -132,6 +154,7 @@ async function runLicenseSniperInner(): Promise<NewEntrant[]> {
       local_contact_name: row.local_contact_contact_name,
       local_contact_phone: row.local_contact_phone,
       host_contact_name: row.host_contact_name,
+      expiration_date: parseExpirationDate(row),
     })
   }
 

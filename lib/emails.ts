@@ -231,7 +231,8 @@ export async function sendSentinelTargetsEmail(
     contact?: { name?: string; phone?: string }
   }>,
   alerts: Array<{ meetingDate: string; topicSummary: string; link: string }> = [],
-  integrityRisks: Array<{ listingUrl: string; displayedPermit: string; address?: string; mismatch: string }> = []
+  integrityRisks: Array<{ listingUrl: string; displayedPermit: string; address?: string; mismatch: string }> = [],
+  expiring: Array<{ licenseId: string; expirationDate: string; address?: string; localContactName?: string; localContactPhone?: string }> = []
 ): Promise<{ ok: boolean; error?: string }> {
   const resend = getResend()
   if (!resend) return { ok: false, error: "Email not configured" }
@@ -274,6 +275,25 @@ export async function sendSentinelTargetsEmail(
   `
       : ""
 
+  const renewalSection =
+    expiring.length > 0
+      ? `
+    <div style="margin-bottom: 24px; padding: 16px; background: #dbeafe; border-left: 4px solid #2563eb; border-radius: 4px;">
+      <h3 style="margin: 0 0 12px; color: #1e40af;">📅 ACTION REQUIRED: Upcoming Renewals</h3>
+      <p style="margin: 0 0 12px; font-size: 14px;"><strong>Revenue protection:</strong> Licenses expiring in 10–45 days. Highest-conversion leads for the $499 Portfolio Audit—reach out 6 weeks before renewal.</p>
+      <ul style="margin: 0; padding-left: 20px;">
+        ${expiring
+          .slice(0, 15)
+          .map(
+            (e) =>
+              `<li style="margin-bottom: 8px;">License <strong>#${e.licenseId}</strong> expires <strong>${e.expirationDate}</strong>${e.address ? ` — ${e.address}` : ""}<br/><span style="font-size: 12px; color: #6b7280;">${[e.localContactName, e.localContactPhone].filter(Boolean).join(" • ") || "—"}</span></li>`
+          )
+          .join("")}
+      </ul>
+    </div>
+  `
+      : ""
+
   const rows = targets
     .slice(0, 50)
     .map(
@@ -285,6 +305,7 @@ export async function sendSentinelTargetsEmail(
   const body = wrapBody(`
     <h2 style="margin: 0 0 16px;">Municipal Sentinel — High-Priority Targets</h2>
     ${integritySection}
+    ${renewalSection}
     ${alertSection}
     <p>Today's distressed leads and new STRO entrants for $499 Portfolio Audit outreach.</p>
     <table style="width:100%; border-collapse: collapse; font-size: 13px;">
@@ -297,11 +318,13 @@ export async function sendSentinelTargetsEmail(
   const subject =
     integrityRisks.length > 0
       ? `🚨 Sentinel: ${integrityRisks.length} Integrity Gap(s) + ${targets.length} targets | DoggyBagg`
-      : alerts.length > 0
-        ? `🚨 Sentinel: ${alerts.length} Legislative Alert(s) + ${targets.length} targets | DoggyBagg`
-        : targets.length > 0
-          ? `Sentinel: ${targets.length} High-Priority Targets | DoggyBagg`
-          : "Sentinel: Daily Report (0 targets) | DoggyBagg"
+      : expiring.length > 0
+        ? `📅 Sentinel: ${expiring.length} Upcoming Renewal(s) + ${targets.length} targets | DoggyBagg`
+        : alerts.length > 0
+          ? `🚨 Sentinel: ${alerts.length} Legislative Alert(s) + ${targets.length} targets | DoggyBagg`
+          : targets.length > 0
+            ? `Sentinel: ${targets.length} High-Priority Targets | DoggyBagg`
+            : "Sentinel: Daily Report (0 targets) | DoggyBagg"
 
   const { error } = await resend.emails.send({
     from: fromEmail,

@@ -6,6 +6,7 @@ export async function logSentinelRun(opts: {
   status: "completed" | "failed"
   alertsCount?: number
   integrityRisksCount?: number
+  expiringCount?: number
   distressedCount: number
   newEntrantsCount: number
   totalTargets: number
@@ -24,6 +25,7 @@ export async function logSentinelRun(opts: {
     result_json: {
       alertsCount: opts.alertsCount ?? 0,
       integrityRisksCount: opts.integrityRisksCount ?? 0,
+      expiringCount: opts.expiringCount ?? 0,
       distressedCount: opts.distressedCount,
       newEntrantsCount: opts.newEntrantsCount,
       totalTargets: opts.totalTargets,

@@ -39,7 +39,8 @@ Durable post-purchase and background workflows via [Workflow DevKit](https://use
 1. **Enforcement Sniper** — Code enforcement (STR, noise) + parking citations from seshat.datasd.org
 2. **License Sniper** — STRO CSV diff; new Tier 3/4 in 92109, 92037
 3. **Integrity Sniper** — AirBnB listings in 92109/92037; cross-reference displayed permit vs STRO registry; flag mismatches
-4. **Enrich & Email** — Contact lookup, send targets + legislative alerts + integrity gaps to admin@doggybagg.cc
+4. **Renewal Sniper** — Licenses expiring in 10–45 days; highest-conversion for $499 Portfolio Audit
+5. **Enrich & Email** — Contact lookup, send targets + legislative alerts + integrity gaps + upcoming renewals to admin@doggybagg.cc
 
 ### Prerequisites
 

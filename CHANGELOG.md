@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Renewal Sentinel
+
+- **lib/snipers/renewal.ts** — Licenses expiring in 10–45 days from sniper_stro_snapshots
+- **scripts/016_stro_expiration.sql** — Add expiration_date column
+- **licenses.ts** — Parse expiration_date / expiration_year from STRO CSV
+- **Sentinel Step 5** — Upcoming Renewals section in admin email (Revenue Protection)
+
 ### Integrity Gap Sniper
 
 - **lib/snipers/integrity.ts** — AirBnB listings in 92109/92037; cross-reference displayed permit vs sniper_stro_snapshots; flag listings not in registry

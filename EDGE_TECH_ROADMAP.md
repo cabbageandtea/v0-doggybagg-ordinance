@@ -75,6 +75,7 @@ Cutting-edge software, APIs, and programs to differentiate and scale. Research-b
 - **Workflow DevKit** — $499 purchase: Welcome email → sleep(3 days) → Follow-up email.
 - **Municipal Docket Scraper** — City Council dockets; STRO/ordinance keyword search; 72h legislative alerts.
 - **Integrity Gap Sniper** — AirBnB listings vs STRO registry; flag permit mismatches (92109, 92037).
+- **Renewal Sentinel** — Licenses expiring in 10–45 days; preventative $499 Portfolio Audit outreach.
 - **Honest SMS copy** — "Email alerts (SMS coming soon)" across UI.
 - **Honest social proof** — "Code + Parking", "San Diego", "24/7" (no fake numbers).
 

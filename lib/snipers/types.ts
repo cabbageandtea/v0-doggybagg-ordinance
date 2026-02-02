@@ -35,6 +35,16 @@ export type LegislativeAlert = {
   meetingId?: string
 }
 
+export type ExpiringLicense = {
+  licenseId: string
+  expirationDate: string
+  address?: string
+  zip?: string
+  localContactName?: string
+  localContactPhone?: string
+  hostContactName?: string
+}
+
 export type IntegrityRisk = {
   listingUrl: string
   displayedPermit: string
