@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 export const metadata = {
   title: "Refer Landlords, Earn",
   description:
-    "DoggyBagg referral program. Refer property managers and landlords, earn when they sign up. San Diego property compliance.",
+    "DoggyBagg referral program. Refer property managers and landlords, earn when they sign up. Precision ordinance oversight.",
 }
 
 export default function ReferPage() {

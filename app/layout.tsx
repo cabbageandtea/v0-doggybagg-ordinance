@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import { headers } from 'next/headers'
 import { Inter, Space_Grotesk, Syne } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { QueryProvider } from '@/providers/query-provider'
 import { PostHogProvider } from '@/providers/posthog-provider'
 import { PostHogIdentifyBridge } from '@/components/posthog-identify-bridge'
@@ -108,6 +109,7 @@ export default async function RootLayout({
           <PostHogIdentifyBridge />
           <QueryProvider>{children}</QueryProvider>
           <Analytics />
+          <SpeedInsights />
           <Toaster position="bottom-center" richColors closeButton />
           <CookieConsent />
         </PostHogProvider>

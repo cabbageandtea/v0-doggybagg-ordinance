@@ -95,6 +95,7 @@ export function BentoTiltCard({
               background:
                 "radial-gradient(400px circle at center, oklch(0.52 0.14 155 / 0.1), transparent 70%)",
               transform: shineTransform,
+              willChange: "transform",
             }}
             initial={false}
           />
