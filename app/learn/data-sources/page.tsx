@@ -30,6 +30,12 @@ const sources = [
     icon: Database,
   },
   {
+    name: "TOT Certificates",
+    description: "Transient Occupancy Tax vacation certificates from data.sandiego.gov. We cross-reference STRO licenses to identify properties missing mandatory TOT registration.",
+    updateFrequency: "Daily",
+    icon: Database,
+  },
+  {
     name: "City Council Dockets",
     description: "San Diego City Clerk council meeting agendas. We monitor for STRO, ordinance, and enforcement discussions and alert 72 hours before meetings.",
     updateFrequency: "Daily",

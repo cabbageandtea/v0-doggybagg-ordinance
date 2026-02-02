@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-02-01
+
+### TOT Gap Sniper
+
+- **lib/snipers/tot.ts** — Cross-reference sniper_stro_snapshots with San Diego TOT certificate registry; identify STRO licenses missing TOT
+- **Sentinel Step 6** — stepTotSniper; FINANCIAL RISK section in admin email (Red Alert for $499 Portfolio Audit)
+
 ## [0.2.0] - 2026-02-01
 
 ### Renewal Sentinel

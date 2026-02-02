@@ -232,7 +232,8 @@ export async function sendSentinelTargetsEmail(
   }>,
   alerts: Array<{ meetingDate: string; topicSummary: string; link: string }> = [],
   integrityRisks: Array<{ listingUrl: string; displayedPermit: string; address?: string; mismatch: string }> = [],
-  expiring: Array<{ licenseId: string; expirationDate: string; address?: string; localContactName?: string; localContactPhone?: string }> = []
+  expiring: Array<{ licenseId: string; expirationDate: string; address?: string; localContactName?: string; localContactPhone?: string }> = [],
+  taxRisks: Array<{ licenseId: string; address?: string; status: string }> = []
 ): Promise<{ ok: boolean; error?: string }> {
   const resend = getResend()
   if (!resend) return { ok: false, error: "Email not configured" }
@@ -275,6 +276,25 @@ export async function sendSentinelTargetsEmail(
   `
       : ""
 
+  const taxSection =
+    taxRisks.length > 0
+      ? `
+    <div style="margin-bottom: 24px; padding: 16px; background: #fef2f2; border-left: 4px solid #b91c1c; border-radius: 4px;">
+      <h3 style="margin: 0 0 12px; color: #7f1d1d;">💸 FINANCIAL RISK: Missing TOT Certificate</h3>
+      <p style="margin: 0 0 12px; font-size: 14px;"><strong>Red Alert:</strong> STRO-licensed properties without a TOT (Transient Occupancy Tax) certificate. Highest-priority leads for the $499 Portfolio Audit—tax exposure is a major pain point.</p>
+      <ul style="margin: 0; padding-left: 20px;">
+        ${taxRisks
+          .slice(0, 15)
+          .map(
+            (t) =>
+              `<li style="margin-bottom: 8px;">License <strong>#${t.licenseId}</strong> — ${t.status}${t.address ? ` — ${t.address}` : ""}</li>`
+          )
+          .join("")}
+      </ul>
+    </div>
+  `
+      : ""
+
   const renewalSection =
     expiring.length > 0
       ? `
@@ -305,6 +325,7 @@ export async function sendSentinelTargetsEmail(
   const body = wrapBody(`
     <h2 style="margin: 0 0 16px;">Municipal Sentinel — High-Priority Targets</h2>
     ${integritySection}
+    ${taxSection}
     ${renewalSection}
     ${alertSection}
     <p>Today's distressed leads and new STRO entrants for $499 Portfolio Audit outreach.</p>
@@ -318,13 +339,15 @@ export async function sendSentinelTargetsEmail(
   const subject =
     integrityRisks.length > 0
       ? `🚨 Sentinel: ${integrityRisks.length} Integrity Gap(s) + ${targets.length} targets | DoggyBagg`
-      : expiring.length > 0
-        ? `📅 Sentinel: ${expiring.length} Upcoming Renewal(s) + ${targets.length} targets | DoggyBagg`
-        : alerts.length > 0
-          ? `🚨 Sentinel: ${alerts.length} Legislative Alert(s) + ${targets.length} targets | DoggyBagg`
-          : targets.length > 0
-            ? `Sentinel: ${targets.length} High-Priority Targets | DoggyBagg`
-            : "Sentinel: Daily Report (0 targets) | DoggyBagg"
+      : taxRisks.length > 0
+        ? `💸 Sentinel: ${taxRisks.length} TOT Gap(s) + ${targets.length} targets | DoggyBagg`
+        : expiring.length > 0
+          ? `📅 Sentinel: ${expiring.length} Upcoming Renewal(s) + ${targets.length} targets | DoggyBagg`
+          : alerts.length > 0
+            ? `🚨 Sentinel: ${alerts.length} Legislative Alert(s) + ${targets.length} targets | DoggyBagg`
+            : targets.length > 0
+              ? `Sentinel: ${targets.length} High-Priority Targets | DoggyBagg`
+              : "Sentinel: Daily Report (0 targets) | DoggyBagg"
 
   const { error } = await resend.emails.send({
     from: fromEmail,

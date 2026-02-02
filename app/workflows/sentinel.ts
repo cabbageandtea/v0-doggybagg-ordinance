@@ -9,9 +9,10 @@ import { runLicenseSniper } from "@/lib/snipers/licenses"
 import { runDocketScraper } from "@/lib/snipers/dockets"
 import { runIntegritySniper } from "@/lib/snipers/integrity"
 import { runRenewalSniper } from "@/lib/snipers/renewal"
+import { runTotSniper } from "@/lib/snipers/tot"
 import { searchContactForLead } from "@/lib/snipers/contact-search"
 import { sendSentinelTargetsEmail } from "@/lib/emails"
-import type { DistressedLead, NewEntrant, LegislativeAlert, IntegrityRisk, ExpiringLicense } from "@/lib/snipers/types"
+import type { DistressedLead, NewEntrant, LegislativeAlert, IntegrityRisk, ExpiringLicense, TaxRisk } from "@/lib/snipers/types"
 
 async function stepDocketScraper() {
   "use step"
@@ -38,10 +39,16 @@ async function stepRenewalSniper() {
   return runRenewalSniper()
 }
 
+async function stepTotSniper() {
+  "use step"
+  return runTotSniper()
+}
+
 async function stepEnrichAndEmail(
   alerts: LegislativeAlert[],
   integrityRisks: IntegrityRisk[],
   expiring: ExpiringLicense[],
+  taxRisks: TaxRisk[],
   distressed: DistressedLead[],
   newEntrants: NewEntrant[]
 ) {
@@ -81,7 +88,7 @@ async function stepEnrichAndEmail(
       contact: { name: contact.name, phone: contact.phone },
     })
   }
-  const result = await sendSentinelTargetsEmail(enriched, alerts, integrityRisks, expiring)
+  const result = await sendSentinelTargetsEmail(enriched, alerts, integrityRisks, expiring, taxRisks)
   if (!result.ok) throw new Error(result.error ?? "Failed to send sentinel email")
   return { sent: enriched.length }
 }
@@ -90,6 +97,7 @@ async function stepLogRun(opts: {
   alertsCount: number
   integrityRisksCount: number
   expiringCount: number
+  taxRisksCount: number
   distressedCount: number
   newEntrantsCount: number
   totalTargets: number
@@ -109,14 +117,16 @@ export async function municipalSentinelWorkflow() {
   const newEntrants = await stepLicenseSniper()
   const integrityRisks = await stepIntegritySniper()
   const expiring = await stepRenewalSniper()
+  const taxRisks = await stepTotSniper()
   const totalTargets = distressed.length + newEntrants.length
 
   try {
-    await stepEnrichAndEmail(alerts, integrityRisks, expiring, distressed, newEntrants)
+    await stepEnrichAndEmail(alerts, integrityRisks, expiring, taxRisks, distressed, newEntrants)
     await stepLogRun({
       alertsCount: alerts.length,
       integrityRisksCount: integrityRisks.length,
       expiringCount: expiring.length,
+      taxRisksCount: taxRisks.length,
       distressedCount: distressed.length,
       newEntrantsCount: newEntrants.length,
       totalTargets,
@@ -127,6 +137,7 @@ export async function municipalSentinelWorkflow() {
       alertsCount: alerts.length,
       integrityRisksCount: integrityRisks.length,
       expiringCount: expiring.length,
+      taxRisksCount: taxRisks.length,
       distressedCount: distressed.length,
       newEntrantsCount: newEntrants.length,
       totalTargets,
@@ -137,6 +148,7 @@ export async function municipalSentinelWorkflow() {
         alertsCount: alerts.length,
         integrityRisksCount: integrityRisks.length,
         expiringCount: expiring.length,
+        taxRisksCount: taxRisks.length,
         distressedCount: distressed.length,
         newEntrantsCount: newEntrants.length,
         totalTargets,

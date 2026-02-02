@@ -45,6 +45,12 @@ export type ExpiringLicense = {
   hostContactName?: string
 }
 
+export type TaxRisk = {
+  licenseId: string
+  address?: string
+  status: "Missing TOT"
+}
+
 export type IntegrityRisk = {
   listingUrl: string
   displayedPermit: string
@@ -56,6 +62,7 @@ export type SentinelResult = {
   distressedLeads: DistressedLead[]
   newEntrants: NewEntrant[]
   integrityRisks: IntegrityRisk[]
+  taxRisks: TaxRisk[]
   expiringLicenses: ExpiringLicense[]
   targets: HighPriorityTarget[]
   runId?: string
