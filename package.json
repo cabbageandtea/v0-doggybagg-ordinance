@@ -3,7 +3,7 @@
   "version": "0.2.2",
   "private": true,
   "scripts": {
-    "build": "next build --webpack",
+    "build": "next build",
     "dev": "next dev",
     "lint": "eslint .",
     "lint:ci": "eslint . --max-warnings=0",
@@ -16,12 +16,10 @@
     "e2e:ci": "playwright test --reporter=github",
     "check:server-actions-async": "node scripts/check-server-actions-async.js",
     "start": "next start",
-    "prepare": "husky",
-    "workflow:web": "workflow web"
+    "prepare": "husky"
   },
   "dependencies": {
     "zod": "4.1.11",
-    "workflow": "4.0.1-beta.41",
     "@emotion/is-prop-valid": "latest",
     "@hookform/resolvers": "^3.10.0",
     "@radix-ui/react-accordion": "latest",

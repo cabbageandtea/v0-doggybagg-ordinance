@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.2.3] - 2026-02-02
+
+### Changed — Abandon Vercel Workflows for Standard Cron
+
+- **Municipal Sentinel** — Logic moved from `app/workflows/sentinel.ts` into `app/api/cron/sentinel/route.ts`. Runs as a standard Next.js route handler triggered by Vercel Cron daily at 00:00 UTC. Eliminates `t._parse` and "Failed to parse server response" errors.
+- **Purchase Audit** — Stripe webhook now calls `sendWelcomeAuditEmail` directly (no durable workflow). The 3-day follow-up email is removed.
+- **Dependencies** — Removed `workflow` package. Kept `zod`.
+- **next.config.ts** — Removed `withWorkflow`, `serverExternalPackages`, `outputFileTracingExcludes`, `rewrites`, and webpack minification overrides.
+- **proxy.ts** — Early return for `/api/cron/*` (secured by CRON_SECRET); removed workflow-specific exclusions.
+- **vercel.json** — Sentinel cron schedule set to `0 0 * * *` (midnight UTC).
+- **Cleanup** — Deleted `app/workflows/`, `app/.well-known/workflow/`, `app/api/debug-zod/route.ts`.
+
 ## [0.2.2] - 2026-02-02
 
 ### Fixes

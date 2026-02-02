@@ -4,9 +4,7 @@ import { stripe } from "@/lib/stripe"
 import { createClient } from "@supabase/supabase-js"
 import { parseCheckoutMetadata } from "@/lib/validation/stripe-webhook"
 import { captureCheckoutCompletedServer } from "@/lib/analytics-server"
-import { start } from "workflow/api"
-import { purchaseAuditWorkflow } from "@/app/workflows/purchase"
-import { sendReceiptEmail, sendPaymentFailedEmail } from "@/lib/emails"
+import { sendWelcomeAuditEmail, sendReceiptEmail, sendPaymentFailedEmail } from "@/lib/emails"
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET
 
@@ -176,7 +174,7 @@ export async function POST(request: NextRequest) {
 
         if (customerEmail) {
           if (isAudit) {
-            void start(purchaseAuditWorkflow, [customerEmail])
+            void sendWelcomeAuditEmail(customerEmail)
           } else {
             const productName = productId === "starter-plan" ? "Starter" : productId === "professional-plan" ? "Professional" : productId ?? "Subscription"
             void sendReceiptEmail(customerEmail, {
