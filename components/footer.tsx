@@ -9,13 +9,9 @@ const footerLinks = {
     { label: "Features", href: "/#features" },
     { label: "Calculator", href: "/#calculator" },
     { label: "Pricing", href: "/#pricing" },
-    { label: "Data Sources", href: "/learn/data-sources" },
-    { label: "API", href: "/docs" },
   ],
   Company: [
     { label: "About", href: "/about" },
-    { label: "Blog", href: "/blog" },
-    { label: "Careers", href: "/careers" },
     { label: "Contact", href: "mailto:hello@doggybagg.cc?subject=General%20Inquiry" },
   ],
   Legal: [
