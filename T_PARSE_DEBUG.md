@@ -6,6 +6,10 @@
 
 ## Fixes Applied
 
+### 0. outputFileTracingExcludes
+
+`outputFileTracingExcludes` excludes nested zod copies inside `@workflow` from the Vercel tracer, so the top-level zod from node_modules is used at runtime.
+
 ### 1. Server Minification Disabled
 
 `next.config.ts` disables minification for the **server** build only:
@@ -32,6 +36,10 @@ This prevents Terser/SWC from renaming `_parse` in server chunks. **If this fixe
 ### 4. experimental.serverComponentsExternalPackages
 
 Deprecated in Next.js 15+; use `serverExternalPackages` (already configured).
+
+## Direct Discovery: /api/debug-zod
+
+`GET /api/debug-zod` returns `typeof z._parse` and `schema._parse`. If `schemaParseType` is `"undefined"`, the bundle is corrupted. Call this in production to confirm Zod is intact.
 
 ## Verification: pnpm dev vs Production
 

@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **serve() / .input() verification** — Workflow DevKit 4.0.1-beta.30 uses withWorkflow (no serve()). Sentinel has no .input() or Zod schema. serverExternalPackages confirmed in next.config.
 - **t._parse minifier fix** — Disable server minification (optimization.minimize=false) to prevent Terser/SWC renaming Zod's _parse. No Zod 3 ghost (pnpm why zod). T_PARSE_DEBUG.md.
 - **Workflow handshake fix** — trailingSlash: false; rewrites /api/workflow/v1/* → /.well-known/workflow/v1/*; proxy early-return for /api/workflow; DEBUG_WORKFLOW_HEADERS for x-vercel-* logging. @vercel/workflow serve() not available (use workflow package).
+- **t._parse recovery** — outputFileTracingExcludes for nested @workflow/zod; workflow 4.0.1-beta.41; /api/debug-zod for typeof z._parse verification.
 
 ## [0.2.1] - 2026-02-01
 

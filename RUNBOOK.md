@@ -52,6 +52,7 @@
 9. **t._parse persists** – Add serverExternalPackages: [zod, workflow, @workflow/*]; disable server minification (webpack optimization.minimize=false for isServer); exclude /api/workflow from proxy. No Zod 3 ghost. See T_PARSE_DEBUG.md.
 10. **Vercel Deployment Protection** – If Vercel Authentication or Password Protection is enabled for production, it can return HTML instead of JSON to the Workflow API. Check Settings → Deployment Protection. See VERCEL_DEPLOYMENT_PROTECTION_CHECK.md.
 11. **GET /v1/runs invalid response** – trailingSlash: false; rewrites /api/workflow/v1/* for alternate path; proxy skips /api/workflow; set DEBUG_WORKFLOW_HEADERS=1 to log x-vercel-* headers.
+12. **t._parse persists (chunk mangling)** – outputFileTracingExcludes for @workflow nested zod; workflow 4.0.1-beta.41; GET /api/debug-zod to verify typeof z._parse in prod.
 
 ---
 

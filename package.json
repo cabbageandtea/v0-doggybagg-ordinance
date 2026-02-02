@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "zod": "4.1.11",
-    "workflow": "4.0.1-beta.30",
+    "workflow": "4.0.1-beta.41",
     "@emotion/is-prop-valid": "latest",
     "@hookform/resolvers": "^3.10.0",
     "@radix-ui/react-accordion": "latest",
