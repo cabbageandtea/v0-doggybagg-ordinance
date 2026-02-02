@@ -10,6 +10,7 @@ Run in **Supabase Dashboard → SQL Editor** in this order.
 4. **008_stripe_webhook_events.sql** – Required for Stripe webhook idempotency. Run before enabling webhooks.
 5. **009_city_registry_cache_rls.sql** – RLS for `city_registry_cache` (run only if table exists).
 6. **010_webhook_logs.sql** – Dead letter table for webhook validation failures. Required for Stripe webhook fail-safe.
+7. **013_ordinances_municipal_case_id.sql** – Adds `municipal_case_id` for idempotent San Diego data sync. Required for `/api/cron/ingest`.
 
 **security-test.sql** – Manual RLS verification. Run as `anon` role to test policies.
 

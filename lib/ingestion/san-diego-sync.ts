@@ -1,60 +1,261 @@
 /**
- * San Diego municipal data sync — scaffold for automated ingestion
+ * San Diego municipal data sync — fetches code enforcement violations from Open Data
  *
- * Data sources (when implemented):
- * - data.sandiego.gov: Code Enforcement Violations, Parking Citations
- * - OpenDSD: Development Services (recent code enforcement)
+ * Data source: seshat.datasd.org (Code Enforcement Cases 2015–2018)
+ * For post-2018 data, City directs to OpenDSD (no public API).
  *
  * Flow:
- * 1. Fetch CSV/API from San Diego Open Data
+ * 1. Fetch CSV from San Diego Open Data
  * 2. Parse and normalize addresses
- * 3. Match to user properties (by address, license_id)
+ * 3. Match to user properties (by normalized address)
  * 4. Insert new ordinances; update properties.reporting_status, risk_score
- * 5. Trigger sendEmailNotification for new violations (via updateProperty)
+ * 5. Send compliance violation emails for new matches
  *
- * Run via: Vercel Cron (daily) or manual: POST /api/cron/ingest with CRON_SECRET
+ * Run via: Vercel Cron (daily) or manual: GET/POST /api/cron/ingest with CRON_SECRET
+ *
+ * Prereq: Run scripts/013_ordinances_municipal_case_id.sql for idempotency.
  */
 
+import { parse } from "csv-parse/sync"
 import { createClient } from "@supabase/supabase-js"
+import { sendComplianceViolationEmail } from "@/lib/emails"
 
-const SAN_DIEGO_CODE_ENFORCEMENT_URL =
-  "https://data.sandiego.gov/datasets/code-enforcement-violations/"
+const CODE_ENFORCEMENT_CSV =
+  "https://seshat.datasd.org/code_enforcement_violations/code_enf_past_3_yr_datasd.csv"
 
 export type SyncResult = {
   success: boolean
   processed: number
   inserted: number
   updated: number
+  matched: number
   errors: string[]
 }
 
+type CodeEnforcementRow = {
+  case_id: string
+  apn?: string
+  address_street?: string
+  case_source?: string
+  description?: string
+  date_open?: string
+  date_closed?: string
+  close_reason?: string
+}
+
+/** Normalize address for matching: lowercase, collapse spaces, standardize abbrevs */
+function normalizeAddress(addr: string): string {
+  if (!addr || typeof addr !== "string") return ""
+  let s = addr
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .trim()
+  // Common abbrevs
+  const abbrevs: [RegExp, string][] = [
+    [/\bav\b/g, "ave"],
+    [/\bavenue\b/g, "ave"],
+    [/\bst\b/g, "st"],
+    [/\bstreet\b/g, "st"],
+    [/\bblvd\b/g, "blvd"],
+    [/\bboulevard\b/g, "blvd"],
+    [/\bdr\b/g, "dr"],
+    [/\bdrive\b/g, "dr"],
+    [/\bln\b/g, "ln"],
+    [/\blane\b/g, "ln"],
+    [/\bct\b/g, "ct"],
+    [/\bcourt\b/g, "ct"],
+    [/\brd\b/g, "rd"],
+    [/\broad\b/g, "rd"],
+    [/\bpl\b/g, "pl"],
+    [/\bplace\b/g, "pl"],
+    [/\bway\b/g, "way"],
+    [/\bterrace\b/g, "ter"],
+    [/\bter\b/g, "ter"],
+  ]
+  for (const [re, sub] of abbrevs) {
+    s = s.replace(re, sub)
+  }
+  return s.replace(/[.,#]/g, "").trim()
+}
+
+/** Extract violation type from description (first 80 chars) */
+function violationTypeFrom(desc: string | undefined): string {
+  if (!desc) return "Code enforcement"
+  const clean = desc.replace(/\s+/g, " ").trim().slice(0, 80)
+  return clean || "Code enforcement"
+}
+
+/** Parse date string to YYYY-MM-DD or null */
+function parseDate(s: string | undefined): string | null {
+  if (!s) return null
+  const d = new Date(s)
+  if (Number.isNaN(d.getTime())) return null
+  return d.toISOString().slice(0, 10)
+}
+
 export async function runSanDiegoSync(): Promise<SyncResult> {
-  const result: SyncResult = { success: false, processed: 0, inserted: 0, updated: 0, errors: [] }
+  const result: SyncResult = {
+    success: false,
+    processed: 0,
+    inserted: 0,
+    updated: 0,
+    matched: 0,
+    errors: [],
+  }
 
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
-  if (!serviceKey) {
-    result.errors.push("SUPABASE_SERVICE_ROLE_KEY not set")
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  if (!serviceKey || !supabaseUrl) {
+    result.errors.push("SUPABASE_SERVICE_ROLE_KEY or NEXT_PUBLIC_SUPABASE_URL not set")
     return result
   }
 
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    serviceKey,
-    { auth: { persistSession: false } }
-  )
+  const supabase = createClient(supabaseUrl, serviceKey, {
+    auth: { persistSession: false },
+  })
 
   try {
-    // TODO: Fetch from San Diego Open Data
-    // const response = await fetch(SAN_DIEGO_CODE_ENFORCEMENT_URL + "latest.csv")
-    // const csv = await response.text()
-    // const rows = parseCSV(csv)
-    //
-    // For each row: normalize address, find matching property, insert ordinance if new,
-    // update property.reporting_status, call sendEmailNotification if new violation
+    // 1. Fetch CSV
+    const res = await fetch(CODE_ENFORCEMENT_CSV)
+    if (!res.ok) {
+      result.errors.push(`CSV fetch failed: ${res.status} ${res.statusText}`)
+      return result
+    }
+    const csv = await res.text()
 
-    // Stub: no-op until data source is wired
+    // 2. Parse
+    const allRows = parse(csv, {
+      columns: true,
+      skip_empty_lines: true,
+      trim: true,
+    }) as CodeEnforcementRow[]
+
+    // Limit rows per run to avoid cron timeout (60s)
+    const MAX_ROWS = 5000
+    const rows = allRows.slice(0, MAX_ROWS)
+    result.processed = rows.length
+
+    if (rows.length === 0) {
+      result.success = true
+      return result
+    }
+
+    // 3. Load all user properties (we need user_id for notifications)
+    const { data: properties, error: propErr } = await supabase
+      .from("properties")
+      .select("id, address, user_id, reporting_status")
+      .not("user_id", "is", null)
+
+    if (propErr) {
+      result.errors.push(`Properties fetch failed: ${propErr.message}`)
+      return result
+    }
+    if (!properties?.length) {
+      result.success = true
+      return result
+    }
+
+    // Build normalized address -> property lookup (one address can match multiple properties if same user has duplicates)
+    const addrToProperties = new Map<string, typeof properties>()
+    for (const p of properties) {
+      const norm = normalizeAddress(p.address)
+      if (!norm) continue
+      const list = addrToProperties.get(norm) ?? []
+      list.push(p)
+      addrToProperties.set(norm, list)
+    }
+
+    // 4. Process each row
+    const seenCaseIds = new Set<string>()
+    for (const row of rows) {
+      const caseId = row.case_id?.trim()
+      if (!caseId || seenCaseIds.has(caseId)) continue
+      seenCaseIds.add(caseId)
+
+      const street = row.address_street?.trim()
+      if (!street) continue
+
+      const norm = normalizeAddress(street)
+      const matches = addrToProperties.get(norm)
+      if (!matches?.length) continue
+
+      result.matched += matches.length
+
+      const violationDate = parseDate(row.date_open || row.date_closed)
+      const violationType = violationTypeFrom(row.description)
+      const status = row.date_closed ? "resolved" : "active"
+      const description = (row.description ?? "").slice(0, 500)
+
+      for (const prop of matches) {
+        // Check if we already have this case (idempotency)
+        const { data: existing } = await supabase
+          .from("ordinances")
+          .select("id")
+          .eq("municipal_case_id", caseId)
+          .maybeSingle()
+
+        if (existing) continue
+
+        // Insert ordinance (municipal_case_id may need migration 013)
+        const { error: insErr } = await supabase.from("ordinances").insert({
+          property_id: prop.id,
+          violation_type: violationType,
+          violation_date: violationDate,
+          description,
+          status,
+          municipal_case_id: caseId,
+        })
+
+        if (insErr) {
+          // If municipal_case_id column doesn't exist, try without it
+          if (insErr.message?.includes("municipal_case_id")) {
+            const { error: insErr2 } = await supabase.from("ordinances").insert({
+              property_id: prop.id,
+              violation_type: violationType,
+              violation_date: violationDate,
+              description,
+              status,
+            })
+            if (insErr2) result.errors.push(`Insert ${caseId}: ${insErr2.message}`)
+            else result.inserted++
+          } else {
+            result.errors.push(`Insert ${caseId}: ${insErr.message}`)
+          }
+          continue
+        }
+        result.inserted++
+
+        // Update property if not already violation
+        if (prop.reporting_status !== "violation") {
+          const { error: updErr } = await supabase
+            .from("properties")
+            .update({
+              reporting_status: "violation",
+              risk_score: Math.min(100, 50 + (prop.reporting_status === "pending" ? 20 : 0)),
+              last_checked: new Date().toISOString(),
+            })
+            .eq("id", prop.id)
+
+          if (!updErr) result.updated++
+
+          // Send notification (respect email prefs)
+          const { data: profile } = await supabase
+            .from("profiles")
+            .select("email, email_notifications")
+            .eq("id", prop.user_id)
+            .single()
+
+          if (profile?.email && profile.email_notifications !== false) {
+            await sendComplianceViolationEmail(profile.email, {
+              propertyAddress: prop.address,
+              violationType,
+            })
+          }
+        }
+      }
+    }
+
     result.success = true
-    result.processed = 0
     return result
   } catch (err) {
     result.errors.push(err instanceof Error ? err.message : "Unknown error")
