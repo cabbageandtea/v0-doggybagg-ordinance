@@ -4,8 +4,8 @@
   "description": "San Diego property compliance monitoring. Take it with you.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0f0f14",
-  "theme_color": "#1a1a2e",
+  "background_color": "#FAFAFA",
+  "theme_color": "#FAFAFA",
   "icons": [
     {
       "src": "/images/og-image.png",

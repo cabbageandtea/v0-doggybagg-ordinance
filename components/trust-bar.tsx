@@ -37,7 +37,7 @@ export function TrustBar() {
           })}
           <div className="hidden items-center gap-2 sm:flex">
             <span className="text-border">|</span>
-            <span className="rounded-full bg-green-500/20 px-2 py-0.5 text-xs font-medium text-green-400">
+            <span className="rounded-full bg-success/20 px-2 py-0.5 text-xs font-medium text-success">
               Join 12,000+ protected investors
             </span>
           </div>

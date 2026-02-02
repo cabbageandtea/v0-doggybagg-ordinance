@@ -84,7 +84,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#1a1a2e',
+  themeColor: '#FAFAFA',
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
@@ -99,7 +99,7 @@ export default async function RootLayout({
   const headersList = await headers()
   const nonce = headersList.get('x-nonce')
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body className={`${inter.variable} ${spaceGrotesk.variable} ${syne.variable} font-sans antialiased`}>
         <StructuredData />
         <FAQStructuredData />

@@ -24,9 +24,9 @@ export function MeshGradientBackground() {
     window.addEventListener("resize", resize)
 
     const gradientColors = [
-      { r: 205, g: 133, b: 63, a: 0.15 },   // Copper
-      { r: 218, g: 165, b: 32, a: 0.1 },    // Golden
-      { r: 184, g: 115, b: 51, a: 0.12 },   // Bronze
+      { r: 129, g: 176, b: 138, a: 0.12 },   // Sage green (logo)
+      { r: 147, g: 185, b: 155, a: 0.08 },  // Pale sage
+      { r: 110, g: 160, b: 120, a: 0.1 },   // Muted sage
     ]
 
     class GradientOrb {
@@ -81,7 +81,7 @@ export function MeshGradientBackground() {
 
     const animate = () => {
       time++
-      ctx.fillStyle = "rgba(18, 18, 35, 1)"
+      ctx.fillStyle = "rgba(250, 250, 250, 1)"
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       for (const orb of orbs) {
@@ -104,7 +104,7 @@ export function MeshGradientBackground() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 -z-10"
-      style={{ background: "oklch(0.12 0.01 250)" }}
+      style={{ background: "oklch(0.985 0.002 100)" }}
       aria-hidden="true"
     />
   )

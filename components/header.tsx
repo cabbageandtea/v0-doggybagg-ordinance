@@ -12,12 +12,12 @@ export function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      <div className="liquid-glass mx-4 mt-4 rounded-2xl">
+      <div className="liquid-glass mx-4 mt-4 rounded-2xl border-border/80 shadow-lg shadow-black/5">
         <nav className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3">
-              <div className="relative h-10 w-10 overflow-hidden rounded-full bg-background/50">
+              <div className="relative h-10 w-10 overflow-hidden rounded-full bg-background/50 ring-1 ring-primary/10">
                 <Image
                   src="/images/og-image.png"
                   alt="DoggyBagg"

@@ -161,18 +161,19 @@ export function BentoGrid() {
             noTilt
           >
             <motion.div
-              className="mb-6"
+              className="mb-6 flex justify-center"
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.25 }}
             >
-              <Image
-                src="/images/og-image.png"
-                alt="DoggyBagg"
-                width={180}
-                height={90}
-                className="h-20 w-auto object-contain md:h-24"
-              />
+              <div className="relative h-20 w-20 overflow-hidden rounded-full bg-background/30 ring-2 ring-primary/20 md:h-24 md:w-24">
+                <Image
+                  src="/images/og-image.png"
+                  alt="DoggyBagg"
+                  fill
+                  className="object-contain p-2"
+                />
+              </div>
             </motion.div>
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-2">
               <span className="relative flex h-2 w-2">

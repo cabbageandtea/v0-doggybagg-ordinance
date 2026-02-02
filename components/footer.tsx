@@ -41,7 +41,7 @@ export function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <Link href="/" className="mb-6 flex items-center gap-3">
-              <div className="relative h-10 w-10 overflow-hidden rounded-full bg-background/50">
+              <div className="relative h-10 w-10 overflow-hidden rounded-full bg-background/50 ring-1 ring-primary/10">
                 <Image
                   src="/images/og-image.png"
                   alt="DoggyBagg"

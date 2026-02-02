@@ -93,7 +93,7 @@ export function BentoTiltCard({
             className="pointer-events-none absolute left-1/2 top-1/2 z-10 h-[400px] w-[400px]"
             style={{
               background:
-                "radial-gradient(400px circle at center, oklch(0.72 0.15 55 / 0.12), transparent 70%)",
+                "radial-gradient(400px circle at center, oklch(0.52 0.14 155 / 0.1), transparent 70%)",
               transform: shineTransform,
             }}
             initial={false}

@@ -26,13 +26,14 @@ export default function NotFound() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.15 }}
           >
-            <Image
-              src="/images/og-image.png"
-              alt="DoggyBagg"
-              width={120}
-              height={60}
-              className="h-12 w-auto object-contain opacity-90"
-            />
+            <div className="relative h-14 w-14 overflow-hidden rounded-full bg-background/30 ring-2 ring-primary/20">
+              <Image
+                src="/images/og-image.png"
+                alt="DoggyBagg"
+                fill
+                className="object-contain p-1.5"
+              />
+            </div>
           </motion.div>
           <motion.div
             className="mb-6 flex justify-center"
