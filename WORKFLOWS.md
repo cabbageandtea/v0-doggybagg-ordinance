@@ -38,13 +38,23 @@ Durable post-purchase and background workflows via [Workflow DevKit](https://use
 0. **Docket Scraper** — San Diego City Council dockets; STRO/ordinance keyword search; alerts 72h before meetings
 1. **Enforcement Sniper** — Code enforcement (STR, noise) + parking citations from seshat.datasd.org
 2. **License Sniper** — STRO CSV diff; new Tier 3/4 in 92109, 92037
-3. **Enrich & Email** — Contact lookup (STRO has built-in; CE/parking: wire Google Search MCP), send targets + legislative alerts to admin@doggybagg.cc
+3. **Integrity Sniper** — AirBnB listings in 92109/92037; cross-reference displayed permit vs STRO registry; flag mismatches
+4. **Enrich & Email** — Contact lookup, send targets + legislative alerts + integrity gaps to admin@doggybagg.cc
 
 ### Prerequisites
 
 - Run `scripts/014_sniper_tables.sql` and `scripts/015_docket_logs.sql` in Supabase
 - `CRON_SECRET` in Vercel (same as ingest)
 - `RESEND_API_KEY` for admin email
+
+### Integrity Gap (AirBnB)
+
+Wire `lib/snipers/integrity.ts` via Apify:
+
+- `APIFY_API_TOKEN` — Apify API token
+- `APIFY_AIRBNB_ACTOR_ID` — e.g. `curious_coder/airbnb-scraper` or actor ID from Apify Store
+
+Without these, the integrity sniper returns `[]` (placeholder).
 
 ### Contact Search
 

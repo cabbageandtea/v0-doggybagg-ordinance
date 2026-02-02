@@ -35,9 +35,17 @@ export type LegislativeAlert = {
   meetingId?: string
 }
 
+export type IntegrityRisk = {
+  listingUrl: string
+  displayedPermit: string
+  address?: string
+  mismatch: string
+}
+
 export type SentinelResult = {
   distressedLeads: DistressedLead[]
   newEntrants: NewEntrant[]
+  integrityRisks: IntegrityRisk[]
   targets: HighPriorityTarget[]
   runId?: string
 }

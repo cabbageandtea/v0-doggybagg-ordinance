@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Integrity Gap Sniper
+
+- **lib/snipers/integrity.ts** — AirBnB listings in 92109/92037; cross-reference displayed permit vs sniper_stro_snapshots; flag listings not in registry
+- **Sentinel workflow** — Step 4: Integrity sniper; CRITICAL Integrity Gap section in admin email
+- **Env:** `APIFY_API_TOKEN`, `APIFY_AIRBNB_ACTOR_ID` (optional; returns [] without)
+
 ### Municipal Docket Scraper
 
 - **lib/snipers/dockets.ts** — Scrapes San Diego City Council dockets; keyword search (STRO, ordinance, enforcement); alerts 72h before meetings

@@ -5,6 +5,7 @@ import { createClient } from "@supabase/supabase-js"
 export async function logSentinelRun(opts: {
   status: "completed" | "failed"
   alertsCount?: number
+  integrityRisksCount?: number
   distressedCount: number
   newEntrantsCount: number
   totalTargets: number
@@ -22,6 +23,7 @@ export async function logSentinelRun(opts: {
     completed_at: new Date().toISOString(),
     result_json: {
       alertsCount: opts.alertsCount ?? 0,
+      integrityRisksCount: opts.integrityRisksCount ?? 0,
       distressedCount: opts.distressedCount,
       newEntrantsCount: opts.newEntrantsCount,
       totalTargets: opts.totalTargets,

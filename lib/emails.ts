@@ -230,7 +230,8 @@ export async function sendSentinelTargetsEmail(
     licenseId?: string
     contact?: { name?: string; phone?: string }
   }>,
-  alerts: Array<{ meetingDate: string; topicSummary: string; link: string }> = []
+  alerts: Array<{ meetingDate: string; topicSummary: string; link: string }> = [],
+  integrityRisks: Array<{ listingUrl: string; displayedPermit: string; address?: string; mismatch: string }> = []
 ): Promise<{ ok: boolean; error?: string }> {
   const resend = getResend()
   if (!resend) return { ok: false, error: "Email not configured" }
@@ -254,6 +255,25 @@ export async function sendSentinelTargetsEmail(
   `
       : ""
 
+  const integritySection =
+    integrityRisks.length > 0
+      ? `
+    <div style="margin-bottom: 24px; padding: 16px; background: #fee2e2; border-left: 4px solid #dc2626; border-radius: 4px;">
+      <h3 style="margin: 0 0 12px; color: #991b1b;">🚨 CRITICAL: Integrity Gap (Illegal Listings)</h3>
+      <p style="margin: 0 0 12px; font-size: 14px;">Listings displaying permit numbers not found in STRO Registry (92109, 92037):</p>
+      <ul style="margin: 0; padding-left: 20px;">
+        ${integrityRisks
+          .slice(0, 10)
+          .map(
+            (r) =>
+              `<li style="margin-bottom: 8px;">${r.mismatch}<br/><a href="${r.listingUrl}" style="color: #6366f1; font-size: 13px;">View listing</a>${r.address ? ` — ${r.address}` : ""}</li>`
+          )
+          .join("")}
+      </ul>
+    </div>
+  `
+      : ""
+
   const rows = targets
     .slice(0, 50)
     .map(
@@ -264,6 +284,7 @@ export async function sendSentinelTargetsEmail(
 
   const body = wrapBody(`
     <h2 style="margin: 0 0 16px;">Municipal Sentinel — High-Priority Targets</h2>
+    ${integritySection}
     ${alertSection}
     <p>Today's distressed leads and new STRO entrants for $499 Portfolio Audit outreach.</p>
     <table style="width:100%; border-collapse: collapse; font-size: 13px;">
@@ -274,11 +295,13 @@ export async function sendSentinelTargetsEmail(
   `)
 
   const subject =
-    alerts.length > 0
-      ? `🚨 Sentinel: ${alerts.length} Legislative Alert(s) + ${targets.length} targets | DoggyBagg`
-      : targets.length > 0
-        ? `Sentinel: ${targets.length} High-Priority Targets | DoggyBagg`
-        : "Sentinel: Daily Report (0 targets) | DoggyBagg"
+    integrityRisks.length > 0
+      ? `🚨 Sentinel: ${integrityRisks.length} Integrity Gap(s) + ${targets.length} targets | DoggyBagg`
+      : alerts.length > 0
+        ? `🚨 Sentinel: ${alerts.length} Legislative Alert(s) + ${targets.length} targets | DoggyBagg`
+        : targets.length > 0
+          ? `Sentinel: ${targets.length} High-Priority Targets | DoggyBagg`
+          : "Sentinel: Daily Report (0 targets) | DoggyBagg"
 
   const { error } = await resend.emails.send({
     from: fromEmail,
