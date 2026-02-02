@@ -8,9 +8,11 @@
 
 | Role | Name | Email |
 |------|------|-------|
-| Founder / CEO | Malik Lomax | doggybag422@gmail.com |
-| Business / Admin | — | doggybag422@gmail.com |
-| Support (domain) | — | support@doggybagg.cc |
+| Founder / CEO | Malik Lomax | maliklomax@doggybagg.cc |
+| Business / Admin | — | hello@doggybagg.cc |
+| Support | — | support@doggybagg.cc |
+| Admin (Sentinel) | — | admin@doggybagg.cc |
+| Privacy / Legal | — | privacy@doggybagg.cc |
 
 **Location:** San Diego, CA
 
@@ -23,8 +25,8 @@
 | **X (Twitter)** | @doggybagg_sd | ✅ Live, profile complete |
 | **LinkedIn (Personal)** | Malik Lomax — Founder/CEO at DoggyBagg Ordinance | ✅ Live |
 | **LinkedIn (Company)** | — | ⏳ Pending (unlocks with connection growth) |
-| **Facebook** | Malik Lomax (doggybag422@gmail.com) | ⏳ Under review |
-| **Google Cloud** | doggybag422@gmail.com | ⏳ Billing/trial verification pending |
+| **Facebook** | Malik Lomax (login: doggybag422@gmail.com) | ⏳ Under review |
+| **Google Cloud** | Billing: admin@doggybagg.cc or hello@doggybagg.cc | ⏳ Verification pending |
 
 ---
 
