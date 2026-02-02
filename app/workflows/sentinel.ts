@@ -3,10 +3,11 @@
  * Daily durable workflow: run snipers, enrich contacts, email admin with high-priority targets.
  * Triggered by Vercel Cron: /api/cron/sentinel
  *
- * Durable Object / Handler Verification (Action C):
- * No getWorldHandlers() or top-level world initialization in this file.
- * Routes are registered by workflow/next via withWorkflow() in next.config.
- * Export is a pure async function; no module-load-time side effects.
+ * Architecture (Workflow DevKit 4.0.1-beta.30):
+ * - No serve() pattern: this SDK uses withWorkflow() in next.config to auto-generate
+ *   /.well-known/workflow/v1/flow, step, webhook route handlers at build time.
+ * - No .input() or Zod schema: this workflow takes no arguments; no schema validation at discovery.
+ * - Export is a pure async function; handlers are created by the framework, not this file.
  */
 
 import { runEnforcementSniper } from "@/lib/snipers/enforcement"

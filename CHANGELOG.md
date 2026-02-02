@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **Advanced t._parse fixes** — serverExternalPackages for zod/workflow/@workflow/*; webpack() in next.config; /api/workflow proxy exclusion; strict zod 4.1.11 override.
 - **Strict proxy termination** — Early return for /.well-known/workflow at top of proxy handler (defense in depth).
 - **Vercel Deployment Protection** — Added VERCEL_DEPLOYMENT_PROTECTION_CHECK.md; Zod 3.x not viable (workflow SDK requires Zod 4).
+- **serve() / .input() verification** — Workflow DevKit 4.0.1-beta.30 uses withWorkflow (no serve()). Sentinel has no .input() or Zod schema. serverExternalPackages confirmed in next.config.
 
 ## [0.2.1] - 2026-02-01
 

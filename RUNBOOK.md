@@ -49,7 +49,7 @@
 6. **500 / `t._parse is not a function`** – Zod version conflict. Ensure `zod@4.1.11` and pnpm override in package.json. Redeploy with **Reset Build Cache** checked.
 7. **Failed to parse server response** – Proxy must not run on `/.well-known/workflow/*`. Ensure `proxy.ts` matcher excludes `\\.well-known`. Pin workflow to 4.0.1-beta.30.
 8. **Turbopack / Zod minification** – Use `next build --webpack` to force Webpack (avoids Turbopack minifying Zod incorrectly). zod + workflow at top of deps; pnpm override zod 4.1.11.
-9. **t._parse persists** – Add serverExternalPackages: [zod, workflow, @workflow/*] so packages are required not bundled; add webpack() in next.config; exclude /api/workflow from proxy. Workflow DevKit uses withWorkflow (no serve/serveMany).
+9. **t._parse persists** – Add serverExternalPackages: [zod, workflow, @workflow/*] so packages are required not bundled; add webpack() in next.config; exclude /api/workflow from proxy. Workflow DevKit uses withWorkflow (no serve()). Sentinel has no .input() schema.
 10. **Vercel Deployment Protection** – If Vercel Authentication or Password Protection is enabled for production, it can return HTML instead of JSON to the Workflow API. Check Settings → Deployment Protection. See VERCEL_DEPLOYMENT_PROTECTION_CHECK.md.
 
 ---
