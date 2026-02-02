@@ -12,7 +12,8 @@ export const config = {
      * - _next/static, _next/image (Next.js internals)
      * - favicon.ico, images
      * - sitemap.xml, robots.txt (SEO – bypass proxy to avoid "Couldn't fetch" in GSC)
+     * - .well-known/workflow (Workflow DevKit API – must bypass proxy to avoid "Failed to parse server response")
      */
-    '/((?!_next/static|_next/image|favicon\\.ico|sitemap\\.xml|robots\\.txt|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/((?!_next/static|_next/image|favicon\\.ico|sitemap\\.xml|robots\\.txt|\\.well-known|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 }

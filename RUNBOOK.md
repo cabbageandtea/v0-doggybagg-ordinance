@@ -47,6 +47,7 @@
 4. **RESEND_API_KEY** – Required for admin@doggybagg.cc alerts. Verify domain in Resend Dashboard.
 5. **Workflows** – If using Vercel Workflows, check the Workflows Dashboard for run status.
 6. **500 / `t._parse is not a function`** – Zod version conflict. Ensure `zod@4.1.11` and pnpm override in package.json. Redeploy with **Reset Build Cache** checked.
+7. **Failed to parse server response** – Proxy must not run on `/.well-known/workflow/*`. Ensure `proxy.ts` matcher excludes `\\.well-known`. Pin workflow to 4.0.1-beta.30.
 
 ---
 

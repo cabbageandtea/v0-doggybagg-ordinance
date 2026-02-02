@@ -85,7 +85,7 @@
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "latest",
-    "workflow": "4.0.1-beta.50",
+    "workflow": "4.0.1-beta.30",
     "zod": "4.1.11"
   },
   "pnpm": {

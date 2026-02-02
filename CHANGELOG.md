@@ -12,6 +12,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - **Zod 4 alignment** — Upgrade zod to 4.1.11 + pnpm override to fix `TypeError: t._parse is not a function` with Workflow DevKit on Vercel.
 - **stripe-webhook validation** — Update return type for Zod 4 compatibility.
+- **Proxy exclusion for workflow** — Exclude `/.well-known/*` from proxy matcher so Workflow DevKit API responses are not modified (fixes "Failed to parse server response").
+- **Workflow SDK pin** — Pin workflow to 4.0.1-beta.30 for stability.
 
 ## [0.2.1] - 2026-02-01
 
