@@ -1,7 +1,11 @@
-import { type NextRequest } from 'next/server'
+import { type NextRequest, NextResponse } from 'next/server'
 import { updateSession } from '@/lib/supabase/proxy'
 
 export async function proxy(request: NextRequest) {
+  // Strict early return: do not execute any logic for workflow API (defense in depth)
+  if (request.nextUrl.pathname.startsWith('/.well-known/workflow')) {
+    return NextResponse.next()
+  }
   return await updateSession(request)
 }
 

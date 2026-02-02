@@ -18,6 +18,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **Deep dependency resolution** — zod + workflow at top of deps; clean pnpm-lock slate; pnpm override zod 4.1.11 for all transitive deps.
 - **Durable object verification** — Documented that sentinel workflow has no top-level world handler init (routes via withWorkflow).
 - **Advanced t._parse fixes** — serverExternalPackages for zod/workflow/@workflow/*; webpack() in next.config; /api/workflow proxy exclusion; strict zod 4.1.11 override.
+- **Strict proxy termination** — Early return for /.well-known/workflow at top of proxy handler (defense in depth).
+- **Vercel Deployment Protection** — Added VERCEL_DEPLOYMENT_PROTECTION_CHECK.md; Zod 3.x not viable (workflow SDK requires Zod 4).
 
 ## [0.2.1] - 2026-02-01
 
