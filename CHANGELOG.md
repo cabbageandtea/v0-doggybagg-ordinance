@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.2.2] - 2026-02-02
+
+### Fixes
+
+- **Zod 4 alignment** — Upgrade zod to 4.1.11 + pnpm override to fix `TypeError: t._parse is not a function` with Workflow DevKit on Vercel.
+- **stripe-webhook validation** — Update return type for Zod 4 compatibility.
+
 ## [0.2.1] - 2026-02-01
 
 ### TOT Gap Sniper

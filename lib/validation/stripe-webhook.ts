@@ -28,13 +28,16 @@ function getMetadata(md: Record<string, string> | null | undefined, key: string)
 /** Parse metadata with case-insensitive key mapping (Stripe may lowercase keys) */
 export function parseCheckoutMetadata(
   md: Record<string, string> | null | undefined
-): z.SafeParseReturnType<Record<string, string>, CheckoutSessionMetadata> {
+): { success: true; data: CheckoutSessionMetadata } | { success: false; error: z.ZodError } {
   if (!md || typeof md !== "object") {
-    return { success: false, error: new z.ZodError([{
-      code: "custom",
-      path: [],
-      message: "Metadata is null or empty",
-    }]) }
+    return {
+      success: false,
+      error: new z.ZodError([{
+        code: "custom",
+        path: [],
+        message: "Metadata is null or empty",
+      }]),
+    }
   }
 
   const mapped: Record<string, string> = {}

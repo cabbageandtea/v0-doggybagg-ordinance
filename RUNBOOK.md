@@ -46,6 +46,7 @@
 3. **Prerequisites** – Run `scripts/014_sniper_tables.sql`, `015_docket_logs.sql`, `016_stro_expiration.sql` in Supabase.
 4. **RESEND_API_KEY** – Required for admin@doggybagg.cc alerts. Verify domain in Resend Dashboard.
 5. **Workflows** – If using Vercel Workflows, check the Workflows Dashboard for run status.
+6. **500 / `t._parse is not a function`** – Zod version conflict. Ensure `zod@4.1.11` and pnpm override in package.json. Redeploy with **Reset Build Cache** checked.
 
 ---
 

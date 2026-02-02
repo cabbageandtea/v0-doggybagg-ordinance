@@ -1,6 +1,6 @@
 {
   "name": "doggybagg",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "private": true,
   "scripts": {
     "build": "next build",
@@ -86,7 +86,12 @@
     "tailwindcss-animate": "^1.0.7",
     "vaul": "latest",
     "workflow": "4.0.1-beta.50",
-    "zod": "3.25.76"
+    "zod": "4.1.11"
+  },
+  "pnpm": {
+    "overrides": {
+      "zod": "4.1.11"
+    }
   },
   "lint-staged": {
     "*.{ts,tsx}": [
