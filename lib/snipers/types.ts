@@ -28,6 +28,13 @@ export type HighPriorityTarget = {
   }
 }
 
+export type LegislativeAlert = {
+  meetingDate: string
+  topicSummary: string
+  link: string
+  meetingId?: string
+}
+
 export type SentinelResult = {
   distressedLeads: DistressedLead[]
   newEntrants: NewEntrant[]

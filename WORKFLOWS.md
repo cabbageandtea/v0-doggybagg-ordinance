@@ -35,13 +35,14 @@ Durable post-purchase and background workflows via [Workflow DevKit](https://use
 
 ### Steps
 
+0. **Docket Scraper** — San Diego City Council dockets; STRO/ordinance keyword search; alerts 72h before meetings
 1. **Enforcement Sniper** — Code enforcement (STR, noise) + parking citations from seshat.datasd.org
 2. **License Sniper** — STRO CSV diff; new Tier 3/4 in 92109, 92037
-3. **Enrich & Email** — Contact lookup (STRO has built-in; CE/parking: wire Google Search MCP), send targets to admin@doggybagg.cc
+3. **Enrich & Email** — Contact lookup (STRO has built-in; CE/parking: wire Google Search MCP), send targets + legislative alerts to admin@doggybagg.cc
 
 ### Prerequisites
 
-- Run `scripts/014_sniper_tables.sql` in Supabase
+- Run `scripts/014_sniper_tables.sql` and `scripts/015_docket_logs.sql` in Supabase
 - `CRON_SECRET` in Vercel (same as ingest)
 - `RESEND_API_KEY` for admin email
 

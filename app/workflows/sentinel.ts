@@ -6,9 +6,15 @@
 
 import { runEnforcementSniper } from "@/lib/snipers/enforcement"
 import { runLicenseSniper } from "@/lib/snipers/licenses"
+import { runDocketScraper } from "@/lib/snipers/dockets"
 import { searchContactForLead } from "@/lib/snipers/contact-search"
 import { sendSentinelTargetsEmail } from "@/lib/emails"
-import type { DistressedLead, NewEntrant } from "@/lib/snipers/types"
+import type { DistressedLead, NewEntrant, LegislativeAlert } from "@/lib/snipers/types"
+
+async function stepDocketScraper() {
+  "use step"
+  return runDocketScraper()
+}
 
 async function stepEnforcementSniper() {
   "use step"
@@ -21,6 +27,7 @@ async function stepLicenseSniper() {
 }
 
 async function stepEnrichAndEmail(
+  alerts: LegislativeAlert[],
   distressed: DistressedLead[],
   newEntrants: NewEntrant[]
 ) {
@@ -60,12 +67,13 @@ async function stepEnrichAndEmail(
       contact: { name: contact.name, phone: contact.phone },
     })
   }
-  const result = await sendSentinelTargetsEmail(enriched)
+  const result = await sendSentinelTargetsEmail(enriched, alerts)
   if (!result.ok) throw new Error(result.error ?? "Failed to send sentinel email")
   return { sent: enriched.length }
 }
 
 async function stepLogRun(opts: {
+  alertsCount: number
   distressedCount: number
   newEntrantsCount: number
   totalTargets: number
@@ -80,13 +88,15 @@ async function stepLogRun(opts: {
 export async function municipalSentinelWorkflow() {
   "use workflow"
 
+  const alerts = await stepDocketScraper()
   const distressed = await stepEnforcementSniper()
   const newEntrants = await stepLicenseSniper()
   const totalTargets = distressed.length + newEntrants.length
 
   try {
-    await stepEnrichAndEmail(distressed, newEntrants)
+    await stepEnrichAndEmail(alerts, distressed, newEntrants)
     await stepLogRun({
+      alertsCount: alerts.length,
       distressedCount: distressed.length,
       newEntrantsCount: newEntrants.length,
       totalTargets,
@@ -94,6 +104,7 @@ export async function municipalSentinelWorkflow() {
     })
     return {
       status: "completed" as const,
+      alertsCount: alerts.length,
       distressedCount: distressed.length,
       newEntrantsCount: newEntrants.length,
       totalTargets,
@@ -101,6 +112,7 @@ export async function municipalSentinelWorkflow() {
   } catch (err) {
     try {
       await stepLogRun({
+        alertsCount: alerts.length,
         distressedCount: distressed.length,
         newEntrantsCount: newEntrants.length,
         totalTargets,

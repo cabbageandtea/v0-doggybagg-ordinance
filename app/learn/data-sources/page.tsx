@@ -24,6 +24,12 @@ const sources = [
     icon: Database,
   },
   {
+    name: "City Council Dockets",
+    description: "San Diego City Clerk council meeting agendas. We monitor for STRO, ordinance, and enforcement discussions and alert 72 hours before meetings.",
+    updateFrequency: "Daily",
+    icon: FileText,
+  },
+  {
     name: "Public Records",
     description: "Address matching, property identifiers, and violation history. We normalize addresses for reliable matching.",
     updateFrequency: "Per sync",

@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Municipal Docket Scraper
+
+- **lib/snipers/dockets.ts** — Scrapes San Diego City Council dockets; keyword search (STRO, ordinance, enforcement); alerts 72h before meetings
+- **scripts/015_docket_logs.sql** — `sentinel_docket_history` for dedupe
+- **Sentinel workflow** — Step 0: Docket scraper; legislative alerts section in admin email
+- **Data sources page** — City Council Dockets added
+
 ### Sentinel Improvements (Team Debate)
 
 - Prioritize new entrants first in email (have contact info)
