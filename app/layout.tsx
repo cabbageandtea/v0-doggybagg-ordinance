@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   description: metaDescription,
   generator: 'DoggyBagg',
-  keywords: ['San Diego', 'ordinance oversight', 'municipal code', 'real estate', 'portfolio analytics', 'AI monitoring', 'STRO', 'short-term rental'],
+  keywords: ['San Diego', 'ordinance oversight', 'municipal code', 'real estate', 'portfolio analytics', 'STRO', 'short-term rental', 'license renewal', 'compliance monitoring'],
   authors: [{ name: 'DoggyBagg LLC', url: siteUrl }],
   creator: 'DoggyBagg LLC',
   openGraph: {

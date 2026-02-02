@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-02-01
+
 ### Renewal Sentinel
 
 - **lib/snipers/renewal.ts** — Licenses expiring in 10–45 days from sniper_stro_snapshots

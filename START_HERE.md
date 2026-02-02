@@ -54,6 +54,10 @@ Without this, payments won't complete correctly.
    - `scripts/001_create_properties_schema.sql`
    - `scripts/005_onboarding_agent_schema.sql`
    - `scripts/008_stripe_webhook_events.sql`
+   - `scripts/014_sniper_tables.sql` (Sentinel)
+   - `scripts/015_docket_logs.sql` (Docket dedupe)
+   - `scripts/016_stro_expiration.sql` (Renewal Sentinel)
+   - `scripts/017_docket_unique_meeting.sql` (Docket uniqueness)
 
    You can copy the contents of each file and paste into the SQL Editor, then Run.
 
