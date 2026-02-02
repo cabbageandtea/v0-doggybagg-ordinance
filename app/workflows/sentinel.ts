@@ -25,7 +25,24 @@ async function stepEnrichAndEmail(
   newEntrants: NewEntrant[]
 ) {
   "use step"
-  const leads: (DistressedLead | NewEntrant)[] = [...distressed, ...newEntrants]
+  // Prioritize new entrants (have contact info); dedupe by normalized address
+  const normalizeAddr = (a: string) => a.toLowerCase().replace(/\s+/g, " ").trim()
+  const seen = new Set<string>()
+  const leads: (DistressedLead | NewEntrant)[] = []
+  for (const l of newEntrants) {
+    const key = normalizeAddr(l.address)
+    if (!seen.has(key)) {
+      seen.add(key)
+      leads.push(l)
+    }
+  }
+  for (const l of distressed) {
+    const key = normalizeAddr(l.address)
+    if (!seen.has(key)) {
+      seen.add(key)
+      leads.push(l)
+    }
+  }
   const enriched: Array<{
     type: string
     address: string
@@ -48,18 +65,51 @@ async function stepEnrichAndEmail(
   return { sent: enriched.length }
 }
 
+async function stepLogRun(opts: {
+  distressedCount: number
+  newEntrantsCount: number
+  totalTargets: number
+  status: "completed" | "failed"
+  error?: string
+}) {
+  "use step"
+  const { logSentinelRun: logRun } = await import("@/lib/snipers/log-run")
+  await logRun(opts)
+}
+
 export async function municipalSentinelWorkflow() {
   "use workflow"
 
   const distressed = await stepEnforcementSniper()
   const newEntrants = await stepLicenseSniper()
+  const totalTargets = distressed.length + newEntrants.length
 
-  await stepEnrichAndEmail(distressed, newEntrants)
-
-  return {
-    status: "completed",
-    distressedCount: distressed.length,
-    newEntrantsCount: newEntrants.length,
-    totalTargets: distressed.length + newEntrants.length,
+  try {
+    await stepEnrichAndEmail(distressed, newEntrants)
+    await stepLogRun({
+      distressedCount: distressed.length,
+      newEntrantsCount: newEntrants.length,
+      totalTargets,
+      status: "completed",
+    })
+    return {
+      status: "completed" as const,
+      distressedCount: distressed.length,
+      newEntrantsCount: newEntrants.length,
+      totalTargets,
+    }
+  } catch (err) {
+    try {
+      await stepLogRun({
+        distressedCount: distressed.length,
+        newEntrantsCount: newEntrants.length,
+        totalTargets,
+        status: "failed",
+        error: err instanceof Error ? err.message : String(err),
+      })
+    } catch {
+      // Log failure is non-fatal
+    }
+    throw err
   }
 }

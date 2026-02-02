@@ -252,11 +252,16 @@ export async function sendSentinelTargetsEmail(
     <p style="margin-top: 16px;"><a href="${siteUrl}/dashboard" style="color: #6366f1; font-weight: 600;">DoggyBagg Dashboard</a></p>
   `)
 
+  const subject =
+    targets.length > 0
+      ? `Sentinel: ${targets.length} High-Priority Targets | DoggyBagg`
+      : "Sentinel: Daily Report (0 targets) | DoggyBagg"
+
   const { error } = await resend.emails.send({
     from: fromEmail,
     to: "admin@doggybagg.cc",
     replyTo,
-    subject: `Sentinel: ${targets.length} High-Priority Targets | DoggyBagg`,
+    subject,
     html: body,
   })
   if (error) {

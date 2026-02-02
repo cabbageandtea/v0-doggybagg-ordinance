@@ -23,6 +23,15 @@ type StroRow = {
 }
 
 export async function runLicenseSniper(): Promise<NewEntrant[]> {
+  try {
+    return await runLicenseSniperInner()
+  } catch (err) {
+    console.error("[license-sniper]", err)
+    return []
+  }
+}
+
+async function runLicenseSniperInner(): Promise<NewEntrant[]> {
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
   if (!serviceKey || !supabaseUrl) {
@@ -32,9 +41,16 @@ export async function runLicenseSniper(): Promise<NewEntrant[]> {
 
   const supabase = createClient(supabaseUrl, serviceKey, { auth: { persistSession: false } })
 
-  const res = await fetch(STRO_CSV)
+  let res: Response
+  try {
+    res = await fetch(STRO_CSV)
+  } catch (err) {
+    console.error("[license-sniper] STRO CSV fetch:", err)
+    return []
+  }
   if (!res.ok) {
-    throw new Error(`STRO CSV fetch failed: ${res.status}`)
+    console.error("[license-sniper] STRO CSV status:", res.status)
+    return []
   }
   const csv = await res.text()
   const rows = parse(csv, { columns: true, skip_empty_lines: true, trim: true }) as StroRow[]

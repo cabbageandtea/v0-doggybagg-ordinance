@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Sentinel Improvements (Team Debate)
+
+- Prioritize new entrants first in email (have contact info)
+- Dedupe by normalized address (prefer STRO over CE)
+- Softer subject when 0 targets: "Daily Report"
+- Log runs to sniper_runs for observability
+- Resilient license sniper: return [] on fetch/Supabase failure
+
 ### Durable Post-Purchase Workflow
 
 - **Workflow DevKit** — `workflow` package; `app/workflows/purchase.ts`
