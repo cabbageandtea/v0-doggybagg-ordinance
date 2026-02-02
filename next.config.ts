@@ -15,9 +15,9 @@ const nextConfig: NextConfig = {
   typescript: { ignoreBuildErrors: false },
   images: { unoptimized: true },
   trailingSlash: false,
-  // Prevent tracer from pulling mangled zod copies; use top-level zod from node_modules
+  // Aggressive: exclude zod from tracer so Vercel uses raw node_modules at runtime (not bundled/mangled)
   outputFileTracingExcludes: {
-    "*": ["**/node_modules/@workflow/**/node_modules/zod/**", "**/node_modules/@workflow/**/zod/**"],
+    "*": ["**/node_modules/zod/**/*"],
   },
   // Alternate path for Workflow API (v5-style); Vercel engine may prefer this over .well-known
   async rewrites() {

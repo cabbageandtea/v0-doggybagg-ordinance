@@ -6,9 +6,9 @@
 
 ## Fixes Applied
 
-### 0. outputFileTracingExcludes
+### 0. outputFileTracingExcludes (aggressive)
 
-`outputFileTracingExcludes` excludes nested zod copies inside `@workflow` from the Vercel tracer, so the top-level zod from node_modules is used at runtime.
+`outputFileTracingExcludes: { "*": ["**/node_modules/zod/**/*"] }` excludes zod from the Vercel tracer entirely. The theory: Vercel uses the raw node_modules version at runtime instead of a bundled/mangled copy. **Risk:** If the deployment omits zod, you may see "Cannot find module 'zod'" at runtime—revert to the conservative exclusion (nested @workflow/zod only) if so.
 
 ### 1. Server Minification Disabled
 
