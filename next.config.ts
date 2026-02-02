@@ -2,13 +2,27 @@ import type { NextConfig } from "next"
 import { withSentryConfig } from "@sentry/nextjs"
 import { withWorkflow } from "workflow/next"
 
+const WORKFLOW_EXTERNALS = [
+  "zod",
+  "workflow",
+  "@workflow/next",
+  "@workflow/core",
+  "@workflow/world",
+  "@workflow/world-vercel",
+] as const
+
 const nextConfig: NextConfig = {
   typescript: { ignoreBuildErrors: false },
   images: { unoptimized: true },
-  // Prevent bundling workflow/zod so Turbopack/Webpack don't minify into invalid t._parse
-  serverExternalPackages: ["zod", "workflow", "@workflow/next", "@workflow/core", "@workflow/world", "@workflow/world-vercel"],
-  // Reinforce Webpack usage (Turbopack has known Zod minification issues)
-  webpack: (config) => config,
+  // Aggressive no-bundle: prevent workflow/zod from being minified into invalid t._parse
+  serverExternalPackages: [...WORKFLOW_EXTERNALS],
+  webpack: (config, { isServer }) => {
+    // Disable server minification to avoid Terser/SWC renaming Zod's _parse
+    if (isServer && config.optimization) {
+      config.optimization = { ...config.optimization, minimize: false }
+    }
+    return config
+  },
 }
 
 const configWithWorkflow = withWorkflow(nextConfig)
