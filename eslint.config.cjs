@@ -1,6 +1,6 @@
 module.exports = [
   {
-    ignores: ['node_modules/**', '.next/**', 'public/**', 'coverage/**'],
+    ignores: ['node_modules/**', '.next/**', 'public/**', 'coverage/**', 'app/.well-known/**'],
   },
   {
     files: ['**/*.{ts,tsx}'],

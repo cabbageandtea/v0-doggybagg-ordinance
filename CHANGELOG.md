@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Durable Post-Purchase Workflow
+
+- **Workflow DevKit** — `workflow` package; `app/workflows/purchase.ts`
+- **$499 Audit sequence:** Welcome email → sleep(3 days) → Follow-up email
+- **Stripe webhook:** Starts `purchaseAuditWorkflow` on checkout.session.completed for audit
+- **Emails:** `sendWelcomeAuditEmail`, `sendFollowUpAuditEmail` in `lib/emails.ts`
+- **Docs:** WORKFLOWS.md; EDGE_TECH_ROADMAP updated
+
 ### Final Hour Polish
 
 - **Metadata:** DoggyBagg title, 160-char description, OpenGraph/Twitter images (`/images/og-image.jpg` + logo fallback)

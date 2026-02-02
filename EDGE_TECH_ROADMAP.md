@@ -61,6 +61,7 @@ Cutting-edge software, APIs, and programs to differentiate and scale. Research-b
 | Tech | What It Is | DoggyBagg Use | Effort | Cost |
 |------|------------|---------------|--------|------|
 | **Vercel Cron** | Scheduled serverless | Data sync (you have this) | Done | Free |
+| **Workflow DevKit** | Durable workflows (sleep, steps) | $499 audit: Welcome email → 3d delay → Follow-up email | Done | Free (Vercel) |
 | **Inngest** | Durable workflows, retries | Replace cron for complex pipelines | Low | Free tier |
 | **Temporal** | Workflow orchestration | Multi-step compliance workflows | High | Self-host or cloud |
 | **Supabase Edge Functions** | Deno at the edge | Lightweight webhooks, transforms | Low | Free tier |
@@ -68,16 +69,20 @@ Cutting-edge software, APIs, and programs to differentiate and scale. Research-b
 
 ---
 
-## 6. Immediate Implementations (This Sprint)
+## 6. Implemented ✅
 
-1. **Parking citations in sync** — Add 2024/2025 parking data; match `location` to properties. Fresher than code enforcement.
-2. **Vercel AI SDK chat** — "/ask" or widget: "Ask about San Diego ordinances." Uses your learn content + municipal snippets.
-3. **Honest SMS copy** — Change "SMS alerts" to "Email alerts (SMS coming soon)" until Twilio wired.
-4. **Honest social proof** — Replace "12,000+" with "Join San Diego investors" or "Early adopters."
+- **Parking citations in sync** — 2024/2025 data; match `location` to properties.
+- **Workflow DevKit** — $499 purchase: Welcome email → sleep(3 days) → Follow-up email.
+- **Honest SMS copy** — "Email alerts (SMS coming soon)" across UI.
+- **Honest social proof** — "Code + Parking", "San Diego", "24/7" (no fake numbers).
+
+## 7. Next Sprint
+
+1. **Vercel AI SDK chat** — "/ask" or widget: "Ask about San Diego ordinances."
 
 ---
 
-## 7. Stack Additions (Packages)
+## 8. Stack Additions (Packages)
 
 ```bash
 # AI chat (when ready)
@@ -90,7 +95,7 @@ pnpm add twilio
 
 ---
 
-## 8. APIs to Watch
+## 9. APIs to Watch
 
 | API | Status | Notes |
 |-----|--------|-------|

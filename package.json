@@ -16,7 +16,8 @@
     "e2e:ci": "playwright test --reporter=github",
     "check:server-actions-async": "node scripts/check-server-actions-async.js",
     "start": "next start",
-    "prepare": "husky"
+    "prepare": "husky",
+    "workflow:web": "workflow web"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
@@ -84,6 +85,7 @@
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "latest",
+    "workflow": "4.0.1-beta.50",
     "zod": "3.25.76"
   },
   "lint-staged": {

@@ -162,6 +162,65 @@ export async function sendAuditConfirmationEmail(to: string): Promise<{ ok: bool
   return { ok: true }
 }
 
+/** Welcome & Deliverable Specs — Step 1 of purchase workflow; sent immediately after $499 audit payment */
+export async function sendWelcomeAuditEmail(to: string): Promise<{ ok: boolean; error?: string }> {
+  const resend = getResend()
+  if (!resend) return { ok: false, error: "Email not configured" }
+
+  const body = wrapBody(`
+    <h2 style="margin: 0 0 16px;">Welcome & Deliverable Specs</h2>
+    <p>Thank you for your $499 Portfolio Audit purchase. Your payment has been confirmed.</p>
+    <p><strong>What you'll receive:</strong></p>
+    <ul style="margin: 12px 0; padding-left: 20px;">
+      <li>Custom ordinance standing report for your San Diego portfolio</li>
+      <li>30-minute expert consultation call</li>
+      <li>Delivered within 5 business days of your scheduled session</li>
+    </ul>
+    <p><strong>Next steps:</strong> Our team will contact you within 24–48 hours to schedule your consultation.</p>
+    <p><a href="${siteUrl}" style="color: #6366f1; font-weight: 600;">Back to DoggyBagg</a></p>
+  `)
+
+  const { error } = await resend.emails.send({
+    from: fromEmail,
+    to,
+    replyTo,
+    subject: "Portfolio Audit — Welcome & Deliverable Specs | DoggyBagg",
+    html: body,
+  })
+  if (error) {
+    console.error("[emails] sendWelcomeAuditEmail failed:", error)
+    return { ok: false, error: error.message }
+  }
+  return { ok: true }
+}
+
+/** Follow-up Audit Health Check — Step 3 of purchase workflow; sent 3 days after purchase */
+export async function sendFollowUpAuditEmail(to: string): Promise<{ ok: boolean; error?: string }> {
+  const resend = getResend()
+  if (!resend) return { ok: false, error: "Email not configured" }
+
+  const body = wrapBody(`
+    <h2 style="margin: 0 0 16px;">Portfolio Audit — Quick Health Check</h2>
+    <p>Hi — we wanted to follow up on your $499 Portfolio Audit.</p>
+    <p>Have you heard from our team? If you haven't received a scheduling link yet, please reply to this email and we'll get you on the calendar right away.</p>
+    <p>Meanwhile, you can add your properties in your <a href="${siteUrl}/dashboard" style="color: #6366f1; font-weight: 600;">dashboard</a> to start monitoring ordinance filings.</p>
+    <p>Questions? Reply to this email or contact support@doggybagg.cc.</p>
+  `)
+
+  const { error } = await resend.emails.send({
+    from: fromEmail,
+    to,
+    replyTo,
+    subject: "Portfolio Audit — follow-up | DoggyBagg",
+    html: body,
+  })
+  if (error) {
+    console.error("[emails] sendFollowUpAuditEmail failed:", error)
+    return { ok: false, error: error.message }
+  }
+  return { ok: true }
+}
+
 export async function sendComplianceViolationEmail(
   to: string,
   opts: { propertyAddress: string; violationType?: string }
