@@ -130,6 +130,38 @@ export async function sendPaymentFailedEmail(to: string): Promise<{ ok: boolean;
   return { ok: true }
 }
 
+/** Audit confirmation — sent when customer pays $499. Sets expectations for next steps. */
+export async function sendAuditConfirmationEmail(to: string): Promise<{ ok: boolean; error?: string }> {
+  const resend = getResend()
+  if (!resend) return { ok: false, error: "Email not configured" }
+
+  const body = wrapBody(`
+    <h2 style="margin: 0 0 16px;">Audit request received</h2>
+    <p>Thank you for your $499 Portfolio Audit purchase. Your payment has been confirmed.</p>
+    <p><strong>What happens next:</strong></p>
+    <ul style="margin: 12px 0; padding-left: 20px;">
+      <li>Our team will contact you within 24–48 hours to schedule your consultation</li>
+      <li>You'll receive a custom ordinance standing report + 30-minute expert call</li>
+      <li>Delivery within 5 business days of your scheduled session</li>
+    </ul>
+    <p>Questions? Reply to this email or contact support@doggybagg.cc.</p>
+    <p><a href="${siteUrl}" style="color: #6366f1; font-weight: 600;">Back to DoggyBagg</a></p>
+  `)
+
+  const { error } = await resend.emails.send({
+    from: fromEmail,
+    to,
+    replyTo,
+    subject: "Portfolio Audit — next steps | DoggyBagg",
+    html: body,
+  })
+  if (error) {
+    console.error("[emails] sendAuditConfirmationEmail failed:", error)
+    return { ok: false, error: error.message }
+  }
+  return { ok: true }
+}
+
 export async function sendComplianceViolationEmail(
   to: string,
   opts: { propertyAddress: string; violationType?: string }

@@ -4,7 +4,7 @@ import { stripe } from "@/lib/stripe"
 import { createClient } from "@supabase/supabase-js"
 import { parseCheckoutMetadata } from "@/lib/validation/stripe-webhook"
 import { captureCheckoutCompletedServer } from "@/lib/analytics-server"
-import { sendReceiptEmail, sendPaymentFailedEmail } from "@/lib/emails"
+import { sendReceiptEmail, sendPaymentFailedEmail, sendAuditConfirmationEmail } from "@/lib/emails"
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET
 
@@ -28,9 +28,8 @@ function logWebhookFailure(context: string, error: unknown) {
 }
 
 /** Dead letter: log validation failure to webhook_logs for debugging */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function deadLetter(
-  supabaseClient: any,
+  supabaseClient: { from: (_table: string) => { insert: (_row: object) => PromiseLike<unknown> } },
   context: string,
   error: unknown,
   eventId?: string,
@@ -50,8 +49,7 @@ async function deadLetter(
     raw_body: rawBody ?? null,
   }
   // webhook_logs from scripts/010; not in generated types
-  const sb = supabaseClient as { from: (t: string) => { insert: (r: object) => PromiseLike<unknown> } }
-  await sb.from("webhook_logs").insert(row)
+  await supabaseClient.from("webhook_logs").insert(row)
 }
 
 /**
@@ -169,15 +167,22 @@ export async function POST(request: NextRequest) {
           captureCheckoutCompletedServer(userId, { productId, value })
         }
 
-        // Branded receipt email (support@doggybagg.cc reply-to)
+        // Branded receipt or audit confirmation email (support@doggybagg.cc reply-to)
         const customerEmail = session.customer_details?.email ?? session.customer_email
+        const amountTotal = session.amount_total ?? 0
+        const isAudit = amountTotal === 49900 || productId === "portfolio-audit"
+
         if (customerEmail) {
-          const productName = productId === "starter-plan" ? "Starter" : productId === "professional-plan" ? "Professional" : productId ?? "Subscription"
-          void sendReceiptEmail(customerEmail, {
-            productName,
-            amount: session.amount_total ?? undefined,
-            currency: session.currency ?? "usd",
-          })
+          if (isAudit) {
+            void sendAuditConfirmationEmail(customerEmail)
+          } else {
+            const productName = productId === "starter-plan" ? "Starter" : productId === "professional-plan" ? "Professional" : productId ?? "Subscription"
+            void sendReceiptEmail(customerEmail, {
+              productName,
+              amount: amountTotal || undefined,
+              currency: session.currency ?? "usd",
+            })
+          }
         }
         break
       }
@@ -197,9 +202,8 @@ export async function POST(request: NextRequest) {
 
       default:
         // Log unhandled event types for future implementation
-        // eslint-disable-next-line no-console
         if (!["ping", "charge.succeeded"].includes(event.type)) {
-          console.log("[stripe-webhook] Unhandled event type:", event.type)
+          console.warn("[stripe-webhook] Unhandled event type:", event.type)
         }
     }
 

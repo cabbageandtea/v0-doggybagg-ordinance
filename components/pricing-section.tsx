@@ -44,6 +44,9 @@ function PortfolioAuditCTA() {
           <p className="mb-6 text-muted-foreground max-w-xl mx-auto">
             Expert-led analysis of your portfolio. Ordinance standing, health scores, and clear next steps. One report, no surprises.
           </p>
+          <p className="mb-4 text-xs text-muted-foreground max-w-lg mx-auto">
+            Includes: custom ordinance report + 30-minute consultation. Delivered within 5 business days. Our team will contact you within 24–48 hours to schedule.
+          </p>
           <div className="mb-6 flex items-center justify-center gap-4">
             <span className="text-5xl font-bold text-foreground">$499</span>
             <span className="text-muted-foreground">one-time</span>

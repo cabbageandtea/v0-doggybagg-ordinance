@@ -21,6 +21,7 @@ Quick audit of what’s done vs. what’s pending or optional.
 | Env vars: `STRIPE_WEBHOOK_SECRET`, `SUPABASE_SERVICE_ROLE_KEY` | Confirm in Vercel |
 | Submit sitemap in Search Console | After launch |
 | Full checkout test (Stripe live) | After launch |
+| **Stripe $499 Payment Link** | Set Success URL to `https://doggybagg.cc/checkout/success?product=audit` (Stripe Dashboard → Payment links → Edit) |
 | PostHog event verification | After launch |
 
 ---

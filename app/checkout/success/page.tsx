@@ -5,7 +5,12 @@ import { Button } from '@/components/ui/button'
 import { CheckoutSuccessTracker } from './checkout-success-tracker'
 import { CheckoutSuccessActions } from './checkout-success-actions'
 
-export default function CheckoutSuccessPage() {
+type Props = { searchParams: Promise<{ product?: string }> }
+
+export default async function CheckoutSuccessPage({ searchParams }: Props) {
+  const params = await searchParams
+  const isAudit = params?.product === 'audit'
+
   return (
     <>
       <Suspense fallback={null}>
@@ -21,22 +26,33 @@ export default function CheckoutSuccessPage() {
           </div>
 
           <h1 className="mb-4 text-3xl font-bold text-foreground">
-            Payment Successful!
+            {isAudit ? 'Audit request confirmed' : 'Payment successful'}
           </h1>
           
           <p className="mb-8 text-muted-foreground">
-            Thank you for your purchase. You'll receive a confirmation email shortly
-            with your receipt and subscription details.
+            {isAudit
+              ? "Thank you for your Portfolio Audit purchase. You'll receive an email within minutes with next steps. Our team will contact you within 24–48 hours to schedule your consultation."
+              : "Thank you for your purchase. You'll receive a confirmation email shortly with your receipt and subscription details."}
           </p>
 
           <div className="space-y-3">
-            <CheckoutSuccessActions />
-            
-            <Link href="/">
-              <Button variant="outline" size="lg" className="w-full bg-transparent">
-                Back to Home
-              </Button>
-            </Link>
+            {isAudit ? (
+              <Link href="/">
+                <Button size="lg" className="w-full gap-2 bg-primary hover:bg-primary/90">
+                  Back to Home
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
+            ) : (
+              <>
+                <CheckoutSuccessActions />
+                <Link href="/">
+                  <Button variant="outline" size="lg" className="w-full bg-transparent">
+                    Back to Home
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
 
           <div className="mt-8 rounded-lg border border-border bg-secondary/50 p-4">
