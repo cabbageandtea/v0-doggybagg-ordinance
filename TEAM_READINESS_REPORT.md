@@ -15,7 +15,7 @@
 | Error boundaries | In place |
 | Money path | Stripe + webhook wired |
 
-**Pending commit:** "Book a Portfolio Strategy Call" button removal (`bento-grid.tsx`, `hero-section.tsx`). Recommend committing before launch.
+Button removal committed. All hero CTAs use Portfolio Audit + See your risk.
 
 **Data:** Property search returns mock data. Real San Diego municipal data is a post-launch integration, not a launch blocker.
 

@@ -1,4 +1,4 @@
-# Ordinance.ai - Production Deployment Checklist
+# DoggyBagg - Production Deployment Checklist
 
 ## ✅ Pre-Deployment Verification
 
@@ -38,7 +38,7 @@
 
 ### UI/UX
 - [x] All CTA buttons linked correctly
-- [x] Hero "Book a Portfolio Strategy Call" → `mailto:support@doggybagg.cc`
+- [x] Hero CTAs → Portfolio Audit (Stripe), See your risk (scroll)
 - [x] Pricing buttons linked to checkout pages (Starter & Professional)
 - [x] Enterprise plan → `mailto:support@doggybagg.cc`
 - [x] Footer links updated (no '#' placeholders)

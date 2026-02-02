@@ -2,7 +2,7 @@
 
 ## ✅ Professional Email Infrastructure Deployed
 
-All three professional mailboxes are **active and fully integrated** into the Ordinance.ai platform:
+All three professional mailboxes are **active and fully integrated** into the DoggyBagg platform:
 
 ### 📧 Email Addresses
 
@@ -22,7 +22,7 @@ All three professional mailboxes are **active and fully integrated** into the Or
 - **Contact** link → `hello@doggybagg.cc` (General Inquiry)
 
 #### Hero Section
-- "Book a Portfolio Strategy Call" CTA → `support@doggybagg.cc`
+- "Get My $499 Portfolio Audit" → Stripe payment link
 
 #### FAQ Section
 - "Contact our team" link → `support@doggybagg.cc` (Support Request)
@@ -31,7 +31,7 @@ All three professional mailboxes are **active and fully integrated** into the Or
 - **Product Section:**
   - API → `maliklomax@doggybagg.cc` (API Access Request)
 - **Company Section:**
-  - About → `hello@doggybagg.cc` (About Ordinance.ai)
+  - About → `hello@doggybagg.cc` (About DoggyBagg)
   - Blog → `hello@doggybagg.cc` (Blog Inquiry)
   - Careers → `maliklomax@doggybagg.cc` (Career Inquiry)
   - Contact → `hello@doggybagg.cc` (General Inquiry)
@@ -97,7 +97,7 @@ Before going live, verify each email link works:
 
 ### Landing Page (`/`)
 - [ ] Header "Contact" link
-- [ ] Hero "Book a Portfolio Strategy Call" button
+- [x] Hero CTAs (Portfolio Audit, See your risk)
 - [ ] FAQ "Contact our team" link
 - [ ] Footer "API" link (Product section)
 - [ ] Footer "About" link (Company section)

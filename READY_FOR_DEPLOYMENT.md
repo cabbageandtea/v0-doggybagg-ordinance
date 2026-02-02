@@ -1,9 +1,9 @@
-# 🚀 READY FOR DEPLOYMENT - Ordinance.ai
+# 🚀 READY FOR DEPLOYMENT - DoggyBagg
 
 ## Status: ✅ ALL SYSTEMS GO
 
 **Date**: January 30, 2026  
-**Project**: Ordinance.ai by DoggyBagg LLC  
+**Project**: DoggyBagg LLC  
 **Domain**: doggybagg.cc  
 **Support**: support@doggybagg.cc
 
@@ -69,7 +69,7 @@ Click the **Publish** button in v0.
 
 **Landing Page:**
 - "Get My $499 Portfolio Audit" → Live Stripe payment link
-- "Book a Portfolio Strategy Call" → support@doggybagg.cc
+- "See your risk" → scrolls to #calculator
 
 **Pricing Section:**
 - "Start Free Trial" (Starter) → `/checkout/starter-plan`

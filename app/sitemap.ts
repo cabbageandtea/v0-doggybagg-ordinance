@@ -23,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/terms`, lastModified: new Date(), changeFrequency: "yearly" as const, priority: 0.4 },
     { url: `${baseUrl}/learn/str-compliance-san-diego`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.6 },
     { url: `${baseUrl}/learn/data-sources`, lastModified: new Date(), changeFrequency: "yearly" as const, priority: 0.5 },
+    { url: `${baseUrl}/refer`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.5 },
   ]
   return routes.map(({ url, lastModified, changeFrequency, priority }) => ({
     url,

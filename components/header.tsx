@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
+import { trackCtaClick } from "@/lib/analytics"
 import { Menu, X } from "lucide-react"
 
 export function Header() {
@@ -70,7 +71,7 @@ export function Header() {
                   Sign In
                 </Button>
               </Link>
-              <Link href="/auth/sign-up">
+              <Link href="/auth/sign-up" onClick={() => trackCtaClick({ cta: "start_free", location: "header" })}>
                 <Button className="glow-accent bg-primary text-primary-foreground hover:bg-primary/90">
                   Start Free
                 </Button>
@@ -129,7 +130,7 @@ export function Header() {
                     Sign In
                   </Button>
                 </Link>
-                <Link href="/auth/sign-up" onClick={() => setIsMenuOpen(false)}>
+                <Link href="/auth/sign-up" onClick={() => { setIsMenuOpen(false); trackCtaClick({ cta: "start_free", location: "header_mobile" }) }}>
                   <Button className="h-11 w-full glow-accent bg-primary text-primary-foreground">
                     Start Free
                   </Button>

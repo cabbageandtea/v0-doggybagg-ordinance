@@ -18,6 +18,7 @@ import {
   ArrowRight,
 } from "lucide-react"
 import Link from "next/link"
+import { trackCtaClick } from "@/lib/analytics"
 import { BentoTiltCard } from "@/components/bento-tilt-card"
 import { TactileButton } from "@/components/tactile-button"
 
@@ -188,7 +189,7 @@ export function BentoGrid() {
               One fine can cost $1,000–$10,000. DoggyBagg starts at $29/mo.
             </p>
             <div className="mb-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <a href="#calculator">
+              <a href="#calculator" onClick={() => trackCtaClick({ cta: "see_your_risk", location: "hero" })}>
                 <TactileButton
                   variant="outline"
                   size="lg"
@@ -205,6 +206,7 @@ export function BentoGrid() {
                 }
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackCtaClick({ cta: "portfolio_audit", location: "hero" })}
               >
                 <TactileButton
                   size="lg"

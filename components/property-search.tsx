@@ -106,6 +106,7 @@ export function PropertySearch() {
         <div>
           <h3 className="text-xl font-bold text-foreground">Property Status</h3>
           <p className="text-sm text-muted-foreground">Check San Diego property compliance</p>
+          <p className="text-xs text-muted-foreground/80 mt-1">Sample results. Live municipal data coming soon.</p>
         </div>
       </div>
 
