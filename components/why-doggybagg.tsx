@@ -92,7 +92,7 @@ export function WhyDoggyBagg() {
               size="lg"
               className="glow-accent bg-primary px-8 py-6 text-lg font-semibold text-primary-foreground hover:bg-primary/90"
             >
-              Join 12,000+ Investors
+              Join San Diego investors
             </TactileButton>
           </Link>
         </motion.div>

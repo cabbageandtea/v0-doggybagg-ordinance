@@ -48,23 +48,23 @@ export function HeroSection() {
             <div className="liquid-glass rounded-2xl p-6">
               <div className="mb-2 flex items-center justify-center gap-2 text-primary">
                 <Shield className="h-5 w-5" />
-                <span className="text-3xl font-bold text-foreground">$2.4M+</span>
+                <span className="text-3xl font-bold text-foreground">Code + Parking</span>
               </div>
-              <p className="text-sm text-muted-foreground">Portfolio Value Protected</p>
+              <p className="text-sm text-muted-foreground">Data sources</p>
             </div>
             <div className="liquid-glass rounded-2xl p-6">
               <div className="mb-2 flex items-center justify-center gap-2 text-primary">
                 <Eye className="h-5 w-5" />
-                <span className="text-3xl font-bold text-foreground">12,000+</span>
+                <span className="text-3xl font-bold text-foreground">San Diego</span>
               </div>
-              <p className="text-sm text-muted-foreground">Properties Monitored</p>
+              <p className="text-sm text-muted-foreground">Coverage</p>
             </div>
             <div className="liquid-glass rounded-2xl p-6">
               <div className="mb-2 flex items-center justify-center gap-2 text-primary">
                 <Zap className="h-5 w-5" />
                 <span className="text-3xl font-bold text-foreground">24/7</span>
               </div>
-              <p className="text-sm text-muted-foreground">Continuous Monitoring</p>
+              <p className="text-sm text-muted-foreground">Monitoring</p>
             </div>
           </div>
         </div>

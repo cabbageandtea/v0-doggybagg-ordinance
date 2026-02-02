@@ -1,8 +1,9 @@
 /**
- * San Diego municipal data sync — fetches code enforcement violations from Open Data
+ * San Diego municipal data sync — code enforcement + parking citations
  *
- * Data source: seshat.datasd.org (Code Enforcement Cases 2015–2018)
- * For post-2018 data, City directs to OpenDSD (no public API).
+ * Data sources:
+ * - Code Enforcement 2015–2018: seshat.datasd.org
+ * - Parking Citations 2024–2025: seshat.datasd.org (fresher data; location-based)
  *
  * Flow:
  * 1. Fetch CSV from San Diego Open Data
@@ -22,6 +23,8 @@ import { sendComplianceViolationEmail } from "@/lib/emails"
 
 const CODE_ENFORCEMENT_CSV =
   "https://seshat.datasd.org/code_enforcement_violations/code_enf_past_3_yr_datasd.csv"
+const PARKING_CITATIONS_2024 =
+  "https://seshat.datasd.org/parking_citations/parking_citations_2024_part1_datasd.csv"
 
 export type SyncResult = {
   success: boolean
@@ -41,6 +44,15 @@ type CodeEnforcementRow = {
   date_open?: string
   date_closed?: string
   close_reason?: string
+}
+
+type ParkingCitationRow = {
+  citation_id: string
+  date_issue?: string
+  location?: string
+  vio_code?: string
+  vio_desc?: string
+  vio_fine?: string
 }
 
 /** Normalize address for matching: lowercase, collapse spaces, standardize abbrevs */
@@ -253,6 +265,72 @@ export async function runSanDiegoSync(): Promise<SyncResult> {
           }
         }
       }
+    }
+
+    // 5. Parking citations (2024+ data — fresher than code enforcement)
+    try {
+      const parkRes = await fetch(PARKING_CITATIONS_2024)
+      if (parkRes.ok) {
+        const parkCsv = await parkRes.text()
+        const parkRows = parse(parkCsv, {
+          columns: true,
+          skip_empty_lines: true,
+          trim: true,
+        }) as ParkingCitationRow[]
+        const parkLimit = Math.min(3000, parkRows.length)
+        result.processed += parkLimit
+        const seenPark = new Set<string>()
+        for (let i = 0; i < parkLimit; i++) {
+          const row = parkRows[i]
+          const cid = row.citation_id?.trim()
+          if (!cid || seenPark.has(cid)) continue
+          seenPark.add(cid)
+          const loc = row.location?.trim()
+          if (!loc) continue
+          const norm = normalizeAddress(loc)
+          const matches = addrToProperties.get(norm)
+          if (!matches?.length) continue
+          result.matched += matches.length
+          const violationDate = parseDate(row.date_issue)
+          const violationType = (row.vio_desc ?? "Parking citation").slice(0, 80)
+          const fine = row.vio_fine ? parseFloat(row.vio_fine) : null
+          const muniId = `park-${cid}`
+          for (const prop of matches) {
+            const { data: existing } = await supabase
+              .from("ordinances")
+              .select("id")
+              .eq("municipal_case_id", muniId)
+              .maybeSingle()
+            if (existing) continue
+            const { error: insErr } = await supabase.from("ordinances").insert({
+              property_id: prop.id,
+              violation_type: violationType,
+              violation_date: violationDate,
+              description: row.vio_desc?.slice(0, 500) ?? "Parking citation",
+              fine_amount: fine,
+              status: "active",
+              municipal_case_id: muniId,
+            })
+            if (!insErr) {
+              result.inserted++
+              if (prop.reporting_status !== "violation") {
+                await supabase.from("properties").update({
+                  reporting_status: "violation",
+                  risk_score: Math.min(100, 50 + (prop.reporting_status === "pending" ? 20 : 0)),
+                  last_checked: new Date().toISOString(),
+                }).eq("id", prop.id)
+                result.updated++
+                const { data: profile } = await supabase.from("profiles").select("email, email_notifications").eq("id", prop.user_id).single()
+                if (profile?.email && profile.email_notifications !== false) {
+                  await sendComplianceViolationEmail(profile.email, { propertyAddress: prop.address, violationType })
+                }
+              }
+            }
+          }
+        }
+      }
+    } catch (parkErr) {
+      result.errors.push(`Parking sync: ${parkErr instanceof Error ? parkErr.message : "Unknown"}`)
     }
 
     result.success = true

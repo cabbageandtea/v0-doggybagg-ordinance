@@ -520,7 +520,7 @@ export async function getOnboardingStatus(): Promise<OnboardingStatus> {
     // Intelligent next action based on tier
     let nextAction = 'Add your first property'
     if (currentStep === 2) {
-      nextAction = 'Verify your phone for SMS alerts'
+      nextAction = 'Verify your phone for alerts'
     } else if (currentStep === 3) {
       nextAction = userTier === 'free' 
         ? 'View Neighborhood Watch heat map'

@@ -22,7 +22,7 @@ export const PRODUCTS: Product[] = [
     features: [
       '1 property monitored',
       'Weekly violation checks',
-      'SMS alerts only',
+      'Email alerts only',
       'Community support',
       '24-hour history',
     ],
@@ -52,7 +52,7 @@ export const PRODUCTS: Product[] = [
     features: [
       'Up to 10 properties',
       'Real-time monitoring',
-      'SMS + Email alerts',
+      'Email alerts (SMS coming soon)',
       'Advanced analytics',
       '90-day history',
       'Priority support',

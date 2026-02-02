@@ -38,7 +38,7 @@ export function TestimonialsSection() {
             Trusted by San Diego <span className="text-glow text-primary">Property Owners</span>
           </h2>
           <p className="mx-auto max-w-2xl text-muted-foreground text-pretty">
-            Join 12,000+ investors who stay ahead of city violations
+            Join San Diego investors who stay ahead of ordinance filings
           </p>
         </div>
 

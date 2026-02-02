@@ -92,7 +92,7 @@ export function PhoneVerificationModal({ onVerified, highlight }: PhoneVerificat
             Phone Verification
           </DialogTitle>
           <DialogDescription>
-            {step === 'phone' && "Enter your phone number to receive SMS alerts"}
+            {step === 'phone' && "Enter your phone number for alerts (SMS coming soon)"}
             {step === 'code' && "Enter the verification code we sent"}
             {step === 'verified' && "Your phone has been verified!"}
           </DialogDescription>
@@ -183,7 +183,7 @@ export function PhoneVerificationModal({ onVerified, highlight }: PhoneVerificat
                 Phone Verified!
               </h3>
               <p className="text-sm text-muted-foreground">
-                You'll now receive SMS alerts for violations
+                You'll receive email alerts for violations
               </p>
             </div>
           )}

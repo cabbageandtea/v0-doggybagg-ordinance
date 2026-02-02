@@ -12,21 +12,21 @@ export const metadata = {
 
 const sources = [
   {
-    name: "San Diego City Treasurer",
-    description: "Municipal code violation records, STRO registry, and fine assessments.",
-    updateFrequency: "Daily",
+    name: "Code Enforcement (2015–2018)",
+    description: "San Diego Development Services code enforcement cases. Historical dataset from data.sandiego.gov.",
+    updateFrequency: "Daily sync",
     icon: FileText,
   },
   {
-    name: "San Diego Development Services",
-    description: "Permit status, inspection records, and code enforcement activity.",
-    updateFrequency: "Daily",
+    name: "Parking Citations (2022–2025)",
+    description: "City of San Diego parking citations by location. Fresher data from seshat.datasd.org.",
+    updateFrequency: "Daily sync",
     icon: Database,
   },
   {
     name: "Public Records",
-    description: "Address verification, property identifiers, and historical violation data.",
-    updateFrequency: "Weekly",
+    description: "Address matching, property identifiers, and violation history. We normalize addresses for reliable matching.",
+    updateFrequency: "Per sync",
     icon: Shield,
   },
 ]

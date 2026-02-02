@@ -109,7 +109,7 @@ export function PropertySearch() {
             <span className="rounded-full border border-primary/40 bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">Demo</span>
           </div>
           <p className="text-sm text-muted-foreground">Check San Diego ordinance standing</p>
-          <p className="text-xs text-muted-foreground/80 mt-1">Sample results. Live municipal data coming soon.</p>
+          <p className="text-xs text-muted-foreground/80 mt-1">Sample results only. Sign up and add properties to your dashboard for live ordinance monitoring.</p>
         </div>
       </div>
 
@@ -158,7 +158,7 @@ export function PropertySearch() {
         {showResults && (
           <div className="space-y-3">
             <p className="text-sm text-muted-foreground">
-              Sample results for <span className="font-medium text-foreground">&quot;{searchQuery}&quot;</span> — demo mode.
+              Sample results for <span className="font-medium text-foreground">&quot;{searchQuery}&quot;</span> — not live data. Add properties in your dashboard for real monitoring.
             </p>
             {mockResults.map((result) => (
               <div

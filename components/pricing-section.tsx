@@ -101,7 +101,7 @@ const plans = [
     features: [
       "1 property monitored",
       "Weekly ordinance checks",
-      "SMS updates only",
+      "Email updates only",
       "Community support",
       "24-hour history",
     ],
@@ -132,7 +132,7 @@ const plans = [
     features: [
       "Up to 10 properties",
       "Real-time monitoring",
-      "SMS + Email updates",
+      "Email updates (SMS coming soon)",
       "Advanced analytics",
       "90-day history",
       "Priority support",

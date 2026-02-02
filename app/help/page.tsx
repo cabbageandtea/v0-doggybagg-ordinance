@@ -25,7 +25,7 @@ const sections = [
       "Sign up at doggybagg.cc with your email.",
       "Add your first property (address or STRO license ID).",
       "Your dashboard shows health scores and ordinance standing.",
-      "Enable email/SMS alerts in Settings to stay informed.",
+      "Enable email alerts in Settings to stay informed.",
     ],
   },
   {
@@ -35,7 +35,7 @@ const sections = [
     items: [
       "Community Alert (free): 1 property, weekly checks.",
       "Starter ($29/mo): 1 property, daily checks, email updates.",
-      "Professional ($99/mo): Up to 10 properties, real-time monitoring, SMS + email updates.",
+      "Professional ($99/mo): Up to 10 properties, real-time monitoring, email updates (SMS coming soon).",
       "Cancel anytime from your dashboard. No long-term commitment.",
     ],
   },

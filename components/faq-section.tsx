@@ -22,7 +22,7 @@ const faqs = [
   {
     question: "How quickly will I be notified of violations?",
     answer:
-      "Most violations are detected within 24 hours of being filed with the city. Critical violations (like STR non-compliance) trigger immediate notifications via email and SMS.",
+      "Most violations are detected within 24 hours of being filed with the city. Critical violations (like STR non-compliance) trigger immediate notifications via email.",
   },
   {
     question: "What types of violations are tracked?",

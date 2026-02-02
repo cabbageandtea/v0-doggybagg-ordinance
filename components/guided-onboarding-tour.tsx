@@ -80,7 +80,7 @@ export function GuidedOnboardingTour({ onComplete }: GuidedTourProps) {
       },
       {
         title: "Verify Your Phone Number",
-        description: "Get instant SMS alerts when violations are detected",
+        description: "Get email alerts when violations are detected",
         icon: Smartphone,
         action: "verify_phone" as const,
         targetId: "verify-phone-button",
@@ -104,7 +104,7 @@ export function GuidedOnboardingTour({ onComplete }: GuidedTourProps) {
     currentStep === 1
       ? "Add your first property"
       : currentStep === 2
-        ? "Verify your phone for SMS alerts"
+        ? "Verify your phone for alerts"
         : currentStep === 3
           ? "View Neighborhood Watch heat map"
           : "Generate your health check"

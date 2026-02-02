@@ -115,23 +115,23 @@ function StatsRow() {
       <div className="group flex flex-col items-center justify-center rounded-xl border border-border/50 bg-background/30 p-4">
         <div className="mb-1 flex items-center gap-2 text-primary">
           <Shield className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" />
-          <span className="text-2xl font-bold text-foreground">$2.4M+</span>
+          <span className="text-2xl font-bold text-foreground">Code + Parking</span>
         </div>
-        <p className="text-xs text-muted-foreground">Portfolio Value Protected</p>
+        <p className="text-xs text-muted-foreground">Data sources</p>
       </div>
       <div className="group flex flex-col items-center justify-center rounded-xl border border-border/50 bg-background/30 p-4">
         <div className="mb-1 flex items-center gap-2 text-primary">
           <Eye className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" />
-          <span className="text-2xl font-bold text-foreground">12,000+</span>
+          <span className="text-2xl font-bold text-foreground">San Diego</span>
         </div>
-        <p className="text-xs text-muted-foreground">Properties Monitored</p>
+        <p className="text-xs text-muted-foreground">Coverage</p>
       </div>
       <div className="group flex flex-col items-center justify-center rounded-xl border border-border/50 bg-background/30 p-4">
         <div className="mb-1 flex items-center gap-2 text-primary">
           <Zap className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" />
           <span className="text-2xl font-bold text-foreground">24/7</span>
         </div>
-        <p className="text-xs text-muted-foreground">Continuous Monitoring</p>
+        <p className="text-xs text-muted-foreground">Monitoring</p>
       </div>
     </div>
   )

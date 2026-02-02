@@ -64,7 +64,7 @@ const faqItems = [
   {
     question: "How quickly will I receive updates?",
     answer:
-      "Most filings are reflected within 24 hours. Critical activity triggers immediate notifications via email and SMS.",
+      "Most filings are reflected within 24 hours. Critical activity triggers immediate notifications via email.",
   },
   {
     question: "What ordinance categories are tracked?",
