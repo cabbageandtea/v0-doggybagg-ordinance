@@ -5,7 +5,7 @@ import { Shield, Zap, Users } from "lucide-react"
 
 const stats = [
   { icon: Shield, value: "$2.4M+", label: "Portfolio value protected" },
-  { icon: Zap, value: "24/7", label: "AI monitoring" },
+  { icon: Zap, value: "24/7", label: "Platform availability" },
   { icon: Users, value: "12,000+", label: "Properties monitored" },
 ]
 

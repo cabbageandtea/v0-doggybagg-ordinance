@@ -22,8 +22,7 @@ export default function AboutPage() {
               investors who got burned by municipal violations—and built it right.
             </p>
             <p className="mb-6 text-muted-foreground">
-              We monitor San Diego County municipal records 24/7. Real-time alerts, AI risk scoring,
-              appeal support. So you stay ahead, not behind.
+              Portfolio oversight, timely alerts, and appeal support for San Diego investors. So you stay ahead, not behind.
             </p>
             <Link
               href="/#features"

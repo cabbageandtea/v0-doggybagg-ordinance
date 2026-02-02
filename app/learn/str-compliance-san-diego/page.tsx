@@ -63,7 +63,7 @@ export default function STRCompliancePage() {
                 Stay Ahead
               </h2>
               <p className="mb-6 text-muted-foreground">
-                DoggyBagg monitors San Diego municipal records 24/7. Get alerts the moment a violation is filed—before penalties double.
+                DoggyBagg helps you track San Diego municipal activity. Timely alerts and resolution support when you need it.
               </p>
               <Link
                 href="/#features"

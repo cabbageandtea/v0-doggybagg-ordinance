@@ -42,7 +42,7 @@ function PortfolioAuditCTA() {
             Portfolio Audit
           </h3>
           <p className="mb-6 text-muted-foreground max-w-xl mx-auto">
-            Comprehensive portfolio analysis. Ordinance standing, health scores, and clear next steps. One report, no surprises.
+            Expert-led analysis of your portfolio. Ordinance standing, health scores, and clear next steps. One report, no surprises.
           </p>
           <div className="mb-6 flex items-center justify-center gap-4">
             <span className="text-5xl font-bold text-foreground">$499</span>
