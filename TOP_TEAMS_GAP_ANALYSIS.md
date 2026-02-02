@@ -33,7 +33,7 @@
 
 | Item | Why Top Teams Have It | Effort |
 |------|------------------------|--------|
-| Health check DB ping | Know if Supabase is reachable | Low |
+| ~~Health check DB ping~~ | Done: `/api/health` pings Supabase, returns 503 if DB unreachable | — |
 | Uptime monitoring | Ping `/api/health` every 5m (Better Uptime, etc.) | Low |
 | Staging env | Test before prod; Vercel previews help | Medium |
 | Feature flags | Launch behind flags, kill switch | Medium |

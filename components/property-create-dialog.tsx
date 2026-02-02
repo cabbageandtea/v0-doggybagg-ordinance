@@ -11,7 +11,7 @@ import { useAddProperty, type AddPropertyInput, type UpdatePropertyInput } from 
 
 interface PropertyCreateDialogProps {
   open: boolean
-  onOpenChange: (open: boolean) => void
+  onOpenChange: (_open: boolean) => void
   onSuccess?: () => void
 }
 

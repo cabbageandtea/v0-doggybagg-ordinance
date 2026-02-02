@@ -38,18 +38,11 @@ function getStatusBadge(status: string) {
   }
 }
 
-function getRiskScoreColor(score: number) {
-  if (score <= 25) return "text-green-400"
-  if (score <= 50) return "text-yellow-400"
-  if (score <= 75) return "text-orange-400"
-  return "text-red-400"
-}
-
 interface PropertyDetailDialogProps {
   property: Property | null
   open: boolean
-  onOpenChange: (open: boolean) => void
-  onEdit?: (property: Property) => void
+  onOpenChange: (_open: boolean) => void
+  onEdit?: (_property: Property) => void
 }
 
 export function PropertyDetailDialog({

@@ -62,7 +62,7 @@ export function PhoneVerificationModal({ onVerified, highlight }: PhoneVerificat
 
     // Call parent callback
     setTimeout(() => {
-      if (onVerified) onVerified()
+      if (onVerified) void onVerified()
       setOpen(false)
       // Reset after close
       setTimeout(() => {

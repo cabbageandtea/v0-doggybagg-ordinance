@@ -24,7 +24,7 @@ type GuidedTourProps = {
 const TOTAL_STEPS = 4
 
 export function GuidedOnboardingTour({ onComplete }: GuidedTourProps) {
-  const { progress, isLoading, primaryCta, refetch } = useOnboarding()
+  const { progress, isLoading, refetch } = useOnboarding()
   const [showHealthCheck, setShowHealthCheck] = useState(false)
   const [healthCheck, setHealthCheck] = useState<ComplianceHealthCheck["report"] | null>(null)
 

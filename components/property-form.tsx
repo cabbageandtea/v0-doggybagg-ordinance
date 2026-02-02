@@ -18,7 +18,7 @@ import { trackAddProperty } from "@/lib/analytics"
 export interface PropertyFormProps {
   /** For create: pass null. For edit: pass the property. */
   property?: Property | null
-  onSubmit: (data: AddPropertyInput | UpdatePropertyInput) => Promise<{ success: boolean; error: string | null }>
+  onSubmit: (_data: AddPropertyInput | UpdatePropertyInput) => Promise<{ success: boolean; error: string | null }>
   onSuccess?: () => void
   submitLabel?: string
   mode?: "create" | "edit"

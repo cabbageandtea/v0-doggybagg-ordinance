@@ -195,12 +195,12 @@ export default function UploadPage() {
     setIsDragging(false)
     const files = Array.from(e.dataTransfer.files)
     const csvFile = files.find((f) => f.type === "text/csv" || f.name.endsWith(".csv"))
-    if (csvFile) processCSVFile(csvFile)
+    if (csvFile) void processCSVFile(csvFile)
   }, [])
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
-    if (files && files[0]) processCSVFile(files[0])
+    if (files && files[0]) void processCSVFile(files[0])
     e.target.value = ""
   }
 

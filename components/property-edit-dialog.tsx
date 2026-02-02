@@ -13,7 +13,7 @@ import type { Property } from "@/app/actions/properties"
 interface PropertyEditDialogProps {
   property: Property | null
   open: boolean
-  onOpenChange: (open: boolean) => void
+  onOpenChange: (_open: boolean) => void
 }
 
 export function PropertyEditDialog({

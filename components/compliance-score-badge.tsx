@@ -22,7 +22,7 @@ function getScoreColor(compliance: number) {
   return "text-red-400 border-red-500/40 bg-red-500/10"
 }
 
-export function ComplianceScoreBadge({ score, address, showShareHint }: ComplianceScoreBadgeProps) {
+export function ComplianceScoreBadge({ score, address: _address, showShareHint }: ComplianceScoreBadgeProps) {
   const compliance = toCompliance(score)
   const shareText = `My property compliance score: ${compliance}/100 — DoggyBagg | doggybagg.cc`
 

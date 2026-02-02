@@ -5,7 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Menu, X, LayoutDashboard, Upload, Settings, LogOut, Bell } from "lucide-react"
+import { Menu, X, LayoutDashboard, Upload, Settings, LogOut } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
 import type { User } from "@supabase/supabase-js"
 import {

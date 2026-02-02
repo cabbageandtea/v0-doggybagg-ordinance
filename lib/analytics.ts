@@ -6,7 +6,7 @@
  */
 
 import posthog from "posthog-js"
-import { trackAdsSignUp, trackAdsPurchase, trackAdsLead } from "@/lib/ads"
+import { trackAdsSignUp, trackAdsLead } from "@/lib/ads"
 
 /** Identify user by Supabase UUID; call when user context is available (auth, dashboard) */
 export function identifyUser(userId: string) {

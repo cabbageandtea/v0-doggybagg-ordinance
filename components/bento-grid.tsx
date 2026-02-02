@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, memo } from "react"
+import { memo } from "react"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import {
@@ -10,7 +10,6 @@ import {
   Clock,
   MapPin,
   TrendingUp,
-  AlertTriangle,
   CheckCircle,
   Shield,
   Eye,
