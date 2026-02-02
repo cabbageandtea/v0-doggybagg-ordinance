@@ -33,7 +33,7 @@ All critical issues have been resolved. The application is now production-ready 
 
 ### Hero Section
 - ✅ **Get My $499 Portfolio Audit** → External Stripe link (https://buy.stripe.com/test_...)
-- ✅ **Book a Portfolio Strategy Call** → Email link (mailto:support@doggybagg.cc)
+- ✅ Hero CTAs → Portfolio Audit (Stripe), See your risk (scroll to calculator)
 
 ### Pricing Section
 

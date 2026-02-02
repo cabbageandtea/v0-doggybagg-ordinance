@@ -185,7 +185,7 @@ Real-time San Diego municipal code violation monitoring for property owners, man
 ### Primary CTAs
 1. **Hero Section**
    - "Get My $499 Portfolio Audit" → Stripe live link
-   - "Book a Portfolio Strategy Call" → support@doggybagg.cc
+   - Hero CTAs → Portfolio Audit, See your risk (removed Strategy Call)
 
 2. **Pricing Cards**
    - Starter "Start Free Trial" → /checkout/starter-plan

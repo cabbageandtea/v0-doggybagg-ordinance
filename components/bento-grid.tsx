@@ -188,6 +188,7 @@ export function BentoGrid() {
             <p className="mx-auto mb-8 text-sm text-muted-foreground/90">
               One fine can cost $1,000–$10,000. DoggyBagg starts at $29/mo.
             </p>
+            {/* Hero CTAs: See your risk + Portfolio Audit only. Book a Portfolio Strategy Call removed. */}
             <div className="mb-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <a href="#calculator" onClick={() => trackCtaClick({ cta: "see_your_risk", location: "hero" })}>
                 <TactileButton
