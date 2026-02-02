@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **Force Webpack over Turbopack** — Use `next build --webpack` to avoid Turbopack minifying Zod-based SDK incorrectly.
 - **Deep dependency resolution** — zod + workflow at top of deps; clean pnpm-lock slate; pnpm override zod 4.1.11 for all transitive deps.
 - **Durable object verification** — Documented that sentinel workflow has no top-level world handler init (routes via withWorkflow).
+- **Advanced t._parse fixes** — serverExternalPackages for zod/workflow/@workflow/*; webpack() in next.config; /api/workflow proxy exclusion; strict zod 4.1.11 override.
 
 ## [0.2.1] - 2026-02-01
 
