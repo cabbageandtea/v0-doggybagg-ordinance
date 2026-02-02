@@ -3,7 +3,7 @@
   "version": "0.2.2",
   "private": true,
   "scripts": {
-    "build": "next build",
+    "build": "next build --webpack",
     "dev": "next dev",
     "lint": "eslint .",
     "lint:ci": "eslint . --max-warnings=0",
@@ -20,6 +20,8 @@
     "workflow:web": "workflow web"
   },
   "dependencies": {
+    "zod": "4.1.11",
+    "workflow": "4.0.1-beta.30",
     "@emotion/is-prop-valid": "latest",
     "@hookform/resolvers": "^3.10.0",
     "@radix-ui/react-accordion": "latest",
@@ -84,9 +86,7 @@
     "stripe": "20.3.0",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
-    "vaul": "latest",
-    "workflow": "4.0.1-beta.30",
-    "zod": "4.1.11"
+    "vaul": "latest"
   },
   "pnpm": {
     "overrides": {

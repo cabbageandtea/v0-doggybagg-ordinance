@@ -14,6 +14,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **stripe-webhook validation** — Update return type for Zod 4 compatibility.
 - **Proxy exclusion for workflow** — Exclude `/.well-known/*` from proxy matcher so Workflow DevKit API responses are not modified (fixes "Failed to parse server response").
 - **Workflow SDK pin** — Pin workflow to 4.0.1-beta.30 for stability.
+- **Force Webpack over Turbopack** — Use `next build --webpack` to avoid Turbopack minifying Zod-based SDK incorrectly.
+- **Deep dependency resolution** — zod + workflow at top of deps; clean pnpm-lock slate; pnpm override zod 4.1.11 for all transitive deps.
+- **Durable object verification** — Documented that sentinel workflow has no top-level world handler init (routes via withWorkflow).
 
 ## [0.2.1] - 2026-02-01
 

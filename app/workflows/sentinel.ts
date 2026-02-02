@@ -2,6 +2,11 @@
  * Municipal Sentinel Workflow
  * Daily durable workflow: run snipers, enrich contacts, email admin with high-priority targets.
  * Triggered by Vercel Cron: /api/cron/sentinel
+ *
+ * Durable Object / Handler Verification (Action C):
+ * No getWorldHandlers() or top-level world initialization in this file.
+ * Routes are registered by workflow/next via withWorkflow() in next.config.
+ * Export is a pure async function; no module-load-time side effects.
  */
 
 import { runEnforcementSniper } from "@/lib/snipers/enforcement"
