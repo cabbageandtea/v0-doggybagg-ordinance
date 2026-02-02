@@ -44,7 +44,7 @@ Durable post-purchase and background workflows via [Workflow DevKit](https://use
 
 ### Prerequisites
 
-- Run `scripts/014_sniper_tables.sql` and `scripts/015_docket_logs.sql` in Supabase
+- Run `scripts/014_sniper_tables.sql`, `015_docket_logs.sql`, `016_stro_expiration.sql`, `017_docket_unique_meeting.sql` in Supabase
 - `CRON_SECRET` in Vercel (same as ingest)
 - `RESEND_API_KEY` for admin email
 

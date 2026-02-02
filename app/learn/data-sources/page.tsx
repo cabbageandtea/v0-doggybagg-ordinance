@@ -24,6 +24,12 @@ const sources = [
     icon: Database,
   },
   {
+    name: "STRO Licenses",
+    description: "Active Short-Term Residential Occupancy licenses from seshat.datasd.org. We track new Tier 3/4 entrants and licenses expiring in 10–45 days for renewal outreach.",
+    updateFrequency: "Daily",
+    icon: Database,
+  },
+  {
     name: "City Council Dockets",
     description: "San Diego City Clerk council meeting agendas. We monitor for STRO, ordinance, and enforcement discussions and alert 72 hours before meetings.",
     updateFrequency: "Daily",

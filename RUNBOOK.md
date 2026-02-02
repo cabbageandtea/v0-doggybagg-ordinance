@@ -39,6 +39,16 @@
 
 ---
 
+## 4b. Municipal Sentinel (Admin Email) Not Running
+
+1. **Manual trigger** – `curl -H "Authorization: Bearer $CRON_SECRET" https://doggybagg.cc/api/cron/sentinel`
+2. **Vercel Cron** – Runs daily 7am UTC. Check Vercel → Logs for `/api/cron/sentinel` errors.
+3. **Prerequisites** – Run `scripts/014_sniper_tables.sql`, `015_docket_logs.sql`, `016_stro_expiration.sql` in Supabase.
+4. **RESEND_API_KEY** – Required for admin@doggybagg.cc alerts. Verify domain in Resend Dashboard.
+5. **Workflows** – If using Vercel Workflows, check the Workflows Dashboard for run status.
+
+---
+
 ## 5. High Error Rate / Sentry Alerts
 
 1. **Sentry** – [sentry.io](https://sentry.io) → Issues. Group by error type, identify top offenders.

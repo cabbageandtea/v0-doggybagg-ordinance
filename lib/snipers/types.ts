@@ -56,6 +56,7 @@ export type SentinelResult = {
   distressedLeads: DistressedLead[]
   newEntrants: NewEntrant[]
   integrityRisks: IntegrityRisk[]
+  expiringLicenses: ExpiringLicense[]
   targets: HighPriorityTarget[]
   runId?: string
 }

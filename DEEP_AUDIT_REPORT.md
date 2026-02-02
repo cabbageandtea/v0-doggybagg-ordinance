@@ -141,4 +141,30 @@ All footer, header, and CTA links verified. No broken hrefs. Removed pages (Data
 
 ---
 
+## 🔄 Sentinel & Snipers Sync (Feb 2026)
+
+### Verified
+
+| Component | Status |
+|-----------|--------|
+| Sentinel workflow (6 steps) | ✅ Docket, Enforcement, License, Integrity, Renewal, Enrich+Email |
+| Cron `/api/cron/sentinel` | ✅ CRON_SECRET, starts municipalSentinelWorkflow |
+| Email template | ✅ Integrity, Renewal, Legislative, Targets sections |
+| Types (SentinelResult) | ✅ expiringLicenses added |
+| log-run | ✅ integrityRisksCount, expiringCount |
+| Data sources page | ✅ STRO Licenses added |
+| WORKFLOWS.md | ✅ 016_stro_expiration in prerequisites |
+| RUNBOOK | ✅ Section 4b: Sentinel manual trigger & troubleshooting |
+
+### Migrations
+
+- **014** sniper_tables, **015** docket_logs, **016** stro_expiration, **017** docket_unique_meeting
+
+### Env Vars
+
+- `CRON_SECRET`, `RESEND_API_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (required)
+- `APIFY_API_TOKEN`, `APIFY_AIRBNB_ACTOR_ID` (optional; Integrity returns [] without)
+
+---
+
 **Audit complete. Fixes applied.**

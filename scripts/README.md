@@ -14,6 +14,7 @@ Run in **Supabase Dashboard → SQL Editor** in this order.
 8. **014_sniper_tables.sql** – `sniper_stro_snapshots`, `sniper_runs` for Lead Sniper / Municipal Sentinel. Required for `/api/cron/sentinel`.
 9. **015_docket_logs.sql** – `sentinel_docket_history` for Municipal Docket Scraper (legislative alerts dedupe).
 10. **016_stro_expiration.sql** – `expiration_date` on `sniper_stro_snapshots` for Renewal Sentinel.
+11. **017_docket_unique_meeting.sql** – Unique constraint on `meeting_id` to prevent duplicate docket alerts.
 
 **security-test.sql** – Manual RLS verification. Run as `anon` role to test policies.
 
