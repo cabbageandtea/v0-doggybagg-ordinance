@@ -2,7 +2,7 @@
 
 ## Why This Matters
 
-If **Deployment Protection** or **Vercel Authentication** is enabled for your production environment, it can intercept requests to `/.well-known/workflow/*` with a login/challenge page instead of JSON. That causes the Workflow SDK to receive HTML instead of JSON, leading to "Failed to parse server response" errors.
+If **Deployment Protection** or **Vercel Authentication** is enabled for your production environment, it can intercept requests to `/.well-known/workflow/*` (or `/api/workflow/v1/*`) with a login/challenge page instead of JSON. That causes the Workflow engine to receive HTML instead of JSON when calling GET /v1/runs/..., leading to "Failed to parse server response" or invalid handshake errors.
 
 ## How to Check
 
@@ -13,9 +13,17 @@ If **Deployment Protection** or **Vercel Authentication** is enabled for your pr
    - If **Vercel Authentication** or **Password Protection** is enabled, the Workflow engine may be challenged
    - Consider setting **Protection** to **None** for production, or use **Protection Bypass for Automation** for cron/webhook endpoints
 
+## Alternate Path: /api/workflow/v1/*
+
+A rewrite maps `/api/workflow/v1/*` → `/.well-known/workflow/v1/*`. If the Vercel engine prefers this path, it may bypass Deployment Protection or routing issues. Both paths skip the proxy (no auth/CSP) and have `trailingSlash: false` to avoid redirects.
+
+## Debug Headers
+
+Set `DEBUG_WORKFLOW_HEADERS=1` in Vercel to log `x-vercel-*` headers on workflow requests. Check Runtime Logs to verify Vercel is sending expected auth tokens.
+
 ## Quick Fix
 
 If Deployment Protection is blocking the Workflow API:
 
 - **Option A:** Disable protection for production (if acceptable)
-- **Option B:** Add a [Protection Bypass for Automation](https://vercel.com/docs/security/deployment-protection/methods-to-bypass-deployment-protection/protection-bypass-automation) exception for `/.well-known/workflow/*` or for requests with your `CRON_SECRET` header
+- **Option B:** Add a [Protection Bypass for Automation](https://vercel.com/docs/security/deployment-protection/methods-to-bypass-deployment-protection/protection-bypass-automation) exception for `/.well-known/workflow/*` and `/api/workflow/*`

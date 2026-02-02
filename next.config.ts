@@ -14,6 +14,13 @@ const WORKFLOW_EXTERNALS = [
 const nextConfig: NextConfig = {
   typescript: { ignoreBuildErrors: false },
   images: { unoptimized: true },
+  trailingSlash: false,
+  // Alternate path for Workflow API (v5-style); Vercel engine may prefer this over .well-known
+  async rewrites() {
+    return [
+      { source: "/api/workflow/v1/:path*", destination: "/.well-known/workflow/v1/:path*" },
+    ]
+  },
   // Aggressive no-bundle: prevent workflow/zod from being minified into invalid t._parse
   serverExternalPackages: [...WORKFLOW_EXTERNALS],
   webpack: (config, { isServer }) => {

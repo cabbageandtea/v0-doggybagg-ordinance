@@ -3,7 +3,18 @@ import { updateSession } from '@/lib/supabase/proxy'
 
 export async function proxy(request: NextRequest) {
   // Strict early return: do not execute any logic for workflow API (defense in depth)
-  if (request.nextUrl.pathname.startsWith('/.well-known/workflow')) {
+  if (
+    request.nextUrl.pathname.startsWith('/.well-known/workflow') ||
+    request.nextUrl.pathname.startsWith('/api/workflow')
+  ) {
+    // Debug: log x-vercel-* headers when DEBUG_WORKFLOW_HEADERS=1 (helps diagnose auth/parsing)
+    if (process.env.DEBUG_WORKFLOW_HEADERS === "1") {
+      const vercelHeaders: Record<string, string> = {}
+      request.headers.forEach((v, k) => {
+        if (k.toLowerCase().startsWith("x-vercel")) vercelHeaders[k] = v
+      })
+      console.warn("[workflow] workflow request headers:", JSON.stringify(vercelHeaders))
+    }
     return NextResponse.next()
   }
   return await updateSession(request)
