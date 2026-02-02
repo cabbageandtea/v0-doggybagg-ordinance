@@ -4,11 +4,12 @@ Quick audit of what’s done vs. what’s pending or optional.
 
 ---
 
-## ✅ Fixed This Pass
+## ✅ Fixed (Deep Audit Feb 2026)
 
-- **Privacy page:** Removed Ordinance.ai reference
-- **Footer:** Privacy link now goes to `/privacy` instead of mailto
-- **.env.example:** Header updated to DoggyBagg
+- **Help page billing:** Starter 1 property, Pro 10 properties
+- **Help page tone:** "health scores and ordinance standing"
+- **Property search:** Added "Demo" badge
+- **Footer:** Removed Data Sources, API, Blog, Careers
 
 ---
 
@@ -34,10 +35,4 @@ Quick audit of what’s done vs. what’s pending or optional.
 
 ---
 
-## 🚀 Uncommitted Changes
-
-- Mobile: menu close on nav, safe-area insets, 44px touch targets
-- Motion: slower springs, smaller offsets, gentler scroll
-- `GAPS_AND_REMINDERS.md` (this file)
-
-Run `git add -A && git commit -m "..." && git push` when ready.
+**See `DEEP_AUDIT_REPORT.md` for full team debate and research synthesis.**

@@ -104,7 +104,10 @@ export function PropertySearch() {
           <MapPin className="h-6 w-6" />
         </div>
         <div>
-          <h3 className="text-xl font-bold text-foreground">Property Status</h3>
+          <div className="flex items-center gap-2">
+            <h3 className="text-xl font-bold text-foreground">Property Status</h3>
+            <span className="rounded-full border border-primary/40 bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">Demo</span>
+          </div>
           <p className="text-sm text-muted-foreground">Check San Diego ordinance standing</p>
           <p className="text-xs text-muted-foreground/80 mt-1">Sample results. Live municipal data coming soon.</p>
         </div>

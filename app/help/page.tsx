@@ -7,7 +7,7 @@ import { FileQuestion, BookOpen, Mail, Rocket, CreditCard, Search, AlertCircle }
 export const metadata = {
   title: "Help Center",
   description:
-    "DoggyBagg help and support — getting started, billing, property search, and contact options for San Diego property compliance.",
+    "DoggyBagg help and support — getting started, billing, property search, and contact options for precision ordinance oversight.",
 }
 
 const helpLinks = [
@@ -24,7 +24,7 @@ const sections = [
     items: [
       "Sign up at doggybagg.cc with your email.",
       "Add your first property (address or STRO license ID).",
-      "Your dashboard shows risk scores and any active violations.",
+      "Your dashboard shows health scores and ordinance standing.",
       "Enable email/SMS alerts in Settings to stay informed.",
     ],
   },
@@ -34,8 +34,8 @@ const sections = [
     title: "Billing & Plans",
     items: [
       "Community Alert (free): 1 property, weekly checks.",
-      "Starter ($29/mo): 5 properties, daily checks, SMS alerts.",
-      "Professional ($99/mo): 25 properties, real-time alerts, CSV export.",
+      "Starter ($29/mo): 1 property, daily checks, email updates.",
+      "Professional ($99/mo): Up to 10 properties, real-time monitoring, SMS + email updates.",
       "Cancel anytime from your dashboard. No long-term commitment.",
     ],
   },
