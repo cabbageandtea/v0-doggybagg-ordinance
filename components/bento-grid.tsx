@@ -214,15 +214,6 @@ export function BentoGrid() {
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </TactileButton>
               </Link>
-              <Link href="mailto:support@doggybagg.cc">
-                <TactileButton
-                  variant="outline"
-                  size="lg"
-                  className="border-border px-8 py-6 text-lg text-foreground hover:bg-secondary bg-transparent"
-                >
-                  Book a Portfolio Strategy Call
-                </TactileButton>
-              </Link>
             </div>
             <StatsRow />
           </BentoTiltCard>

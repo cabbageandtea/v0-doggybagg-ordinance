@@ -42,15 +42,6 @@ export function HeroSection() {
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
-            <Link href="mailto:support@doggybagg.cc">
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-border px-8 py-6 text-lg text-foreground hover:bg-secondary bg-transparent"
-              >
-                Book a Portfolio Strategy Call
-              </Button>
-            </Link>
           </div>
 
           {/* Stats */}
