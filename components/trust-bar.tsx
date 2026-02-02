@@ -4,9 +4,9 @@ import { motion } from "framer-motion"
 import { Shield, Zap, Users } from "lucide-react"
 
 const stats = [
-  { icon: Shield, value: "$2.4M+", label: "Fines prevented" },
+  { icon: Shield, value: "$2.4M+", label: "Portfolio value protected" },
   { icon: Zap, value: "24/7", label: "AI monitoring" },
-  { icon: Users, value: "12,000+", label: "Properties protected" },
+  { icon: Users, value: "12,000+", label: "Properties monitored" },
 ]
 
 export function TrustBar() {
@@ -38,7 +38,7 @@ export function TrustBar() {
           <div className="hidden items-center gap-2 sm:flex">
             <span className="text-border">|</span>
             <span className="rounded-full bg-success/20 px-2 py-0.5 text-xs font-medium text-success">
-              Join 12,000+ protected investors
+              Join 12,000+ investors
             </span>
           </div>
         </div>

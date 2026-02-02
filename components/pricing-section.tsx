@@ -42,7 +42,7 @@ function PortfolioAuditCTA() {
             Portfolio Audit
           </h3>
           <p className="mb-6 text-muted-foreground max-w-xl mx-auto">
-            Full portfolio analysis. Violations, risk scores, and clear next steps. One report, no surprises.
+            Comprehensive portfolio analysis. Ordinance standing, health scores, and clear next steps. One report, no surprises.
           </p>
           <div className="mb-6 flex items-center justify-center gap-4">
             <span className="text-5xl font-bold text-foreground">$499</span>
@@ -79,7 +79,7 @@ function PortfolioAuditCTA() {
               size="lg"
               className="group glow-accent-intense bg-primary px-8 py-6 text-lg font-semibold text-primary-foreground hover:bg-primary/90"
             >
-              Get My $499 Portfolio Audit
+              Request Portfolio Audit
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
           </Link>
@@ -92,17 +92,17 @@ function PortfolioAuditCTA() {
 const plans = [
   {
     name: "Community Alert",
-    description: "Protect your home. Always free.",
+    description: "Your home. Always free.",
     price: 0,
     period: "",
     features: [
       "1 property monitored",
-      "Weekly violation checks",
-      "SMS alerts only",
+      "Weekly ordinance checks",
+      "SMS updates only",
       "Community support",
       "24-hour history",
     ],
-    cta: "Start Free Protection",
+    cta: "Begin Free",
     highlighted: false,
     isFree: true,
   },
@@ -113,12 +113,12 @@ const plans = [
     period: "/month",
     features: [
       "1 property monitored",
-      "Daily violation checks",
-      "Email alerts",
+      "Daily ordinance checks",
+      "Email updates",
       "Basic analytics",
       "7-day history",
     ],
-    cta: "Start Free Trial",
+    cta: "Begin Free Trial",
     highlighted: false,
   },
   {
@@ -129,13 +129,13 @@ const plans = [
     features: [
       "Up to 10 properties",
       "Real-time monitoring",
-      "SMS + Email alerts",
+      "SMS + Email updates",
       "Advanced analytics",
       "90-day history",
       "Priority support",
       "API access",
     ],
-    cta: "Get Started",
+    cta: "Begin",
     highlighted: true,
   },
   {
@@ -152,7 +152,7 @@ const plans = [
       "Custom reporting",
       "White-label options",
     ],
-    cta: "Contact Sales",
+    cta: "Request Consultation",
     highlighted: false,
   },
 ]
@@ -163,13 +163,13 @@ export function PricingSection() {
       <div className="container mx-auto px-4">
         <div className="mb-16 text-center">
           <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl text-balance">
-            Choose Your <span className="text-glow text-primary">Protection</span> Level
+            Select Your <span className="text-glow text-primary">Plan</span>
           </h2>
           <p className="mx-auto max-w-2xl text-muted-foreground text-pretty mb-2">
-            Start monitoring your San Diego properties today. No lock-in. Cancel anytime.
+            Oversight for your San Diego portfolio. No lock-in. Cancel anytime.
           </p>
-          <p className="text-sm text-amber-400/90 font-medium">
-            One fine can cost $1,000–$10,000. Protection starts at $29/mo.
+          <p className="text-sm text-muted-foreground font-medium">
+            Professional oversight starts at $29/mo.
           </p>
         </div>
 
@@ -183,11 +183,10 @@ export function PricingSection() {
               <span className="text-sm font-medium text-green-400">100% Free Forever</span>
             </div>
             <h3 className="mb-2 text-xl font-bold text-foreground">
-              Protect Your Home. Get Notified of City Violations for Free.
+              Your Home. Timely Municipal Updates—Free Forever.
             </h3>
             <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-              Single-property owners deserve protection too. Monitor your address and receive SMS alerts 
-              when San Diego issues violations—no credit card required.
+              Single-property owners. Monitor your address and receive timely municipal updates—no credit card required.
             </p>
           </div>
         </div>

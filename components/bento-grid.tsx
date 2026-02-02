@@ -24,29 +24,29 @@ import { TactileButton } from "@/components/tactile-button"
 
 const features = [
   {
-    title: "Real-Time Violation Alerts",
-    description: "Get instant notifications when a code violation is filed against any property in your portfolio.",
+    title: "Precision Notifications",
+    description: "Timely updates when municipal activity affects any property in your portfolio.",
     icon: Bell,
     gridClass: "md:col-span-2 md:row-span-1",
     highlight: true,
   },
   {
-    title: "Historical Data Analysis",
-    description: "Full violation history. Spot patterns before they become problems.",
+    title: "Historical Intelligence",
+    description: "Complete audit trail. Identify trends for informed decisions.",
     icon: FileSearch,
     gridClass: "md:col-span-1 md:row-span-1",
     highlight: false,
   },
   {
     title: "Portfolio Analytics",
-    description: "One-screen view of risk scores and compliance status across every property.",
+    description: "One-screen view of health scores and ordinance standing across every property.",
     icon: BarChart3,
     gridClass: "md:col-span-1 md:row-span-2",
     highlight: false,
   },
   {
-    title: "Early Detection",
-    description: "Catch violations within 24 hours of filing—before penalties escalate.",
+    title: "Same-Day Intelligence",
+    description: "Updates within 24 hours of municipal filing.",
     icon: Clock,
     gridClass: "md:col-span-1 md:row-span-1",
     highlight: false,
@@ -60,7 +60,7 @@ const features = [
   },
   {
     title: "Trend Forecasting",
-    description: "Predict enforcement by neighborhood. See risk before it lands.",
+    description: "Enrollment patterns by neighborhood. Data-driven foresight.",
     icon: TrendingUp,
     gridClass: "md:col-span-1 md:row-span-1",
     highlight: false,
@@ -94,9 +94,9 @@ const FeatureCard = memo(function FeatureCard({
         <p className="flex-grow text-sm text-muted-foreground">{feature.description}</p>
         {feature.highlight && (
           <div className="mt-4 flex items-center gap-4 text-xs">
-            <div className="flex items-center gap-1 text-red-400">
-              <AlertTriangle className="h-3 w-3" />
-              <span>12 Active Alerts</span>
+            <div className="flex items-center gap-1 text-muted-foreground">
+              <Bell className="h-3 w-3" />
+              <span>12 Updates Pending</span>
             </div>
             <div className="flex items-center gap-1 text-green-400">
               <CheckCircle className="h-3 w-3" />
@@ -118,7 +118,7 @@ function StatsRow() {
           <Shield className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" />
           <span className="text-2xl font-bold text-foreground">$2.4M+</span>
         </div>
-        <p className="text-xs text-muted-foreground">Fines Detected</p>
+        <p className="text-xs text-muted-foreground">Portfolio Value Protected</p>
       </div>
       <div className="group flex flex-col items-center justify-center rounded-xl border border-border/50 bg-background/30 p-4">
         <div className="mb-1 flex items-center gap-2 text-primary">
@@ -132,7 +132,7 @@ function StatsRow() {
           <Zap className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" />
           <span className="text-2xl font-bold text-foreground">24/7</span>
         </div>
-        <p className="text-xs text-muted-foreground">Real-time Alerts</p>
+        <p className="text-xs text-muted-foreground">Continuous Monitoring</p>
       </div>
     </div>
   )
@@ -144,7 +144,7 @@ function BentoHeadline() {
     <h1 className="mb-6 font-display text-4xl font-bold tracking-tight text-foreground md:text-6xl lg:text-7xl text-balance">
       San Diego&apos;s
       <br />
-      <span className="text-glow text-primary">Compliance</span> Command Center
+      <span className="text-glow text-primary">Portfolio</span> Intelligence Center
     </h1>
   )
 }
@@ -180,14 +180,14 @@ export function BentoGrid() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
               </span>
-              <span className="text-sm font-medium text-primary">Stop fines before they stop you</span>
+              <span className="text-sm font-medium text-primary">Precision oversight for San Diego portfolios</span>
             </div>
             <BentoHeadline />
             <p className="mx-auto mb-4 max-w-2xl text-lg text-muted-foreground md:text-xl text-pretty">
-              Real-time alerts. AI risk scores. Appeal support. The compliance shield for San Diego investors—so you stay ahead.
+              Timely updates. Portfolio analytics. Resolution support. High-end oversight for San Diego investors.
             </p>
             <p className="mx-auto mb-8 text-sm text-muted-foreground/90">
-              One fine can cost $1,000–$10,000. DoggyBagg starts at $29/mo.
+              Professional oversight starts at $29/mo.
             </p>
             {/* Hero CTAs: See your risk + Portfolio Audit only. Book a Portfolio Strategy Call removed. */}
             <div className="mb-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -197,7 +197,7 @@ export function BentoGrid() {
                   size="lg"
                   className="border-primary/50 text-primary hover:bg-primary/10 px-8 py-6"
                 >
-                  See your risk
+                  Explore portfolio health
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </TactileButton>
               </a>
@@ -214,7 +214,7 @@ export function BentoGrid() {
                   size="lg"
                   className="group glow-accent-intense bg-primary px-8 py-6 text-lg font-semibold text-primary-foreground hover:bg-primary/90"
                 >
-                  Get My $499 Portfolio Audit
+                  Request Portfolio Audit
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </TactileButton>
               </Link>
@@ -229,7 +229,7 @@ export function BentoGrid() {
             Enterprise-Grade <span className="text-glow text-primary">Monitoring</span>
           </h2>
           <p className="mx-auto max-w-2xl text-muted-foreground text-pretty">
-            AI-powered detection and portfolio tools. Stay ahead of the city.
+            Precision municipal intelligence and portfolio analytics.
           </p>
         </div>
 

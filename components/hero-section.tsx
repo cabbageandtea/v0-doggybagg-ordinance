@@ -15,20 +15,19 @@ export function HeroSection() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
             </span>
-            <span className="text-sm text-primary">AI-Powered Fine Detection</span>
+            <span className="text-sm text-primary">Precision Ordinance Intelligence</span>
           </div>
 
           {/* Headline */}
           <h1 className="mb-6 text-4xl font-bold tracking-tight text-foreground md:text-6xl lg:text-7xl text-balance">
-            <span className="text-glow text-primary">Protect</span> Your San Diego
+            <span className="text-glow text-primary">Oversight</span> for Your San Diego
             <br />
             Property Portfolio
           </h1>
 
           {/* Subheadline */}
           <p className="mx-auto mb-10 max-w-2xl text-lg text-muted-foreground md:text-xl text-pretty">
-            Take it with you. Real-time San Diego municipal code violation monitoring. 
-            Detect fines before they escalate—stay compliant with City ordinances.
+            Take it with you. Timely municipal intelligence and portfolio analytics for San Diego investors.
           </p>
 
           {/* CTA Buttons */}
@@ -38,7 +37,7 @@ export function HeroSection() {
                 size="lg"
                 className="group glow-accent-intense bg-primary px-8 py-6 text-lg font-semibold text-primary-foreground hover:bg-primary/90"
               >
-                Get My $499 Portfolio Audit
+                Request Portfolio Audit
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
@@ -51,7 +50,7 @@ export function HeroSection() {
                 <Shield className="h-5 w-5" />
                 <span className="text-3xl font-bold text-foreground">$2.4M+</span>
               </div>
-              <p className="text-sm text-muted-foreground">Fines Detected</p>
+              <p className="text-sm text-muted-foreground">Portfolio Value Protected</p>
             </div>
             <div className="liquid-glass rounded-2xl p-6">
               <div className="mb-2 flex items-center justify-center gap-2 text-primary">
@@ -65,7 +64,7 @@ export function HeroSection() {
                 <Zap className="h-5 w-5" />
                 <span className="text-3xl font-bold text-foreground">24/7</span>
               </div>
-              <p className="text-sm text-muted-foreground">Real-time Alerts</p>
+              <p className="text-sm text-muted-foreground">Continuous Monitoring</p>
             </div>
           </div>
         </div>

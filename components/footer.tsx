@@ -59,8 +59,7 @@ export function Footer() {
               </div>
             </Link>
             <p className="mb-6 max-w-sm text-sm text-muted-foreground">
-              The compliance shield for San Diego investors. Stop fines before they stop you—
-              real-time alerts, AI risk scoring, appeal support.
+              Precision ordinance oversight for San Diego investors. Timely updates, portfolio analytics, resolution support.
             </p>
             <div className="flex gap-4">
               <Link

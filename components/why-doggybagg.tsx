@@ -15,21 +15,21 @@ const differentiators = [
   },
   {
     icon: Clock,
-    title: "24-Hour Early Detection",
-    description: "Violations hit our system the moment they're filed. You respond before penalties double.",
+    title: "Same-Day Intelligence",
+    description: "Municipal filings reach our system within hours. Timely updates for informed decisions.",
     stat: "<24h",
   },
   {
     icon: Brain,
     title: "AI That Learns",
-    description: "Our models track enforcement trends by neighborhood. We predict risk before it happens.",
+    description: "Models track enforcement trends by neighborhood. Data-driven foresight for your portfolio.",
     stat: "Predictive",
   },
   {
     icon: Shield,
-    title: "We Fight for You",
-    description: "Appeal templates, DIY guides, and expert support. When the city comes knocking, you're ready.",
-    stat: "Protected",
+    title: "Resolution Support",
+    description: "Appeal templates, DIY guides, and expert support. Prepared when you need to respond.",
+    stat: "Ready",
   },
 ]
 
@@ -47,10 +47,10 @@ export function WhyDoggyBagg() {
           transition={{ duration: 0.7 }}
         >
           <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl text-balance">
-            Why <span className="text-glow text-primary">DoggyBagg</span> Wins
+            Why <span className="text-glow text-primary">DoggyBagg</span>
           </h2>
           <p className="mx-auto max-w-2xl text-muted-foreground text-pretty">
-            Generic tools miss what matters. We're built by investors who got burned—and built it right.
+            Precision ordinance oversight built for San Diego investors.
           </p>
         </motion.div>
 
@@ -92,7 +92,7 @@ export function WhyDoggyBagg() {
               size="lg"
               className="glow-accent bg-primary px-8 py-6 text-lg font-semibold text-primary-foreground hover:bg-primary/90"
             >
-              Join 12,000+ Protected Investors
+              Join 12,000+ Investors
             </TactileButton>
           </Link>
         </motion.div>

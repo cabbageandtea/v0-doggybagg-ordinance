@@ -21,17 +21,17 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://doggybagg.cc'
 
 /** 160-char high-converting summary for social and SEO */
 const metaDescription =
-  'Stop fines before they stop you. DoggyBagg monitors San Diego municipal code violations 24/7. Detect early, protect your portfolio, stay compliant. Start free.'
+  'High-end ordinance oversight for San Diego investors. Timely municipal intelligence, portfolio analytics, resolution support. Start free.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'DoggyBagg | AI-Powered Property Compliance',
+    default: 'DoggyBagg | Precision Ordinance Oversight',
     template: '%s | DoggyBagg',
   },
   description: metaDescription,
   generator: 'DoggyBagg',
-  keywords: ['San Diego', 'property fines', 'municipal code', 'real estate', 'compliance', 'AI monitoring', 'STRO', 'short-term rental'],
+  keywords: ['San Diego', 'ordinance oversight', 'municipal code', 'real estate', 'portfolio analytics', 'AI monitoring', 'STRO', 'short-term rental'],
   authors: [{ name: 'DoggyBagg LLC', url: siteUrl }],
   creator: 'DoggyBagg LLC',
   openGraph: {
@@ -39,26 +39,26 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: siteUrl,
     siteName: 'DoggyBagg',
-    title: 'DoggyBagg | AI-Powered Property Compliance',
+    title: 'DoggyBagg | Precision Ordinance Oversight',
     description: metaDescription,
     images: [
       {
         url: '/images/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'DoggyBagg - Take it with you | San Diego Property Compliance',
+        alt: 'DoggyBagg - Take it with you | Precision Ordinance Oversight',
       },
       {
         url: '/images/darkdoggylogo.jpg',
         width: 1200,
         height: 630,
-        alt: 'DoggyBagg - San Diego Property Compliance Monitoring',
+        alt: 'DoggyBagg - Precision Ordinance Oversight',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'DoggyBagg | AI-Powered Property Compliance',
+    title: 'DoggyBagg | Precision Ordinance Oversight',
     description: metaDescription,
     images: ['/images/og-image.png'],
   },

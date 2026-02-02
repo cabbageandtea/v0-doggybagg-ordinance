@@ -11,7 +11,7 @@ const organizationSchema = {
   url: siteUrl,
   logo: `${siteUrl}/images/og-image.png`,
   description:
-    "All-in-one San Diego property compliance monitoring. Stop fines before they stop you.",
+    "Precision ordinance oversight for San Diego investors. Timely updates, portfolio analytics, resolution support.",
   sameAs: [],
 }
 
@@ -21,7 +21,7 @@ const websiteSchema = {
   name: "DoggyBagg",
   url: siteUrl,
   description:
-    "Stop fines before they stop you. DoggyBagg monitors San Diego property compliance and municipal code violations 24/7.",
+    "High-end ordinance oversight for San Diego investors. Timely municipal intelligence, portfolio analytics, resolution support.",
   publisher: { "@id": `${siteUrl}/#organization` },
   potentialAction: {
     "@type": "SearchAction",
@@ -52,9 +52,9 @@ export function StructuredData() {
 
 const faqItems = [
   {
-    question: "How does DoggyBagg detect violations?",
+    question: "How does DoggyBagg deliver ordinance intelligence?",
     answer:
-      "We continuously monitor San Diego municipal databases including Code Enforcement and STRO registries. Our system cross-references property addresses with active violation reports and sends real-time alerts.",
+      "We continuously monitor San Diego municipal databases including Code Enforcement and STRO registries. Our system cross-references property addresses and sends timely updates.",
   },
   {
     question: "Which properties can I monitor?",
@@ -62,14 +62,14 @@ const faqItems = [
       "Any residential or commercial property within San Diego County, including short-term rentals (STRs), multifamily units, and ADUs.",
   },
   {
-    question: "How quickly will I be notified of violations?",
+    question: "How quickly will I receive updates?",
     answer:
-      "Most violations are detected within 24 hours of being filed. Critical violations trigger immediate notifications via email and SMS.",
+      "Most filings are reflected within 24 hours. Critical activity triggers immediate notifications via email and SMS.",
   },
   {
-    question: "What types of violations are tracked?",
+    question: "What ordinance categories are tracked?",
     answer:
-      "Trash/debris, unpermitted construction, noise ordinances, parking violations, STR compliance issues, occupancy violations, overgrown vegetation, and more.",
+      "Trash/debris, unpermitted construction, noise ordinances, parking, STR compliance, occupancy, overgrown vegetation, and more.",
   },
   {
     question: "Can I cancel at any time?",

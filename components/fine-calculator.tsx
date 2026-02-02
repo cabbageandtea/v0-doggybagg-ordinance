@@ -61,17 +61,17 @@ export function FineCalculator() {
         </div>
         <div className="min-w-0">
           <h3 className="text-lg sm:text-xl font-bold text-foreground">Fine Calculator</h3>
-          <p className="text-xs sm:text-sm text-muted-foreground">Estimate potential violation costs</p>
+          <p className="text-xs sm:text-sm text-muted-foreground">Explore potential municipal cost scenarios</p>
         </div>
       </div>
 
       <div className="space-y-4 sm:space-y-6">
         {/* Violation Type */}
         <div className="space-y-2">
-          <Label className="text-sm sm:text-base text-foreground">Violation Type</Label>
+          <Label className="text-sm sm:text-base text-foreground">Ordinance Category</Label>
           <Select value={violationType} onValueChange={handleViolationChange}>
             <SelectTrigger className="border-border bg-input text-foreground h-10 sm:h-11 text-sm sm:text-base">
-              <SelectValue placeholder="Select violation type" />
+              <SelectValue placeholder="Select ordinance category" />
             </SelectTrigger>
             <SelectContent className="border-border bg-card">
               {violationTypes.map((type) => (

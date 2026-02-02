@@ -335,7 +335,7 @@ export default function DashboardPage() {
           <div>
             <h2 className="text-xl font-bold text-foreground">Property Portfolio</h2>
             <p className="text-sm text-muted-foreground">
-              Monitor compliance status across all your San Diego properties
+              Ordinance standing across all your San Diego properties
             </p>
           </div>
           <div className="flex gap-2">
@@ -461,7 +461,7 @@ export default function DashboardPage() {
             </div>
             <h3 className="text-xl font-bold text-foreground">No properties yet</h3>
             <p className="mt-3 max-w-sm mx-auto text-sm text-muted-foreground">
-              Add your first San Diego property to start monitoring compliance. Take it with you—DoggyBagg protects your portfolio 24/7.
+              Add your first San Diego property to begin. Take it with you—precision oversight for your portfolio.
             </p>
             <Button 
               size="lg" 

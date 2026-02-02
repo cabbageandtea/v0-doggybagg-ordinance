@@ -129,11 +129,10 @@ export function NeighborhoodWatchWidget() {
             Neighborhood <span className="text-glow text-primary">Watch</span> Dashboard
           </h2>
           <p className="mx-auto max-w-2xl text-sm sm:text-base text-muted-foreground text-pretty">
-            Real-time enforcement heat maps for San Diego neighborhoods. See where the city
-            is actively monitoring before violations hit your property.
+            Municipal activity heat maps for San Diego neighborhoods. Enrolled zone intelligence at a glance.
           </p>
           <p className="mt-3 text-xs text-primary/80 max-w-xl mx-auto">
-            Similar properties in your area have been cited recently. Predictive alerts coming soon.
+            Enrollment forecasting for your area. Predictive insights coming soon.
           </p>
         </motion.div>
 
@@ -219,11 +218,10 @@ export function NeighborhoodWatchWidget() {
               transition={{ ...springTransition, delay: 0.5 }}
             >
               <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2">
-                Is Your Neighborhood at Risk?
+                Neighborhood Ordinance Activity
               </h3>
               <p className="text-sm sm:text-base text-muted-foreground mb-6 max-w-2xl mx-auto">
-                Get instant alerts when enforcement activity increases in your area. 
-                Protect your property before violations escalate.
+                Receive timely updates when municipal activity changes in your area.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
                 <div className="text-center sm:text-left">
@@ -233,7 +231,7 @@ export function NeighborhoodWatchWidget() {
                       size="lg"
                       className="w-full sm:w-auto glow-accent bg-green-500 text-white hover:bg-green-600"
                     >
-                      Start Free Monitoring
+                      Begin Free
                     </TactileButton>
                   </Link>
                 </div>
@@ -243,7 +241,7 @@ export function NeighborhoodWatchWidget() {
                     size="lg"
                     className="w-full sm:w-auto gap-2 bg-transparent"
                   >
-                    View All Plans
+                    View Plans
                     <ChevronRight className="h-4 w-4" />
                   </TactileButton>
                 </Link>

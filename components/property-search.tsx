@@ -105,7 +105,7 @@ export function PropertySearch() {
         </div>
         <div>
           <h3 className="text-xl font-bold text-foreground">Property Status</h3>
-          <p className="text-sm text-muted-foreground">Check San Diego property compliance</p>
+          <p className="text-sm text-muted-foreground">Check San Diego ordinance standing</p>
           <p className="text-xs text-muted-foreground/80 mt-1">Sample results. Live municipal data coming soon.</p>
         </div>
       </div>
@@ -193,7 +193,7 @@ export function PropertySearch() {
           <div className="rounded-xl border border-dashed border-border bg-secondary/20 p-8 text-center">
             <Search className="mx-auto mb-4 h-12 w-12 text-muted-foreground/50" />
             <p className="text-sm text-muted-foreground">
-              Enter an address to check for active violations
+              Enter an address to view ordinance standing
             </p>
             <p className="mt-1 text-xs text-muted-foreground/70">
               Covers all San Diego County municipalities
@@ -205,8 +205,8 @@ export function PropertySearch() {
         <Link href="/auth/sign-up" onClick={() => trackCtaClick({ cta: "sign_up", location: "property_search" })}>
           <div className="rounded-lg border border-primary/20 bg-primary/5 p-4 transition-all hover:bg-primary/10 cursor-pointer">
             <p className="text-center text-sm text-muted-foreground">
-              <span className="font-medium text-primary">Sign up now</span> to save properties 
-              and receive real-time violation alerts
+              <span className="font-medium text-primary">Sign up</span> to save properties 
+              and receive timely municipal updates
             </p>
           </div>
         </Link>

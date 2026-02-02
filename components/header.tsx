@@ -73,7 +73,7 @@ export function Header() {
               </Link>
               <Link href="/auth/sign-up" onClick={() => trackCtaClick({ cta: "start_free", location: "header" })}>
                 <Button className="glow-accent bg-primary text-primary-foreground hover:bg-primary/90">
-                  Start Free
+                  Begin Free
                 </Button>
               </Link>
             </div>
@@ -132,7 +132,7 @@ export function Header() {
                 </Link>
                 <Link href="/auth/sign-up" onClick={() => { setIsMenuOpen(false); trackCtaClick({ cta: "start_free", location: "header_mobile" }) }}>
                   <Button className="h-11 w-full glow-accent bg-primary text-primary-foreground">
-                    Start Free
+                    Begin Free
                   </Button>
                 </Link>
               </div>
