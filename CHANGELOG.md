@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Autonomous SEO Intelligence Layer (Feb 2026)
+
+- **app/property/[address]/page.tsx** — Dynamic property pages from leads_crm.csv
+- **Exit Risk** — Transfer tax calculator ($0.55 → $30.55 per $500) for properties >$1M
+- **Equity Unlock (AB 1033)** — Condo-ization potential meter for completed ADU leads
+- **TPA Density** — Badge for Transit Priority Areas (2026 LDC Spring 139)
+- **AIEO** — JSON-LD Dataset + FAQ schemas for Perplexity/Gemini/ChatGPT citation
+- **Blurred CTA** — "Unlock Full 2026 Audit" email capture → inbound_leads (Supabase)
+- **Sitemap** — Property URLs from leads_crm.csv; priority 0.8 for TPA/ADU leads
+- **scripts/018_inbound_leads.sql** — inbound_leads table for CTA signups
+
 ### Launch Campaign (Feb 2026)
 
 - **LAUNCH_CAMPAIGN.md** — Consolidated launch checklist, current blockers, tone rules

@@ -15,6 +15,7 @@ Run in **Supabase Dashboard → SQL Editor** in this order.
 9. **015_docket_logs.sql** – `sentinel_docket_history` for Municipal Docket Scraper (legislative alerts dedupe).
 10. **016_stro_expiration.sql** – `expiration_date` on `sniper_stro_snapshots` for Renewal Sentinel.
 11. **017_docket_unique_meeting.sql** – Unique constraint on `meeting_id` to prevent duplicate docket alerts.
+12. **018_inbound_leads.sql** – Table for property page CTA signups (Unlock Full 2026 Audit).
 
 **security-test.sql** – Manual RLS verification. Run as `anon` role to test policies.
 
@@ -32,6 +33,8 @@ python scripts/lead_sniper.py
 **Automation:** Runs daily via GitHub Action (`.github/workflows/lead-sniper.yml`). Output artifact retained 7 days.
 
 **Note:** `leads_crm.csv` is gitignored (PII). Download from Actions artifact if needed.
+
+**Property pages:** Run lead_sniper before build so `leads_crm.csv` exists. The sitemap and `/property/[address]` pages read from it. For Vercel: add a build step that fetches the artifact or syncs leads to Supabase.
 
 ---
 
