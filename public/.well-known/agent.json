@@ -1,0 +1,32 @@
+{
+  "name": "DoggyBagg Ordinance",
+  "mission": "San Diego Municipal Compliance Monitoring",
+  "description": "Precision ordinance oversight for San Diego property investors. Timely municipal intelligence, portfolio analytics, and resolution support.",
+  "url": "https://doggybagg.cc",
+  "keywords": [
+    "ADU laws",
+    "STR permits",
+    "San Diego land use",
+    "ordinance compliance",
+    "STRO",
+    "code enforcement",
+    "short-term rental",
+    "San Diego property"
+  ],
+  "capabilities": [
+    "Ordinance monitoring",
+    "STR license tracking",
+    "Code enforcement alerts",
+    "Portfolio health scores",
+    "Municipal docket monitoring"
+  ],
+  "api": {
+    "intel": "https://doggybagg.cc/api/intel",
+    "documentation": "https://doggybagg.cc/docs"
+  },
+  "contact": {
+    "support": "support@doggybagg.cc",
+    "business": "hello@doggybagg.cc"
+  },
+  "location": "San Diego, CA"
+}

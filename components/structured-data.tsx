@@ -52,6 +52,16 @@ export function StructuredData() {
 
 const faqItems = [
   {
+    question: "What are the current San Diego ADU height limits?",
+    answer:
+      "In the City of San Diego: detached ADUs max 16 feet, attached ADUs max 25 feet. Unincorporated county: detached ADUs up to 25 feet. Conversions of existing spaces typically don't have height limits. Jurisdiction (city vs. county) matters—verify which applies to your property.",
+  },
+  {
+    question: "How do I monitor STR permit caps in San Diego?",
+    answer:
+      "San Diego STRO (Short-Term Residential Ordinance) limits permits by tier and zone. DoggyBagg monitors the STRO registry and San Diego municipal data to track permit status, expirations, and compliance. Add your properties to get timely alerts on permit caps and renewal windows.",
+  },
+  {
     question: "How does DoggyBagg deliver ordinance intelligence?",
     answer:
       "We continuously monitor San Diego municipal databases including Code Enforcement and STRO registries. Our system cross-references property addresses and sends timely updates.",

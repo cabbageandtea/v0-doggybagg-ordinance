@@ -17,7 +17,8 @@ export const config = {
      * - favicon.ico, images
      * - sitemap.xml, robots.txt (SEO – bypass proxy to avoid "Couldn't fetch" in GSC)
      * - api/cron (Vercel Cron – secured by CRON_SECRET in route handlers)
+     * - .well-known (Agent Card, etc. – for AI crawlers)
      */
-    '/((?!_next/static|_next/image|favicon\\.ico|sitemap\\.xml|robots\\.txt|api/cron|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/((?!_next/static|_next/image|favicon\\.ico|sitemap\\.xml|robots\\.txt|api/cron|\\.well-known|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 }

@@ -76,6 +76,15 @@ See **AD_COPY_EXAMPLES.md** for full copy. Key:
 
 ---
 
+## AI Agent Nudge (Implemented)
+
+- **Agent Card** — `/.well-known/agent.json` — Brand, mission, keywords, API link for AI crawlers
+- **Intel API** — `/api/intel` — Machine-readable capabilities, endpoints, topics
+- **FAQ Schema** — Organization + FAQPage JSON-LD with San Diego ADU height limits, STR permit monitoring
+- **Reddit drafts** → REDDIT_EXPERT_REPLIES.md — 5 value-first replies for r/SanDiegan
+
+---
+
 ## Cross-References
 
 - **Strategy & budget** → MARKETING_CAMPAIGN_STRATEGY.md
