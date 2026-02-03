@@ -34,7 +34,7 @@ export default function ReferPage() {
               <li>• Earn per qualifying sign-up</li>
             </ul>
             <a
-              href="mailto:support@doggybagg.cc?subject=Referral%20Partner%20Inquiry&body=Hi%2C%20I%27d%20like%20to%20learn%20about%20the%20DoggyBagg%20referral%20program.%0A%0AName%3A%0ANumber%20of%20landlords%2FPMs%20I%20can%20refer%3A"
+              href="mailto:maliklomax@doggybagg.cc?subject=Referral%20Partner%20Inquiry&body=Hi%2C%20I%27d%20like%20to%20learn%20about%20the%20DoggyBagg%20referral%20program.%0A%0AName%3A%0ANumber%20of%20landlords%2FPMs%20I%20can%20refer%3A"
             >
               <Button size="lg" className="gap-2 glow-accent bg-primary">
                 Get Started as a Referral Partner

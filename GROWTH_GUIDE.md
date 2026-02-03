@@ -2,6 +2,8 @@
 
 How to position DoggyBagg, get found in search, run ads, and support customers.
 
+**Launch checklist:** See **LAUNCH_CAMPAIGN.md** for current status and week-by-week actions.
+
 ---
 
 ## 1. AIO (All-In-One) Positioning

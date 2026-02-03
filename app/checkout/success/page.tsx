@@ -55,16 +55,21 @@ export default async function CheckoutSuccessPage({ searchParams }: Props) {
             )}
           </div>
 
-          <div className="mt-8 rounded-lg border border-border bg-secondary/50 p-4">
+          <div className="mt-8 space-y-4">
             <p className="text-sm text-muted-foreground">
-              Need help? Contact us at{' '}
-              <a
-                href="mailto:support@doggybagg.cc"
-                className="text-primary hover:underline"
-              >
-                support@doggybagg.cc
-              </a>
+              Know a landlord? <Link href="/refer" className="text-primary hover:underline font-medium">Refer them and earn</Link>.
             </p>
+            <div className="rounded-lg border border-border bg-secondary/50 p-4">
+              <p className="text-sm text-muted-foreground">
+                Need help? Contact us at{' '}
+                <a
+                  href="mailto:support@doggybagg.cc"
+                  className="text-primary hover:underline"
+                >
+                  support@doggybagg.cc
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </div>

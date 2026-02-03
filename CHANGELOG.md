@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Launch Campaign (Feb 2026)
+
+- **LAUNCH_CAMPAIGN.md** — Consolidated launch checklist, current blockers, tone rules
+- **AD_COPY_EXAMPLES** — Removed inflated "12,000+ investors" claim; aligned with premium tone
+- **MARKETING_CAMPAIGN_STRATEGY** — Added Current Blockers (§0); Quick Wins aligned with $100 budget
+- **Referral** — CTA added to checkout success page, receipt email, welcome audit email
+- **Refer page** — Partnership inquiries → maliklomax@doggybagg.cc
+- **Structured data** — sameAs includes @doggybagg_sd (X/Twitter)
+- **Docs sync** — CONTACT_AND_ACCOUNTS, GROWTH_GUIDE, MARKETING_CAMPAIGN cross-reference LAUNCH_CAMPAIGN
+
 ## [0.2.3] - 2026-02-02
 
 ### Changed — Abandon Vercel Workflows for Standard Cron

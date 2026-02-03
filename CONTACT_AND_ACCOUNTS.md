@@ -1,6 +1,6 @@
 # DoggyBagg — Contact & Account Status
 
-**Last updated:** Live deployment reference
+**Last updated:** Live deployment reference. See LAUNCH_CAMPAIGN.md for launch checklist.
 
 ---
 

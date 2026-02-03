@@ -55,6 +55,18 @@ Once you have 5–10 paying customers and can afford $300–500/mo, add Google S
 
 ---
 
+## 0. Current Blockers (Launch State)
+
+| Platform | Status | Action |
+|----------|--------|--------|
+| **Facebook** | Account under review | No Meta ads until verified |
+| **LinkedIn Company** | Pending (connection growth) | Use personal profile for now |
+| **X (Twitter)** | @doggybagg_sd live | Use for organic + Product Hunt push |
+
+See CONTACT_AND_ACCOUNTS.md for full status.
+
+---
+
 ## 1. Channel Prioritization (Best for Your Platform)
 
 | Channel | Best For | DoggyBagg Fit | Priority |
@@ -286,12 +298,16 @@ Once you have 5–10 paying customers and can afford $300–500/mo, add Google S
 
 ## 15. Quick Wins (This Week)
 
-1. **Google Ads:** Create account; run 1 Search campaign with 10 San Diego keywords; $20/day test
-2. **Meta:** Create Business Manager; 1 campaign geo-targeting San Diego; $10/day
+**$100 Budget Mode:** Focus on zero-cost first. See LAUNCH_CAMPAIGN.md for aligned checklist.
+
+1. **San Diego STRA:** Join or reach out for partnership/sponsorship ($0 or $50 for event)
+2. **BiggerPockets:** Create account; introduce yourself in San Diego forum (value-first)
 3. **Product Hunt:** Schedule launch; prep assets
-4. **San Diego STRA:** Join or reach out for partnership/sponsorship
-5. **BiggerPockets:** Create account; introduce yourself in San Diego forum (value-first)
-6. **Referral:** Add "Refer a landlord" CTA to post-purchase/checkout success email
+4. **G2 + Capterra:** Create profiles (free)
+5. **Referral:** Add "Refer a landlord" CTA to post-purchase/checkout success email
+6. **Google Ads (optional):** If budget allows, 1 campaign, 5–10 keywords, $2/day for ~15 days
+
+**Hold:** Meta/Facebook ads until account verification complete (see CONTACT_AND_ACCOUNTS.md).
 
 ---
 
@@ -310,4 +326,4 @@ Once you have 5–10 paying customers and can afford $300–500/mo, add Google S
 
 ---
 
-*Last updated: Feb 2026. Adjust budgets and tactics based on actual CPA and conversion data.*
+*Last updated: Feb 2026. Adjust budgets and tactics based on actual CPA and conversion data. See LAUNCH_CAMPAIGN.md for launch checklist and current blockers.*

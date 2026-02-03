@@ -89,6 +89,7 @@ export async function sendReceiptEmail(
     <h2 style="margin: 0 0 16px;">Thank you for your purchase</h2>
     <p>You're now subscribed to <strong>${opts.productName}</strong>${amountStr ? ` – ${amountStr}` : ""}.</p>
     <p><a href="${siteUrl}/dashboard" style="color: #6366f1; font-weight: 600;">Go to Dashboard</a></p>
+    <p style="margin-top: 20px; font-size: 14px; color: #6b7280;">Know a landlord or property manager? <a href="${siteUrl}/refer" style="color: #6366f1;">Refer them</a> and earn when they sign up.</p>
   `)
 
   const { error } = await resend.emails.send({
@@ -178,6 +179,7 @@ export async function sendWelcomeAuditEmail(to: string): Promise<{ ok: boolean; 
     </ul>
     <p><strong>Next steps:</strong> Our team will contact you within 24–48 hours to schedule your consultation.</p>
     <p><a href="${siteUrl}" style="color: #6366f1; font-weight: 600;">Back to DoggyBagg</a></p>
+    <p style="margin-top: 20px; font-size: 14px; color: #6b7280;">Know a landlord or property manager? <a href="${siteUrl}/refer" style="color: #6366f1;">Refer them</a> and earn when they sign up.</p>
   `)
 
   const { error } = await resend.emails.send({

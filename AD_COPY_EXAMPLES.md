@@ -38,7 +38,7 @@ Ready-to-use copy for Google, Meta, and LinkedIn. Adjust per platform limits.
 1. **Card 1:** "Ordinance filings don't wait. Neither should you." — Same-day intelligence for San Diego properties
 2. **Card 2:** "One dashboard. All your properties." — Health scores, standing, next steps
 3. **Card 3:** "Expert-led $499 audit" — Custom report + 30-min consultation. Delivered in 5 days
-4. **Card 4:** "Join 12,000+ investors" — Precision oversight. Start free. doggybagg.cc
+4. **Card 4:** "Precision oversight for San Diego investors." — Start free. doggybagg.cc
 
 ---
 

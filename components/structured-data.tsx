@@ -12,7 +12,7 @@ const organizationSchema = {
   logo: `${siteUrl}/images/og-image.png`,
   description:
     "Precision ordinance oversight for San Diego investors. Timely updates, portfolio analytics, resolution support.",
-  sameAs: [],
+  sameAs: ["https://twitter.com/doggybagg_sd", "https://x.com/doggybagg_sd"],
 }
 
 const websiteSchema = {
