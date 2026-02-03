@@ -1,0 +1,33 @@
+name: Lead Sniper
+
+on:
+  schedule:
+    # Run daily at 06:00 UTC (10 PM PST)
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+jobs:
+  sniper:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements-lead-sniper.txt
+
+      - name: Run lead sniper
+        run: python scripts/lead_sniper.py
+
+      - name: Upload leads artifact (optional)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: leads-crm
+          path: leads_crm.csv
+          retention-days: 7
+          if-no-files-found: ignore

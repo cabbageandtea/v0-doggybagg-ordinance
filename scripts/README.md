@@ -20,6 +20,21 @@ Run in **Supabase Dashboard → SQL Editor** in this order.
 
 **How to run:** No Supabase CLI in this project. Run each script manually in **Supabase Dashboard → SQL Editor**. Paste the file contents and Execute.
 
+## Lead Sniper (Python)
+
+**lead_sniper.py** — Data acquisition engine for DoggyBagg. Fetches San Diego Open Data (STRO, RUBT, Building Permits), applies 2026 intelligence filters, outputs to `leads_crm.csv`.
+
+```bash
+pip install -r requirements-lead-sniper.txt
+python scripts/lead_sniper.py
+```
+
+**Automation:** Runs daily via GitHub Action (`.github/workflows/lead-sniper.yml`). Output artifact retained 7 days.
+
+**Note:** `leads_crm.csv` is gitignored (PII). Download from Actions artifact if needed.
+
+---
+
 ## Performance Benchmark
 
 **performance-bench.js** — Stress-tests the Tactile landing page (3D Tilt cards, Tactile Buttons), reports FCP.

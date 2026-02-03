@@ -39,3 +39,6 @@ coverage/
 
 # playwright
 test-results/
+
+# Lead sniper output (PII)
+leads_crm.csv
