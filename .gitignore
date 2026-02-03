@@ -1,21 +1,16 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
-
 # next.js
 /.next/
 /out/
-
 # production
 /build
-
 # debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
-
 # env files (keep .env.example trackable as template)
 .env
 .env.local
@@ -23,22 +18,22 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 !.env.example
-
 # vercel
 .vercel
-
 # Cursor (optional: keep MCP/config local)
 .cursor
-
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
 # coverage
 coverage/
-
 # playwright
 test-results/
-
 # Lead sniper output (PII)
 leads_crm.csv
+# Outreach Hunter (credentials, counters, generated PDFs)
+scripts/outreach_creds/
+.outreach_daily_count.json
+outreach_pdfs/
+# Python
+__pycache__/

@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Outreach Hunter (Feb 2026)
+
+- **scripts/outreach_hunter.py** — Proactive outreach: High-priority leads (PB/MB STRO, TPA) from leads_crm.csv
+- **PDF Brief** — 1-page 2026 Property Intelligence Brief (ReportLab), Confidential watermark, Feb 2 2026
+- **Gmail API** — Draft/send from doggybag422@gmail.com; LLM ghostwriter (OpenAI) or template fallback
+- **Throttling** — Max 5/day, 8:45 AM–4:15 PM PST; Status → Contacted_With_Brief
+- **Follow-up** — 72h no-reply → Soft Nudge mentioning Feb 5 Neighborhoods for All forum
+
 ### Autonomous SEO Intelligence Layer (Feb 2026)
 
 - **/property** — Explore page: search by address, browse by neighborhood (from leads_crm.csv)

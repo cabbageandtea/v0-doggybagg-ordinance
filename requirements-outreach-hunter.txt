@@ -1,0 +1,7 @@
+# Dependencies for scripts/outreach_hunter.py
+# Install: pip install -r requirements-outreach-hunter.txt
+
+reportlab>=4.0.0
+google-auth>=2.22.0
+google-auth-oauthlib>=1.0.0
+google-api-python-client>=2.100.0

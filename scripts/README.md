@@ -36,6 +36,23 @@ python scripts/lead_sniper.py
 
 **Property pages:** Run lead_sniper before build so `leads_crm.csv` exists. The sitemap and `/property/[address]` pages read from it. For Vercel: add a build step that fetches the artifact or syncs leads to Supabase.
 
+## Outreach Hunter (Python)
+
+**outreach_hunter.py** — Proactive outreach for high-priority leads. Reads `leads_crm.csv`, generates 1-page PDF Intelligence Briefs, and sends personalized emails via Gmail API.
+
+```bash
+pip install -r requirements-outreach-hunter.txt
+python scripts/outreach_hunter.py
+python scripts/outreach_hunter.py --dry-run  # Preview without sending
+```
+
+**Setup:**
+1. **Gmail API:** Create OAuth credentials at [Google Cloud Console](https://console.cloud.google.com/apis/credentials). Enable Gmail API. Download OAuth client JSON and save as `scripts/outreach_creds/credentials.json`. First run will open a browser for consent.
+2. **Emails:** Leads must have `Email` populated. Connect Hunter.io/Apollo in `lead_sniper.py` or manually add emails to the CSV.
+3. **LLM (optional):** Set `OPENAI_API_KEY` for AI-generated email bodies. Without it, template fallback is used.
+
+**Throttling:** Max 5 emails/day. Sends only between 8:45 AM–4:15 PM PST. Status updated to `Contacted_With_Brief`; follow-up after 72h if no reply.
+
 ---
 
 ## Performance Benchmark
