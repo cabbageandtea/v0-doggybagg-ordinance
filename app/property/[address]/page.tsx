@@ -7,17 +7,32 @@ import { getLeadBySlug, isTpaLead, isAduLead } from "@/lib/leads"
 import type { LeadRow } from "@/lib/leads"
 import { PropertyIntelligence } from "./property-intelligence"
 import { PropertyAieoScript } from "./property-aieo-script"
+import { CiteButton } from "@/components/cite-button"
+import { OrdinancePulse } from "@/components/ordinance-pulse"
 
 type Props = { params: Promise<{ address: string }> }
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://doggybagg.cc"
 
 export async function generateMetadata({ params }: Props) {
   const { address: slug } = await params
   const lead = getLeadBySlug(slug)
   if (!lead) return { title: "Property Not Found" }
   const addr = lead.Address || "San Diego Property"
+  const desc = `2026 LDC updates, transfer tax, and ADU condo-sale eligibility for ${addr}. San Diego ordinance intelligence from DoggyBagg.`
+  const url = `${siteUrl}/property/${slug}`
   return {
     title: `${addr} | 2026 Ordinance Intelligence | DoggyBagg`,
-    description: `2026 LDC updates, transfer tax, and ADU condo-sale eligibility for ${addr}. San Diego ordinance intelligence from DoggyBagg.`,
+    description: desc,
+    openGraph: {
+      title: `${addr} | 2026 Ordinance Intelligence`,
+      description: desc,
+      url,
+      siteName: "DoggyBagg",
+      images: [{ url: `${siteUrl}/images/og-image.png`, width: 1200, height: 630, alt: "DoggyBagg" }],
+    },
+    twitter: { card: "summary_large_image", title: `${addr} | 2026 Ordinance Intelligence` },
+    alternates: { canonical: url },
   }
 }
 
@@ -33,7 +48,7 @@ export default async function PropertyPage({ params }: Props) {
       <div className="relative z-10">
         <Header />
         <main className="container mx-auto px-4 pt-24 pb-16">
-          <PropertyContent lead={lead} />
+          <PropertyContent lead={lead} slug={slug} />
         </main>
         <Footer />
       </div>
@@ -41,28 +56,39 @@ export default async function PropertyPage({ params }: Props) {
   )
 }
 
-function PropertyContent({ lead }: { lead: LeadRow }) {
+function PropertyContent({ lead, slug }: { lead: LeadRow; slug: string }) {
   const tpa = isTpaLead(lead)
   const adu = isAduLead(lead)
   const addr = lead.Address || "Unknown"
 
   return (
     <div className="mx-auto max-w-3xl space-y-8">
-      <div>
+      <div className="flex flex-wrap items-center gap-4">
         <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">
-          ← Back to DoggyBagg
+          ← DoggyBagg
+        </Link>
+        <Link href="/property" className="text-sm text-muted-foreground hover:text-foreground">
+          Explore more properties →
         </Link>
       </div>
 
       <div className="liquid-glass-glow rounded-2xl border border-primary/10 p-8">
-        <h1 className="mb-2 text-2xl font-bold text-foreground md:text-3xl">
-          {addr}
-        </h1>
-        <p className="text-muted-foreground">
-          {lead.Name && lead.Name !== "Unknown" ? `${lead.Name} • ` : ""}
-          {lead.Zone && `Zone: ${lead.Zone}`}
-          {lead.Lead_Type && ` • ${lead.Lead_Type}`}
-        </p>
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <h1 className="mb-2 text-2xl font-bold text-foreground md:text-3xl">
+              {addr}
+            </h1>
+            <p className="text-muted-foreground">
+              {lead.Name && lead.Name !== "Unknown" ? `${lead.Name} • ` : ""}
+              {lead.Zone && `Zone: ${lead.Zone}`}
+              {lead.Lead_Type && ` • ${lead.Lead_Type}`}
+            </p>
+            <div className="mt-3">
+              <OrdinancePulse />
+            </div>
+          </div>
+          <CiteButton title={`2026 Ordinance Intelligence: ${addr}`} url={`${siteUrl}/property/${slug}`} />
+        </div>
 
         <div className="mt-6 flex flex-wrap gap-2">
           {tpa && (

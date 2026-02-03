@@ -25,6 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/learn/str-compliance-san-diego`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.6 },
     { url: `${baseUrl}/learn/data-sources`, lastModified: new Date(), changeFrequency: "yearly" as const, priority: 0.5 },
     { url: `${baseUrl}/refer`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.5 },
+    { url: `${baseUrl}/property`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.8 },
   ]
 
   try {

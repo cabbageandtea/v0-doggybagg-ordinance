@@ -7,6 +7,7 @@ import { AlertTriangle } from "lucide-react"
 const footerLinks = {
   Product: [
     { label: "Features", href: "/#features" },
+    { label: "Property Intel", href: "/property" },
     { label: "Calculator", href: "/#calculator" },
     { label: "Pricing", href: "/#pricing" },
     { label: "Data Sources", href: "/learn/data-sources" },

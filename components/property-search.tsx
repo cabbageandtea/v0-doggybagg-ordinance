@@ -204,6 +204,13 @@ export function PropertySearch() {
           </div>
         )}
 
+        {/* Property Intel Explorer */}
+        <Link href="/property" onClick={() => trackCtaClick({ cta: "property_intel", location: "property_search" })}>
+          <p className="text-center text-sm text-muted-foreground hover:text-foreground">
+            Explore 2026 ordinance intel by address →
+          </p>
+        </Link>
+
         {/* Auth Placeholder */}
         <Link href="/auth/sign-up" onClick={() => trackCtaClick({ cta: "sign_up", location: "property_search" })}>
           <div className="rounded-lg border border-primary/20 bg-primary/5 p-4 transition-all hover:bg-primary/10 cursor-pointer">

@@ -20,9 +20,8 @@ export function PropertyIntelligence({ lead, tpa, adu }: Props) {
   const [email, setEmail] = useState("")
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
 
-  const estValue = 1_500_000
-  const tax = exitTaxIncrease(estValue)
   const showExitRisk = tpa || adu || (lead.Lead_Type || "").toLowerCase().includes("stro")
+  const samples = [1_000_000, 1_500_000, 2_000_000]
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -48,18 +47,22 @@ export function PropertyIntelligence({ lead, tpa, adu }: Props) {
         <div className="liquid-glass rounded-2xl border border-amber-500/20 bg-amber-500/5 p-6">
           <h2 className="mb-2 font-semibold text-foreground">Exit Risk (Transfer Tax)</h2>
           <p className="mb-4 text-sm text-muted-foreground">
-            If property value exceeds $1M, the proposed Jan 2026 rate increase affects your exit.
+            For properties valued over $1M, the proposed Jan 2026 rate jump ($0.55 → $30.55 per $500) materially affects your exit.
           </p>
-          <div className="space-y-1 text-sm">
-            <p>
-              <strong>Current rate:</strong> $0.55 per $500 → Est. tax on $1.5M: ${tax.current.toLocaleString("en-US", { maximumFractionDigits: 0 })}
-            </p>
-            <p>
-              <strong>Proposed rate:</strong> $30.55 per $500 → Est. tax on $1.5M: ${tax.proposed.toLocaleString("en-US", { maximumFractionDigits: 0 })}
-            </p>
-            <p className="font-medium text-amber-600 dark:text-amber-500">
-              Estimated Exit Tax Increase: ${tax.diff.toLocaleString("en-US", { maximumFractionDigits: 0 })}
-            </p>
+          <div className="space-y-2 text-sm">
+            <p><strong>Current rate:</strong> $0.55 per $500</p>
+            <p><strong>Proposed rate:</strong> $30.55 per $500</p>
+            <div className="mt-3 grid gap-2 sm:grid-cols-3">
+              {samples.map((val) => {
+                const t = exitTaxIncrease(val)
+                return (
+                  <div key={val} className="rounded-lg bg-background/50 p-3">
+                    <p className="font-medium">${(val / 1e6).toFixed(1)}M sale</p>
+                    <p className="text-amber-600 dark:text-amber-500">+${t.diff.toLocaleString("en-US", { maximumFractionDigits: 0 })} tax</p>
+                  </div>
+                )
+              })}
+            </div>
           </div>
         </div>
       )}

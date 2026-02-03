@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Autonomous SEO Intelligence Layer (Feb 2026)
 
+- **/property** — Explore page: search by address, browse by neighborhood (from leads_crm.csv)
+- **app/api/property-search** — GET ?q=… returns matching addresses/slugs
 - **app/property/[address]/page.tsx** — Dynamic property pages from leads_crm.csv
 - **Exit Risk** — Transfer tax calculator ($0.55 → $30.55 per $500) for properties >$1M
 - **Equity Unlock (AB 1033)** — Condo-ization potential meter for completed ADU leads
@@ -16,6 +18,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **Blurred CTA** — "Unlock Full 2026 Audit" email capture → inbound_leads (Supabase)
 - **Sitemap** — Property URLs from leads_crm.csv; priority 0.8 for TPA/ADU leads
 - **scripts/018_inbound_leads.sql** — inbound_leads table for CTA signups
+- **Cite button** — Copy citation for AI/research (Perplexity, Gemini, ChatGPT)
+- **Ordinance Pulse** — "Updated daily" live badge on property pages
+- **Transfer tax calculator** — $1M / $1.5M / $2M sale examples (not just $1.5M)
+- **OG metadata** — Dynamic OpenGraph + canonical per property
 
 ### Launch Campaign (Feb 2026)
 

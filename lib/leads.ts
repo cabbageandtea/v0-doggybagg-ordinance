@@ -79,3 +79,40 @@ export function isTpaLead(lead: LeadRow): boolean {
 export function isAduLead(lead: LeadRow): boolean {
   return (lead.Lead_Type || "").toLowerCase().includes("adu")
 }
+
+/** Group leads by zone for explore page */
+export function getLeadsByZone(): Map<string, { count: number; sample: LeadRow }> {
+  const rows = loadLeads()
+  const byZone = new Map<string, { count: number; sample: LeadRow }>()
+  const seen = new Set<string>()
+  for (const r of rows) {
+    const zone = (r.Zone || "Other").trim() || "Other"
+    const addr = (r.Address || "").toLowerCase()
+    if (!addr || seen.has(addr)) continue
+    seen.add(addr)
+    const prev = byZone.get(zone)
+    if (prev) {
+      prev.count += 1
+    } else {
+      byZone.set(zone, { count: 1, sample: r })
+    }
+  }
+  return byZone
+}
+
+/** Search leads by address substring */
+export function searchLeads(query: string, limit = 10): Array<{ lead: LeadRow; slug: string }> {
+  const rows = loadLeads()
+  const q = query.toLowerCase().trim()
+  if (!q || q.length < 2) return []
+  const results: Array<{ lead: LeadRow; slug: string }> = []
+  const seen = new Set<string>()
+  for (const r of rows) {
+    const addr = (r.Address || "").toLowerCase()
+    if (!addr || seen.has(addr) || !addr.includes(q)) continue
+    seen.add(addr)
+    results.push({ lead: r, slug: slugify(r.Address || "") })
+    if (results.length >= limit) break
+  }
+  return results
+}
